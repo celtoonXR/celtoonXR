@@ -1,12 +1,27 @@
-const https = require('https');
-const fs = require('fs');
-
-const options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('csr.pem')
+const styles = {
+  body: {
+    fontFamily: 'sans-serif',
+    margin: 0,
+    padding: 0,
+    background: '#f7f7f7',
+    color: '#333',
+  },
+  header: {
+    background: '#4f46e5',
+    color: 'white',
+    padding: '2rem',
+    textAlign: 'center',
+  },
+  main: {
+    padding: '2rem',
+  },
+  section: {
+    marginBottom: '2rem',
+  },
+  footer: {
+    background: '#333',
+    color: 'white',
+    textAlign: 'center',
+    padding: '1rem',
+  }
 };
-
-https.createServer(options, function (req, res) {
-  res.writeHead(200);
-  res.end("hello world\n");
-}).listen(8000);
