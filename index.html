@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Celtoon Agência Criativa</title>
+  <title>Minha Empresa Criativa</title>
   <style>
     /* RESET */
     * {
@@ -16,6 +16,10 @@
       font-family: 'Arial', sans-serif;
       background: #f2f2f2;
       color: #333;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     /* NAVBAR */
@@ -36,15 +40,43 @@
       height: 40px;
     }
 
-    .nav-links a {
-      color: #1F4381;
-      text-decoration: none;
-      margin-left: 1.5rem;
-      font-weight: 500;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
     }
 
-    .nav-links a:hover {
-      text-decoration: underline;
+    .nav-links a {
+      color: #1F4381;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1;
+      min-width: 200px;
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #1F4381;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
 
     /* HERO SECTION */
@@ -125,10 +157,95 @@
       font-size: 1.2rem;
     }
 
+    /* SECTION COM IMAGEM DE FUNDO */
+    .cta-section {
+      min-height: 100vh;
+      background-image: url('https://via.placeholder.com/1200x800');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 2rem;
+      color: #fff;
+    }
+
+    .cta-text {
+      width: 50%;
+      font-size: 1.5rem;
+      padding-right: 2rem;
+    }
+
+    .cta-button {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cta-button a {
+      padding: 1rem 2rem;
+      background-color: #fff;
+      color: #1F4381;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .cta-button a:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #1F4381;
+      color: white;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-address {
+      width: 30%;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: white;
+      font-weight: 500;
+    }
+
     @media (max-width: 768px) {
-      .feature-box {
-        width: 90%;
-        height: auto;
+      .cta-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cta-text,
+      .cta-button {
+        width: 100%;
+        padding: 1rem 0;
+      }
+
+      .footer-address,
+      .footer-links {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
       }
     }
   </style>
@@ -138,12 +255,20 @@
   <!-- NAVBAR -->
   <nav>
     <div class="logo">
-      <img src="Logo_png.png" alt="Logo da empresa">
+      <img src="logo.png" alt="Logo da empresa">
     </div>
     <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#orcamento">Orçamento</a>
-      <a href="#produtos">Produtos</a>
+      <div class="dropdown">
+        <a href="#produtos">Produtos</a>
+        <div class="dropdown-content">
+          <a href="#">Design Personalizado</a>
+          <a href="#">Modelagem 3D</a>
+          <a href="#">Identidade Visual</a>
+          <a href="#">Redes Sociais</a>
+        </div>
+      </div>
       <a href="#contato">Contato</a>
     </div>
   </nav>
@@ -187,6 +312,32 @@
       </div>
     </div>
   </section>
+
+  <!-- SECTION COM IMAGEM DE FUNDO E BOTÃO -->
+  <section class="cta-section">
+    <div class="cta-text">
+      Está pronto para transformar seu negócio com um design incrível?  
+      Solicite agora mesmo um orçamento sob medida para você.
+    </div>
+    <div class="cta-button">
+      <a href="#orcamento">Solicitar Orçamento</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-address">
+      Rua Criatividade, 123<br>
+      Bairro Inspiração<br>
+      Cidade das Ideias – BR
+    </div>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#orcamento">Orçamento</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#contato">Contato</a>
+    </div>
+  </footer>
 
   <script>
     // Animação da imagem principal (entra da esquerda)
