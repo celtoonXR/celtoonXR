@@ -49,7 +49,12 @@
 
     /* HERO SECTION */
     .hero {
-      padding: 4rem 2rem;
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
     }
 
@@ -61,7 +66,6 @@
     .hero-image {
       width: 100%;
       max-width: 600px;
-      margin: 0 auto;
       opacity: 0;
       transform: translateX(-100px);
       transition: all 1s ease-out;
@@ -72,13 +76,22 @@
       transform: translateX(0);
     }
 
-    /* THREE BOXES */
+    /* THREE BOXES SECTION */
     .feature-section {
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .feature-boxes {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
-      padding: 2rem;
+      margin-top: 2rem;
     }
 
     .feature-box {
@@ -137,20 +150,23 @@
 
   <!-- FEATURE BOXES -->
   <section class="feature-section">
-    <div class="feature-box" style="background-color: #ffe0e0;">
-      <img src="https://via.placeholder.com/300x150" alt="Serviço 1" />
-      <h3>Design Personalizado</h3>
-      <p>Projetos criativos sob medida para o seu negócio.</p>
-    </div>
-    <div class="feature-box" style="background-color: #e0ffe0;">
-      <img src="https://via.placeholder.com/300x150" alt="Serviço 2" />
-      <h3>Modelagem 3D</h3>
-      <p>Modelos digitais com alto realismo para apresentação.</p>
-    </div>
-    <div class="feature-box" style="background-color: #e0e0ff;">
-      <img src="https://via.placeholder.com/300x150" alt="Serviço 3" />
-      <h3>Identidade Visual</h3>
-      <p>Construímos sua marca com estilo e consistência.</p>
+    <h2 style="font-size: 2rem;">Nossos Serviços</h2>
+    <div class="feature-boxes">
+      <div class="feature-box" style="background-color: #ffe0e0;">
+        <img src="https://via.placeholder.com/300x150" alt="Serviço 1" />
+        <h3>Design Personalizado</h3>
+        <p>Projetos criativos sob medida para o seu negócio.</p>
+      </div>
+      <div class="feature-box" style="background-color: #e0ffe0;">
+        <img src="https://via.placeholder.com/300x150" alt="Serviço 2" />
+        <h3>Modelagem 3D</h3>
+        <p>Modelos digitais com alto realismo para apresentação.</p>
+      </div>
+      <div class="feature-box" style="background-color: #e0e0ff;">
+        <img src="https://via.placeholder.com/300x150" alt="Serviço 3" />
+        <h3>Identidade Visual</h3>
+        <p>Construímos sua marca com estilo e consistência.</p>
+      </div>
     </div>
   </section>
 
@@ -162,4 +178,5 @@
   </script>
 </body>
 </html>
+
 
