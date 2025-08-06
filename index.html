@@ -236,37 +236,49 @@
       background-color: #e0e0e0;
     }
 
-    /* CLIENTES */
-    .clientes-section {
-      background-color: #fff;
-      padding: 2rem 0;
-      text-align: center;
-    }
+ /* CLIENTES */
+.clientes-section {
+  min-height: 100vh;
+  background-color: #fff;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
 
-    .clientes-section h2 {
-      color: #1F4381;
-      margin-bottom: 2rem;
-    }
+.clientes-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .logos-container {
-      overflow: hidden;
-      position: relative;
-      width: 100%;
-    }
+.clientes-section h2 {
+  color: #1F4381;
+  margin-bottom: 2rem;
+}
 
-    .logos-slide {
-      display: flex;
-      gap: 3rem;
-      will-change: transform;
-    }
+.clientes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+}
 
-    .logos-slide img {
-      height: 60px;
-      max-width: 120px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
+.clientes-grid img {
+  height: 60px;
+  max-width: 120px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
 
+.clientes-grid img:hover {
+  transform: scale(1.1);
+}
+    
     /* FOOTER */
     footer {
       background-color: #1F4381;
@@ -398,19 +410,17 @@
   </section>
 
 
-  <!-- CLIENTES -->
-  <section class="clientes-section">
-    <h2>Nossos Clientes</h2>
-    <div class="logos-container">
-      <div class="logos-slide" id="logosSlide">
-        <img src="logo1.png" alt="Cliente 1">
-        <img src="logo2.png" alt="Cliente 2">
-        <img src="logo3.png" alt="Cliente 3">
-        <img src="logo4.png" alt="Cliente 4">
-        <img src="logo5.png" alt="Cliente 5">
-      </div>
-    </div>
-  </section>
+ <!-- CLIENTES -->
+<section class="clientes-section" id="clientes">
+  <h2>Nossos Clientes</h2>
+  <div class="clientes-grid">
+    <img src="logo1.png" alt="Cliente 1">
+    <img src="logo2.png" alt="Cliente 2">
+    <img src="logo3.png" alt="Cliente 3">
+    <img src="logo4.png" alt="Cliente 4">
+    <img src="logo5.png" alt="Cliente 5">
+  </div>
+</section>
 
   <!-- FOOTER -->
   <footer>
@@ -447,27 +457,21 @@
         heroImage.classList.add('visible');
       }
 
-      // Scroll infinito logos
-      const slide = document.getElementById('logosSlide');
-      const logos = slide.querySelectorAll('img');
+       // Animação da seção de clientes
+  const clientesSection = document.querySelector('.clientes-section');
 
-      logos.forEach(logo => {
-        const clone = logo.cloneNode(true);
-        slide.appendChild(clone);
-      });
-
-      let x = 0;
-
-      function animate() {
-        x -= 1;
-        if (Math.abs(x) >= slide.scrollWidth / 2) {
-          x = 0;
-        }
-        slide.style.transform = `translateX(${x}px)`;
-        requestAnimationFrame(animate);
+  const clientesObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
       }
+    });
+  }, { threshold: 0.1 });
 
-      animate();
+  if (clientesSection) {
+    clientesObserver.observe(clientesSection);
+  }
+
     });
 
     const boxes = document.querySelectorAll('.feature-box');
