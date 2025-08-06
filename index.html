@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -77,27 +78,6 @@
 
     .dropdown:hover .dropdown-content {
       display: block;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .social-icons a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 32px;
-      height: 32px;
-      background-color: #1F4381;
-      border-radius: 50%;
-    }
-
-    .social-icons img {
-      width: 18px;
-      height: 18px;
-      filter: invert(1);
     }
 
     /* HERO SECTION */
@@ -184,17 +164,6 @@
       font-size: 1.2rem;
     }
 
-    .more-button {
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #1F4381;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
     /* SECTION COM IMAGEM DE FUNDO */
     .cta-section {
       min-height: 100vh;
@@ -256,7 +225,7 @@
     .logos-slide {
       display: flex;
       gap: 3rem;
-      animation: scroll-logos 20s linear infinite;
+      will-change: transform;
     }
 
     .logos-slide img {
@@ -264,15 +233,6 @@
       max-width: 120px;
       object-fit: contain;
       flex-shrink: 0;
-    }
-
-    @keyframes scroll-logos {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
     }
 
     /* FOOTER */
@@ -283,7 +243,6 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      align-items: center;
     }
 
     .footer-address {
@@ -331,7 +290,7 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
+   <!-- NAVBAR -->
   <nav>
     <div class="logo">
       <img src="Logo_png.png" alt="Logo da empresa">
@@ -403,24 +362,19 @@
     </div>
   </section>
 
+
   <!-- CLIENTES -->
   <section class="clientes-section">
     <h2>Nossos Clientes</h2>
     <div class="logos-container">
-      <div class="logos-slide">
+      <div class="logos-slide" id="logosSlide">
         <img src="logo1.png" alt="Cliente 1">
         <img src="logo2.png" alt="Cliente 2">
         <img src="logo3.png" alt="Cliente 3">
         <img src="logo4.png" alt="Cliente 4">
         <img src="logo5.png" alt="Cliente 5">
-        <img src="logo1.png" alt="Cliente 1 Clone">
-        <img src="logo2.png" alt="Cliente 2 Clone">
-        <img src="logo3.png" alt="Cliente 3 Clone">
-        <img src="logo4.png" alt="Cliente 4 Clone">
-        <img src="logo5.png" alt="Cliente 5 Clone">
       </div>
     </div>
-    <button class="more-button">Mais</button>
   </section>
 
   <!-- FOOTER -->
@@ -436,14 +390,51 @@
       <a href="#produtos">Produtos</a>
       <a href="#contato">Contato</a>
     </div>
-    <div class="social-icons">
-      <a href="https://instagram.com" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
-      </a>
-      <a href="https://linkedin.com" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384014.png" alt="LinkedIn">
-      </a>
-    </div>
   </footer>
+
+  <script>
+    // Animações existentes
+    window.addEventListener('load', () => {
+      const heroImage = document.getElementById('heroImage');
+      if (heroImage) {
+        heroImage.classList.add('visible');
+      }
+
+      // Scroll infinito logos
+      const slide = document.getElementById('logosSlide');
+      const logos = slide.querySelectorAll('img');
+
+      logos.forEach(logo => {
+        const clone = logo.cloneNode(true);
+        slide.appendChild(clone);
+      });
+
+      let x = 0;
+
+      function animate() {
+        x -= 1;
+        if (Math.abs(x) >= slide.scrollWidth / 2) {
+          x = 0;
+        }
+        slide.style.transform = `translateX(${x}px)`;
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    });
+
+    const boxes = document.querySelectorAll('.feature-box');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    boxes.forEach(box => observer.observe(box));
+  </script>
+
 </body>
 </html>
