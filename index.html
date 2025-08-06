@@ -290,11 +290,14 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 3rem;
+  max-width: 960px; /* 4 x 120px + gaps */
+  margin: 0 auto;
 }
 
 .clientes-grid img {
-  height: 60px;
+  flex: 0 1 calc(25% - 3rem); /* 4 por linha com gap */
   max-width: 120px;
+  height: 60px;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
