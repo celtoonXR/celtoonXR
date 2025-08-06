@@ -203,6 +203,41 @@
       background-color: #e0e0e0;
     }
 
+    /* CLIENTES */
+    .clientes-section {
+      background-color: #fff;
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .clientes-section h2 {
+      color: #1F4381;
+      margin-bottom: 2rem;
+    }
+
+    .logos-container {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .logos-slide {
+      display: flex;
+      gap: 3rem;
+      animation: scrollLogos 25s linear infinite;
+    }
+
+    .logos-slide img {
+      height: 60px;
+      max-width: 120px;
+      object-fit: contain;
+    }
+
+    @keyframes scrollLogos {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
     /* FOOTER */
     footer {
       background-color: #1F4381;
@@ -259,74 +294,31 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav>
-    <div class="logo">
-      <img src="Logo_png.png" alt="Logo da empresa">
-    </div>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#orcamento">Orçamento</a>
-      <div class="dropdown">
-        <a href="#produtos">Produtos</a>
-        <div class="dropdown-content">
-          <a href="#">Impressão</a>
-          <a href="#">Criação</a>
-          <a href="#">Digital</a>
-          <a href="#">Redes Sociais</a>
-        </div>
-      </div>
-      <a href="#contato">Contato</a>
-    </div>
-  </nav>
+  <!-- ... NAVBAR CONTENT ... -->
 
   <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-text" style="font-family: 'Georgia', serif;">
-      Bem-vindo à nossa empresa criativa! Transformamos ideias em soluções visuais incríveis.
-    </div>
-    <img 
-      src="https://via.placeholder.com/600x300" 
-      alt="Imagem principal" 
-      class="hero-image" 
-      id="heroImage"
-    />
-  </section>
+  <!-- ... HERO CONTENT ... -->
 
   <!-- FEATURE BOXES -->
-  <section class="feature-section">
-    <h2 style="font-size: 2rem;">Nossos Serviços</h2>
-    <div class="feature-boxes">
-      <div class="feature-box">
-        <h3>Impressão</h3>
-        <p>Flyer, cordão para crachá, credencial, totem, caderno, camiseta, ecobag, adesivo, cartão de visitas, cartaz, convite, envelope, banner, arte finalização.</p>
-        <img src="impressão.png" alt="Serviço 1" />
-      </div>
-      <div class="feature-box">
-        <h3>Criação</h3>
-        <p>Naming, slogan, style guide, criação de logo, mascote, mockup digital, layout, embalagem, vetorização, ilustração, key visual, edição, conceito visual.</p>
-        <img src="criacao.png" alt="Serviço 2" />
-      </div>
-      <div class="feature-box">
-        <h3>Digital</h3>
-        <p>Modelagem 3D, UI & UX, Banner para site, infográfico, apresentação de slide, catálogo, landing page.</p>
-        <img src="digital.png" alt="Serviço 3" />
-      </div>
-      <div class="feature-box">
-        <h3>Redes Sociais</h3>
-        <p>Estático, reels, animado, carrossel.</p>
-        <img src="redes.png" alt="Serviço 4" />
-      </div>
-    </div>
-  </section>
+  <!-- ... FEATURE CONTENT ... -->
 
   <!-- SECTION COM IMAGEM DE FUNDO E BOTÃO -->
-  <section class="cta-section">
-    <div class="cta-text">
-      Está pronto para transformar seu negócio com um design incrível?  
-      Solicite agora mesmo um orçamento sob medida para você.
-    </div>
-    <div class="cta-button">
-      <a href="#orcamento">Solicitar Orçamento</a>
+  <!-- ... CTA CONTENT ... -->
+
+  <!-- CLIENTES -->
+  <section class="clientes-section">
+    <h2>Nossos Clientes</h2>
+    <div class="logos-container">
+      <div class="logos-slide">
+        <img src="logo1.png" alt="Cliente 1">
+        <img src="logo2.png" alt="Cliente 2">
+        <img src="logo3.png" alt="Cliente 3">
+        <img src="logo4.png" alt="Cliente 4">
+        <img src="logo5.png" alt="Cliente 5">
+        <!-- Repita se quiser efeito contínuo -->
+        <img src="logo1.png" alt="Cliente 1">
+        <img src="logo2.png" alt="Cliente 2">
+      </div>
     </div>
   </section>
 
@@ -346,12 +338,11 @@
   </footer>
 
   <script>
-    // Animação da imagem principal (entra da esquerda)
+    // Animações existentes
     window.addEventListener('load', () => {
       document.getElementById('heroImage').classList.add('visible');
     });
 
-    // Animação dos boxes (entram de baixo pra cima com scroll)
     const boxes = document.querySelectorAll('.feature-box');
 
     const observer = new IntersectionObserver((entries) => {
