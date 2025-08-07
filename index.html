@@ -143,6 +143,17 @@
       width: 50%;
     }
 
+    .cursor {
+  display: inline-block;
+  color: #1F4381;
+  font-weight: bold;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 
 
     /* FEATURE SECTION */
@@ -386,10 +397,9 @@
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <div class="hero-text">
-      Menos do mesmo.
-      Mais do que esperam.
-    </div>
+   <div class="hero-text">
+  <span id="typewriter"></span><span class="cursor">|</span>
+   </div>
   </section>
 
   <!-- FEATURE BOXES -->
@@ -513,6 +523,44 @@
     }, { threshold: 0.1 });
 
     boxes.forEach(box => observer.observe(box));
+
+    // animação texto topo 
+    const phrases = [
+    "Criamos design que resolve.",
+    "Ideias ousadas. Resultados reais.",
+    "Visual forte, marca memorável.",
+    "Seu negócio, nossa arte.",
+    "Do rascunho ao extraordinário.",
+    "Design que move, conecta e vende."
+  ];
+
+  const typewriter = document.getElementById('typewriter');
+  const cursor = document.querySelector('.cursor');
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function type() {
+    const currentPhrase = phrases[phraseIndex];
+    if (isDeleting) {
+      typewriter.textContent = currentPhrase.substring(0, charIndex--);
+    } else {
+      typewriter.textContent = currentPhrase.substring(0, charIndex++);
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      setTimeout(() => isDeleting = true, 2000);
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+    }
+
+    const speed = isDeleting ? 50 : 100;
+    setTimeout(type, speed);
+  }
+
+  document.addEventListener('DOMContentLoaded', type);
+</script>
   </script>
 
 </body>
