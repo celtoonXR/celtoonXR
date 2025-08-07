@@ -121,6 +121,9 @@
     .hero {
       min-height: 100vh;
       padding: 2rem;
+      background-image: url('Fundo1.png');
+      background-size: cover;
+      background-position: center;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -135,18 +138,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .hero-image {
-      width: 100%;
-      max-width: 600px;
-      opacity: 0;
-      transform: translateX(-100px);
-      transition: all 1s ease-out;
-    }
 
-    .hero-image.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
 
     /* FEATURE SECTION */
     .feature-section {
@@ -392,12 +384,6 @@
     <div class="hero-text">
       Bem-vindo à nossa empresa criativa! Transformamos ideias em soluções visuais incríveis.
     </div>
-    <img 
-      src="Fundo1.png" 
-      alt="Imagem principal" 
-      class="hero-image" 
-      id="heroImage"
-    />
   </section>
 
   <!-- FEATURE BOXES -->
