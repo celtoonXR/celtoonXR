@@ -116,6 +116,33 @@
       height: 40px;
       filter: invert(1);
     }
+
+    /* WHATSAPP BOTÃO*/
+
+  .whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-float img {
+  width: 30px;
+  height: 30px;
+}
     
     /* HERO SECTION */
    .hero {
@@ -491,6 +518,10 @@
   </div>
   </footer>
 
+  <a href="https://wa.me/SEUNUMERO" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
+  <img src="https://cdn-icons-png.flaticon.com/512/1384/1384007.png" alt="WhatsApp" />
+  </a>
+
   <script>
     // Animações existentes
     window.addEventListener('load', () => {
@@ -571,5 +602,7 @@
 
   </script>
 
+
+  
 </body>
 </html>
