@@ -23,61 +23,6 @@
     font-style: normal;
   }
 
-    /* CONTAINER DO TOGGLE */
-.toggle-theme {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 999;
-}
-
-/* ESCONDE O CHECKBOX ORIGINAL */
-#theme-toggle {
-  display: none;
-}
-
-/* ESTILO DO ÍCONE DO BOTÃO */
-.theme-icon {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--btn-bg, #fff);
-  border-radius: 50%;
-  padding: 0.5rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s;
-}
-
-/* ÍCONES DE SOL E LUA */
-.theme-icon img {
-  width: 24px;
-  height: 24px;
-  transition: opacity 0.3s ease;
-}
-
-.sun {
-  opacity: 1;
-}
-
-.moon {
-  opacity: 0;
-}
-
-/* QUANDO ATIVAR O MODO ESCURO */
-#theme-toggle:checked + .theme-icon .sun {
-  opacity: 0;
-}
-
-#theme-toggle:checked + .theme-icon .moon {
-  opacity: 1;
-}
-
-    body.dark-mode {
-  background-color: #121212;
-  color: #eee;
-}
-
     
     /* RESET */
     * {
@@ -503,14 +448,6 @@
 </head>
 <body>
 
-  <!-- TOGGLE DARK MODE -->
-<div class="toggle-theme">
-  <input type="checkbox" id="theme-toggle" />
-  <label for="theme-toggle" class="theme-icon">
-    <img src="sun-icon.png" alt="Light mode" class="sun" />
-    <img src="moon-icon.png" alt="Dark mode" class="moon" />
-  </label>
-</div>
 
    <!-- NAVBAR -->
   <nav>
@@ -719,12 +656,6 @@
     toggleBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
-
-  // DARK MODE FUNCTIONALITY
-  document.getElementById('theme-toggle').addEventListener('change', function () {
-  document.body.classList.toggle('dark-mode');
-  });
-
 
     
   </script>
