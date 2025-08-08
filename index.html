@@ -7,6 +7,8 @@
   <title>Celtoon Agência Criativa</title>
   <style>
 
+  
+
      @font-face {
     font-family: 'IntroCondBlackFree';
     src: url('IntroCondBlackFree.woff2') format('woff2');
@@ -20,6 +22,28 @@
     font-weight: normal;
     font-style: normal;
   }
+
+      /*Modo Claro escuro*/
+    body {
+  transition: background-color 0.3s, color 0.3s;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+button#theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
     
     /* RESET */
     * {
@@ -445,6 +469,8 @@
 </head>
 <body>
 
+  <button id="theme-toggle">🌙</button>
+
    <!-- NAVBAR -->
   <nav>
     <div class="logo">
@@ -651,6 +677,29 @@
 
     toggleBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
+  });
+
+    /*Modo claro escuro*/
+    const toggle = document.getElementById("theme-toggle");
+  const body = document.body;
+
+  // Verifica preferência salva
+  if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark-mode");
+    toggle.textContent = "☀️";
+  }
+
+  toggle.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+
+    // Atualiza ícone e salva preferência
+    if (body.classList.contains("dark-mode")) {
+      toggle.textContent = "☀️";
+      localStorage.setItem("theme", "dark");
+    } else {
+      toggle.textContent = "🌙";
+      localStorage.setItem("theme", "light");
+    }
   });
     
   </script>
