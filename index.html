@@ -308,6 +308,66 @@
       text-decoration: none;
     }
 
+    /* SECTION PORTFOLIO*/
+
+    .portfolio-section {
+  padding: 60px 20px;
+  background-color: var(--background-color, #fff);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.portfolio-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.05);
+}
+
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.portfolio-overlay h3 {
+  color: #fff;
+  margin-bottom: 10px;
+  font-family: 'IntroRegularAlt', sans-serif;
+}
+
+.portfolio-tag {
+  background: #ff6600; /* cor da caixa */
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
     /* SECTION COM IMAGEM DE FUNDO */
     .cta-section {
       min-height: 100vh;
@@ -509,6 +569,54 @@
         <img src="redes.png" alt="Serviço 4" />
       </div>
     </div>
+
+    <!-- Portfolio-->
+    <section class="portfolio-section">
+  <div class="portfolio-grid">
+    <div class="portfolio-item">
+      <img src="imagens/projeto1.jpg" alt="Projeto 1">
+      <div class="portfolio-overlay">
+        <h3>Projeto 1</h3>
+        <span class="portfolio-tag">Branding</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="imagens/projeto2.jpg" alt="Projeto 2">
+      <div class="portfolio-overlay">
+        <h3>Projeto 2</h3>
+        <span class="portfolio-tag">Impressão</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="imagens/projeto3.jpg" alt="Projeto 3">
+      <div class="portfolio-overlay">
+        <h3>Projeto 3</h3>
+        <span class="portfolio-tag">Branding</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="imagens/projeto4.jpg" alt="Projeto 4">
+      <div class="portfolio-overlay">
+        <h3>Projeto 4</h3>
+        <span class="portfolio-tag">Branding</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="imagens/projeto5.jpg" alt="Projeto 5">
+      <div class="portfolio-overlay">
+        <h3>Projeto 5</h3>
+        <span class="portfolio-tag">Branding</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="imagens/projeto6.jpg" alt="Projeto 6">
+      <div class="portfolio-overlay">
+        <h3>Projeto 6</h3>
+        <span class="portfolio-tag">Branding</span>
+      </div>
+    </div>
+</section>
+
 
      <!-- Botão MAIS abaixo das caixas -->
  <a href="#produtos" class="more-button">Mais</a>
