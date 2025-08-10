@@ -313,64 +313,109 @@
 
     /* SECTION PORTFOLIO*/
 
-.projects-section {
-    width: 100%;
-    margin-top: 60px; /* aumenta o espaço acima da seção */
-    padding: 0;
+/* título centralizado igual ao das feature boxes */
+.section-title {
+  font-size: 2rem;                 /* mesmo tamanho do outro título */
+  text-align: center;             /* centraliza */
+  color: #1F4381;                 /* mesma cor usada no site */
+  font-family: 'IntroRegularAlt', sans-serif; /* ou a fonte que quiser */
+  margin-bottom: 1.25rem;
+  width: 100%;
 }
 
+/* container da seção sem margens laterais e ocupando a tela */
+.projects-section {
+  min-height: 100vh;              /* ocupa toda a tela como as outras seções */
+  padding: 2rem 0;                /* sem padding lateral */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;               /* ajuste se quiser outra cor */
+}
+
+/* grid 3 colunas, sem espaço lateral */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 0;                         /* sem gap entre imagens */
   width: 100%;
-  margin: 0;
-  padding: 0;
+  max-width: 1200px;              /* controla largura máxima — ajuste se quiser 100% */
 }
 
+/* items sem margem/padding */
 .project-item {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 3;           /* força proporção consistente — ajuste conforme sua imagem */
 }
 
+/* imagem cobre totalmente o cell */
 .project-item img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   display: block;
+  transition: filter .18s ease, transform .18s ease;
 }
 
+/* overlay efeito fade + escurecer */
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  background-color: rgba(0,0,0,0.45);
   opacity: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.3s ease-in-out;
+  gap: 0.5rem;
+  transition: opacity .2s ease;
+  padding: 1rem;
+  text-align: center;
+}
+
+.project-item:hover img {
+  transform: scale(1.02);
+  filter: brightness(0.6);
 }
 
 .project-item:hover .overlay {
   opacity: 1;
 }
 
+/* estilo do texto sobre a imagem */
 .overlay h3 {
-  color: white;
-  margin: 0 0 10px 0;
-  font-size: 1.5rem;
+  color: #fff;
+  margin: 0;
+  font-size: 1.25rem;
+  font-family: 'IntroCondBlackFree', sans-serif;
+  letter-spacing: 1px;
 }
 
+/* tag colorida abaixo do nome */
 .tag {
-  background-color: #ff4d4d;
-  color: white;
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  border-radius: 3px;
+  background-color: #1F4381;
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  font-family: 'IntroRegularAlt', sans-serif;
 }
 
+/* RESPONSIVO: 2 colunas em telas médias, 1 coluna em telas pequenas */
+@media (max-width: 992px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
     /* SECTION COM IMAGEM DE FUNDO */
     .cta-section {
@@ -578,53 +623,61 @@
  <a href="#produtos" class="more-button">Mais</a>
     
     <!-- Portfolio-->
-  <section class="projects-grid">
-  <div class="project-item">
-    <img src="renderjpg.jpg" alt="Projeto 1">
-    <div class="overlay">
-      <h3>Projeto 1</h3>
-      <span class="tag">Branding</span>
+<section class="projects-section">
+  <h2 class="section-title">Cases de sucesso</h2>
+
+  <div class="projects-grid">
+    <!-- repita até 6 itens -->
+    <div class="project-item">
+      <img src="lavi.jpg" alt="Projeto 1">
+      <div class="overlay">
+        <h3>Nome do Projeto 1</h3>
+        <div class="tag">Branding</div>
+      </div>
     </div>
-  </div>
-  <div class="project-item">
-    <img src="nort.jpg" alt="Projeto 2">
-    <div class="overlay">
-      <h3>Projeto 2</h3>
-      <span class="tag">Impressão</span>
+
+    <div class="project-item">
+      <img src="nort.jpg" alt="Projeto 2">
+      <div class="overlay">
+        <h3>Nome do Projeto 2</h3>
+        <div class="tag">Impressão</div>
+      </div>
     </div>
-  </div>
-  <div class="project-item">
-    <img src="lavi.jpg" alt="Projeto 3">
-    <div class="overlay">
-      <h3>Projeto 3</h3>
-      <span class="tag">Design</span>
+
+    <div class="project-item">
+      <img src="renderjpg.jpg" alt="Projeto 3">
+      <div class="overlay">
+        <h3>Nome do Projeto 3</h3>
+        <div class="tag">Identidade</div>
+      </div>
     </div>
-  </div>
-  <div class="project-item">
-    <img src="magazine_boneco.jpg" alt="Projeto 4">
-    <div class="overlay">
-      <h3>Projeto 4</h3>
-      <span class="tag">Web</span>
+
+    <div class="project-item">
+      <img src="magazine_boneco.jpg" alt="Projeto 4">
+      <div class="overlay">
+        <h3>Nome do Projeto 4</h3>
+        <div class="tag">3D</div>
+      </div>
     </div>
-  </div>
-  <div class="project-item">
-    <img src="renderjpg.jpg" alt="Projeto 5">
-    <div class="overlay">
-      <h3>Projeto 5</h3>
-      <span class="tag">Identidade Visual</span>
+
+    <div class="project-item">
+      <img src="renderjpg.jpg" alt="Projeto 5">
+      <div class="overlay">
+        <h3>Nome do Projeto 5</h3>
+        <div class="tag">Digital</div>
+      </div>
     </div>
-  </div>
-  <div class="project-item">
-    <img src="renderjpg.jpg" alt="Projeto 6">
-    <div class="overlay">
-      <h3>Projeto 6</h3>
-      <span class="tag">Edição</span>
+
+    <div class="project-item">
+      <img src="lavi.jpg" alt="Projeto 6">
+      <div class="overlay">
+        <h3>Nome do Projeto 6</h3>
+        <div class="tag">Embalagem</div>
+      </div>
     </div>
   </div>
 </section>
 
-
-  </section> 
 
   <!-- SECTION COM IMAGEM DE FUNDO E BOTÃO -->
   <section class="cta-section">
