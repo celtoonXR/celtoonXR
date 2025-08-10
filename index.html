@@ -312,7 +312,7 @@
     }
 
     /* SECTION PORTFOLIO*/
-/* título centralizado igual ao das feature boxes */
+    /* título centralizado igual ao das feature boxes */
 .section-title {
   font-size: 2rem;                 /* mesmo tamanho do outro título */
   text-align: center;             /* centraliza */
@@ -320,67 +320,102 @@
   font-family: 'IntroRegularAlt', sans-serif; /* ou a fonte que quiser */
   margin-bottom: 1.25rem;
   width: 100%;
-  padding: 2rem;
 }
+
+/* container da seção sem margens laterais e ocupando a tela */
 .projects-section {
-    width: 100%;
-    margin-top: 60px; /* aumenta o espaço acima da seção */
-
+  min-height: 100vh;              /* ocupa toda a tela como as outras seções */
+  padding: 2rem 0;                /* sem padding lateral */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;               /* ajuste se quiser outra cor */
 }
 
+/* grid 3 colunas, sem espaço lateral */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 0;                         /* sem gap entre imagens */
   width: 100%;
-  margin: 0;
-  padding: 0;
+  max-width: 1200px;              /* controla largura máxima — ajuste se quiser 100% */
 }
 
+/* items sem margem/padding */
 .project-item {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 3;           /* força proporção consistente — ajuste conforme sua imagem */
 }
 
+/* imagem cobre totalmente o cell */
 .project-item img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   display: block;
+  transition: filter .18s ease, transform .18s ease;
 }
 
+/* overlay efeito fade + escurecer */
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  background-color: rgba(0,0,0,0.45);
   opacity: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.3s ease-in-out;
+  gap: 0.5rem;
+  transition: opacity .2s ease;
+  padding: 1rem;
+  text-align: center;
+}
+
+.project-item:hover img {
+  transform: scale(1.02);
+  filter: brightness(0.6);
 }
 
 .project-item:hover .overlay {
   opacity: 1;
 }
 
+/* estilo do texto sobre a imagem */
 .overlay h3 {
-  color: white;
-  margin: 0 0 10px 0;
-  font-size: 1.5rem;
+  color: #fff;
+  margin: 0;
+  font-size: 1.25rem;
+  font-family: 'IntroCondBlackFree', sans-serif;
+  letter-spacing: 1px;
 }
 
+/* tag colorida abaixo do nome */
 .tag {
-  background-color: #ff4d4d;
-  color: white;
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  border-radius: 3px;
+  background-color: #1F4381;
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  font-family: 'IntroRegularAlt', sans-serif;
 }
 
+/* RESPONSIVO: 2 colunas em telas médias, 1 coluna em telas pequenas */
+@media (max-width: 992px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
+@media (max-width: 600px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+    
     /* SECTION COM IMAGEM DE FUNDO */
     .cta-section {
       min-height: 100vh;
