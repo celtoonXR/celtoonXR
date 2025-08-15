@@ -57,6 +57,8 @@
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: top 0.3s ease; /* suaviza o movimento */
+    --nav-height: 80px; /* define a altura da navbar */
+  height: var(--nav-height);
 }
     .logo img {
       height: 50px;
@@ -201,7 +203,7 @@
   color: #fff;
   text-align: left;
   overflow: hidden; /* evita rolagem extra */
-  padding-top: 80px; /* mesma altura da navbar */
+  padding-top: var(--nav-height);
 }
 
 .hero-video {
