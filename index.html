@@ -43,19 +43,21 @@
     }
 
     /* NAVBAR */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: #fff;
-      color: #1F4381;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
+   nav { 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #fff;
+  color: #1F4381;
+  position: fixed; /* antes era sticky */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: top 0.3s ease; /* suaviza o movimento */
+}
     .logo img {
       height: 50px;
     }
@@ -751,6 +753,25 @@
   </a>
 
   <script>
+//Esconde a barra de comandos 
+let lastScrollTop = 0;
+const navbar = document.querySelector('nav');
+
+window.addEventListener('scroll', function() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+  if (scrollTop > lastScrollTop) {
+    // Rolando para baixo → esconder
+    navbar.style.top = "-80px"; // ajuste a altura da navbar
+  } else {
+    // Rolando para cima → mostrar
+    navbar.style.top = "0";
+  }
+
+  lastScrollTop = scrollTop;
+});
+
+
     // Animações existentes
     window.addEventListener('load', () => {
       const heroImage = document.getElementById('heroImage');
