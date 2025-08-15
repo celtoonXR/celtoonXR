@@ -201,7 +201,6 @@
   color: #fff;
   text-align: left;
   overflow: hidden; /* evita rolagem extra */
-  padding-top: 100px;
 }
 
 .hero-video {
@@ -754,6 +753,10 @@
   </a>
 
   <script>
+const navbar = document.querySelector('nav');
+const hero = document.querySelector('.hero');
+hero.style.paddingTop = navbar.offsetHeight + 'px';
+    
 //Esconde a barra de comandos 
 let lastScrollTop = 0;
 const navbar = document.querySelector('nav');
