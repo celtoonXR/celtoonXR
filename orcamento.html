@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamento</title>
+  <style>
+ 
+    @font-face {
+    font-family: 'IntroCondBlackFree';
+    src: url('IntroCondBlackFree.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+       @font-face {
+    font-family: 'IntroRegularAlt';
+    src: url('IntroRegularAlt.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+    
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f2f2f2;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* NAVBAR */
+   nav { 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1F4381;
+  color: #1F4381;
+  position: fixed; /* antes era sticky */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: top 0.3s ease; /* suaviza o movimento */
+}
+    .logo img {
+      height: 50px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .nav-links a {
+      color: #fff;
+      font-family: 'IntroCondBlackFree', sans-serif;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #1F4381;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1;
+      min-width: 200px;
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #fff;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+      .social-icons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .social-icons a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      background-color: #1F4381;
+      border-radius: 50%;
+    }
+
+    .social-icons img {
+      width: 40px;
+      height: 40px;
+      filter: invert(1);
+    }
+
+    .menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #1F4381;
+  cursor: pointer;
+}
+
+/* Mobile: mostrar botão, esconder links */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+    margin-top: 0.5rem;
+  }
+}
+
+    /* WHATSAPP BOTÃO*/
+
+  .whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-float img {
+  width: 60px;
+  height: 60px;
+}
+    
+
+/* === ORÇAMENTO === */
+.orcamento {
+  max-width: 800px;
+  margin: 6rem auto 4rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.orcamento h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-orcamento {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.form-orcamento label {
+  font-weight: bold;
+}
+
+.form-orcamento input[type="text"] {
+  padding: .8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.form-orcamento fieldset {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.form-orcamento legend {
+  font-weight: bold;
+}
+
+.form-orcamento input[type="checkbox"] {
+  margin-right: .5rem;
+}
+
+.form-orcamento button {
+  margin-top: 1rem;
+  background-color: #1F4381;
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .3s ease;
+}
+
+.form-orcamento button:hover {
+  background-color: #16315b;
+}
+
+@media (max-width: 600px) {
+  .orcamento {
+    padding: 1rem;
+  }
+  .orcamento h1 {
+    font-size: 2rem;
+  }
+}
+
+    
+    /* FOOTER */
+    footer {
+      background-color: #1F4381;
+      color: white;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-address {
+      width: 30%;
+      font-size: 0.9rem;
+      font-family: 'IntroRegularAlt', sans-serif;
+    }
+
+   .footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 30%;
+    }
+
+    .footer-links a {
+      font-family: 'IntroRegularAlt', sans-serif;
+      color: white;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .cta-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cta-text,
+      .cta-button {
+        width: 100%;
+        padding: 1rem 0;
+      }
+
+      .footer-address,
+      .footer-links {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">
+      <a href="index.html"><img src="Logo_png.png" alt="Logo da empresa"></a>
+    </div>
+    
+    <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+    
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="orcamento.html">Orçamento</a>
+      <div class="dropdown">
+        <a href="#">Produtos</a>
+        <div class="dropdown-content">
+          <a href="impressao.html">Impressão</a>
+          <a href="criacao.html">Criação</a>
+          <a href="digital.html">Digital</a>
+          <a href="redes-sociais.html">Redes Sociais</a>
+        </div>
+      </div>
+      <a href="contato.html">Contato</a>
+    </div>
+  </nav>
+
+
+  <!-- Seção Orçamento -->
+  <section class="orcamento">
+    <h1>Solicite um orçamento</h1>
+    <form action="https://formspree.io/f/seu-endpoint" method="POST" class="form-orcamento">
+      <label for="nome">Seu nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="contato">Seu e-mail e/ou telefone:</label>
+      <input type="text" id="contato" name="contato" required>
+
+      <label for="empresa">Nome da empresa, segmento de atuação e número de funcionários:</label>
+      <input type="text" id="empresa" name="empresa_info">
+
+      <label for="investimento">Até quanto pretende investir nesse projeto?</label>
+      <input type="text" id="investimento" name="investimento">
+
+      <fieldset>
+        <legend>Em quais categorias abaixo o seu projeto se encaixa?</legend>
+        <label><input type="checkbox" name="categoria" value="Design ou Redesign de marca"> Design ou Redesign de marca</label>
+        <label><input type="checkbox" name="categoria" value="Identidade Visual"> Identidade Visual</label>
+        <label><input type="checkbox" name="categoria" value="Padrão de Comunicação"> Padrão de Comunicação</label>
+        <label><input type="checkbox" name="categoria" value="Ilustração Manual e Digital"> Ilustração Manual e Digital</label>
+        <label><input type="checkbox" name="categoria" value="Design de Personagens ou Mascotes"> Design de Personagens ou Mascotes</label>
+        <label><input type="checkbox" name="categoria" value="Materiais Impressos: cartaz, panfleto, folder etc..."> Materiais Impressos</label>
+        <label><input type="checkbox" name="categoria" value="Diagramação de Livros e Revistas"> Diagramação de Livros e Revistas</label>
+        <label><input type="checkbox" name="categoria" value="Anúncio"> Anúncio</label>
+        <label><input type="checkbox" name="categoria" value="Arte para Redes Sociais"> Arte para Redes Sociais</label>
+      </fieldset>
+
+      <button type="submit">Enviar pedido</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-address">
+      Rua Criatividade, 123<br>
+      Bairro Inspiração<br>
+      Cidade das Ideias – BR
+    </div>
+     <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#orcamento">Orçamento</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#contato">Contato</a>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://www.instagram.com/celtoon.agencia/" target="_blank">
+      <img src="instagram.png" alt="Instagram">
+    </a>
+    <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank">
+      <img src="linkedin.png" alt="LinkedIn">
+    </a>
+    <a href="https://wa.me/seunumerodetelefone" target="_blank">
+      <img src="whats.png" alt="Whatsapp">
+    </a>
+  </div>
+  </footer>
+
+  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
+  <img src="whats2.png" alt="WhatsApp" />
+  </a>
+
+
+    <script>
+    
+//Esconde a barra de comandos 
+let lastScrollTop = 0;
+const navbar = document.querySelector('nav');
+
+window.addEventListener('scroll', function() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+  if (scrollTop > lastScrollTop) {
+    // Rolando para baixo → esconder
+    navbar.style.top = "-80px"; // ajuste a altura da navbar
+  } else {
+    // Rolando para cima → mostrar
+    navbar.style.top = "0";
+  }
+
+  lastScrollTop = scrollTop;
+});
+
+
+    // Animações existentes
+    window.addEventListener('load', () => {
+      const heroImage = document.getElementById('heroImage');
+      if (heroImage) {
+        heroImage.classList.add('visible');
+      }
+
+    /*Menu Toogle*/
+    const toggleBtn = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+    
+  </script>
+
+</body>
+</html>
