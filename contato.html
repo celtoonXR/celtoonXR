@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressão</title>
+  <style>
+ 
+    @font-face {
+    font-family: 'IntroCondBlackFree';
+    src: url('IntroCondBlackFree.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+       @font-face {
+    font-family: 'IntroRegularAlt';
+    src: url('IntroRegularAlt.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+    
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f2f2f2;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* NAVBAR */
+   nav { 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1F4381;
+  color: #1F4381;
+  position: fixed; /* antes era sticky */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: top 0.3s ease; /* suaviza o movimento */
+}
+    .logo img {
+      height: 50px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .nav-links a {
+      color: #fff;
+      font-family: 'IntroCondBlackFree', sans-serif;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #1F4381;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1;
+      min-width: 200px;
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #fff;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+      .social-icons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .social-icons a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      background-color: #1F4381;
+      border-radius: 50%;
+    }
+
+    .social-icons img {
+      width: 40px;
+      height: 40px;
+      filter: invert(1);
+    }
+
+    .menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #1F4381;
+  cursor: pointer;
+}
+
+/* Mobile: mostrar botão, esconder links */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+    margin-top: 0.5rem;
+  }
+}
+
+    /* WHATSAPP BOTÃO*/
+
+  .whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-float img {
+  width: 60px;
+  height: 60px;
+}
+    
+    /* HERO SECTION */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  margin-top: 3rem;   /* descola da navbar */
+  padding: 0 6rem;    /* afasta o conteúdo das laterais */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+  text-align: left;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* preenche o fundo sem distorcer */
+  z-index: 0;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 1; /* garante que o texto fique acima do vídeo */
+  font-family: 'IntroCondBlackFree', sans-serif;
+  letter-spacing: 1px;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  padding-right: 2rem;
+  width: 50%;
+  color: #fff;
+}
+
+.cursor {
+  display: inline-block;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'IntroRegularAlt', sans-serif;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+    /* FEATURE SECTION */
+    .feature-section {
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .feature-boxes {
+      display: flex;
+      
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.8rem;
+      margin-top: 4rem;
+      
+    }
+
+    .feature-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #1F4381;
+      border-radius: 8px;
+      padding: 1.5rem;
+      width: 300px;
+      height: 350px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .feature-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feature-box p {
+  font-family: 'IntroRegularAlt', sans-serif;
+    }
+
+     .feature-section h1 {
+      font-family: 'IntroRegularAlt', sans-serif;
+      color: #1F4381;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+
+    .feature-box img {
+      width: auto;
+      max-width: 100%;
+      height: 50%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      margin-bottom: 10px;
+      align-self: center;
+    }
+
+    .feature-box h3 {
+      font-family: 'IntroCondBlackFree', sans-serif;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .more-button {
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #1F4381;
+      color: #fff;
+      border-radius: 8px;;
+      font-family: 'IntroRegularAlt', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      margin-bottom: 2rem;
+    }
+
+    .more-button a:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* SECTION PORTFOLIO*/
+    /* título centralizado igual ao das feature boxes */
+.section-title {
+  font-size: 2rem;                 /* mesmo tamanho do outro título */
+  text-align: center;             /* centraliza */
+  color: #1F4381;                 /* mesma cor usada no site */
+  font-family: 'IntroRegularAlt', sans-serif; /* ou a fonte que quiser */
+  margin-bottom: 1.25rem;
+  
+}
+
+/* container da seção sem margens laterais e ocupando a tela */
+.projects-section {
+  min-height: 100vh;              /* ocupa toda a tela como as outras seções */
+  padding: 2rem 0;                /* sem padding lateral */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;               /* ajuste se quiser outra cor */
+}
+
+/* grid 3 colunas, sem espaço lateral */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;                         /* sem gap entre imagens */
+  width: 100%;
+  padding-top:2rem;
+}
+
+/* items sem margem/padding */
+.project-item {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 4;           /* força proporção consistente — ajuste conforme sua imagem */
+}
+
+/* imagem cobre totalmente o cell */
+.project-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter .18s ease, transform .18s ease;
+}
+
+/* overlay efeito fade + escurecer */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0,0,0,0.45);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity .2s ease;
+  padding: 1rem;
+  text-align: center;
+}
+
+.project-item:hover img {
+  transform: scale(1.02);
+  filter: brightness(0.6);
+}
+
+.project-item:hover .overlay {
+  opacity: 1;
+}
+
+/* estilo do texto sobre a imagem */
+.overlay h3 {
+  color: #fff;
+  margin: 0;
+  font-size: 1.25rem;
+  font-family: 'IntroCondBlackFree', sans-serif;
+  letter-spacing: 1px;
+}
+
+/* tag colorida abaixo do nome */
+.tag {
+  background-color: #1F4381;
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  font-family: 'IntroRegularAlt', sans-serif;
+}
+
+/* RESPONSIVO: 2 colunas em telas médias, 1 coluna em telas pequenas */
+@media (max-width: 992px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+    
+    /* SECTION COM IMAGEM DE FUNDO */
+    .cta-section {
+      min-height: 100vh;
+      background-image: url('Fundo1.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 6rem;
+      color: #fff;
+    }
+
+    .cta-text {
+      font-family: 'IntroCondBlackFree', sans-serif;
+      letter-spacing: 1px;
+      width: 50%;
+      font-size: 2rem;
+      padding-right: 2rem;
+    }
+
+    .cta-button {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cta-button a {
+      padding: 1rem 2rem;
+      background-color: #fff;
+      border-radius: 8px;
+      color: #1F4381;
+      font-family: 'IntroRegularAlt', sans-serif;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .cta-button a:hover {
+      background-color: #e0e0e0;
+    }
+
+     /* CLIENTES */
+    .clientes-section {
+    min-height: 100vh;
+    background-color: #fff;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+.clientes-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.clientes-section h2 {
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 2rem;     
+  color: #1F4381;
+  margin-bottom: 2rem;
+}
+
+.clientes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 960px; /* 4 x 120px + gaps */
+  margin: 0 auto;
+}
+
+.clientes-grid img {
+  flex: 0 1 calc(25% - 3rem); /* 4 por linha com gap */
+  max-width: 120px;
+  height: 60px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.clientes-grid img:hover {
+  transform: scale(1.1);
+}
+    
+    /* FOOTER */
+    footer {
+      background-color: #1F4381;
+      color: white;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-address {
+      width: 30%;
+      font-size: 0.9rem;
+      font-family: 'IntroRegularAlt', sans-serif;
+    }
+
+   .footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 30%;
+    }
+
+    .footer-links a {
+      font-family: 'IntroRegularAlt', sans-serif;
+      color: white;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .cta-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cta-text,
+      .cta-button {
+        width: 100%;
+        padding: 1rem 0;
+      }
+
+      .footer-address,
+      .footer-links {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">
+      <a href="index.html"><img src="Logo_png.png" alt="Logo da empresa"></a>
+    </div>
+    
+    <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+    
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="orcamento.html">Orçamento</a>
+      <div class="dropdown">
+        <a href="#">Produtos</a>
+        <div class="dropdown-content">
+          <a href="impressao.html">Impressão</a>
+          <a href="criacao.html">Criação</a>
+          <a href="digital.html">Digital</a>
+          <a href="redes-sociais.html">Redes Sociais</a>
+        </div>
+      </div>
+      <a href="contato.html">Contato</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop>
+      <source src="videos/impressao.mp4" type="video/mp4">
+      Seu navegador não suporta vídeos em HTML5.
+    </video>
+    <div class="hero-text">
+      <h1>Impressão</h1>
+      <p>Materiais gráficos de qualidade para dar vida às suas ideias.</p>
+    </div>
+  </section>
+
+  <!-- DESCRIÇÃO CURTA -->
+  <section class="descricao">
+    <div class="container">
+      <h2>O que oferecemos</h2>
+      <p>
+        Nossa linha de impressão abrange desde pequenos formatos até grandes tiragens, 
+        garantindo qualidade, cores vivas e durabilidade em cada material.
+      </p>
+    </div>
+  </section>
+
+  <!-- GRID DE SERVIÇOS -->
+  <section class="servicos">
+    <div class="container">
+      <h2>Serviços de Impressão</h2>
+      <div class="grid-servicos">
+        <div class="card">
+          <img src="imagens/flyer.jpg" alt="Flyer">
+          <h3>Flyers</h3>
+          <p>Divulgue seu negócio com impacto e criatividade.</p>
+        </div>
+        <div class="card">
+          <img src="imagens/caderno.jpg" alt="Caderno personalizado">
+          <h3>Cadernos</h3>
+          <p>Materiais escolares e corporativos sob medida.</p>
+        </div>
+        <div class="card">
+          <img src="imagens/camiseta.jpg" alt="Camiseta estampada">
+          <h3>Camisetas</h3>
+          <p>Estampas de alta qualidade para sua marca ou evento.</p>
+        </div>
+        <div class="card">
+          <img src="imagens/cracha.jpg" alt="Cordão para crachá">
+          <h3>Crachás</h3>
+          <p>Identificação personalizada para empresas e eventos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="cta">
+    <div class="container">
+      <h2>Gostou? Solicite um orçamento personalizado!</h2>
+      <a href="orcamento.html" class="btn">Solicitar Orçamento</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-address">
+      Rua Criatividade, 123<br>
+      Bairro Inspiração<br>
+      Cidade das Ideias – BR
+    </div>
+     <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#orcamento">Orçamento</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#contato">Contato</a>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://www.instagram.com/celtoon.agencia/" target="_blank">
+      <img src="instagram.png" alt="Instagram">
+    </a>
+    <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank">
+      <img src="linkedin.png" alt="LinkedIn">
+    </a>
+    <a href="https://wa.me/seunumerodetelefone" target="_blank">
+      <img src="whats.png" alt="Whatsapp">
+    </a>
+  </div>
+  </footer>
+
+  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
+  <img src="whats2.png" alt="WhatsApp" />
+  </a>
+
+
+    <script>
+    
+//Esconde a barra de comandos 
+let lastScrollTop = 0;
+const navbar = document.querySelector('nav');
+
+window.addEventListener('scroll', function() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+  if (scrollTop > lastScrollTop) {
+    // Rolando para baixo → esconder
+    navbar.style.top = "-80px"; // ajuste a altura da navbar
+  } else {
+    // Rolando para cima → mostrar
+    navbar.style.top = "0";
+  }
+
+  lastScrollTop = scrollTop;
+});
+
+
+    // Animações existentes
+    window.addEventListener('load', () => {
+      const heroImage = document.getElementById('heroImage');
+      if (heroImage) {
+        heroImage.classList.add('visible');
+      }
+
+       // Animação da seção de clientes
+  const clientesSection = document.querySelector('.clientes-section');
+
+  const clientesObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  if (clientesSection) {
+    clientesObserver.observe(clientesSection);
+  }
+
+    });
+
+    const boxes = document.querySelectorAll('.feature-box');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    boxes.forEach(box => observer.observe(box));
+
+    // animação texto topo 
+    const phrases = [
+    "Criamos design que resolve.",
+    "Ideias ousadas. Resultados reais.",
+    "Visual forte, marca memorável.",
+    "Seu negócio, nossa arte.",
+    "Do rascunho ao extraordinário.",
+    "Design que move, conecta e vende.",
+    "Criatividade é nossa matéria prima.",
+    "Projetamos impacto.",
+    "Menos do mesmo. Mais do que esperam.",
+    
+  ];
+
+  const typewriter = document.getElementById('typewriter');
+  const cursor = document.querySelector('.cursor');
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function type() {
+    const currentPhrase = phrases[phraseIndex];
+    if (isDeleting) {
+      typewriter.textContent = currentPhrase.substring(0, charIndex--);
+    } else {
+      typewriter.textContent = currentPhrase.substring(0, charIndex++);
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      setTimeout(() => isDeleting = true, 2000);
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+    }
+
+    const speed = isDeleting ? 50 : 100;
+    setTimeout(type, speed);
+  }
+
+  document.addEventListener('DOMContentLoaded', type);
+
+    /*Menu Toogle*/
+    const toggleBtn = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+    
+  </script>
+
+</body>
+</html>
