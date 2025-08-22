@@ -185,342 +185,105 @@
   height: 60px;
 }
     
-    /* HERO SECTION */
-
-.hero {
-  position: relative;
-  min-height: 100vh;
-  margin-top: 3rem;   /* descola da navbar */
-  padding: 0 6rem;    /* afasta o conteúdo das laterais */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  color: #fff;
-  text-align: left;
-  overflow: hidden;
-}
-
-.hero-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* preenche o fundo sem distorcer */
-  z-index: 0;
-}
-
-.hero-text {
-  position: relative;
-  z-index: 1; /* garante que o texto fique acima do vídeo */
-  font-family: 'IntroCondBlackFree', sans-serif;
-  letter-spacing: 1px;
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  max-width: 600px;
-  padding-right: 2rem;
-  width: 50%;
-  color: #fff;
-}
-
-.cursor {
-  display: inline-block;
-  color: #fff;
-  font-weight: bold;
-  font-family: 'IntroRegularAlt', sans-serif;
-  animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-    /* FEATURE SECTION */
-    .feature-section {
-      min-height: 100vh;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .feature-boxes {
-      display: flex;
-      
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.8rem;
-      margin-top: 4rem;
-      
-    }
-
-    .feature-box {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background-color: #1F4381;
-      border-radius: 8px;
-      padding: 1.5rem;
-      width: 300px;
-      height: 350px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      color: #fff;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .feature-box.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .feature-box p {
-  font-family: 'IntroRegularAlt', sans-serif;
-    }
-
-     .feature-section h1 {
-      font-family: 'IntroRegularAlt', sans-serif;
-      color: #1F4381;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      font-size: 2rem;
-    }
-
-    .feature-box img {
-      width: auto;
-      max-width: 100%;
-      height: 50%;
-      border-radius: 8px;
-      margin-top: 1rem;
-      margin-bottom: 10px;
-      align-self: center;
-    }
-
-    .feature-box h3 {
-      font-family: 'IntroCondBlackFree', sans-serif;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    .more-button {
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #1F4381;
-      color: #fff;
-      border-radius: 8px;;
-      font-family: 'IntroRegularAlt', sans-serif;
-      font-size: 1rem;
-      cursor: pointer;
-      display: inline-block;
-      text-align: center;
-      text-decoration: none;
-      margin-bottom: 2rem;
-    }
-
-    .more-button a:hover {
-      background-color: #e0e0e0;
-    }
-
-    /* SECTION PORTFOLIO*/
-    /* título centralizado igual ao das feature boxes */
-.section-title {
-  font-size: 2rem;                 /* mesmo tamanho do outro título */
-  text-align: center;             /* centraliza */
-  color: #1F4381;                 /* mesma cor usada no site */
-  font-family: 'IntroRegularAlt', sans-serif; /* ou a fonte que quiser */
-  margin-bottom: 1.25rem;
-  
-}
-
-/* container da seção sem margens laterais e ocupando a tela */
-.projects-section {
-  min-height: 100vh;              /* ocupa toda a tela como as outras seções */
-  padding: 2rem 0;                /* sem padding lateral */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #fff;               /* ajuste se quiser outra cor */
-}
-
-/* grid 3 colunas, sem espaço lateral */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;                         /* sem gap entre imagens */
-  width: 100%;
-  padding-top:2rem;
-}
-
-/* items sem margem/padding */
-.project-item {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  aspect-ratio: 4 / 4;           /* força proporção consistente — ajuste conforme sua imagem */
-}
-
-/* imagem cobre totalmente o cell */
-.project-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: filter .18s ease, transform .18s ease;
-}
-
-/* overlay efeito fade + escurecer */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0,0,0,0.45);
-  opacity: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  transition: opacity .2s ease;
-  padding: 1rem;
+/* === SEÇÃO CONTATO === */
+.contato {
+  max-width: 800px;
+  margin: 6rem auto 4rem auto; /* deixa espaço da navbar */
+  padding: 2rem;
   text-align: center;
 }
 
-.project-item:hover img {
-  transform: scale(1.02);
-  filter: brightness(0.6);
+.contato h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
-.project-item:hover .overlay {
-  opacity: 1;
-}
-
-/* estilo do texto sobre a imagem */
-.overlay h3 {
-  color: #fff;
-  margin: 0;
-  font-size: 1.25rem;
-  font-family: 'IntroCondBlackFree', sans-serif;
-  letter-spacing: 1px;
-}
-
-/* tag colorida abaixo do nome */
-.tag {
-  background-color: #1F4381;
-  color: #fff;
-  padding: 6px 10px;
-  font-size: 0.85rem;
-  border-radius: 6px;
-  font-family: 'IntroRegularAlt', sans-serif;
-}
-
-/* RESPONSIVO: 2 colunas em telas médias, 1 coluna em telas pequenas */
-@media (max-width: 992px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-}
-    
-    /* SECTION COM IMAGEM DE FUNDO */
-    .cta-section {
-      min-height: 100vh;
-      background-image: url('Fundo1.png');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2rem 6rem;
-      color: #fff;
-    }
-
-    .cta-text {
-      font-family: 'IntroCondBlackFree', sans-serif;
-      letter-spacing: 1px;
-      width: 50%;
-      font-size: 2rem;
-      padding-right: 2rem;
-    }
-
-    .cta-button {
-      width: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .cta-button a {
-      padding: 1rem 2rem;
-      background-color: #fff;
-      border-radius: 8px;
-      color: #1F4381;
-      font-family: 'IntroRegularAlt', sans-serif;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .cta-button a:hover {
-      background-color: #e0e0e0;
-    }
-
-     /* CLIENTES */
-    .clientes-section {
-    min-height: 100vh;
-    background-color: #fff;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-.clientes-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.clientes-section h2 {
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 2rem;     
-  color: #1F4381;
+.contato p {
+  font-size: 1.1rem;
   margin-bottom: 2rem;
+  color: #444;
 }
 
-.clientes-grid {
+/* === FORMULÁRIO === */
+.form-contato {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-  max-width: 960px; /* 4 x 120px + gaps */
-  margin: 0 auto;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
 }
 
-.clientes-grid img {
-  flex: 0 1 calc(25% - 3rem); /* 4 por linha com gap */
-  max-width: 120px;
-  height: 60px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
+.form-contato label {
+  font-weight: bold;
+  color: #222;
 }
 
-.clientes-grid img:hover {
-  transform: scale(1.1);
+.form-contato input,
+.form-contato textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+.form-contato input:focus,
+.form-contato textarea:focus {
+  outline: none;
+  border-color: #0066ff;
+  box-shadow: 0 0 5px rgba(0, 102, 255, 0.3);
+}
+
+.form-contato button {
+  background-color: #0066ff;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-contato button:hover {
+  background-color: #004fcc;
+}
+
+/* === CONTATO DIRETO === */
+.info-contato {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.info-contato h2 {
+  margin-bottom: 1rem;
+}
+
+.info-contato p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.info-contato a {
+  color: #0066ff;
+  text-decoration: none;
+}
+
+.info-contato a:hover {
+  text-decoration: underline;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 600px) {
+  .contato {
+    padding: 1rem;
+  }
+
+  .contato h1 {
+    font-size: 2rem;
+  }
+}
+
     
     /* FOOTER */
     footer {
@@ -603,65 +366,47 @@
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <video class="hero-video" autoplay muted loop>
-      <source src="videos/impressao.mp4" type="video/mp4">
-      Seu navegador não suporta vídeos em HTML5.
-    </video>
-    <div class="hero-text">
-      <h1>Impressão</h1>
-      <p>Materiais gráficos de qualidade para dar vida às suas ideias.</p>
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato - Minha Empresa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Seção Contato -->
+  <section class="contato">
+    <h1>Entre em Contato</h1>
+    <p>Preencha o formulário abaixo ou utilize um dos nossos canais de contato direto.</p>
+
+    <!-- Formulário -->
+    <form action="https://formspree.io/f/mqakjlep" method="POST" class="form-contato">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="empresa">Empresa:</label>
+      <input type="text" id="empresa" name="empresa">
+
+      <label for="assunto">Assunto:</label>
+      <input type="text" id="assunto" name="assunto" required>
+
+      <label for="mensagem">Mensagem:</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <!-- Contato Direto -->
+    <div class="info-contato">
+      <h2>Outros canais</h2>
+      <p><strong>Email:</strong> <a href="mailto:dancelsosilva@gmail.com">dancelsosilva@gmail.com</a></p>
+      <p><strong>Telefone:</strong> <a href="tel:+559999999999">(99) 99999-9999</a></p>
+      <p><strong>Instagram:</strong> <a href="https://instagram.com/seuinstagram" target="_blank">@seuinstagram</a></p>
     </div>
   </section>
 
-  <!-- DESCRIÇÃO CURTA -->
-  <section class="descricao">
-    <div class="container">
-      <h2>O que oferecemos</h2>
-      <p>
-        Nossa linha de impressão abrange desde pequenos formatos até grandes tiragens, 
-        garantindo qualidade, cores vivas e durabilidade em cada material.
-      </p>
-    </div>
-  </section>
-
-  <!-- GRID DE SERVIÇOS -->
-  <section class="servicos">
-    <div class="container">
-      <h2>Serviços de Impressão</h2>
-      <div class="grid-servicos">
-        <div class="card">
-          <img src="imagens/flyer.jpg" alt="Flyer">
-          <h3>Flyers</h3>
-          <p>Divulgue seu negócio com impacto e criatividade.</p>
-        </div>
-        <div class="card">
-          <img src="imagens/caderno.jpg" alt="Caderno personalizado">
-          <h3>Cadernos</h3>
-          <p>Materiais escolares e corporativos sob medida.</p>
-        </div>
-        <div class="card">
-          <img src="imagens/camiseta.jpg" alt="Camiseta estampada">
-          <h3>Camisetas</h3>
-          <p>Estampas de alta qualidade para sua marca ou evento.</p>
-        </div>
-        <div class="card">
-          <img src="imagens/cracha.jpg" alt="Cordão para crachá">
-          <h3>Crachás</h3>
-          <p>Identificação personalizada para empresas e eventos.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CALL TO ACTION -->
-  <section class="cta">
-    <div class="container">
-      <h2>Gostou? Solicite um orçamento personalizado!</h2>
-      <a href="orcamento.html" class="btn">Solicitar Orçamento</a>
-    </div>
-  </section>
 
   <!-- FOOTER -->
   <footer>
