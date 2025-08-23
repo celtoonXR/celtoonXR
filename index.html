@@ -250,13 +250,38 @@
   50% { opacity: 0; }
 }
 
-  @media (max-width: 600px) {
-.hero-text {
-  font-size: 2rem;
+/* HERO MOBILE */
+.hero-mobile {
+  display: none; /* esconde por padrão */
+  position: relative;
+  min-height: 100vh;
+  background: url('sua-imagem.jpg') no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+}
+
+.hero-mobile-bg {
+  background: rgba(0,0,0,0.5); /* camada escura sobre a imagem */
   width: 100%;
-  max-width: 100%;   /* não corta o texto */
-  padding: 0 1rem;   /* espaço lateral para não colar na borda */
-  text-align: center; /* opcional: centraliza no mobile */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-mobile-text h1 {
+  font-size: 2rem;
+  padding: 0 1rem;
+  font-family: 'IntroCondBlackFree', sans-serif;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .hero {
+    display: none; /* esconde a versão com vídeo */
+  }
+  .hero-mobile {
+    display: block; /* mostra a versão exclusiva do mobile */
   }
 }
 
@@ -632,7 +657,15 @@
     <source src="imagem/fundo.mp4" type="video/mp4">
     Seu navegador não suporta vídeo.
   </video>
-    
+
+    <!-- HERO MOBILE -->
+<section class="hero hero-mobile">
+  <div class="hero-mobile-bg">
+    <div class="hero-mobile-text">
+      <h1>Sua frase para mobile aqui</h1>
+    </div>
+  </div>
+</section>
 
    <div class="hero-text">
   <span id="typewriter"></span><span class="cursor">|</span>
