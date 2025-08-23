@@ -228,9 +228,13 @@
   font-size: 3rem;
   margin-bottom: 1.5rem;
   max-width: 600px;
-  padding-right: 2rem;
   width: 50%;
   color: #fff;
+
+  /* 👇 ajustes para evitar quebra estranha */
+  white-space: normal;   /* permite quebra de linha */
+  word-break: break-word; /* força quebra em palavras longas */
+  padding-right: 2rem;
 }
 
 .cursor {
@@ -250,7 +254,9 @@
 .hero-text {
   font-size: 2rem;
   width: 100%;
-  padding-right: 0;
+  max-width: 100%;   /* não corta o texto */
+  padding: 0 1rem;   /* espaço lateral para não colar na borda */
+  text-align: center; /* opcional: centraliza no mobile */
   }
 }
 
