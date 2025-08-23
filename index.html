@@ -49,7 +49,6 @@
   align-items: center;
   padding: 1rem 2rem;
   background: #1F4381;
-  color: #1F4381;
   position: fixed; /* antes era sticky */
   top: 0;
   left: 0;
@@ -128,8 +127,9 @@
   font-size: 2rem;
   background: none;
   border: none;
-  color: #1F4381;
+  color: #fff;
   cursor: pointer;
+  z-index: 1001;
 }
 
 /* Mobile: mostrar botão, esconder links */
@@ -141,7 +141,7 @@
   .nav-links {
     display: none;
     flex-direction: column;
-    background: #fff;
+    background: #1F4381;
     position: absolute;
     top: 70px;
     right: 20px;
@@ -149,6 +149,11 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     z-index: 999;
   }
+
+   .nav-links a {
+    color: #fff;
+  }
+
 
   .nav-links.active {
     display: flex;
@@ -193,8 +198,9 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  margin-top: 3rem;   /* descola da navbar */
-  padding: 0 6rem;    /* afasta o conteúdo das laterais */
+  padding-top: 80px;  /* altura da navbar */
+  padding-left: 6rem;
+  padding-right: 6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -238,6 +244,14 @@
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+  @media (max-width: 600px) {
+.hero-text {
+  font-size: 2rem;
+  width: 100%;
+  padding-right: 0;
+  }
 }
 
     /* FEATURE SECTION */
@@ -771,7 +785,7 @@ window.addEventListener('scroll', function() {
 
   if (scrollTop > lastScrollTop) {
     // Rolando para baixo → esconder
-    navbar.style.top = "-80px"; // ajuste a altura da navbar
+    navbar.style.top = `-${navbar.offsetHeight}px`;
   } else {
     // Rolando para cima → mostrar
     navbar.style.top = "0";
