@@ -388,33 +388,33 @@
 
 /* container da seção sem margens laterais e ocupando a tela */
 .projects-section {
-  min-height: 100vh;              /* ocupa toda a tela como as outras seções */
-  padding: 2rem 0;                /* sem padding lateral */
+  min-height: 100vh;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #fff;               /* ajuste se quiser outra cor */
+  background: #fff;
 }
 
-/* grid 3 colunas, sem espaço lateral */
+/* grid padrão (desktop) */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;                         /* sem gap entre imagens */
+  gap: 0;
   width: 100%;
-  padding-top:2rem;
+  padding-top: 2rem;
 }
 
-/* items sem margem/padding */
+/* itens */
 .project-item {
   position: relative;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 4 / 4;           /* força proporção consistente — ajuste conforme sua imagem */
+  aspect-ratio: 4 / 4;
 }
 
-/* imagem cobre totalmente o cell */
+/* imagem */
 .project-item img {
   width: 100%;
   height: 100%;
@@ -423,7 +423,7 @@
   transition: filter .18s ease, transform .18s ease;
 }
 
-/* overlay efeito fade + escurecer */
+/* overlay */
 .overlay {
   position: absolute;
   inset: 0;
@@ -448,7 +448,7 @@
   opacity: 1;
 }
 
-/* estilo do texto sobre a imagem */
+/* texto */
 .overlay h3 {
   color: #fff;
   margin: 0;
@@ -457,7 +457,7 @@
   letter-spacing: 1px;
 }
 
-/* tag colorida abaixo do nome */
+/* tag */
 .tag {
   background-color: #1F4381;
   color: #fff;
@@ -467,19 +467,31 @@
   font-family: 'IntroRegularAlt', sans-serif;
 }
 
-/* RESPONSIVO: 2 colunas em telas médias, 1 coluna em telas pequenas */
+/* RESPONSIVO: tablet */
 @media (max-width: 992px) {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* MOBILE: vira carrossel horizontal */
 @media (max-width: 600px) {
   .projects-grid {
-    grid-template-columns: 1fr;
+    display: flex;                     /* troca grid por flex */
+    overflow-x: auto;                  /* rolagem horizontal */
+    gap: 1rem;
+    scroll-snap-type: x mandatory;     /* efeito de encaixe */
+    -webkit-overflow-scrolling: touch; /* rolagem suave no iOS */
+    padding: 1rem 0;
+  }
+
+  .project-item {
+    flex: 0 0 80%;       /* cada item ocupa 80% da largura da tela */
+    scroll-snap-align: start;
+    aspect-ratio: 4 / 4;
   }
 }
-    
+
     /* SECTION COM IMAGEM DE FUNDO */
     .cta-section {
       min-height: 100vh;
