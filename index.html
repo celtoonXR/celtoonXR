@@ -291,6 +291,7 @@ html, body { overflow-x: hidden; }
 @media (max-width: 768px) {
   .hero { display: none !important; }
   .hero-mobile { display: flex !important; }
+  .hero-mobile { padding-top: 4.5rem; } /* ajuste conforme necessário */
 }
 
 /* FEATURE SECTION */
@@ -380,6 +381,9 @@ html, body { overflow-x: hidden; }
   background-color: #16366a;
 }
 
+/* por padrão escondemos as bolinhas (desktop) */
+.carousel-indicators { display: none; }
+
 /* Mobile */
 @media (max-width: 768px) {
   .feature-boxes {
@@ -390,26 +394,22 @@ html, body { overflow-x: hidden; }
     gap: 1rem;
     padding: 0 1rem;
     max-width: 100vw;
-    scroll-snap-type: x mandatory;   
-    scroll-padding-left: 0;
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x;              /* deixa o browser cuidar do gesto horizontal */
     overscroll-behavior-x: contain;   /* evita puxar o body nas bordas */
+    justify-content: flex-start;      /* <--- IMPORTANTE: força iniciar colado à esquerda */
+    scroll-padding-left: 1rem;        /* garante alinhamento se houver padding */
   }
-
-  .feature-box:first-child {
-  scroll-snap-align: start;
-}
 
   .feature-box {
     flex: 0 0 auto;
     width: 300px;    /* mantém o tamanho dos cards */
     height: 350px;
     scroll-snap-align: start;         /* começa sempre colado à esquerda */
-    /* sem scroll-snap-stop para não “grudar” demais */
   }
 
-  /* Indicadores só no mobile */
+  /* Indicadores só no mobile: agora mostrados apenas aqui */
   .carousel-indicators {
     display: flex;
     justify-content: center;
@@ -420,18 +420,13 @@ html, body { overflow-x: hidden; }
     width: 10px; height: 10px; border-radius: 50%;
     background: #ccc;
     transition: background .3s, transform .2s;
+    display: block;
   }
   .carousel-indicators span.active {
     background: #1F4381;
     transform: scale(1.1);
   }
 }
-
-/* Esconde as bolinhas no desktop */
-@media (min-width: 769px) {
-  .carousel-indicators { display: none; }
-}
-
     /* SECTION PORTFOLIO*/
     /* título centralizado igual ao das feature boxes */
 .section-title {
@@ -944,38 +939,45 @@ window.addEventListener('scroll', function() {
   }
 
   function updateDots() {
-    const idx = Math.round(scroller.scrollLeft / stepSize());
+    const size = stepSize();
+    if (!size) return;
+    const idx = Math.round(scroller.scrollLeft / size);
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
   }
 
   function scrollToIndex(i, behavior = 'smooth') {
-    scroller.scrollTo({ left: i * stepSize(), behavior });
+    const left = i * stepSize();
+    scroller.scrollTo({ left, behavior });
   }
 
-  // inicia colado no primeiro card à esquerda
-  const init = () => {
+  function init() {
+    // Aguarda o load completo (garante imagens definidas)
+    // e também aguarda um frame de layout para total segurança.
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
+        // garantir sem smooth no init
+        const prev = scroller.style.scrollBehavior;
+        scroller.style.scrollBehavior = 'auto';
         scrollToIndex(0, 'auto'); // força no primeiro
         updateDots();
+        scroller.style.scrollBehavior = prev || '';
       });
     });
-  };
+  }
 
+  // eventos
   scroller.addEventListener('scroll', updateDots, { passive: true });
   window.addEventListener('resize', () => {
-    const active = dots.findIndex(d => d.classList.contains('active')) || 0;
-    scrollToIndex(active, 'auto');
+    // reposiciona no mesmo índice ao redimensionar
+    const idx = dots.findIndex(d => d.classList.contains('active'));
+    scrollToIndex(idx >= 0 ? idx : 0, 'auto');
   });
 
-  // (opcional) clicar nas bolinhas navega
   dots.forEach((d, i) => d.addEventListener('click', () => scrollToIndex(i)));
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  // inicia após load completo (garante imagens)
+  if (document.readyState === 'complete') init();
+  else window.addEventListener('load', init);
 })();
 
 
