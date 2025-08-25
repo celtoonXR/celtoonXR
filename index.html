@@ -380,19 +380,26 @@
   background-color: #16366a;
 }
 
-/* ===== MOBILE (carrossel) ===== */
+/* ===== MOBILE: carrossel mantendo 300x350 ===== */
 @media (max-width: 768px) {
   .feature-boxes {
-    flex-wrap: nowrap;              /* impede quebra de linha */
-    overflow-x: auto;               /* scroll lateral */
-    scroll-snap-type: x mandatory;  /* ativa snapping */
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-wrap: nowrap;              /* não quebra linha */
+    overflow-x: auto;               /* scroll horizontal */
+    overflow-y: hidden;
     gap: 1rem;
+    padding: 0 1rem;                /* respiro nas bordas */
+    scroll-snap-type: x mandatory;  /* snapping */
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    scroll-padding: 0 1rem;         /* alinha o snap ao padding */
   }
 
   .feature-box {
-    flex: 0 0 80%;                  /* ocupa 80% da largura */
-    scroll-snap-align: center;      /* centraliza no snap */
+    flex: 0 0 auto;                 /* NÃO estica nem encolhe */
+    width: 300px !important;        /* mantém o tamanho antigo */
+    height: 350px !important;
+    scroll-snap-align: start;       /* ou "center" se preferir */
   }
 
   /* Indicadores (bolinhas) */
@@ -400,9 +407,8 @@
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin: 1rem 0 0.75rem;         /* acima do botão "Mais" */
   }
-
   .carousel-indicators span {
     width: 10px;
     height: 10px;
@@ -411,11 +417,11 @@
     display: block;
     transition: background 0.3s;
   }
-
   .carousel-indicators span.active {
     background: #1F4381;
   }
 }
+
 
     /* SECTION PORTFOLIO*/
     /* título centralizado igual ao das feature boxes */
