@@ -291,95 +291,131 @@
 
 
 
-    /* FEATURE SECTION */
-    .feature-section {
-      min-height: 100vh;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+/* FEATURE SECTION */
+.feature-section {
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-    .feature-boxes {
-      display: flex;
-      
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.8rem;
-      margin-top: 4rem;
-      
-    }
+.feature-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.8rem;
+  margin-top: 4rem;
+}
 
-    .feature-box {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background-color: #1F4381;
-      border-radius: 8px;
-      padding: 1.5rem;
-      width: 300px;
-      height: 350px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      color: #fff;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
+.feature-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #1F4381;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 300px;
+  height: 350px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
 
-    .feature-box.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.feature-box.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .feature-box p {
+.feature-box p {
   font-family: 'IntroRegularAlt', sans-serif;
-    }
+}
 
-     .feature-section h1 {
-      font-family: 'IntroRegularAlt', sans-serif;
-      color: #1F4381;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      font-size: 2rem;
-    }
+.feature-section h1 {
+  font-family: 'IntroRegularAlt', sans-serif;
+  color: #1F4381;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
 
-    .feature-box img {
-      width: auto;
-      max-width: 100%;
-      height: 50%;
-      border-radius: 8px;
-      margin-top: 1rem;
-      margin-bottom: 10px;
-      align-self: center;
-    }
+.feature-box img {
+  width: auto;
+  max-width: 100%;
+  height: 50%;
+  border-radius: 8px;
+  margin-top: 1rem;
+  margin-bottom: 10px;
+  align-self: center;
+}
 
-    .feature-box h3 {
-      font-family: 'IntroCondBlackFree', sans-serif;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
+.feature-box h3 {
+  font-family: 'IntroCondBlackFree', sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
 
-    .more-button {
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #1F4381;
-      color: #fff;
-      border-radius: 8px;;
-      font-family: 'IntroRegularAlt', sans-serif;
-      font-size: 1rem;
-      cursor: pointer;
-      display: inline-block;
-      text-align: center;
-      text-decoration: none;
-      margin-bottom: 2rem;
-    }
+/* Botão MAIS */
+.more-button {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #1F4381;
+  color: #fff;
+  border-radius: 8px;
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 2rem;
+}
 
-    .more-button a:hover {
-      background-color: #e0e0e0;
-    }
+.more-button:hover {
+  background-color: #16366a;
+}
+
+/* ===== MOBILE (carrossel) ===== */
+@media (max-width: 768px) {
+  .feature-boxes {
+    flex-wrap: nowrap;              /* impede quebra de linha */
+    overflow-x: auto;               /* scroll lateral */
+    scroll-snap-type: x mandatory;  /* ativa snapping */
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+  }
+
+  .feature-box {
+    flex: 0 0 80%;                  /* ocupa 80% da largura */
+    scroll-snap-align: center;      /* centraliza no snap */
+  }
+
+  /* Indicadores (bolinhas) */
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .carousel-indicators span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    display: block;
+    transition: background 0.3s;
+  }
+
+  .carousel-indicators span.active {
+    background: #1F4381;
+  }
+}
 
     /* SECTION PORTFOLIO*/
     /* título centralizado igual ao das feature boxes */
@@ -696,8 +732,12 @@
 
 
   <!-- FEATURE BOXES -->
-  <section class="feature-section">
-    <h1>Nossos serviços</h1>
+ <!-- FEATURE BOXES -->
+<section class="feature-section">
+  <h1>Nossos serviços</h1>
+
+  <!-- Container do carrossel -->
+  <div class="feature-carousel">
     <div class="feature-boxes">
       <div class="feature-box">
         <h3>Impressão</h3>
@@ -721,8 +761,19 @@
       </div>
     </div>
 
-      <!-- Botão MAIS abaixo das caixas -->
- <a href="#produtos" class="more-button">Mais</a>
+    <!-- Indicadores (bolinhas do carrossel) -->
+    <div class="carousel-indicators">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Botão MAIS abaixo das caixas -->
+  <a href="#produtos" class="more-button">Mais</a>
+</section>
+
     
     <!-- Portfolio-->
     <h2 class="section-title">Cases de sucesso</h2>
@@ -863,6 +914,20 @@ window.addEventListener('scroll', function() {
       if (heroImage) {
         heroImage.classList.add('visible');
       }
+
+
+  const carousel = document.querySelector(".feature-boxes");
+  const dots = document.querySelectorAll(".carousel-indicators .dot");
+
+  carousel.addEventListener("scroll", () => {
+    const scrollPos = carousel.scrollLeft;
+    const boxWidth = carousel.children[0].offsetWidth;
+    const index = Math.round(scrollPos / boxWidth);
+
+    dots.forEach(dot => dot.classList.remove("active"));
+    if (dots[index]) dots[index].classList.add("active");
+  });
+
 
        // Animação da seção de clientes
   const clientesSection = document.querySelector('.clientes-section');
