@@ -390,12 +390,16 @@ html, body { overflow-x: hidden; }
     gap: 1rem;
     padding: 0 1rem;
     max-width: 100vw;
-    scroll-snap-type: x proximity;   /* mais suave que mandatory */
+    scroll-snap-type: x mandatory;   
     scroll-padding-left: 0;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x;              /* deixa o browser cuidar do gesto horizontal */
     overscroll-behavior-x: contain;   /* evita puxar o body nas bordas */
   }
+
+  .feature-box:first-child {
+  scroll-snap-align: start;
+}
 
   .feature-box {
     flex: 0 0 auto;
