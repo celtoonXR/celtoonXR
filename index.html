@@ -950,8 +950,12 @@ window.addEventListener('scroll', function() {
 
   // inicia colado no primeiro card à esquerda
   const init = () => {
-    scrollToIndex(0, 'auto');
-    updateDots();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToIndex(0, 'auto'); // força no primeiro
+        updateDots();
+      });
+    });
   };
 
   scroller.addEventListener('scroll', updateDots, { passive: true });
