@@ -544,6 +544,34 @@ html, body { overflow-x: hidden; }
     aspect-ratio: 4 / 4;
   }
 }
+    /* bolinhas do carrossel portfolio */
+.portfolio-indicators {
+  display: none; /* esconde no desktop */
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.portfolio-indicators span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.portfolio-indicators span.active {
+  background-color: #1F4381;
+}
+
+/* só aparece no mobile */
+@media (max-width: 600px) {
+  .portfolio-indicators {
+    display: flex;
+  }
+}
+
 
     /* SECTION COM IMAGEM DE FUNDO */
     .cta-section {
@@ -832,9 +860,17 @@ html, body { overflow-x: hidden; }
     </div>
   </div>
 </section>
+  </section>
 
+  <div class="portfolio-indicators">
+  <span class="active"></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  </div>
 
-  </section> 
 
   <!-- SECTION COM IMAGEM DE FUNDO E BOTÃO -->
   <section class="cta-section">
@@ -925,7 +961,7 @@ window.addEventListener('scroll', function() {
         heroImage.classList.add('visible');
       }
 
-
+//scroll da seção boxes
 (function () {
   const scroller = document.querySelector('.feature-boxes');
   const dots = Array.from(document.querySelectorAll('.carousel-indicators span'));
@@ -978,6 +1014,50 @@ window.addEventListener('scroll', function() {
   // inicia após load completo (garante imagens)
   if (document.readyState === 'complete') init();
   else window.addEventListener('load', init);
+})();
+
+
+      //scroll seção portfolio
+      (function () {
+  const scroller = document.querySelector('.projects-grid');
+  const dots = Array.from(document.querySelectorAll('.portfolio-indicators span'));
+  if (!scroller || !dots.length) return;
+
+  function stepSize() {
+    const card = scroller.querySelector('.project-item');
+    if (!card) return 1;
+    const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+    return card.offsetWidth + gap;
+  }
+
+  function updateDots() {
+    const idx = Math.round(scroller.scrollLeft / stepSize());
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  function scrollToIndex(i, behavior = 'smooth') {
+    scroller.scrollTo({ left: i * stepSize(), behavior });
+  }
+
+  // inicia colado no primeiro card à esquerda
+  const init = () => {
+    scrollToIndex(0, 'auto');
+    updateDots();
+  };
+
+  scroller.addEventListener('scroll', updateDots, { passive: true });
+  window.addEventListener('resize', () => {
+    const active = dots.findIndex(d => d.classList.contains('active')) || 0;
+    scrollToIndex(active, 'auto');
+  });
+
+  dots.forEach((d, i) => d.addEventListener('click', () => scrollToIndex(i)));
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 
 
