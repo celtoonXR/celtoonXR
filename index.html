@@ -928,58 +928,51 @@ window.addEventListener('scroll', function() {
       }
 
 
-  const carousel = document.querySelector(".feature-boxes");
-  const dots = document.querySelectorAll(".carousel-indicators .dot");
+ const scroller = document.querySelector('.feature-boxes');
+const dots = document.querySelectorAll('.carousel-indicators span');
 
-  carousel.addEventListener("scroll", () => {
-    const scrollPos = carousel.scrollLeft;
-    const boxWidth = carousel.children[0].offsetWidth;
-    const index = Math.round(scrollPos / boxWidth);
+// 🔹 Garante que o primeiro card comece colado na esquerda
+window.addEventListener('load', () => {
+  scroller.scrollTo({ left: 0, behavior: 'instant' }); 
+  updateDots(); // já ativa a primeira bolinha
+});
 
-    dots.forEach(dot => dot.classList.remove("active"));
-    if (dots[index]) dots[index].classList.add("active");
-  });
+// Evita rolagem vertical quando o gesto é horizontal
+let startX = 0, startY = 0, dragging = false;
+scroller.addEventListener('touchstart', (e) => {
+  const t = e.touches[0];
+  startX = t.clientX;
+  startY = t.clientY;
+  dragging = true;
+}, { passive: true });
 
-  // Seletores
-  const scroller = document.querySelector('.feature-boxes');
-  const dots = document.querySelectorAll('.carousel-indicators span');
-
-  // Evita a página rolar quando o gesto é predominantemente horizontal
-  let startX = 0, startY = 0, dragging = false;
-  scroller.addEventListener('touchstart', (e) => {
-    const t = e.touches[0];
-    startX = t.clientX;
-    startY = t.clientY;
-    dragging = true;
-  }, { passive: true });
-
-  scroller.addEventListener('touchmove', (e) => {
-    if (!dragging) return;
-    const t = e.touches[0];
-    const dx = Math.abs(t.clientX - startX);
-    const dy = Math.abs(t.clientY - startY);
-    if (dx > dy) {
-      // gesto mais horizontal → impedir scroll vertical do body
-      e.preventDefault();
-    }
-  }, { passive: false });
-
-  ['touchend','touchcancel'].forEach(ev =>
-    scroller.addEventListener(ev, () => dragging = false)
-  );
-
-  // Atualiza as bolinhas conforme o scroll
-  function updateDots() {
-    const card = scroller.querySelector('.feature-box');
-    if (!card) return;
-    const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
-    const step = card.offsetWidth + gap; // largura do card + gap
-    const index = Math.round(scroller.scrollLeft / step);
-    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+scroller.addEventListener('touchmove', (e) => {
+  if (!dragging) return;
+  const t = e.touches[0];
+  const dx = Math.abs(t.clientX - startX);
+  const dy = Math.abs(t.clientY - startY);
+  if (dx > dy) {
+    e.preventDefault(); // bloqueia scroll vertical do body
   }
-  scroller.addEventListener('scroll', updateDots, { passive: true });
-  window.addEventListener('load', updateDots);
-  window.addEventListener('resize', updateDots);
+}, { passive: false });
+
+['touchend','touchcancel'].forEach(ev =>
+  scroller.addEventListener(ev, () => dragging = false)
+);
+
+// 🔹 Atualiza as bolinhas conforme posição do scroll
+function updateDots() {
+  const card = scroller.querySelector('.feature-box');
+  if (!card) return;
+  const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+  const step = card.offsetWidth + gap; // largura card + gap
+  const index = Math.round(scroller.scrollLeft / step);
+
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+}
+
+scroller.addEventListener('scroll', updateDots, { passive: true });
+window.addEventListener('resize', updateDots);
 
 
        // Animação da seção de clientes
