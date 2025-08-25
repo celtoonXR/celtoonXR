@@ -380,7 +380,7 @@ html, body { overflow-x: hidden; }
   background-color: #16366a;
 }
 
-/* ===== MOBILE ===== */
+/* Mobile */
 @media (max-width: 768px) {
   .feature-boxes {
     display: flex;
@@ -390,25 +390,22 @@ html, body { overflow-x: hidden; }
     gap: 1rem;
     padding: 0 1rem;
     max-width: 100vw;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;   /* mais suave que mandatory */
+    scroll-padding-left: 0;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-x !important;
-    overscroll-behavior-x: contain;
-    scroll-padding-left: 0; /* 🔹 garante alinhamento no início */
+    touch-action: pan-x;              /* deixa o browser cuidar do gesto horizontal */
+    overscroll-behavior-x: contain;   /* evita puxar o body nas bordas */
   }
 
   .feature-box {
     flex: 0 0 auto;
-    width: 300px;
+    width: 300px;    /* mantém o tamanho dos cards */
     height: 350px;
-    scroll-snap-align: start;
+    scroll-snap-align: start;         /* começa sempre colado à esquerda */
+    /* sem scroll-snap-stop para não “grudar” demais */
   }
 
-  /* Esconde barra de rolagem */
-  .feature-boxes::-webkit-scrollbar { display: none; }
-  .feature-boxes { -ms-overflow-style: none; scrollbar-width: none; }
-
-  /* Indicadores (bolinhas) – só no mobile */
+  /* Indicadores só no mobile */
   .carousel-indicators {
     display: flex;
     justify-content: center;
@@ -416,17 +413,19 @@ html, body { overflow-x: hidden; }
     margin: 1rem 0 0.75rem;
   }
   .carousel-indicators span {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    width: 10px; height: 10px; border-radius: 50%;
     background: #ccc;
-    display: block;
     transition: background .3s, transform .2s;
   }
   .carousel-indicators span.active {
     background: #1F4381;
     transform: scale(1.1);
   }
+}
+
+/* Esconde as bolinhas no desktop */
+@media (min-width: 769px) {
+  .carousel-indicators { display: none; }
 }
 
     /* SECTION PORTFOLIO*/
@@ -928,51 +927,48 @@ window.addEventListener('scroll', function() {
       }
 
 
- const scroller = document.querySelector('.feature-boxes');
-const dots = document.querySelectorAll('.carousel-indicators span');
+(function () {
+  const scroller = document.querySelector('.feature-boxes');
+  const dots = Array.from(document.querySelectorAll('.carousel-indicators span'));
+  if (!scroller || !dots.length) return;
 
-// 🔹 Garante que o primeiro card comece colado na esquerda
-window.addEventListener('load', () => {
-  scroller.scrollTo({ left: 0, behavior: 'instant' }); 
-  updateDots(); // já ativa a primeira bolinha
-});
-
-// Evita rolagem vertical quando o gesto é horizontal
-let startX = 0, startY = 0, dragging = false;
-scroller.addEventListener('touchstart', (e) => {
-  const t = e.touches[0];
-  startX = t.clientX;
-  startY = t.clientY;
-  dragging = true;
-}, { passive: true });
-
-scroller.addEventListener('touchmove', (e) => {
-  if (!dragging) return;
-  const t = e.touches[0];
-  const dx = Math.abs(t.clientX - startX);
-  const dy = Math.abs(t.clientY - startY);
-  if (dx > dy) {
-    e.preventDefault(); // bloqueia scroll vertical do body
+  function stepSize() {
+    const card = scroller.querySelector('.feature-box');
+    if (!card) return 1;
+    const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+    return card.offsetWidth + gap;
   }
-}, { passive: false });
 
-['touchend','touchcancel'].forEach(ev =>
-  scroller.addEventListener(ev, () => dragging = false)
-);
+  function updateDots() {
+    const idx = Math.round(scroller.scrollLeft / stepSize());
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
 
-// 🔹 Atualiza as bolinhas conforme posição do scroll
-function updateDots() {
-  const card = scroller.querySelector('.feature-box');
-  if (!card) return;
-  const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
-  const step = card.offsetWidth + gap; // largura card + gap
-  const index = Math.round(scroller.scrollLeft / step);
+  function scrollToIndex(i, behavior = 'smooth') {
+    scroller.scrollTo({ left: i * stepSize(), behavior });
+  }
 
-  dots.forEach((d, i) => d.classList.toggle('active', i === index));
-}
+  // inicia colado no primeiro card à esquerda
+  const init = () => {
+    scrollToIndex(0, 'auto');
+    updateDots();
+  };
 
-scroller.addEventListener('scroll', updateDots, { passive: true });
-window.addEventListener('resize', updateDots);
+  scroller.addEventListener('scroll', updateDots, { passive: true });
+  window.addEventListener('resize', () => {
+    const active = dots.findIndex(d => d.classList.contains('active')) || 0;
+    scrollToIndex(active, 'auto');
+  });
+
+  // (opcional) clicar nas bolinhas navega
+  dots.forEach((d, i) => d.addEventListener('click', () => scrollToIndex(i)));
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 
 
        // Animação da seção de clientes
