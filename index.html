@@ -394,13 +394,14 @@ html, body { overflow-x: hidden; }
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x !important;
     overscroll-behavior-x: contain;
+    scroll-padding-left: 0; /* 🔹 garante alinhamento no início */
   }
 
   .feature-box {
     flex: 0 0 auto;
     width: 300px;
     height: 350px;
-    scroll-snap-align: center;
+    scroll-snap-align: start;
   }
 
   /* Esconde barra de rolagem */
