@@ -24,6 +24,9 @@
     font-style: normal;
   }
 
+    /* Evita a página mexer lateralmente */
+html, body { overflow-x: hidden; }
+
     
     /* RESET */
     * {
@@ -380,34 +383,40 @@
   background-color: #16366a;
 }
 
-/* ===== MOBILE: carrossel mantendo 300x350 ===== */
 @media (max-width: 768px) {
   .feature-boxes {
     display: flex;
-    flex-wrap: nowrap;              /* não quebra linha */
-    overflow-x: auto;               /* scroll horizontal */
+    flex-wrap: nowrap;               /* em linha, sem quebrar */
+    overflow-x: auto;                /* scroll horizontal */
     overflow-y: hidden;
     gap: 1rem;
-    padding: 0 1rem;                /* respiro nas bordas */
-    scroll-snap-type: x mandatory;  /* snapping */
+    padding: 0 1rem;
+    max-width: 100vw;                /* nunca maior que a viewport */
+    scroll-snap-type: x mandatory;   /* carrossel com snap */
+    scroll-padding: 0 1rem;
     -webkit-overflow-scrolling: touch;
-    justify-content: flex-start;
-    scroll-padding: 0 1rem;         /* alinha o snap ao padding */
+    touch-action: pan-x;             /* prioriza gesto horizontal */
+    overscroll-behavior-x: contain;  /* evita “puxar” o body ao bater no fim */
   }
 
   .feature-box {
-    flex: 0 0 auto;                 /* NÃO estica nem encolhe */
-    width: 300px !important;        /* mantém o tamanho antigo */
+    flex: 0 0 auto;                  /* não estica/não encolhe */
+    width: 300px !important;         /* mantém seu tamanho de card */
     height: 350px !important;
-    scroll-snap-align: start;       /* ou "center" se preferir */
+    scroll-snap-align: center;       /* centraliza no snap (ou use 'start') */
+    scroll-snap-stop: always;        /* para em cada card */
   }
+
+  /* (Opcional) esconder barra de rolagem no iOS/Android */
+  .feature-boxes::-webkit-scrollbar { display: none; }
+  .feature-boxes { -ms-overflow-style: none; scrollbar-width: none; }
 
   /* Indicadores (bolinhas) */
   .carousel-indicators {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin: 1rem 0 0.75rem;         /* acima do botão "Mais" */
+    margin: 1rem 0 0.75rem;          /* acima do botão “Mais” */
   }
   .carousel-indicators span {
     width: 10px;
@@ -415,10 +424,11 @@
     border-radius: 50%;
     background: #ccc;
     display: block;
-    transition: background 0.3s;
+    transition: background .3s, transform .2s;
   }
   .carousel-indicators span.active {
     background: #1F4381;
+    transform: scale(1.1);
   }
 }
 
@@ -768,7 +778,7 @@
     </div>
 
     <!-- Indicadores (bolinhas do carrossel) -->
-    <div class="carousel-indicators">
+    <div class="carousel-indicators" aria-hidden="true">
       <span class="active"></span>
       <span></span>
       <span></span>
@@ -933,6 +943,47 @@ window.addEventListener('scroll', function() {
     dots.forEach(dot => dot.classList.remove("active"));
     if (dots[index]) dots[index].classList.add("active");
   });
+<script>
+  // Seletores
+  const scroller = document.querySelector('.feature-boxes');
+  const dots = document.querySelectorAll('.carousel-indicators span');
+
+  // Evita a página rolar quando o gesto é predominantemente horizontal
+  let startX = 0, startY = 0, dragging = false;
+  scroller.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    startX = t.clientX;
+    startY = t.clientY;
+    dragging = true;
+  }, { passive: true });
+
+  scroller.addEventListener('touchmove', (e) => {
+    if (!dragging) return;
+    const t = e.touches[0];
+    const dx = Math.abs(t.clientX - startX);
+    const dy = Math.abs(t.clientY - startY);
+    if (dx > dy) {
+      // gesto mais horizontal → impedir scroll vertical do body
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  ['touchend','touchcancel'].forEach(ev =>
+    scroller.addEventListener(ev, () => dragging = false)
+  );
+
+  // Atualiza as bolinhas conforme o scroll
+  function updateDots() {
+    const card = scroller.querySelector('.feature-box');
+    if (!card) return;
+    const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+    const step = card.offsetWidth + gap; // largura do card + gap
+    const index = Math.round(scroller.scrollLeft / step);
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+  scroller.addEventListener('scroll', updateDots, { passive: true });
+  window.addEventListener('load', updateDots);
+  window.addEventListener('resize', updateDots);
 
 
        // Animação da seção de clientes
