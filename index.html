@@ -430,13 +430,13 @@ html, body { overflow-x: hidden; }
 
 
     
-/* SEÇAO PORTFOLIO */
+/* ========== SEÇÃO PORTFÓLIO ========== */
 
 .section-title { 
-  font-size: 2rem; /* mesmo tamanho do outro título */ 
-  text-align: center; /* centraliza */ 
-  color: #1F4381; /* mesma cor usada no site */ 
-  font-family: 'IntroRegularAlt', sans-serif; /* ou a fonte que quiser */ 
+  font-size: 2rem;
+  text-align: center;
+  color: #1F4381;
+  font-family: 'IntroRegularAlt', sans-serif;
 }
     
 .projects-section {
@@ -446,10 +446,9 @@ html, body { overflow-x: hidden; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
-/* CARROSSEL (DESKTOP) */
+/* ======== CARROSSEL (DESKTOP) ======== */
 .projects-carousel {
   position: relative;
   width: 100%;
@@ -503,12 +502,14 @@ html, body { overflow-x: hidden; }
   font-size: 1rem;
 }
 
+/* caixinha arredondada por baixo do texto (segunda linha do overlay) */
 .overlay .tag {
-  font-family: 'IntroRegularAlt', sans-serif;
   background: #1F4381;
-  padding: 0.4rem 0.8rem;
+  color: #fff;
+  padding: 6px 10px;
   border-radius: 8px;
   font-size: 0.85rem;
+  font-family: 'IntroRegularAlt', sans-serif;
 }
 
 .project-item:hover img {
@@ -591,7 +592,7 @@ html, body { overflow-x: hidden; }
   }
 }
 
-/* mobile: carrossel com bolinhas */
+/* mobile: carrossel horizontal + bolinhas */
 @media (max-width: 600px) {
   .projects-grid {
     display: flex;
@@ -614,9 +615,10 @@ html, body { overflow-x: hidden; }
   }
 
   .carousel-dots {
-    display: flex; /* agora aparecem no mobile */
+    display: flex; /* bolinhas aparecem no mobile */
   }
 }
+
 
     /* SECTION COM IMAGEM DE FUNDO */
     .cta-section {
@@ -1135,6 +1137,38 @@ window.addEventListener('scroll', function() {
   // Inicializa imediatamente (sem depender de DOMContentLoaded dentro de load)
   initDesktop();
 })();
+
+      (function () {
+  const scroller = document.querySelector('.projects-grid');
+  const dots = Array.from(document.querySelectorAll('.portfolio-indicators span'));
+  if (!scroller || !dots.length) return;
+
+  function stepSize() {
+    const card = scroller.querySelector('.project-item');
+    if (!card) return scroller.clientWidth;
+    const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+    return card.offsetWidth + gap;
+  }
+
+  function updateDots() {
+    const step = stepSize();
+    if (!step) return;
+    const idx = Math.round(scroller.scrollLeft / step);
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  // clique nas bolinhas navega (útil no mobile)
+  dots.forEach((d, i) => d.addEventListener('click', () => {
+    scroller.scrollTo({ left: i * stepSize(), behavior: 'smooth' });
+    updateDots();
+  }));
+
+  scroller.addEventListener('scroll', updateDots, { passive: true });
+  window.addEventListener('resize', updateDots);
+  // run once
+  setTimeout(updateDots, 200);
+})();
+
 
 
 
