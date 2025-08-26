@@ -1059,6 +1059,35 @@ window.addEventListener('scroll', function() {
   }
 })();
 
+      document.addEventListener("DOMContentLoaded", function () {
+  const grid = document.querySelector(".projects-grid");
+  const items = document.querySelectorAll(".project-item");
+  const prevBtn = document.querySelector(".portfolio-arrows .prev");
+  const nextBtn = document.querySelector(".portfolio-arrows .next");
+  let currentIndex = 0;
+  const itemsPerPage = 3; // mostra 3 de cada vez no desktop
+
+  function updateCarousel() {
+    const offset = -(currentIndex * (100 / itemsPerPage));
+    grid.style.transform = `translateX(${offset}%)`;
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (currentIndex < items.length / itemsPerPage - 1) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+});
+
+
 
        // Animação da seção de clientes
   const clientesSection = document.querySelector('.clientes-section');
