@@ -427,10 +427,13 @@ html, body { overflow-x: hidden; }
     transform: scale(1.1);
   }
 }
-/* Seçao portfolio */
+
+
+    
+/* SEÇAO PORTFOLIO */
 .projects-section {
   min-height: 100vh;
-  padding: 0; /* remove margens laterais */
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -479,10 +482,23 @@ html, body { overflow-x: hidden; }
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.7rem;
   transition: opacity .2s ease;
   padding: 1rem;
   text-align: center;
+  color: #fff;
+}
+
+.overlay p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.overlay .tag {
+  background: rgba(255,255,255,0.15);
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
 }
 
 .project-item:hover img {
@@ -525,25 +541,47 @@ html, body { overflow-x: hidden; }
   cursor: default;
 }
 
+/* ======== BOLINHAS (MOBILE) ======== */
+.carousel-dots {
+  display: none; /* só aparece no mobile */
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.carousel-dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.carousel-dots button.active {
+  background-color: #1F4381;
+}
+
 /* ========== RESPONSIVO TABLET/MOBILE ========== */
 
-/* tablet: continua 2 colunas */
+/* tablet: 2 colunas */
 @media (max-width: 992px) {
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    transition: none; /* remove transição do carrossel */
+    transition: none;
   }
   .project-item {
     flex: unset;
     max-width: unset;
   }
   .portfolio-arrows {
-    display: none; /* esconde as setas */
+    display: none;
   }
 }
 
-/* mobile: vira carrossel horizontal com bolinhas */
+/* mobile: carrossel com bolinhas */
 @media (max-width: 600px) {
   .projects-grid {
     display: flex;
@@ -562,10 +600,13 @@ html, body { overflow-x: hidden; }
   }
 
   .portfolio-arrows {
-    display: none; /* só bolinhas no mobile */
+    display: none;
+  }
+
+  .carousel-dots {
+    display: flex; /* agora aparecem no mobile */
   }
 }
-
 
     /* SECTION COM IMAGEM DE FUNDO */
     .cta-section {
