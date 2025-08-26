@@ -151,13 +151,47 @@
     .project-item { flex: unset; max-width: unset; }
     .portfolio-arrows { display: none; }
   }
-  @media (max-width: 768px) {
-    .projects-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 1rem; transition: none; }
-    .project-item { flex: 0 0 100%; max-width: 100%; scroll-snap-align: start; aspect-ratio: 4/4; }
-    .portfolio-arrows { display: none; }
-    /* agora as bolinhas do portfolio também aparecem no mobile */
-    .portfolio-indicators { display: flex; }
+@media (max-width: 768px) {
+  .projects-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    transition: none;
   }
+
+  .project-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+    scroll-snap-align: start;
+    aspect-ratio: 4/4;
+  }
+
+  .portfolio-arrows {
+    display: none;
+  }
+
+  /* agora as bolinhas do portfolio também aparecem no mobile */
+  .portfolio-indicators {
+    display: flex;
+    justify-content: center;   /* centraliza */
+    gap: 0.5rem;               /* espaço entre bolinhas */
+    margin-top: 1rem;          /* afasta um pouco da seção */
+  }
+
+  .portfolio-indicators span {
+    width: 10px;
+    height: 10px;
+    background: #ccc;          /* cor padrão */
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .portfolio-indicators span.active {
+    background: #1F4381;       /* cor da bolinha ativa */
+  }
+}
 
   /* ==========================================
      CTA / CLIENTES / FOOTER
