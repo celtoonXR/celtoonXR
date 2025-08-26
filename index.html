@@ -427,22 +427,10 @@ html, body { overflow-x: hidden; }
     transform: scale(1.1);
   }
 }
-    /* SECTION PORTFOLIO*/
-    /* título centralizado igual ao das feature boxes */
-.section-title {
-  font-size: 2rem;                 /* mesmo tamanho do outro título */
-  text-align: center;             /* centraliza */
-  color: #1F4381;                 /* mesma cor usada no site */
-  font-family: 'IntroRegularAlt', sans-serif; /* ou a fonte que quiser */
-  margin-bottom: 1rem;
-  padding-top: 0rem;
-  
-}
-
-/* container da seção sem margens laterais e ocupando a tela */
+  /* CONTAINER PRINCIPAL */
 .projects-section {
   min-height: 100vh;
-  padding: 1rem 2rem;
+  padding: 0; /* remove margens laterais */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -450,21 +438,27 @@ html, body { overflow-x: hidden; }
   background: #fff;
 }
 
-/* grid padrão (desktop) */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+/* CARROSSEL (DESKTOP) */
+.projects-carousel {
+  position: relative;
   width: 100%;
-  padding-top: 2rem;
+  overflow: hidden;
 }
 
-/* itens */
+/* Wrapper que desliza */
+.projects-grid {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+/* cada slide = 1/3 da largura */
 .project-item {
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
   position: relative;
   overflow: hidden;
-  width: 100%;
-  aspect-ratio: 4 / 4;
+  aspect-ratio: 4/4;
 }
 
 /* imagem */
@@ -472,7 +466,6 @@ html, body { overflow-x: hidden; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
   transition: filter .18s ease, transform .18s ease;
 }
 
@@ -501,74 +494,67 @@ html, body { overflow-x: hidden; }
   opacity: 1;
 }
 
-/* texto */
-.overlay h3 {
-  color: #fff;
-  margin: 0;
-  font-size: 1.25rem;
-  font-family: 'IntroCondBlackFree', sans-serif;
-  letter-spacing: 1px;
-}
-
-/* tag */
-.tag {
-  background-color: #1F4381;
-  color: #fff;
-  padding: 6px 10px;
-  font-size: 0.85rem;
-  border-radius: 6px;
-  font-family: 'IntroRegularAlt', sans-serif;
-}
-
-/* RESPONSIVO: tablet */
-@media (max-width: 992px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* MOBILE: vira carrossel horizontal */
-@media (max-width: 600px) {
-  .projects-grid {
-    display: flex;                     /* troca grid por flex */
-    overflow-x: auto;                  /* rolagem horizontal */
-    gap: 1rem;
-    scroll-snap-type: x mandatory;     /* efeito de encaixe */
-    -webkit-overflow-scrolling: touch; /* rolagem suave no iOS */
-    padding: 1rem 0;
-  }
-
-  .project-item {
-    flex: 0 0 100%;       /* cada item ocupa 80% da largura da tela */
-    scroll-snap-align: start;
-    aspect-ratio: 4 / 4;
-  }
-}
-    /* bolinhas do carrossel portfolio */
-.portfolio-indicators {
-  display: none; /* esconde no desktop */
+/* setas do carrossel */
+.carousel-controls {
+  display: flex;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1rem;
   margin-top: 1rem;
 }
 
-.portfolio-indicators span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #ccc;
-  display: inline-block;
+.carousel-btn {
+  background-color: #1F4381;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
   transition: background-color 0.3s ease;
 }
 
-.portfolio-indicators span.active {
-  background-color: #1F4381;
+.carousel-btn:hover {
+  background-color: #16315f;
 }
 
-/* só aparece no mobile */
+/* ========== RESPONSIVO TABLET/MOBILE ========== */
+
+/* tablet: continua 2 colunas */
+@media (max-width: 992px) {
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    transition: none; /* remove transição do carrossel */
+  }
+  .project-item {
+    flex: unset;
+    max-width: unset;
+  }
+  .carousel-controls {
+    display: none; /* esconde as setas */
+  }
+}
+
+/* mobile: vira carrossel horizontal com bolinhas */
 @media (max-width: 600px) {
-  .portfolio-indicators {
+  .projects-grid {
     display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    transition: none;
+  }
+
+  .project-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+    scroll-snap-align: start;
+    aspect-ratio: 4/4;
+  }
+
+  .carousel-controls {
+    display: none; /* só bolinhas no mobile */
   }
 }
 
@@ -814,63 +800,75 @@ html, body { overflow-x: hidden; }
 </section>
 
     
-    <!-- Portfolio-->
-    <h2 class="section-title">Cases de sucesso</h2>
-    
-  <section class="projects-grid">
-  <div class="project-item">
-    <img src="imagem/renderjpg.jpg" alt="Recírculo 1">
-    <div class="overlay">
-      <h3>Recírculo</h3>
-      <span class="tag">Criação/Digital</span>
+  <!-- Portfolio-->
+<h2 class="section-title">Cases de sucesso</h2>
+
+<section class="projects-section">
+  <!-- wrapper do carrossel -->
+  <div class="projects-carousel">
+    <div class="projects-grid">
+      <div class="project-item">
+        <img src="imagem/renderjpg.jpg" alt="Recírculo 1">
+        <div class="overlay">
+          <h3>Recírculo</h3>
+          <span class="tag">Criação/Digital</span>
+        </div>
+      </div>
+      <div class="project-item">
+        <img src="imagem/nort.jpg" alt="Nortinho">
+        <div class="overlay">
+          <h3>Nortinho</h3>
+          <span class="tag">Digital</span>
+        </div>
+      </div>
+      <div class="project-item">
+        <img src="imagem/lavi.jpg" alt="Lavinho">
+        <div class="overlay">
+          <h3>Lavinho</h3>
+          <span class="tag">Digital</span>
+        </div>
+      </div>
+      <div class="project-item">
+        <img src="imagem/magazine_boneco.jpg" alt="Magazine Móveis">
+        <div class="overlay">
+          <h3>Magazine Móveis</h3>
+          <span class="tag">Criação/Impressão</span>
+        </div>
+      </div>
+      <div class="project-item">
+        <img src="imagem/recirculo.jpg" alt="Recírculo 2">
+        <div class="overlay">
+          <h3>Recírculo</h3>
+          <span class="tag">Criação/Digital</span>
+        </div>
+      </div>
+      <div class="project-item">
+        <img src="imagem/ceopaginho.jpg" alt="Ceopag">
+        <div class="overlay">
+          <h3>Ceopaguinho</h3>
+          <span class="tag">Criação/Impressão</span>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="project-item">
-    <img src="imagem/nort.jpg" alt="Nortinho">
-    <div class="overlay">
-      <h3>Nortinho</h3>
-      <span class="tag">Digital</span>
-    </div>
+
+  <!-- setas do desktop -->
+  <div class="portfolio-arrows">
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
   </div>
-  <div class="project-item">
-    <img src="imagem/lavi.jpg" alt="Lavinho">
-    <div class="overlay">
-      <h3>Lavinho</h3>
-      <span class="tag">Digital</span>
-    </div>
-  </div>
-  <div class="project-item">
-    <img src="imagem/magazine_boneco.jpg" alt="Magazine Móveis">
-    <div class="overlay">
-      <h3>Magazine Móveis</h3>
-      <span class="tag">Criação/Impressão</span>
-    </div>
-  </div>
-  <div class="project-item">
-    <img src="imagem/recirculo.jpg" alt="Recirculo 2">
-    <div class="overlay">
-      <h3>Recírculo</h3>
-      <span class="tag">Criação/Digital</span>
-    </div>
-  </div>
-  <div class="project-item">
-    <img src="imagem/ceopaginho.jpg" alt="Ceopag">
-    <div class="overlay">
-      <h3>Ceopaguinho</h3>
-      <span class="tag">Criação/Impressão</span>
-    </div>
+
+  <!-- bolinhas do mobile -->
+  <div class="portfolio-indicators">
+    <span class="active"></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </section>
-  </section>
 
-  <div class="portfolio-indicators">
-  <span class="active"></span>
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-  </div>
 
 
   <!-- SECTION COM IMAGEM DE FUNDO E BOTÃO -->
