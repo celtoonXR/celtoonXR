@@ -427,7 +427,7 @@ html, body { overflow-x: hidden; }
     transform: scale(1.1);
   }
 }
-  /* CONTAINER PRINCIPAL */
+/* Seçao portfolio */
 .projects-section {
   min-height: 100vh;
   padding: 0; /* remove margens laterais */
@@ -494,15 +494,16 @@ html, body { overflow-x: hidden; }
   opacity: 1;
 }
 
-/* setas do carrossel */
-.carousel-controls {
+/* ======== SETAS DO CARROSSEL (DESKTOP) ======== */
+.portfolio-arrows {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin-top: 1rem;
 }
 
-.carousel-btn {
+.portfolio-arrows .prev,
+.portfolio-arrows .next {
   background-color: #1F4381;
   color: #fff;
   border: none;
@@ -510,11 +511,18 @@ html, body { overflow-x: hidden; }
   border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, opacity 0.2s ease;
 }
 
-.carousel-btn:hover {
+.portfolio-arrows .prev:hover,
+.portfolio-arrows .next:hover {
   background-color: #16315f;
+}
+
+.portfolio-arrows .prev:disabled,
+.portfolio-arrows .next:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 /* ========== RESPONSIVO TABLET/MOBILE ========== */
@@ -530,7 +538,7 @@ html, body { overflow-x: hidden; }
     flex: unset;
     max-width: unset;
   }
-  .carousel-controls {
+  .portfolio-arrows {
     display: none; /* esconde as setas */
   }
 }
@@ -553,7 +561,7 @@ html, body { overflow-x: hidden; }
     aspect-ratio: 4/4;
   }
 
-  .carousel-controls {
+  .portfolio-arrows {
     display: none; /* só bolinhas no mobile */
   }
 }
@@ -1016,76 +1024,67 @@ window.addEventListener('scroll', function() {
 })();
 
 
-      //scroll seção portfolio
-      (function () {
-  const scroller = document.querySelector('.projects-grid');
-  const dots = Array.from(document.querySelectorAll('.portfolio-indicators span'));
-  if (!scroller || !dots.length) return;
 
-  function stepSize() {
-    const card = scroller.querySelector('.project-item');
-    if (!card) return 1;
-    const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
-    return card.offsetWidth + gap;
+(function () {
+  // ----- MOBILE (bolinhas) já está OK acima, então aqui focamos no DESKTOP -----
+
+  const grid = document.querySelector('.projects-grid');
+  const items = grid ? Array.from(grid.querySelectorAll('.project-item')) : [];
+  const prevBtn = document.querySelector('.portfolio-arrows .prev');
+  const nextBtn = document.querySelector('.portfolio-arrows .next');
+  const mqDesktop = window.matchMedia('(min-width: 993px)');
+  const itemsPerPage = 3;
+  let currentPage = 0;
+
+  if (!grid || !prevBtn || !nextBtn) return;
+
+  function totalPages() {
+    return Math.max(1, Math.ceil(items.length / itemsPerPage));
   }
 
-  function updateDots() {
-    const idx = Math.round(scroller.scrollLeft / stepSize());
-    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  function applyTransform() {
+    // No desktop, cada página = largura inteira do wrapper
+    if (mqDesktop.matches) {
+      grid.style.transform = `translateX(-${currentPage * 100}%)`;
+    } else {
+      // Em tablet/mobile não usamos transform
+      grid.style.transform = '';
+    }
   }
 
-  function scrollToIndex(i, behavior = 'smooth') {
-    scroller.scrollTo({ left: i * stepSize(), behavior });
+  function updateButtons() {
+    const pages = totalPages();
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage >= pages - 1;
   }
 
-  // inicia colado no primeiro card à esquerda
-  const init = () => {
-    scrollToIndex(0, 'auto');
-    updateDots();
-  };
-
-  scroller.addEventListener('scroll', updateDots, { passive: true });
-  window.addEventListener('resize', () => {
-    const active = dots.findIndex(d => d.classList.contains('active')) || 0;
-    scrollToIndex(active, 'auto');
-  });
-
-  dots.forEach((d, i) => d.addEventListener('click', () => scrollToIndex(i)));
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+  function goTo(page) {
+    const pages = totalPages();
+    currentPage = Math.min(Math.max(0, page), pages - 1);
+    applyTransform();
+    updateButtons();
   }
+
+  function initDesktop() {
+    if (mqDesktop.matches) {
+      grid.style.willChange = 'transform';
+      goTo(0);
+    } else {
+      grid.style.willChange = '';
+      grid.style.transform = '';
+    }
+  }
+
+  // Eventos
+  prevBtn.addEventListener('click', () => goTo(currentPage - 1));
+  nextBtn.addEventListener('click', () => goTo(currentPage + 1));
+  mqDesktop.addEventListener('change', initDesktop);
+  window.addEventListener('resize', applyTransform);
+
+  // Inicializa imediatamente (sem depender de DOMContentLoaded dentro de load)
+  initDesktop();
 })();
 
-      document.addEventListener("DOMContentLoaded", function () {
-  const grid = document.querySelector(".projects-grid");
-  const items = document.querySelectorAll(".project-item");
-  const prevBtn = document.querySelector(".portfolio-arrows .prev");
-  const nextBtn = document.querySelector(".portfolio-arrows .next");
-  let currentIndex = 0;
-  const itemsPerPage = 3; // mostra 3 de cada vez no desktop
-
-  function updateCarousel() {
-    const offset = -(currentIndex * (100 / itemsPerPage));
-    grid.style.transform = `translateX(${offset}%)`;
-  }
-
-  nextBtn.addEventListener("click", () => {
-    if (currentIndex < items.length / itemsPerPage - 1) {
-      currentIndex++;
-      updateCarousel();
-    }
-  });
-
-  prevBtn.addEventListener("click", () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateCarousel();
-    }
-  });
-});
 
 
 
