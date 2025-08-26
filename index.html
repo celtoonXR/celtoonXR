@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,1253 +5,430 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Celtoon Agência Criativa</title>
   <style>
-
-  
-
-     @font-face {
+  /* ==========================================
+     FONTS / RESET / VARIÁVEIS
+     ========================================== */
+  @font-face {
     font-family: 'IntroCondBlackFree';
     src: url('IntroCondBlackFree.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
-
-       @font-face {
+  @font-face {
     font-family: 'IntroRegularAlt';
     src: url('IntroRegularAlt.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
 
-    /* Evita a página mexer lateralmente */
-html, body { overflow-x: hidden; }
-
-    
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #f2f2f2;
-      color: #333;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    /* NAVBAR */
-   nav { 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #1F4381;
-  position: fixed; /* antes era sticky */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: top 0.3s ease; /* suaviza o movimento */
-}
-    .logo img {
-      height: 50px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      position: relative;
-    }
-
-    .nav-links a {
-      color: #fff;
-      font-family: 'IntroCondBlackFree', sans-serif;
-      font-weight: 500;
-      position: relative;
-    }
-
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #1F4381;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 1;
-      min-width: 200px;
-      border-radius: 4px;
-    }
-
-    .dropdown-content a {
-      display: block;
-      padding: 0.75rem 1rem;
-      color: #fff;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-      .social-icons {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .social-icons a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-      background-color: #1F4381;
-      border-radius: 50%;
-    }
-
-    .social-icons img {
-      width: 40px;
-      height: 40px;
-      filter: invert(1);
-    }
-
-    .menu-toggle {
-  display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  z-index: 1001;
-}
-
-/* Mobile: mostrar botão, esconder links */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
+  :root{
+    --brand: #1F4381;
+    --brand-dark: #16315f;
+    --bg: #f2f2f2;
+    --text: #333;
   }
 
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: #1F4381;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    padding: 1rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    z-index: 999;
+  /* Evita a página mexer lateralmente */
+  html, body { overflow-x: hidden; }
+
+  /* RESET */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+  a { text-decoration: none; }
+
+  /* ==========================================
+     NAVBAR
+     ========================================== */
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2rem; background: var(--brand);
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: top 0.3s ease;
+  }
+  .logo img { height: 50px; }
+  .nav-links { display: flex; align-items: center; gap: 1.5rem; position: relative; }
+  .nav-links a { color: #fff; font-family: 'IntroCondBlackFree', sans-serif; font-weight: 500; }
+  .dropdown { position: relative; }
+  .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background-color: var(--brand); min-width: 200px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .dropdown-content a { display: block; padding: 0.75rem 1rem; color: #fff; }
+  .dropdown:hover .dropdown-content { display: block; }
+  .social-icons { display: flex; gap: 0.5rem; }
+  .social-icons a { display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; background-color: var(--brand); border-radius: 50%; }
+  .social-icons img { width: 40px; height: 40px; filter: invert(1); }
+  .menu-toggle { display: none; font-size: 2rem; background: none; border: none; color: #fff; cursor: pointer; z-index: 1001; }
+
+  /* NAV - MOBILE */
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .nav-links { display: none; flex-direction: column; background: var(--brand); position: absolute; top: 70px; right: 20px; padding: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 999; }
+    .nav-links a { color: #fff; }
+    .nav-links.active { display: flex; }
+    .dropdown-content { position: static; box-shadow: none; margin-top: 0.5rem; }
   }
 
-   .nav-links a {
-    color: #fff;
+  /* ==========================================
+     WHATSAPP FLOAT
+     ========================================== */
+  .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 20px; right: 20px; z-index: 1000; background-color: #25d366; border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
+  .whatsapp-float:hover { transform: scale(1.1); }
+  .whatsapp-float img { width: 60px; height: 60px; }
+
+  /* ==========================================
+     HERO (Desktop & Mobile)
+     ========================================== */
+  .hero { position: relative; min-height: 100vh; margin-top: 3rem; padding: 0 6rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; color: #fff; text-align: left; overflow: hidden; }
+  .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .hero-text { position: relative; z-index: 1; font-family: 'IntroCondBlackFree', sans-serif; letter-spacing: 1px; font-size: 3rem; margin-bottom: 1.5rem; max-width: 600px; width: 50%; color: #fff; padding-right: 2rem; }
+  .cursor { display: inline-block; color: #fff; font-weight: bold; font-family: 'IntroRegularAlt', sans-serif; animation: blink 0.7s infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .hero-mobile { display: none; position: relative; min-height: 100vh; color: #fff; text-align: center; overflow: hidden; }
+  .hero-mobile .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .hero-mobile-bg { position: relative; z-index: 1; background: rgba(0,0,0,0.5); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .hero-mobile-text h1 { font-size: 2rem; padding: 0 1rem; font-family: 'IntroCondBlackFree', sans-serif; }
+  @media (max-width: 768px) { .hero { display: none !important; } .hero-mobile { display: flex !important; margin-top: 4.5rem; } }
+
+  /* ==========================================
+     FEATURE (Boxes / Carousel) 
+     ========================================== */
+  .feature-section { min-height: 90vh; padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
+  .feature-section h1 { font-family: 'IntroRegularAlt', sans-serif; color: var(--brand); letter-spacing: 2px; margin-bottom: 0.5rem; font-size: 2rem; }
+  .feature-boxes { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.8rem; margin-top: 2rem; }
+  .feature-box { display: flex; flex-direction: column; justify-content: space-between; background-color: var(--brand); border-radius: 8px; padding: 1.5rem; width: 300px; height: 350px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; color: #fff; transition: opacity 0.8s ease, transform 0.8s ease; }
+  .feature-box.visible { opacity: 1; transform: translateY(0); }
+  .feature-box p { font-family: 'IntroRegularAlt', sans-serif; }
+  .feature-box img { width: auto; max-width: 100%; height: 50%; border-radius: 8px; margin-top: 1rem; margin-bottom: 10px; align-self: center; }
+  .feature-box h3 { font-family: 'IntroCondBlackFree', sans-serif; letter-spacing: 2px; margin-bottom: 0.5rem; font-size: 1.2rem; }
+  .more-button { margin-top: 2rem; padding: 0.75rem 1.5rem; background-color: var(--brand); color: #fff; border-radius: 8px; font-family: 'IntroRegularAlt', sans-serif; font-size: 1rem; cursor: pointer; display: inline-block; text-align: center; text-decoration: none; margin-bottom: 2rem; }
+  .more-button:hover { background-color: var(--brand-dark); }
+
+  /* Indicadores (bolinhas) - por padrão escondemos no desktop */
+  .carousel-indicators, .portfolio-indicators, .carousel-dots { display: none; }
+
+  /* estilos das bolinhas (usados tanto para feature quanto portfolio) */
+  .carousel-indicators span, .portfolio-indicators span, .carousel-dots span { display: block; width: 10px; height: 10px; border-radius: 50%; background: #ccc; transition: background .3s, transform .2s; }
+  .carousel-indicators span.active, .portfolio-indicators span.active, .carousel-dots span.active { background: var(--brand); transform: scale(1.1); }
+
+  /* MOBILE: transformamos em scroller horizontal */
+  @media (max-width: 768px) {
+    .feature-boxes { display: flex; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; gap: 1rem; padding: 0 1rem; max-width: 100vw; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; touch-action: pan-x; overscroll-behavior-x: contain; justify-content: flex-start; scroll-padding-left: 1rem; }
+    .feature-box { flex: 0 0 auto; width: 300px; height: 350px; scroll-snap-align: start; }
+
+    /* Indicadores do feature (aparecem no mobile) */
+    .carousel-indicators { display: flex; justify-content: center; gap: 0.5rem; margin: 1rem 0 0.75rem; position: relative; z-index: 2; }
+
+    /* Exibir indicadores do portfolio também em mobile/tablet */
+    .portfolio-indicators { display: flex; justify-content: center; gap: 0.5rem; margin: 1rem 0 0.75rem; position: relative; z-index: 2; }
+
+    /* pequenas melhorias visuais */
+    .feature-section { padding-bottom: 3rem; }
   }
 
+  /* ==========================================
+     PORTFOLIO / PROJECTS
+     ========================================== */
+  .section-title { font-size: 2rem; text-align: center; color: var(--brand); font-family: 'IntroRegularAlt', sans-serif; }
+  .projects-section { min-height: 80vh; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .projects-carousel { position: relative; width: 100%; overflow: hidden; }
+  .projects-grid { display: flex; transition: transform 0.5s ease-in-out; width: 100%; gap: 1rem; }
+  .project-item { flex: 0 0 33.333%; max-width: 33.333%; position: relative; overflow: hidden; aspect-ratio: 4/4; }
+  .project-item img { width: 100%; height: 100%; object-fit: cover; transition: filter .18s ease, transform .18s ease; }
+  .overlay { position: absolute; inset: 0; background-color: rgba(0,0,0,0.45); opacity: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.7rem; transition: opacity .2s ease; padding: 1rem; text-align: center; color: #fff; }
+  .overlay p { font-family: 'IntroRegularAlt', sans-serif; margin: 0; font-size: 1rem; }
+  .overlay .tag { background: var(--brand); color: #fff; padding: 6px 10px; border-radius: 8px; font-size: 0.85rem; font-family: 'IntroRegularAlt', sans-serif; }
+  .project-item:hover img { transform: scale(1.02); filter: brightness(0.6); }
+  .project-item:hover .overlay { opacity: 1; }
 
-  .nav-links.active {
-    display: flex;
+  .portfolio-arrows { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
+  .portfolio-arrows .prev, .portfolio-arrows .next { background-color: var(--brand); color: #fff; border: none; padding: 0.6rem 1rem; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: background-color 0.3s ease, opacity 0.2s ease; }
+  .portfolio-arrows .prev:hover, .portfolio-arrows .next:hover { background-color: var(--brand-dark); }
+  .portfolio-arrows .prev:disabled, .portfolio-arrows .next:disabled { opacity: 0.4; cursor: default; }
+
+  /* RESPONSIVO - tablet & mobile */
+  @media (max-width: 992px) {
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); transition: none; }
+    .project-item { flex: unset; max-width: unset; }
+    .portfolio-arrows { display: none; }
+  }
+  @media (max-width: 768px) {
+    .projects-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 1rem; transition: none; }
+    .project-item { flex: 0 0 100%; max-width: 100%; scroll-snap-align: start; aspect-ratio: 4/4; }
+    .portfolio-arrows { display: none; }
+    /* agora as bolinhas do portfolio também aparecem no mobile */
+    .portfolio-indicators { display: flex; }
   }
 
-  .dropdown-content {
-    position: static;
-    box-shadow: none;
-    margin-top: 0.5rem;
-  }
-}
-
-    /* WHATSAPP BOTÃO*/
-
-  .whatsapp-float {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  background-color: #25d366;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s;
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.1);
-}
-
-.whatsapp-float img {
-  width: 60px;
-  height: 60px;
-}
-    
-/* HERO DESKTOP */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  margin-top: 3rem;
-  padding: 0 6rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  color: #fff;
-  text-align: left;
-  overflow: hidden;
-}
-
-.hero-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-.hero-text {
-  position: relative;
-  z-index: 1;
-  font-family: 'IntroCondBlackFree', sans-serif;
-  letter-spacing: 1px;
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  max-width: 600px;
-  width: 50%;
-  color: #fff;
-  white-space: normal;
-  word-break: break-word;
-  padding-right: 2rem;
-}
-
-  .cursor { 
-    display: inline-block; 
-    color: #fff; 
-    font-weight: bold; 
-    font-family: 'IntroRegularAlt', sans-serif; 
-    animation: blink 0.7s infinite; 
-  }
-    
-    @keyframes blink 
-    { 0%, 100% { opacity: 1; }
-     50% { opacity: 0; } 
-    }
-
-/* HERO MOBILE */
-.hero-mobile {
-  display: none; /* some no desktop */
-  position: relative;
-  min-height: 100vh;
-  color: #fff;
-  text-align: center;
-  overflow: hidden;
-}
-
-.hero-mobile .hero-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-.hero-mobile-bg {
-  position: relative;
-  z-index: 1;
-  background: rgba(0,0,0,0.5); /* camada escura */
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-mobile-text h1 {
-  font-size: 2rem;
-  padding: 0 1rem;
-  font-family: 'IntroCondBlackFree', sans-serif;
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 768px) {
-  .hero { display: none !important; }
-  .hero-mobile { display: flex !important; }
-  .hero-mobile { margin-top: 4.5rem; } /* ajuste conforme necessário */
-}
-
-/* FEATURE SECTION */
-.feature-section {
-  min-height: 90vh;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.feature-boxes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.8rem;
-  margin-top: 2rem;
-}
-
-.feature-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #1F4381;
-  border-radius: 8px;
-  padding: 1.5rem;
-  width: 300px;
-  height: 350px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  text-align: center;
-  color: #fff;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.feature-box.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.feature-box p {
-  font-family: 'IntroRegularAlt', sans-serif;
-}
-
-.feature-section h1 {
-  font-family: 'IntroRegularAlt', sans-serif;
-  color: #1F4381;
-  letter-spacing: 2px;
-  margin-bottom: 0.5rem;
-  font-size: 2rem;
-}
-
-.feature-box img {
-  width: auto;
-  max-width: 100%;
-  height: 50%;
-  border-radius: 8px;
-  margin-top: 1rem;
-  margin-bottom: 10px;
-  align-self: center;
-}
-
-.feature-box h3 {
-  font-family: 'IntroCondBlackFree', sans-serif;
-  letter-spacing: 2px;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-
-/* Botão MAIS */
-.more-button {
-  margin-top: 2rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #1F4381;
-  color: #fff;
-  border-radius: 8px;
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 1rem;
-  cursor: pointer;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  margin-bottom: 2rem;
-}
-
-.more-button:hover {
-  background-color: #16366a;
-}
-
-/* por padrão escondemos as bolinhas (desktop) */
-.carousel-indicators { display: none; }
-
-/* Mobile */
-@media (max-width: 768px) {
-  .feature-boxes {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 1rem;
-    padding: 0 1rem;
-    max-width: 100vw;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;              /* deixa o browser cuidar do gesto horizontal */
-    overscroll-behavior-x: contain;   /* evita puxar o body nas bordas */
-    justify-content: flex-start;      /* <--- IMPORTANTE: força iniciar colado à esquerda */
-    scroll-padding-left: 1rem;        /* garante alinhamento se houver padding */
-  }
-
-  .feature-box {
-    flex: 0 0 auto;
-    width: 300px;    /* mantém o tamanho dos cards */
-    height: 350px;
-    scroll-snap-align: start;         /* começa sempre colado à esquerda */
-  }
-
-  /* Indicadores só no mobile: agora mostrados apenas aqui */
-  .carousel-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 1rem 0 0.75rem;
-  }
-  .carousel-indicators span {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: #ccc;
-    transition: background .3s, transform .2s;
-    display: block;
-  }
-  .carousel-indicators span.active {
-    background: #1F4381;
-    transform: scale(1.1);
-  }
-}
-
-
-    
-/* ========== SEÇÃO PORTFÓLIO ========== */
-
-.section-title { 
-  font-size: 2rem;
-  text-align: center;
-  color: #1F4381;
-  font-family: 'IntroRegularAlt', sans-serif;
-}
-    
-.projects-section {
-  min-height: 80vh;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ======== CARROSSEL (DESKTOP) ======== */
-.projects-carousel {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Wrapper que desliza */
-.projects-grid {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  width: 100%;
-}
-
-/* cada slide = 1/3 da largura */
-.project-item {
-  flex: 0 0 33.333%;
-  max-width: 33.333%;
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4/4;
-}
-
-/* imagem */
-.project-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: filter .18s ease, transform .18s ease;
-}
-
-/* overlay */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0,0,0,0.45);
-  opacity: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.7rem;
-  transition: opacity .2s ease;
-  padding: 1rem;
-  text-align: center;
-  color: #fff;
-}
-
-.overlay p {
-  font-family: 'IntroRegularAlt', sans-serif;
-  margin: 0;
-  font-size: 1rem;
-}
-
-/* caixinha arredondada por baixo do texto (segunda linha do overlay) */
-.overlay .tag {
-  background: #1F4381;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-family: 'IntroRegularAlt', sans-serif;
-}
-
-.project-item:hover img {
-  transform: scale(1.02);
-  filter: brightness(0.6);
-}
-
-.project-item:hover .overlay {
-  opacity: 1;
-}
-
-/* ======== SETAS DO CARROSSEL (DESKTOP) ======== */
-.portfolio-arrows {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.portfolio-arrows .prev,
-.portfolio-arrows .next {
-  background-color: #1F4381;
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, opacity 0.2s ease;
-}
-
-.portfolio-arrows .prev:hover,
-.portfolio-arrows .next:hover {
-  background-color: #16315f;
-}
-
-.portfolio-arrows .prev:disabled,
-.portfolio-arrows .next:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
-
-/* ======== BOLINHAS (MOBILE) ======== */
-.carousel-dots {
-  display: none; /* só aparece no mobile */
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.carousel-dots button {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: none;
-  background-color: #ccc;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.carousel-dots button.active {
-  background-color: #1F4381;
-}
-
-/* ========== RESPONSIVO TABLET/MOBILE ========== */
-
-/* tablet: 2 colunas */
-@media (max-width: 992px) {
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    transition: none;
-  }
-  .project-item {
-    flex: unset;
-    max-width: unset;
-  }
-  .portfolio-arrows {
-    display: none;
-  }
-}
-
-/* mobile: carrossel horizontal + bolinhas */
-@media (max-width: 600px) {
-  .projects-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 1rem;
-    transition: none;
-  }
-
-  .project-item {
-    flex: 0 0 100%;
-    max-width: 100%;
-    scroll-snap-align: start;
-    aspect-ratio: 4/4;
-  }
-
-  .portfolio-arrows {
-    display: none;
-  }
-
-  .carousel-dots {
-    display: flex; /* bolinhas aparecem no mobile */
-  }
-}
-
-
-    /* SECTION COM IMAGEM DE FUNDO */
-    .cta-section {
-      min-height: 100vh;
-      background-image: url('Fundo1.png');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8rem 4rem;
-      color: #fff;
-      margin-top: 2rem;
-    }
-
-    .cta-text {
-      font-family: 'IntroCondBlackFree', sans-serif;
-      letter-spacing: 1px;
-      width: 50%;
-      font-size: 2rem;
-      padding-right: 2rem;
-    }
-
-    .cta-button {
-      width: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .cta-button a {
-      padding: 1rem 2rem;
-      background-color: #fff;
-      border-radius: 8px;
-      color: #1F4381;
-      font-family: 'IntroRegularAlt', sans-serif;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .cta-button a:hover {
-      background-color: #e0e0e0;
-    }
-
-     /* CLIENTES */
-    .clientes-section {
-    min-height: 60vh;
-    background-color: #fff;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-.clientes-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.clientes-section h2 {
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 2rem;     
-  color: #1F4381;
-  margin-bottom: 2rem;
-}
-
-.clientes-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-  max-width: 960px; /* 4 x 120px + gaps */
-  margin: 0 auto;
-}
-
-.clientes-grid img {
-  flex: 0 1 calc(25% - 3rem); /* 4 por linha com gap */
-  max-width: 120px;
-  height: 60px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.clientes-grid img:hover {
-  transform: scale(1.1);
-}
-    
-    /* FOOTER */
-    footer {
-      background-color: #1F4381;
-      color: white;
-      padding: 2rem;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .footer-address {
-      width: 30%;
-      font-size: 0.9rem;
-      font-family: 'IntroRegularAlt', sans-serif;
-    }
-
-   .footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 30%;
-    }
-
-    .footer-links a {
-      font-family: 'IntroRegularAlt', sans-serif;
-      color: white;
-      font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-      .cta-section {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .cta-text,
-      .cta-button {
-        width: 100%;
-        padding: 1rem 0;
-      }
-
-      .footer-address,
-      .footer-links {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-
-      .nav-links {
-        flex-direction: column;
-      }
-    }
+  /* ==========================================
+     CTA / CLIENTES / FOOTER
+     ========================================== */
+  .cta-section { min-height: 100vh; background-image: url('Fundo1.png'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: space-between; padding: 8rem 4rem; color: #fff; margin-top: 2rem; }
+  .cta-text { font-family: 'IntroCondBlackFree', sans-serif; letter-spacing: 1px; width: 50%; font-size: 2rem; padding-right: 2rem; }
+  .cta-button { width: 50%; display: flex; justify-content: center; align-items: center; }
+  .cta-button a { padding: 1rem 2rem; background-color: #fff; border-radius: 8px; color: var(--brand); font-family: 'IntroRegularAlt', sans-serif; text-decoration: none; transition: background 0.3s ease; }
+  .cta-button a:hover { background-color: #e0e0e0; }
+
+  .clientes-section { min-height: 60vh; background-color: #fff; padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .clientes-section.visible { opacity: 1; transform: translateY(0); }
+  .clientes-section h2 { font-family: 'IntroRegularAlt', sans-serif; font-size: 2rem; color: var(--brand); margin-bottom: 2rem; }
+  .clientes-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; max-width: 960px; margin: 0 auto; }
+  .clientes-grid img { flex: 0 1 calc(25% - 3rem); max-width: 120px; height: 60px; object-fit: contain; transition: transform 0.3s ease; }
+  .clientes-grid img:hover { transform: scale(1.1); }
+
+  footer { background-color: var(--brand); color: white; padding: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; }
+  .footer-address { width: 30%; font-size: 0.9rem; font-family: 'IntroRegularAlt', sans-serif; }
+  .footer-links { display: flex; flex-direction: column; gap: 0.5rem; width: 30%; }
+  .footer-links a { font-family: 'IntroRegularAlt', sans-serif; color: white; font-weight: 500; }
+  @media (max-width: 768px) { .cta-section { flex-direction: column; text-align: center; } .cta-text, .cta-button { width: 100%; padding: 1rem 0; } .footer-address, .footer-links { width: 100%; text-align: center; margin-bottom: 1rem; } .nav-links { flex-direction: column; } }
   </style>
 </head>
 <body>
 
-
-   <!-- NAVBAR -->
+  <!-- NAVBAR -->
   <nav>
-    <div class="logo">
-      <img src="Logo_png.png" alt="Logo da empresa">
-    </div>
-    
+    <div class="logo"><img src="Logo_png.png" alt="Logo da empresa"></div>
     <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
-    
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="orcamento.html">Orçamento</a>
       <div class="dropdown">
         <a href="#produtos">Produtos</a>
         <div class="dropdown-content">
-        <a href="impressão.html">Impressão</a>
-        <a href="criacao.html">Criação</a>
-        <a href="digital.html">Digital</a>
-        <a href="redes-sociais.html">Redes Sociais</a>
+          <a href="impressão.html">Impressão</a>
+          <a href="criacao.html">Criação</a>
+          <a href="digital.html">Digital</a>
+          <a href="redes-sociais.html">Redes Sociais</a>
         </div>
       </div>
       <a href="contato.html">Contato</a>
     </div>
   </nav>
 
-<!-- HERO DESKTOP -->
-<section class="hero" id="home">
-  <video autoplay muted loop playsinline class="hero-video">
-    <source src="imagem/fundo.mp4" type="video/mp4">
-    Seu navegador não suporta vídeo.
-  </video>
-  <div class="hero-text">
-    <span id="typewriter"></span><span class="cursor">|</span>
-  </div>
-</section>
-
-<!-- HERO MOBILE -->
-<section class="hero-mobile">
-  <video autoplay muted loop playsinline class="hero-video">
-    <source src="celtoon-reel-sn.mp4" type="video/mp4">
-    Seu navegador não suporta vídeo.
-  </video>
-  <div class="hero-mobile-bg">
-    <div class="hero-mobile-text">
-      <h1>Criatividade é nossa matéria prima.</h1>
+  <!-- HERO DESKTOP -->
+  <section class="hero" id="home">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="imagem/fundo.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
+    </video>
+    <div class="hero-text">
+      <span id="typewriter"></span><span class="cursor">|</span>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- HERO MOBILE -->
+  <section class="hero-mobile">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="celtoon-reel-sn.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
+    </video>
+    <div class="hero-mobile-bg"><div class="hero-mobile-text"><h1>Criatividade é nossa matéria prima.</h1></div></div>
+  </section>
 
   <!-- FEATURE BOXES -->
- <!-- FEATURE BOXES -->
-<section class="feature-section">
-  <h1>Nossos serviços</h1>
+  <section class="feature-section">
+    <h1>Nossos serviços</h1>
+    <div class="feature-carousel">
+      <div class="feature-boxes">
+        <div class="feature-box"><h3>Impressão</h3><p>Flyer, cordão para crachá, credencial, totem, caderno, camiseta, ecobag, adesivo, cartão de visitas, cartaz, convite, envelope, banner, arte finalização.</p><img src="personagem/impressão.png" alt="Serviço 1" /></div>
+        <div class="feature-box"><h3>Criação</h3><p>Naming, slogan, style guide, criação de logo, mascote, mockup digital, layout, embalagem, vetorização, ilustração, key visual, edição, conceito visual.</p><img src="personagem/criacao.png" alt="Serviço 2" /></div>
+        <div class="feature-box"><h3>Digital</h3><p>Modelagem 3D, UI &amp; UX, Banner para site, infográfico, apresentação de slide, catálogo, landing page.</p><img src="personagem/digital.png" alt="Serviço 3" /></div>
+        <div class="feature-box"><h3>Redes Sociais</h3><p>Estático, reels, animado, carrossel</p><img src="personagem/redes.png" alt="Serviço 4" /></div>
+      </div>
 
-  <!-- Container do carrossel -->
-  <div class="feature-carousel">
-    <div class="feature-boxes">
-      <div class="feature-box">
-        <h3>Impressão</h3>
-        <p>Flyer, cordão para crachá, credencial, totem, caderno, camiseta, ecobag, adesivo, cartão de visitas, cartaz, convite, envelope, banner, arte finalização.</p>
-        <img src="personagem/impressão.png" alt="Serviço 1" />
+      <!-- Indicadores (bolinhas do carrossel de features) -->
+      <div class="carousel-indicators" aria-hidden="true">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <div class="feature-box">
-        <h3>Criação</h3>
-        <p>Naming, slogan, style guide, criação de logo, mascote, mockup digital, layout, embalagem, vetorização, ilustração, key visual, edição, conceito visual.</p>
-        <img src="personagem/criacao.png" alt="Serviço 2" />
-      </div>
-      <div class="feature-box">
-        <h3>Digital</h3>
-        <p>Modelagem 3D, UI & UX, Banner para site, infográfico, apresentação de slide, catálogo, landing page.</p>
-        <img src="personagem/digital.png" alt="Serviço 3" />
-      </div>
-      <div class="feature-box">
-        <h3>Redes Sociais</h3>
-        <p>Estático, reels, animado, carrossel</p>
-        <img src="personagem/redes.png" alt="Serviço 4" />
+    </div>
+    <a href="#produtos" class="more-button">Mais</a>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <h2 class="section-title">Cases de sucesso</h2>
+  <section class="projects-section">
+    <div class="projects-carousel">
+      <div class="projects-grid">
+        <div class="project-item"><img src="imagem/renderjpg.jpg" alt="Recírculo 1"><div class="overlay"><h3>Recírculo</h3><span class="tag">Criação/Digital</span></div></div>
+        <div class="project-item"><img src="imagem/nort.jpg" alt="Nortinho"><div class="overlay"><h3>Nortinho</h3><span class="tag">Digital</span></div></div>
+        <div class="project-item"><img src="imagem/lavi.jpg" alt="Lavinho"><div class="overlay"><h3>Lavinho</h3><span class="tag">Digital</span></div></div>
+        <div class="project-item"><img src="imagem/magazine_boneco.jpg" alt="Magazine Móveis"><div class="overlay"><h3>Magazine Móveis</h3><span class="tag">Criação/Impressão</span></div></div>
+        <div class="project-item"><img src="imagem/recirculo.jpg" alt="Recírculo 2"><div class="overlay"><h3>Recírculo</h3><span class="tag">Criação/Digital</span></div></div>
+        <div class="project-item"><img src="imagem/ceopaginho.jpg" alt="Ceopag"><div class="overlay"><h3>Ceopaguinho</h3><span class="tag">Criação/Impressão</span></div></div>
       </div>
     </div>
 
-    <!-- Indicadores (bolinhas do carrossel) -->
-    <div class="carousel-indicators" aria-hidden="true">
+    <div class="portfolio-arrows"><button class="prev">&#10094;</button><button class="next">&#10095;</button></div>
+
+    <!-- bolinhas do mobile (portfolio) -->
+    <div class="portfolio-indicators" aria-hidden="true">
       <span class="active"></span>
       <span></span>
       <span></span>
       <span></span>
-    </div>
- </div>
-
-  <!-- Botão MAIS abaixo das caixas -->
-  <a href="#produtos" class="more-button">Mais</a>
-</section>
-
-    
-  <!-- Portfolio-->
-<h2 class="section-title">Cases de sucesso</h2>
-
-<section class="projects-section">
-  <!-- wrapper do carrossel -->
-  <div class="projects-carousel">
-    <div class="projects-grid">
-      <div class="project-item">
-        <img src="imagem/renderjpg.jpg" alt="Recírculo 1">
-        <div class="overlay">
-          <h3>Recírculo</h3>
-          <span class="tag">Criação/Digital</span>
-        </div>
-      </div>
-      <div class="project-item">
-        <img src="imagem/nort.jpg" alt="Nortinho">
-        <div class="overlay">
-          <h3>Nortinho</h3>
-          <span class="tag">Digital</span>
-        </div>
-      </div>
-      <div class="project-item">
-        <img src="imagem/lavi.jpg" alt="Lavinho">
-        <div class="overlay">
-          <h3>Lavinho</h3>
-          <span class="tag">Digital</span>
-        </div>
-      </div>
-      <div class="project-item">
-        <img src="imagem/magazine_boneco.jpg" alt="Magazine Móveis">
-        <div class="overlay">
-          <h3>Magazine Móveis</h3>
-          <span class="tag">Criação/Impressão</span>
-        </div>
-      </div>
-      <div class="project-item">
-        <img src="imagem/recirculo.jpg" alt="Recírculo 2">
-        <div class="overlay">
-          <h3>Recírculo</h3>
-          <span class="tag">Criação/Digital</span>
-        </div>
-      </div>
-      <div class="project-item">
-        <img src="imagem/ceopaginho.jpg" alt="Ceopag">
-        <div class="overlay">
-          <h3>Ceopaguinho</h3>
-          <span class="tag">Criação/Impressão</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- setas do desktop -->
-  <div class="portfolio-arrows">
-    <button class="prev">&#10094;</button>
-    <button class="next">&#10095;</button>
-  </div>
-
-  <!-- bolinhas do mobile -->
-  <div class="portfolio-indicators">
-    <span class="active"></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</section>
-
-
-
-  <!-- SECTION COM IMAGEM DE FUNDO E BOTÃO -->
-  <section class="cta-section">
-    <div class="cta-text">
-      Está pronto para transformar seu negócio com um design incrível?  
-      Solicite agora mesmo um orçamento sob medida para você.
-    </div>
-    <div class="cta-button">
-      <a href="orcamento.html">Solicitar Orçamento</a>
+      <span></span>
+      <span></span>
     </div>
   </section>
 
+  <!-- CTA -->
+  <section class="cta-section"><div class="cta-text">Está pronto para transformar seu negócio com um design incrível? Solicite agora mesmo um orçamento sob medida para você.</div><div class="cta-button"><a href="orcamento.html">Solicitar Orçamento</a></div></section>
 
- <!-- CLIENTES -->
-<section class="clientes-section" id="clientes">
-  <h2>Nossos clientes</h2>
-  <div class="clientes-grid">
-    <img src="cliente/Ansell.png" alt="Ansell">
-    <img src="cliente/Bike.png" alt="Bike Center Brasilia">
-    <img src="cliente/Ceopag.png" alt="Ceopag">
-    <img src="cliente/Magazine.png" alt="Magazine Móveis">
-    <img src="cliente/Recirculo.png" alt="Recirculo">
-    <img src="cliente/norte.png" alt="Norte Telecom">
-    <img src="cliente/powernet.png" alt="Power Net">
-    <img src="cliente/rohto.png" alt="Rohto">
-    <img src="cliente/Yogoberry.png" alt="Yogoberry">
-    <img src="cliente/HiperRoll.png" alt="Hiper Roll">
-    <img src="cliente/Guaçu.png" alt="Rádio Guaçu">
-  </div>
-</section>
+  <!-- CLIENTES -->
+  <section class="clientes-section" id="clientes"><h2>Nossos clientes</h2><div class="clientes-grid">
+    <img src="cliente/Ansell.png" alt="Ansell"><img src="cliente/Bike.png" alt="Bike Center Brasilia"><img src="cliente/Ceopag.png" alt="Ceopag"><img src="cliente/Magazine.png" alt="Magazine Móveis"><img src="cliente/Recirculo.png" alt="Recirculo"><img src="cliente/norte.png" alt="Norte Telecom"><img src="cliente/powernet.png" alt="Power Net"><img src="cliente/rohto.png" alt="Rohto"><img src="cliente/Yogoberry.png" alt="Yogoberry"><img src="cliente/HiperRoll.png" alt="Hiper Roll"><img src="cliente/Guaçu.png" alt="Rádio Guaçu">
+  </div></section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-address">
-      Rua Criatividade, 123<br>
-      Bairro Inspiração<br>
-      Cidade das Ideias – BR
-    </div>
-     <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="orcamento.html">Orçamento</a>
-    <a href="#produtos">Produtos</a>
-    <a href="contato.html">Contato</a>
-  </div>
-
-  <div class="social-icons">
-    <a href="https://www.instagram.com/celtoon.agencia/" target="_blank">
-      <img src="instagram.png" alt="Instagram">
-    </a>
-    <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank">
-      <img src="linkedin.png" alt="LinkedIn">
-    </a>
-    <a href="https://wa.me/seunumerodetelefone" target="_blank">
-      <img src="whats.png" alt="Whatsapp">
-    </a>
-  </div>
+    <div class="footer-address">Rua Criatividade, 123<br>Bairro Inspiração<br>Cidade das Ideias – BR</div>
+    <div class="footer-links"><a href="index.html">Home</a><a href="orcamento.html">Orçamento</a><a href="#produtos">Produtos</a><a href="contato.html">Contato</a></div>
+    <div class="social-icons"><a href="https://www.instagram.com/celtoon.agencia/" target="_blank"><img src="instagram.png" alt="Instagram"></a><a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank"><img src="linkedin.png" alt="LinkedIn"></a><a href="https://wa.me/seunumerodetelefone" target="_blank"><img src="whats.png" alt="Whatsapp"></a></div>
   </footer>
 
-  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
-  <img src="whats2.png" alt="WhatsApp" />
-  </a>
+  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp" /></a>
 
+  <!-- ==========================================
+       SCRIPTS (organizados & robustos)
+       ========================================== -->
   <script>
-    
-//Esconde a barra de comandos 
-let lastScrollTop = 0;
-const navbar = document.querySelector('nav');
+  (function(){
+    'use strict';
 
-window.addEventListener('scroll', function() {
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    // ---------- helpers ----------
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-  if (scrollTop > lastScrollTop) {
-    // Rolando para baixo → esconder
-    navbar.style.top = `-${navbar.offsetHeight}px`;
-  } else {
-    // Rolando para cima → mostrar
-    navbar.style.top = "0";
-  }
+    // ---------- NAVBAR hide on scroll ----------
+    (function navbarScroll(){
+      const navbar = $('nav');
+      if(!navbar) return;
+      let lastScrollTop = 0;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) navbar.style.top = `-${navbar.offsetHeight}px`; else navbar.style.top = '0';
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      }, { passive: true });
+    })();
 
-  lastScrollTop = scrollTop;
-});
+    // ---------- MENU TOGGLE ----------
+    (function menuToggle(){
+      const toggleBtn = $('.menu-toggle');
+      const navLinks = $('.nav-links');
+      if(!toggleBtn || !navLinks) return;
+      toggleBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+    })();
 
-
-    // Animações existentes
-    window.addEventListener('load', () => {
-      const heroImage = document.getElementById('heroImage');
-      if (heroImage) {
-        heroImage.classList.add('visible');
+    // ---------- TYPEWRITER ----------
+    (function typewriter(){
+      const phrases = [
+        "Criamos design que resolve.",
+        "Ideias ousadas. Resultados reais.",
+        "Visual forte, marca memorável.",
+        "Seu negócio, nossa arte.",
+        "Do rascunho ao extraordinário.",
+        "Design que move, conecta e vende.",
+        "Criatividade é nossa matéria prima.",
+        "Projetamos impacto.",
+        "Menos do mesmo. Mais do que esperam.",
+      ];
+      const el = $('#typewriter');
+      if(!el) return;
+      let phraseIndex = 0, charIndex = 0, isDeleting = false;
+      function tick(){
+        const p = phrases[phraseIndex];
+        if(isDeleting) { el.textContent = p.substring(0, charIndex--); }
+        else { el.textContent = p.substring(0, charIndex++); }
+        if(!isDeleting && charIndex === p.length) setTimeout(() => isDeleting = true, 2000);
+        else if(isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex+1) % phrases.length; }
+        const speed = isDeleting ? 50 : 100;
+        setTimeout(tick, speed);
       }
+      // start after DOM ready (script is at end so safe)
+      tick();
+    })();
 
-//scroll da seção boxes
-(function () {
-  const scroller = document.querySelector('.feature-boxes');
-  const dots = Array.from(document.querySelectorAll('.carousel-indicators span'));
-  if (!scroller || !dots.length) return;
+    // ---------- FEATURE SCROLLER + INDICATORS (bolinhas) ----------
+    (function initFeatureScroller(){
+      const scroller = document.querySelector('.feature-boxes');
+      const dots = document.querySelectorAll('.carousel-indicators span');
+      if(!scroller || !dots.length) return;
 
-  function stepSize() {
-    const card = scroller.querySelector('.feature-box');
-    if (!card) return 1;
-    const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
-    return card.offsetWidth + gap;
-  }
-
-  function updateDots() {
-    const size = stepSize();
-    if (!size) return;
-    const idx = Math.round(scroller.scrollLeft / size);
-    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-  }
-
-  function scrollToIndex(i, behavior = 'smooth') {
-    const left = i * stepSize();
-    scroller.scrollTo({ left, behavior });
-  }
-
-  function init() {
-    // Aguarda o load completo (garante imagens definidas)
-    // e também aguarda um frame de layout para total segurança.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        // garantir sem smooth no init
-        const prev = scroller.style.scrollBehavior;
-        scroller.style.scrollBehavior = 'auto';
-        scrollToIndex(0, 'auto'); // força no primeiro
-        updateDots();
-        scroller.style.scrollBehavior = prev || '';
-      });
-    });
-  }
-
-  // eventos
-  scroller.addEventListener('scroll', updateDots, { passive: true });
-  window.addEventListener('resize', () => {
-    // reposiciona no mesmo índice ao redimensionar
-    const idx = dots.findIndex(d => d.classList.contains('active'));
-    scrollToIndex(idx >= 0 ? idx : 0, 'auto');
-  });
-
-  dots.forEach((d, i) => d.addEventListener('click', () => scrollToIndex(i)));
-
-  // inicia após load completo (garante imagens)
-  if (document.readyState === 'complete') init();
-  else window.addEventListener('load', init);
-})();
-
-
-
-(function () {
-  // ----- MOBILE (bolinhas) já está OK acima, então aqui focamos no DESKTOP -----
-
-  const grid = document.querySelector('.projects-grid');
-  const items = grid ? Array.from(grid.querySelectorAll('.project-item')) : [];
-  const prevBtn = document.querySelector('.portfolio-arrows .prev');
-  const nextBtn = document.querySelector('.portfolio-arrows .next');
-  const mqDesktop = window.matchMedia('(min-width: 993px)');
-  const itemsPerPage = 3;
-  let currentPage = 0;
-
-  if (!grid || !prevBtn || !nextBtn) return;
-
-  function totalPages() {
-    return Math.max(1, Math.ceil(items.length / itemsPerPage));
-  }
-
-  function applyTransform() {
-    // No desktop, cada página = largura inteira do wrapper
-    if (mqDesktop.matches) {
-      grid.style.transform = `translateX(-${currentPage * 100}%)`;
-    } else {
-      // Em tablet/mobile não usamos transform
-      grid.style.transform = '';
-    }
-  }
-
-  function updateButtons() {
-    const pages = totalPages();
-    prevBtn.disabled = currentPage === 0;
-    nextBtn.disabled = currentPage >= pages - 1;
-  }
-
-  function goTo(page) {
-    const pages = totalPages();
-    currentPage = Math.min(Math.max(0, page), pages - 1);
-    applyTransform();
-    updateButtons();
-  }
-
-  function initDesktop() {
-    if (mqDesktop.matches) {
-      grid.style.willChange = 'transform';
-      goTo(0);
-    } else {
-      grid.style.willChange = '';
-      grid.style.transform = '';
-    }
-  }
-
-  // Eventos
-  prevBtn.addEventListener('click', () => goTo(currentPage - 1));
-  nextBtn.addEventListener('click', () => goTo(currentPage + 1));
-  mqDesktop.addEventListener('change', initDesktop);
-  window.addEventListener('resize', applyTransform);
-
-  // Inicializa imediatamente (sem depender de DOMContentLoaded dentro de load)
-  initDesktop();
-})();
-
-      (function () {
-  const scroller = document.querySelector('.projects-grid');
-  const dots = Array.from(document.querySelectorAll('.portfolio-indicators span'));
-  if (!scroller || !dots.length) return;
-
-  function stepSize() {
-    const card = scroller.querySelector('.project-item');
-    if (!card) return scroller.clientWidth;
-    const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
-    return card.offsetWidth + gap;
-  }
-
-  function updateDots() {
-    const step = stepSize();
-    if (!step) return;
-    const idx = Math.round(scroller.scrollLeft / step);
-    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-  }
-
-  // clique nas bolinhas navega (útil no mobile)
-  dots.forEach((d, i) => d.addEventListener('click', () => {
-    scroller.scrollTo({ left: i * stepSize(), behavior: 'smooth' });
-    updateDots();
-  }));
-
-  scroller.addEventListener('scroll', updateDots, { passive: true });
-  window.addEventListener('resize', updateDots);
-  // run once
-  setTimeout(updateDots, 200);
-})();
-
-
-
-
-
-       // Animação da seção de clientes
-  const clientesSection = document.querySelector('.clientes-section');
-
-  const clientesObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+      function cardSize(){
+        const card = scroller.querySelector('.feature-box');
+        if(!card) return scroller.clientWidth;
+        const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+        return card.offsetWidth + gap;
       }
-    });
-  }, { threshold: 0.1 });
+      function updateDots(){
+        const size = cardSize(); if(!size) return;
+        const idx = Math.round(scroller.scrollLeft / size);
+        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+      }
+      function scrollToIndex(i, behavior='smooth'){ scroller.scrollTo({ left: i * cardSize(), behavior }); }
 
-  if (clientesSection) {
-    clientesObserver.observe(clientesSection);
-  }
+      dots.forEach((d,i) => d.addEventListener('click', () => scrollToIndex(i)));
+      scroller.addEventListener('scroll', updateDots, { passive: true });
+      window.addEventListener('resize', updateDots);
+      // ensure we start at 0 after images/layout stable
+      if (document.readyState === 'complete') requestAnimationFrame(updateDots); else window.addEventListener('load', () => requestAnimationFrame(updateDots));
+    })();
 
-    });
+    // ---------- PROJECTS GRID (desktop arrows) ----------
+    (function initProjectsDesktop(){
+      const grid = document.querySelector('.projects-grid');
+      const items = grid ? Array.from(grid.querySelectorAll('.project-item')) : [];
+      const prevBtn = document.querySelector('.portfolio-arrows .prev');
+      const nextBtn = document.querySelector('.portfolio-arrows .next');
+      const mqDesktop = window.matchMedia('(min-width: 993px)');
+      const itemsPerPage = 3; let currentPage = 0;
+      if(!grid || !prevBtn || !nextBtn) return;
 
-    const boxes = document.querySelectorAll('.feature-box');
+      function totalPages(){ return Math.max(1, Math.ceil(items.length / itemsPerPage)); }
+      function applyTransform(){ if(mqDesktop.matches) grid.style.transform = `translateX(-${currentPage * 100}%)`; else grid.style.transform = ''; }
+      function updateButtons(){ const pages = totalPages(); prevBtn.disabled = currentPage === 0; nextBtn.disabled = currentPage >= pages - 1; }
+      function goTo(page){ const pages = totalPages(); currentPage = Math.min(Math.max(0, page), pages - 1); applyTransform(); updateButtons(); }
+      function init(){ if(mqDesktop.matches){ grid.style.willChange = 'transform'; goTo(0); } else { grid.style.willChange = ''; grid.style.transform = ''; } }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+      prevBtn.addEventListener('click', () => goTo(currentPage - 1));
+      nextBtn.addEventListener('click', () => goTo(currentPage + 1));
+      mqDesktop.addEventListener('change', init);
+      window.addEventListener('resize', applyTransform);
+      init();
+    })();
 
-    boxes.forEach(box => observer.observe(box));
+    // ---------- PROJECTS MOBILE INDICATORS ----------
+    (function initProjectsDots(){
+      const scroller = document.querySelector('.projects-grid');
+      const dots = document.querySelectorAll('.portfolio-indicators span');
+      if(!scroller || !dots.length) return;
 
-    // animação texto topo 
-    const phrases = [
-    "Criamos design que resolve.",
-    "Ideias ousadas. Resultados reais.",
-    "Visual forte, marca memorável.",
-    "Seu negócio, nossa arte.",
-    "Do rascunho ao extraordinário.",
-    "Design que move, conecta e vende.",
-    "Criatividade é nossa matéria prima.",
-    "Projetamos impacto.",
-    "Menos do mesmo. Mais do que esperam.",
-    
-  ];
+      function stepSize(){ const card = scroller.querySelector('.project-item'); if(!card) return scroller.clientWidth; const gap = parseFloat(getComputedStyle(scroller).gap) || 0; return card.offsetWidth + gap; }
+      function updateDots(){ const step = stepSize(); if(!step) return; const idx = Math.round(scroller.scrollLeft / step); dots.forEach((d,i) => d.classList.toggle('active', i === idx)); }
+      dots.forEach((d,i) => d.addEventListener('click', () => { scroller.scrollTo({ left: i * stepSize(), behavior: 'smooth' }); }));
+      scroller.addEventListener('scroll', updateDots, { passive: true });
+      window.addEventListener('resize', updateDots);
+      // run once shortly after load/layout
+      setTimeout(updateDots, 250);
+    })();
 
-  const typewriter = document.getElementById('typewriter');
-  const cursor = document.querySelector('.cursor');
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
+    // ---------- ANIMAÇÃO CLIENTES & FEATURE BOXES (IntersectionObserver) ----------
+    (function observeSections(){
+      const clientesSection = document.querySelector('.clientes-section');
+      if(clientesSection){
+        const obs = new IntersectionObserver((entries)=>{ entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        obs.observe(clientesSection);
+      }
+      const boxes = document.querySelectorAll('.feature-box');
+      if(boxes.length){
+        const obs2 = new IntersectionObserver((entries)=>{ entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        boxes.forEach(b => obs2.observe(b));
+      }
+    })();
 
-  function type() {
-    const currentPhrase = phrases[phraseIndex];
-    if (isDeleting) {
-      typewriter.textContent = currentPhrase.substring(0, charIndex--);
-    } else {
-      typewriter.textContent = currentPhrase.substring(0, charIndex++);
-    }
-
-    if (!isDeleting && charIndex === currentPhrase.length) {
-      setTimeout(() => isDeleting = true, 2000);
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-    }
-
-    const speed = isDeleting ? 50 : 100;
-    setTimeout(type, speed);
-  }
-
-  document.addEventListener('DOMContentLoaded', type);
-
-    /*Menu Toogle*/
-    const toggleBtn = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-
-    
+  })();
   </script>
-
-
-  
 </body>
 </html>
