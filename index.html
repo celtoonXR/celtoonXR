@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Celtoon Agência Criativa</title>
+
+  <!-- marca que indica que JS está disponível (usada pelo CSS para não esconder elementos se o JS não rodar) -->
+  <script>document.documentElement.classList.add('js');</script>
+
   <style>
   /* ==========================================
      FONTS / RESET / VARIÁVEIS
@@ -37,13 +41,13 @@
   body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
   a { text-decoration: none; }
 
-  /* fade-in genérico (usado em features, portfolio, cta e clientes) */
-  .fade-in {
+  /* FADE-IN: só aplica a ocultação se o JS está presente (classe .js é adicionada via script) */
+  .js .fade-in {
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
-  .fade-in.visible {
+  .js .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
   }
@@ -117,12 +121,8 @@
   .carousel-indicators, .portfolio-indicators, .carousel-dots { display: none; }
 
   /* estilos das bolinhas (usados tanto para feature quanto portfolio) */
-  .carousel-indicators span, .portfolio-indicators span, .carousel-dots span {
-    display: block; width: 10px; height: 10px; border-radius: 50%; background: #ccc; transition: background .3s, transform .2s;
-  }
-  .carousel-indicators span.active, .portfolio-indicators span.active, .carousel-dots span.active {
-    background: var(--brand); transform: scale(1.1);
-  }
+  .carousel-indicators span, .portfolio-indicators span, .carousel-dots span { display: block; width: 10px; height: 10px; border-radius: 50%; background: #ccc; transition: background .3s, transform .2s; }
+  .carousel-indicators span.active, .portfolio-indicators span.active, .carousel-dots span.active { background: var(--brand); transform: scale(1.1); }
 
   /* MOBILE: transformamos em scroller horizontal */
   @media (max-width: 768px) {
@@ -166,51 +166,14 @@
     .portfolio-arrows { display: none; }
   }
   @media (max-width: 768px) {
-    /* Ajustes corretos para a seção de portfolio (nome certo da classe) */
-    .projects-section {
-      margin-top: 0rem;
-      margin-bottom: 0rem;
-    }
-
-    .section-title {
-      margin-bottom: 0rem;
-      font-size: 2rem;
-    }
-
-    .projects-grid {
-      margin-top: 0rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .portfolio-indicators {
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .projects-grid {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      gap: 1rem;
-      transition: none;
-    }
-
-    .project-item {
-      flex: 0 0 100%;
-      max-width: 100%;
-      scroll-snap-align: start;
-      aspect-ratio: 4/4;
-    }
-
+    .projects-section { margin-top: 0rem; margin-bottom: 0rem; }
+    .section-title { margin-bottom: 0rem; font-size: 2rem; }
+    .projects-grid { margin-top: 0rem; margin-bottom: 0.5rem; }
+    .portfolio-indicators { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+    .projects-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 1rem; transition: none; }
+    .project-item { flex: 0 0 100%; max-width: 100%; scroll-snap-align: start; aspect-ratio: 4/4; }
     .portfolio-arrows { display: none; }
-
-    .portfolio-indicators {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
+    .portfolio-indicators { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
     .portfolio-indicators span { width: 10px; height: 10px; background: #ccc; border-radius: 50%; cursor: pointer; }
     .portfolio-indicators span.active { background: #1F4381; }
   }
@@ -224,7 +187,7 @@
   .cta-button a { padding: 1rem 2rem; background-color: #fff; border-radius: 8px; color: var(--brand); font-family: 'IntroRegularAlt', sans-serif; text-decoration: none; transition: background 0.3s ease; }
   .cta-button a:hover { background-color: #e0e0e0; }
 
-  /* clientes usa a mesma animação fade-in */
+  /* clientes - agora sem regra .visible separada (usamos .fade-in) */
   .clientes-section { min-height: 60vh; background-color: #fff; padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
   .clientes-section h2 { font-family: 'IntroRegularAlt', sans-serif; font-size: 2rem; color: var(--brand); margin-bottom: 2rem; }
   .clientes-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; max-width: 960px; margin: 0 auto; }
@@ -235,12 +198,7 @@
   .footer-address { width: 30%; font-size: 0.9rem; font-family: 'IntroRegularAlt', sans-serif; }
   .footer-links { display: flex; flex-direction: column; gap: 0.5rem; width: 30%; }
   .footer-links a { font-family: 'IntroRegularAlt', sans-serif; color: white; font-weight: 500; }
-  @media (max-width: 768px) {
-    .cta-section { flex-direction: column; text-align: center; }
-    .cta-text, .cta-button { width: 100%; padding: 1rem 0; }
-    .footer-address, .footer-links { width: 100%; text-align: center; margin-bottom: 1rem; }
-    .nav-links { flex-direction: column; }
-  }
+  @media (max-width: 768px) { .cta-section { flex-direction: column; text-align: center; } .cta-text, .cta-button { width: 100%; padding: 1rem 0; } .footer-address, .footer-links { width: 100%; text-align: center; margin-bottom: 1rem; } .nav-links { flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -329,17 +287,8 @@
 
     <!-- bolinhas do mobile (portfolio) -->
     <div class="portfolio-indicators" aria-hidden="true">
-      <span class="active"></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span class="active"></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
     </div>
   </section>
 
@@ -375,6 +324,7 @@
 
     // ---------- helpers ----------
     const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
 
     // ---------- NAVBAR hide on scroll ----------
     (function navbarScroll(){
@@ -446,7 +396,6 @@
       dots.forEach((d,i) => d.addEventListener('click', () => scrollToIndex(i)));
       scroller.addEventListener('scroll', updateDots, { passive: true });
       window.addEventListener('resize', updateDots);
-
       if (document.readyState === 'complete') requestAnimationFrame(updateDots);
       else window.addEventListener('load', () => requestAnimationFrame(updateDots));
     })();
@@ -491,9 +440,7 @@
         const idx = Math.round(scroller.scrollLeft / step);
         dots.forEach((d,i) => d.classList.toggle('active', i === idx));
       }
-      dots.forEach((d,i) => d.addEventListener('click', () => {
-        scroller.scrollTo({ left: i * stepSize(), behavior: 'smooth' });
-      }));
+      dots.forEach((d,i) => d.addEventListener('click', () => { scroller.scrollTo({ left: i * stepSize(), behavior: 'smooth' }); }));
       scroller.addEventListener('scroll', updateDots, { passive: true });
       window.addEventListener('resize', updateDots);
       setTimeout(updateDots, 250);
@@ -503,6 +450,12 @@
     (function initFadeIn(){
       const targets = document.querySelectorAll('.fade-in');
       if(!targets.length) return;
+
+      // fallback se IntersectionObserver não existir
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(t => t.classList.add('visible'));
+        return;
+      }
 
       const io = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
