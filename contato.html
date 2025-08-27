@@ -206,11 +206,13 @@
 }
 
 .sobre-contato img {
-  width: 70%;
-  max-width: 280px;
-  padding-right: 2rem;
-  border-radius: 12px;
-  margin-bottom: 1rem;
+  display: block;              /* permite centralizar */
+  margin: 0 auto 1rem auto;    /* centraliza horizontalmente */
+  width: 200px;                /* define tamanho fixo */
+  height: 200px;               /* mesmo valor para altura */
+  border-radius: 50%;          /* deixa circular */
+  object-fit: cover;           /* garante que a imagem preencha sem distorcer */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* opcional: sombra elegante */
 }
 
 .sobre-contato h2 {
