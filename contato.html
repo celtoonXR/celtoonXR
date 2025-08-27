@@ -186,103 +186,111 @@
 }
     
 /* === SEÇÃO CONTATO === */
+/* Container principal contato */
 .contato {
-  max-width: 800px;
-  margin: 6rem auto 4rem auto; /* deixa espaço da navbar */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 6rem auto 4rem auto; /* espaço da navbar */
   padding: 2rem;
-  text-align: center;
+  border-left: 4px solid transparent;
 }
 
-.contato h1 {
-  font-size: 2.5rem;
+/* Coluna esquerda (sobre) */
+.sobre-contato {
+  flex: 1;
+  padding-right: 2rem;
+  border-right: 1px solid #ccc;
+}
+
+.sobre-contato img {
+  width: 100%;
+  max-width: 280px;
+  border-radius: 12px;
   margin-bottom: 1rem;
 }
 
-.contato p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+.sobre-contato h2 {
+  font-family: 'IntroCondBlackFree', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1F4381;
+}
+
+.sobre-contato p {
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
   color: #444;
 }
 
-/* === FORMULÁRIO === */
+/* Coluna direita (formulário) */
+.form-col {
+  flex: 1;
+  padding-left: 2rem;
+}
+
+.form-col h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.form-col p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+/* Form elegante */
 .form-contato {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  text-align: left;
-}
-
-.form-contato label {
-  font-weight: bold;
-  color: #222;
 }
 
 .form-contato input,
 .form-contato textarea {
   padding: 0.8rem;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 1rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.form-contato input:focus,
-.form-contato textarea:focus {
-  outline: none;
-  border-color: #0066ff;
-  box-shadow: 0 0 5px rgba(0, 102, 255, 0.3);
 }
 
 .form-contato button {
-  background-color: #0066ff;
+  background-color: #1F4381;
   color: white;
   border: none;
-  padding: 1rem;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  padding: 0.9rem;
+  border-radius: 6px;
+  font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .form-contato button:hover {
-  background-color: #004fcc;
+  background-color: #16315e;
 }
 
-/* === CONTATO DIRETO === */
-.info-contato {
-  margin-top: 3rem;
-  text-align: center;
-}
-
-.info-contato h2 {
-  margin-bottom: 1rem;
-}
-
-.info-contato p {
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
-}
-
-.info-contato a {
-  color: #0066ff;
-  text-decoration: none;
-}
-
-.info-contato a:hover {
-  text-decoration: underline;
-}
-
-/* === RESPONSIVIDADE === */
-@media (max-width: 600px) {
+/* Responsividade: empilha colunas no mobile */
+@media (max-width: 768px) {
   .contato {
+    flex-direction: column;
     padding: 1rem;
   }
 
-  .contato h1 {
-    font-size: 2rem;
+  .sobre-contato {
+    border-right: none;
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+
+  .form-col {
+    padding-left: 0;
   }
 }
+
 
     
     /* FOOTER */
@@ -367,11 +375,22 @@
   </nav>
   
   <!-- Seção Contato -->
-  <section class="contato">
-    <h1>Entre em Contato</h1>
-    <p>Preencha o formulário abaixo ou utilize um dos nossos canais de contato direto.</p>
+<section class="contato">
+  <!-- Coluna esquerda -->
+  <div class="sobre-contato">
+    <img src="sua-foto.jpg" alt="Foto de apresentação">
+    <h2>Sobre</h2>
+    <p>
+      Olá, meu nome é Danilo. Sou designer e criador de soluções visuais que unem criatividade e estratégia. 
+      Acredito que um bom design tem o poder de transformar marcas em experiências marcantes.
+    </p>
+  </div>
 
-    <!-- Formulário -->
+  <!-- Coluna direita -->
+  <div class="form-col">
+    <h1>Entre em Contato</h1>
+    <p>Preencha o formulário abaixo ou utilize nossos canais de contato direto.</p>
+
     <form action="https://formspree.io/f/mqakjlep" method="POST" class="form-contato">
       <label for="nome">Nome:</label>
       <input type="text" id="nome" name="nome" required>
@@ -388,14 +407,15 @@
       <button type="submit">Enviar</button>
     </form>
 
-    <!-- Contato Direto -->
     <div class="info-contato">
       <h2>Outros canais</h2>
       <p><strong>Email:</strong> <a href="mailto:dancelsosilva@gmail.com">dancelsosilva@gmail.com</a></p>
       <p><strong>Telefone:</strong> <a href="tel:+559999999999">(99) 99999-9999</a></p>
       <p><strong>Instagram:</strong> <a href="https://instagram.com/seuinstagram" target="_blank">@seuinstagram</a></p>
     </div>
-  </section>
+  </div>
+</section>
+
 
 
   <!-- FOOTER -->
