@@ -198,7 +198,58 @@
   .footer-address { width: 30%; font-size: 0.9rem; font-family: 'IntroRegularAlt', sans-serif; }
   .footer-links { display: flex; flex-direction: column; gap: 0.5rem; width: 30%; }
   .footer-links a { font-family: 'IntroRegularAlt', sans-serif; color: white; font-weight: 500; }
-  @media (max-width: 768px) { .cta-section { flex-direction: column; text-align: center; } .cta-text, .cta-button { width: 100%; padding: 1rem 0; } .footer-address, .footer-links { width: 100%; text-align: center; margin-bottom: 1rem; } .nav-links { flex-direction: column; } }
+    /* Ícones */
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.social-icons img {
+  width: 28px;
+  height: 28px;
+  transition: opacity 0.3s ease;
+}
+
+.social-icons img:hover {
+  opacity: 0.8;
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .cta-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cta-text,
+  .cta-button {
+    width: 100%;
+    padding: 1rem 0;
+  }
+
+  /* Esconde endereço e links */
+  .footer-address,
+  .footer-links {
+    display: none;
+  }
+
+  /* Mostra só Insta e LinkedIn no mobile */
+  .social-icons {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  /* Esconde ícone do WhatsApp do footer */
+  .social-icons a[href*="wa.me"] {
+    display: none;
+  }
+
+  .nav-links {
+    flex-direction: column;
+  }
+}
   </style>
 </head>
 <body>
