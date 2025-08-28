@@ -199,11 +199,12 @@
   .footer-links { display: flex; flex-direction: column; gap: 0.5rem; width: 30%; }
   .footer-links a { font-family: 'IntroRegularAlt', sans-serif; color: white; font-weight: 500; }
     
-    /* Ícones */
+/* Ícones */
 .social-icons {
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  justify-content: center; /* garante centralização */
   padding-right: 4rem;
 }
 
@@ -236,20 +237,24 @@
     display: none;
   }
 
-  /* Mostra só Insta e LinkedIn no mobile */
+  /* Centraliza ícones no mobile */
   .social-icons {
-    width: 100%;
-     align-items: center;
+    justify-content: center;  /* centraliza no rodapé */
+    padding-right: 0;         /* remove espaçamento lateral */
     margin-top: 1rem;
-    width: 28px;   /* aumenta o tamanho só no mobile */
-    height: 28px;
-    gap: 1rem;   /* diminui a distância só no mobile */
+    gap: 1rem;                /* distância entre ícones */
+  }
+
+  .social-icons img {
+    width: 50px;   /* tamanho dos ícones no mobile */
+    height: 50px;
   }
 
   .nav-links {
     flex-direction: column;
   }
 }
+
   </style>
 </head>
 <body>
