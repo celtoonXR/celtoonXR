@@ -198,11 +198,13 @@
   .footer-address { width: 30%; font-size: 0.9rem; font-family: 'IntroRegularAlt', sans-serif; }
   .footer-links { display: flex; flex-direction: column; gap: 0.5rem; width: 30%; }
   .footer-links a { font-family: 'IntroRegularAlt', sans-serif; color: white; font-weight: 500; }
+    
     /* Ícones */
 .social-icons {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
+  padding-right: 4rem;
 }
 
 .social-icons img {
@@ -239,11 +241,9 @@
     width: 100%;
     justify-content: center;
     margin-top: 1rem;
-  }
-
-  /* Esconde ícone do WhatsApp do footer */
-  .social-icons a[href*="wa.me"] {
-    display: none;
+    width: 30px;   /* aumenta o tamanho só no mobile */
+    height: 30px;
+    gap: 0.3rem;   /* diminui a distância só no mobile */
   }
 
   .nav-links {
