@@ -270,14 +270,36 @@
       /* ==========================================
      PORTFOLIO / PROJECTS
      ========================================== */
+
+  .portfolio-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 0 4rem 2rem 4rem;
+  }
+    
   .section-title { 
     font-size: 2rem;
     text-align: left;
     margin-left: 4rem;
     color: var(--brand);
     font-family: 'IntroCondBlackFree', sans-serif;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem
+    margin: 0;
+  'flex-shrink: 0;
   }
+    
+  .section-description {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.4rem;
+    max-height: 3rem;           /* controla altura máxima (≈ altura do título) */
+    display: flex;
+    align-items: center;        /* centraliza verticalmente com o título */
+    font-family: 'IntroRegularAlt', sans-serif;
+  }
+    
   .projects-section { 
     min-height: 80vh; 
     padding: 0; 
@@ -389,6 +411,18 @@
       font-size: 2rem; 
       align-items: flex-start;
     }
+
+    .portfolio-header {
+      flex-direction: column;
+      align-items: flex-start;
+       margin: 0 2rem 1.5rem 2rem;
+    }
+
+    .section-description {
+      max-height: none;   /* libera altura no mobile */
+      line-height: 1.4rem;
+    }
+    
     .projects-grid { 
       margin-top: 0rem; 
       margin-bottom: 0.5rem;
@@ -557,7 +591,14 @@
 
   <!-- PROJECTS / PORTFOLIO -->
   <section id="portfolio" class="projects-section fade-in">
-    <h2 class="section-title">Portfólio<br>criativo</h2>
+    <div class="portfolio-header">
+      <h2 class="section-title">Portfólio<br>criativo</h2>
+      <p class="section-description">
+        Impressões de alta qualidade que dão vida ao seu projeto. Trabalhamos com papéis especiais,
+        acabamentos premium e cores vibrantes para que cada detalhe transmita profissionalismo e impacto visual.
+      </p>
+    </div>
+
     <div class="projects-carousel">
       <div class="projects-grid">
         <div class="project-item"><img src="imagem/renderjpg.jpg" alt="Recírculo 1"><div class="overlay"><h3>Recírculo</h3><span class="tag">Criação/Digital</span></div></div>
@@ -584,6 +625,7 @@
       <span></span><span></span><span></span><span></span><span></span>
     </div>
   </section>
+
 
   <!-- FOOTER -->
   <footer>
