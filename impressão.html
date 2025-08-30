@@ -416,7 +416,84 @@
     }
   }
 
-   .footer { 
+ /* ==========================================
+     CTA / CLIENTES / FOOTER
+     ========================================== */
+  .cta-section { 
+    min-height: 100vh; 
+    background-image: url('Fundo1.png'); 
+    background-size: cover; 
+    background-position: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 8rem 4rem; 
+    color: #fff;
+    margin-top: 2rem; 
+  }
+  .cta-text { 
+    font-family: 'IntroCondBlackFree', sans-serif;
+    letter-spacing: 1px; 
+    width: 50%;
+    font-size: 2rem; 
+    padding-right: 2rem; 
+  }
+  .cta-button { 
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .cta-button a { 
+    padding: 1rem 2rem; 
+    background-color: #fff; 
+    border-radius: 8px; 
+    color: var(--brand); 
+    font-family: 'IntroRegularAlt', sans-serif; 
+    text-decoration: none; 
+    transition: background 0.3s ease; 
+  }
+  .cta-button a:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* clientes - agora sem regra .visible separada (usamos .fade-in) */
+  .clientes-section { 
+    min-height: 60vh; 
+    background-color: #fff; 
+    padding: 2rem; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+  }
+  .clientes-section h2 {
+    font-family: 'IntroCondBlackFree', sans-serif;
+    font-size: 2rem; 
+    color: var(--brand);
+    margin-bottom: 2rem; 
+    text-align: center;
+  }
+  .clientes-grid { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 3rem; 
+    max-width: 960px; 
+    margin: 0 auto;
+  }
+  .clientes-grid img { 
+    flex: 0 1 calc(25% - 3rem);
+    max-width: 120px; 
+    height: 60px;
+    object-fit: contain; 
+    transition: transform 0.3s ease;
+  }
+  .clientes-grid img:hover { 
+    transform: scale(1.1);
+  }
+
+  footer { 
     background-color: var(--brand);
     color: white; 
     padding: 2rem; 
