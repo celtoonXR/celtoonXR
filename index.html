@@ -206,7 +206,10 @@
     overflow: hidden; 
   }
 
+
   .orcamento-button { 
+    position: relative; /* garante que z-index funcione */
+    z-index: 2; /* aparece sobre o vídeo */
     margin-top: 8rem; 
     padding: 0.75rem 1.5rem; 
     background-color: var(--brand); 
@@ -220,8 +223,8 @@
     text-decoration: none; 
     margin-bottom: 2rem;
     margin-left: 4rem;
-    justify-content: flex-start; 
   }
+
   .orcamento-button:hover { 
     background-color: var(--brand-dark); 
   }
@@ -309,7 +312,24 @@
     align-items: center; 
     justify-content: center; 
   }
-  @media (max-width: 768px) { .hero { display: none !important; } .hero-mobile { display: flex !important; margin-top: 4.5rem; } }
+  @media (max-width: 768px) { 
+    .hero { 
+      display: none !important; 
+    } 
+    .hero-mobile { 
+      display: flex !important; 
+      margin-top: 4.5rem; 
+      position: relative;
+    } 
+    .orcamento-button { 
+      position: absolute;  /* fica sobre o vídeo */
+      bottom: 2rem;        /* fixa na parte inferior */
+      left: 50%;           /* centraliza horizontalmente */
+      transform: translateX(-50%);
+      margin: 0;           /* remove margins que empurram */
+      z-index: 2;
+    }
+  }
 
   /* ==========================================
      FEATURE (Boxes / Carousel) 
