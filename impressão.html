@@ -251,6 +251,22 @@
   50% { opacity: 0; }
 }
 
+      /* Indicadores (bolinhas) - por padrão escondemos no desktop */
+  .carousel-indicators, .portfolio-indicators, .carousel-dots { display: none; }
+
+  /* estilos das bolinhas (usados tanto para feature quanto portfolio) */
+  .carousel-indicators span, .portfolio-indicators span, .carousel-dots span { 
+    display: block; 
+    width: 10px; 
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    transition: background .3s, transform .2s; 
+  }
+  .carousel-indicators span.active, .portfolio-indicators span.active, .carousel-dots span.active {
+    background: var(--brand); transform: scale(1.1); 
+  }
+
       /* ==========================================
      PORTFOLIO / PROJECTS
      ========================================== */
@@ -582,32 +598,130 @@
 
     <script>
     
-//Esconde a barra de comandos 
-let lastScrollTop = 0;
-const navbar = document.querySelector('nav');
+  <script>
+  (function(){
+    'use strict';
 
-window.addEventListener('scroll', function() {
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    // ---------- helpers ----------
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-  if (scrollTop > lastScrollTop) {
-    // Rolando para baixo → esconder
-    navbar.style.top = "-80px"; // ajuste a altura da navbar
-  } else {
-    // Rolando para cima → mostrar
-    navbar.style.top = "0";
-  }
+    // ---------- NAVBAR hide on scroll ----------
+    (function navbarScroll(){
+      const navbar = $('nav');
+      if(!navbar) return;
+      let lastScrollTop = 0;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) navbar.style.top = `-${navbar.offsetHeight}px`; else navbar.style.top = '0';
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      }, { passive: true });
+    })();
 
-  lastScrollTop = scrollTop;
-});
+    // ---------- MENU TOGGLE ----------
+    (function menuToggle(){
+      const toggleBtn = $('.menu-toggle');
+      const navLinks = $('.nav-links');
+      if(!toggleBtn || !navLinks) return;
+      toggleBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+    })();
 
 
-    /*Menu Toogle*/
-    const toggleBtn = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
+    // ---------- FEATURE SCROLLER + INDICATORS (bolinhas) ----------
+    (function initFeatureScroller(){
+      const scroller = document.querySelector('.feature-boxes');
+      const dots = document.querySelectorAll('.carousel-indicators span');
+      if(!scroller || !dots.length) return;
 
-    toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
+      function cardSize(){
+        const card = scroller.querySelector('.feature-box');
+        if(!card) return scroller.clientWidth;
+        const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+        return card.offsetWidth + gap;
+      }
+      function updateDots(){
+        const size = cardSize(); if(!size) return;
+        const idx = Math.round(scroller.scrollLeft / size);
+        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+      }
+      function scrollToIndex(i, behavior='smooth'){ scroller.scrollTo({ left: i * cardSize(), behavior }); }
+
+      dots.forEach((d,i) => d.addEventListener('click', () => scrollToIndex(i)));
+      scroller.addEventListener('scroll', updateDots, { passive: true });
+      window.addEventListener('resize', updateDots);
+      if (document.readyState === 'complete') requestAnimationFrame(updateDots);
+      else window.addEventListener('load', () => requestAnimationFrame(updateDots));
+    })();
+
+    // ---------- PROJECTS GRID (desktop arrows) ----------
+    (function initProjectsDesktop(){
+      const grid = document.querySelector('.projects-grid');
+      const items = grid ? Array.from(grid.querySelectorAll('.project-item')) : [];
+      const prevBtn = document.querySelector('.portfolio-arrows .prev');
+      const nextBtn = document.querySelector('.portfolio-arrows .next');
+      const mqDesktop = window.matchMedia('(min-width: 993px)');
+      const itemsPerPage = 3; let currentPage = 0;
+      if(!grid || !prevBtn || !nextBtn) return;
+
+      function totalPages(){ return Math.max(1, Math.ceil(items.length / itemsPerPage)); }
+      function applyTransform(){ if(mqDesktop.matches) grid.style.transform = `translateX(-${currentPage * 100}%)`; else grid.style.transform = ''; }
+      function updateButtons(){ const pages = totalPages(); prevBtn.disabled = currentPage === 0; nextBtn.disabled = currentPage >= pages - 1; }
+      function goTo(page){ const pages = totalPages(); currentPage = Math.min(Math.max(0, page), pages - 1); applyTransform(); updateButtons(); }
+      function init(){ if(mqDesktop.matches){ grid.style.willChange = 'transform'; goTo(0); } else { grid.style.willChange = ''; grid.style.transform = ''; } }
+
+      prevBtn.addEventListener('click', () => goTo(currentPage - 1));
+      nextBtn.addEventListener('click', () => goTo(currentPage + 1));
+      mqDesktop.addEventListener('change', init);
+      window.addEventListener('resize', applyTransform);
+      init();
+    })();
+
+    // ---------- PROJECTS MOBILE INDICATORS ----------
+    (function initProjectsDots(){
+      const scroller = document.querySelector('.projects-grid');
+      const dots = document.querySelectorAll('.portfolio-indicators span');
+      if(!scroller || !dots.length) return;
+
+      function stepSize(){
+        const card = scroller.querySelector('.project-item');
+        if(!card) return scroller.clientWidth;
+        const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+        return card.offsetWidth + gap;
+      }
+      function updateDots(){
+        const step = stepSize(); if(!step) return;
+        const idx = Math.round(scroller.scrollLeft / step);
+        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+      }
+      dots.forEach((d,i) => d.addEventListener('click', () => { scroller.scrollTo({ left: i * stepSize(), behavior: 'smooth' }); }));
+      scroller.addEventListener('scroll', updateDots, { passive: true });
+      window.addEventListener('resize', updateDots);
+      setTimeout(updateDots, 250);
+    })();
+
+    // ---------- FADE-IN (um único observer para tudo que tiver .fade-in) ----------
+    (function initFadeIn(){
+      const targets = document.querySelectorAll('.fade-in');
+      if(!targets.length) return;
+
+      // fallback se IntersectionObserver não existir
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(t => t.classList.add('visible'));
+        return;
+      }
+
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+      targets.forEach(el => io.observe(el));
+    })();
+ })();
 
     
   </script>
