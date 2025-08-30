@@ -257,7 +257,7 @@
     z-index: 1;
     background: rgba(0,0,0,0.5); 
     width: 100%; 
-    height: 100%; 
+    height: 100vh; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
@@ -266,6 +266,8 @@
     font-size: 2rem;
     padding: 0 1rem;
     font-family: 'IntroCondBlackFree', sans-serif;
+    align-items: center; 
+    justify-content: center; 
   }
   @media (max-width: 768px) { .hero { display: none !important; } .hero-mobile { display: flex !important; margin-top: 4.5rem; } }
 
@@ -371,7 +373,7 @@
       overflow-x: auto; 
       overflow-y: hidden; 
       gap: 1rem; 
-      padding: 0 1rem; 
+      padding: 1 1rem; 
       max-width: 100vw; 
       scroll-snap-type: x mandatory; 
       -webkit-overflow-scrolling: touch; 
