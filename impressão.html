@@ -4,39 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impressão</title>
+
+    <!-- marca que indica que JS está disponível (usada pelo CSS para não esconder elementos se o JS não rodar) -->
+  <script>document.documentElement.classList.add('js');</script>
+  
   <style>
  
-    @font-face {
+  /* ==========================================
+     FONTS / RESET / VARIÁVEIS
+     ========================================== */
+  @font-face {
     font-family: 'IntroCondBlackFree';
     src: url('IntroCondBlackFree.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
-
-       @font-face {
+  @font-face {
     font-family: 'IntroRegularAlt';
     src: url('IntroRegularAlt.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
 
-    
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  :root{
+    --brand: #1F4381;
+    --brand-dark: #16315f;
+    --bg: #f2f2f2;
+    --text: #333;
+  }
 
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #f2f2f2;
-      color: #333;
-    }
+  /* Evita a página mexer lateralmente */
+  html, body { overflow-x: hidden; }
 
-    a {
-      text-decoration: none;
-    }
+  /* RESET */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+  a { text-decoration: none; }
+
+  /* FADE-IN: só aplica a ocultação se o JS está presente (classe .js é adicionada via script) */
+  .js .fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .js .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
     /* NAVBAR */
    nav { 
@@ -555,9 +570,6 @@
     <div class="footer-links"><a href="index.html">Home</a><a href="orcamento.html">Orçamento</a><a href="#produtos">Produtos</a><a href="contato.html">Contato</a></div>
     <div class="social-icons"><a href="https://www.instagram.com/celtoon.agencia/" target="_blank"><img src="instagram.png" alt="Instagram"></a><a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank"><img src="linkedin.png" alt="LinkedIn"></a></div>
   </footer>
-
-  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp" /></a>
-
 
   <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
   <img src="whats2.png" alt="WhatsApp" />
