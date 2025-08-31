@@ -323,6 +323,24 @@
     align-items: flex-start;
     position: relative;
   }
+
+    .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.feature-description {
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 1rem;
+  max-width: 400px;
+  color: var(--text);
+  max-height: 3rem; /* mesma altura do título */
+  overflow: hidden;
+}
+    
   .feature-section h1 { 
     text-align: left;
     margin-left: 2rem;
@@ -422,6 +440,18 @@
       justify-content: flex-start; 
       scroll-padding-left: 1rem;
     }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+    .feature-description {
+    max-width: 100%;
+    max-height: none;
+  }
+    
     .feature-box { 
       flex: 0 0 auto; 
       width: 300px;
@@ -469,6 +499,23 @@
     font-family: 'IntroCondBlackFree', sans-serif;
     margin-bottom: 0.5rem;
   }
+
+    .portfolio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 2rem 4rem 1rem;
+}
+.portfolio-description {
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 1rem;
+  max-width: 400px;
+  color: var(--text);
+  max-height: 3rem;
+  overflow: hidden;
+}
+    
   .projects-section { 
     min-height: 80vh; 
     padding: 0; 
@@ -560,6 +607,7 @@
       grid-template-columns: repeat(2, 1fr); 
       transition: none; 
     }
+
     .project-item {
       flex: unset; 
       max-width: unset; 
@@ -574,6 +622,19 @@
       margin-top: 0rem; 
       padding-bottom: 2rem;
     }
+
+    .portfolio-description {
+    max-width: 100%;
+    max-height: none;
+  }
+
+
+     .portfolio-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+    
     .section-title { 
       margin-bottom: 2rem; 
       font-size: 2rem; 
@@ -825,54 +886,85 @@
     <div class="hero-mobile-bg"><div class="hero-mobile-text"><h1>Criatividade é nossa matéria prima.</h1></div></div>
   </section>
 
-  <!-- FEATURE BOXES -->
-  <section id="features" class="feature-section fade-in">
+
+<!-- FEATURE BOXES -->
+<section id="features" class="feature-section fade-in">
+  <div class="section-header">
     <h1>O que<br>fazemos</h1>
-    <div class="feature-carousel">
-      <div class="feature-boxes">
-        <div class="feature-box fade-in"><h3>Impressão</h3><p>Flyer, cordão para crachá, credencial, totem, caderno, camiseta, ecobag, adesivo, cartão de visitas, cartaz, convite, envelope, banner, arte finalização.</p><img src="personagem/impressão.png" alt="Serviço 1" /></div>
-        <div class="feature-box fade-in"><h3>Criação</h3><p>Naming, slogan, style guide, criação de logo, mascote, mockup digital, layout, embalagem, vetorização, ilustração, key visual, edição, conceito visual.</p><img src="personagem/criacao.png" alt="Serviço 2" /></div>
-        <div class="feature-box fade-in"><h3>Digital</h3><p>Modelagem 3D, UI &amp; UX, Banner para site, infográfico, apresentação de slide, catálogo, landing page.</p><img src="personagem/digital.png" alt="Serviço 3" /></div>
-        <div class="feature-box fade-in"><h3>Redes Sociais</h3><p>Estático, reels, animado, carrossel</p><img src="personagem/redes.png" alt="Serviço 4" /></div>
+    <p class="feature-description">
+      Oferecemos serviços de impressão, criação, digital e redes sociais para dar vida às suas ideias.
+    </p>
+  </div>
+  <div class="feature-carousel">
+    <div class="feature-boxes">
+      <div class="feature-box fade-in">
+        <h3>Impressão</h3>
+        <p>Flyer, cordão para crachá, credencial, totem, caderno, camiseta, ecobag, adesivo, cartão de visitas, cartaz, convite, envelope, banner, arte finalização.</p>
+        <img src="personagem/impressão.png" alt="Serviço 1" />
       </div>
-
-      <!-- Indicadores (bolinhas do carrossel de features) -->
-      <div class="carousel-indicators" aria-hidden="true">
-        <span class="active"></span>
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="feature-box fade-in">
+        <h3>Criação</h3>
+        <p>Naming, slogan, style guide, criação de logo, mascote, mockup digital, layout, embalagem, vetorização, ilustração, key visual, edição, conceito visual.</p>
+        <img src="personagem/criacao.png" alt="Serviço 2" />
+      </div>
+      <div class="feature-box fade-in">
+        <h3>Digital</h3>
+        <p>Modelagem 3D, UI &amp; UX, Banner para site, infográfico, apresentação de slide, catálogo, landing page.</p>
+        <img src="personagem/digital.png" alt="Serviço 3" />
+      </div>
+      <div class="feature-box fade-in">
+        <h3>Redes Sociais</h3>
+        <p>Estático, reels, animado, carrossel</p>
+        <img src="personagem/redes.png" alt="Serviço 4" />
       </div>
     </div>
-    <a href="#produtos" class="more-button">Mais</a>
-  </section>
 
-  <!-- PORTFOLIO -->
+    <!-- Indicadores -->
+    <div class="carousel-indicators" aria-hidden="true">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <a href="#produtos" class="more-button">Mais</a>
+</section>
+
+
+    <!-- Indicadores -->
+    <div class="carousel-indicators" aria-hidden="true">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <a href="#produtos" class="more-button">Mais</a>
+</section>
+
+  
+<!-- PORTFOLIO -->
+<div class="portfolio-header">
   <h2 class="section-title">Portfólio<br>criativo</h2>
-  <section id="portfolio" class="projects-section fade-in">
-    <div class="projects-carousel">
-      <div class="projects-grid">
-        <div class="project-item"><img src="imagem/renderjpg.jpg" alt="Recírculo 1"><div class="overlay"><h3>Recírculo</h3><span class="tag">Criação/Digital</span></div></div>
-        <div class="project-item"><img src="imagem/mock_2.png" alt="Programação"><div class="overlay"><h3>Celtoon App</h3><span class="tag">Digital</span></div></div>
-        <div class="project-item"><img src="imagem/cabine.png" alt="Cabine"><div class="overlay"><h3>Cabine Fotográfica</h3><span class="tag">Criação</span></div></div>
-        <div class="project-item"><img src="imagem/nort.jpg" alt="Nortinho"><div class="overlay"><h3>Nortinho</h3><span class="tag">Digital</span></div></div>
-        <div class="project-item"><img src="imagem/Domo.jpg" alt="Domo"><div class="overlay"><h3>Domo UFES</h3><span class="tag">Criação</span></div></div>
-        <div class="project-item"><img src="imagem/lavi.jpg" alt="Lavinho"><div class="overlay"><h3>Lavinho</h3><span class="tag">Digital</span></div></div>
-        <div class="project-item"><img src="imagem/mock.jpg" alt="Livro"><div class="overlay"><h3>Capa de livro</h3><span class="tag">Criação/Impressão</span></div></div>
-        <div class="project-item"><img src="imagem/magazine_boneco.jpg" alt="Magazine Móveis"><div class="overlay"><h3>Magazine Móveis</h3><span class="tag">Criação/Impressão</span></div></div>
-        <div class="project-item"><img src="imagem/recirculo.jpg" alt="Recírculo 2"><div class="overlay"><h3>Recírculo</h3><span class="tag">Criação/Digital</span></div></div>
-        <div class="project-item"><img src="imagem/ceopaginho.jpg" alt="Ceopag"><div class="overlay"><h3>Ceopaguinho</h3><span class="tag">Criação/Impressão</span></div></div>
-      </div>
+  <p class="portfolio-description">
+    Do conceito à execução, entregamos projetos visuais de impacto que fortalecem a identidade da sua marca.
+  </p>
+</div>
+<section id="portfolio" class="projects-section fade-in">
+  <div class="projects-carousel">
+    <div class="projects-grid">
+      <!-- seus items aqui -->
     </div>
-
-    <div class="portfolio-arrows"><button class="prev">&#10094;</button><button class="next">&#10095;</button></div>
-
-    <!-- bolinhas do mobile (portfolio) -->
-    <div class="portfolio-indicators" aria-hidden="true">
-      <span class="active"></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-  </section>
+  </div>
+  <div class="portfolio-arrows">
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </div>
+  <div class="portfolio-indicators" aria-hidden="true">
+    <span class="active"></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+</section>
 
   <!-- CTA -->
   <section id="cta" class="cta-section fade-in">
