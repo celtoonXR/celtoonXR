@@ -229,18 +229,34 @@
   color: #fff;
 }
 
-.cursor {
-  display: inline-block;
-  color: #fff;
-  font-weight: bold;
-  font-family: 'IntroRegularAlt', sans-serif;
-  animation: blink 0.7s infinite;
-}
+      @media (max-width: 768px) { 
+    .hero { 
+      display: none !important; 
+    } 
+    .hero-mobile { 
+      display: flex !important; 
+      margin-top: 4.5rem; 
+      position: relative;
+    } 
+    .orcamento-button { 
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+      z-index: 2;
+    }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
+    .hero-mobile-text p { 
+    font-size: 2rem;
+    padding: 0 1rem;
+    font-family: 'IntroCondBlackFree', sans-serif;
+    align-items: center; 
+    justify-content: center; 
+    margin-left: 1rem;
+  }
+  }
+    
 
       /* Indicadores (bolinhas) - por padrão escondemos no desktop */
   .carousel-indicators, .portfolio-indicators, .carousel-dots { display: none; }
