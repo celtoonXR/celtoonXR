@@ -53,97 +53,89 @@
     transform: translateY(0);
   }
 
-    /* NAVBAR */
-   nav { 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #1F4381;
-  color: #1F4381;
-  position: fixed; /* antes era sticky */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: top 0.3s ease; /* suaviza o movimento */
-}
-    .logo img {
-      height: 50px;
-    }
+  /* ==========================================
+     NAVBAR
+     ========================================== */
+  nav {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 1rem 2rem; 
+    background: var(--brand);
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    transition: top 0.3s ease;
+  }
+    
+  .logo img { 
+    height: 50px; 
+  }
+  .nav-links { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem; 
+    position: relative; 
+  }
+  .nav-links a { 
+    color: #fff; 
+    font-family: 'IntroCondBlackFree', sans-serif; 
+    font-weight: 500; 
+  }
+  .dropdown { 
+    position: relative; 
+  }
+  .dropdown-content { 
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    background-color: var(--brand); 
+    min-width: 200px; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+  }
+  .dropdown-content a { 
+    display: block; 
+    padding: 0.75rem 1rem; 
+    color: #fff; 
+  }
+  .dropdown:hover .dropdown-content { 
+    display: block; 
+  }
+  .social-icons { 
+    display: flex; 
+    gap: 0.5rem; 
+  }
+  .social-icons a { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 40px; 
+    height: 40px; 
+    background-color: var(--brand); 
+    border-radius: 50%; 
+  }
+  .social-icons img {
+    width: 40px; 
+    height: 40px; 
+    filter: invert(1); 
+  }
+  .menu-toggle { 
+    display: none; 
+    font-size: 2rem; 
+    background: none; 
+    border: none; 
+    color: #fff; 
+    cursor: pointer; 
+    z-index: 1001; 
+  }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      position: relative;
-    }
-
-    .nav-links a {
-      color: #fff;
-      font-family: 'IntroCondBlackFree', sans-serif;
-      font-weight: 500;
-      position: relative;
-    }
-
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #1F4381;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 1;
-      min-width: 200px;
-      border-radius: 4px;
-    }
-
-    .dropdown-content a {
-      display: block;
-      padding: 0.75rem 1rem;
-      color: #fff;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-      .social-icons {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .social-icons a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-      background-color: #1F4381;
-      border-radius: 50%;
-    }
-
-    .social-icons img {
-      width: 40px;
-      height: 40px;
-      filter: invert(1);
-    }
-
-    .menu-toggle {
-  display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: #1F4381;
-  cursor: pointer;
-}
-
-/* Mobile: mostrar botão, esconder links */
+  /* NAV - MOBILE */
+  @media (max-width: 768px) {
     .menu-toggle { 
       display: block; 
     }
@@ -171,32 +163,32 @@
     }
   }
 
-    /* WHATSAPP BOTÃO*/
+  /* ==========================================
+     WHATSAPP FLOAT
+     ========================================== */
+  .whatsapp-float { 
+    position: fixed; 
+    width: 60px; 
+    height: 60px; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+    background-color: #25d366; 
+    border-radius: 50%; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: transform 0.3s; 
+  }
+  .whatsapp-float:hover { 
+    transform: scale(1.1); 
+  }
+  .whatsapp-float img { 
+    width: 60px; 
+    height: 60px; 
+  }
 
-  .whatsapp-float {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  background-color: #25d366;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s;
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.1);
-}
-
-.whatsapp-float img {
-  width: 60px;
-  height: 60px;
-}
     
     /* HERO SECTION */
 
