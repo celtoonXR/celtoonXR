@@ -228,6 +228,22 @@
   width: 50%;
   color: #fff;
 }
+
+    @media (max-width: 768px) {
+  .hero {
+    padding: 0 1.5rem;   /* menos espaço lateral */
+    align-items: center; /* centraliza no mobile */
+    text-align: center;  /* texto centralizado */
+  }
+
+  .hero-text {
+    font-size: 1.8rem;   /* reduz tamanho da fonte */
+    width: 100%;         /* ocupa toda a largura */
+    max-width: 90%;      /* mas limita para não encostar nas bordas */
+    padding-right: 0;    /* remove espaçamento lateral */
+    margin-bottom: 1rem;
+  }
+}
     
 
       /* Indicadores (bolinhas) - por padrão escondemos no desktop */
