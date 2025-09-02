@@ -246,6 +246,15 @@
     width: 50%; 
     color: #fff; 
     padding-right: 2rem; 
+      /* altura fixa — ajuste para caber o número de linhas que seu typewriter mostra */
+    height: 4.5rem;
+  /* garante que o texto que aparece não aumente o bloco */
+    overflow: hidden;
+  /* mantém o layout atual (block para controle de altura) */
+    display: block;
+  /* impede quebra de linha excessiva; use 'normal' se quiser permitir várias linhas */
+    white-space: normal;
+    line-height: 1.05;
   }
 
   .cursor { 
