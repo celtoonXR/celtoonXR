@@ -204,21 +204,14 @@
   color: #fff;
   text-align: left;
   overflow: hidden;
-}
 
-.hero-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* preenche o fundo sem distorcer */
-  z-index: 0;
+  background: url("imagem/fundo_impressao.png") no-repeat center center;
+  background-size: cover; /* cobre todo o espaço */
 }
 
 .hero-text {
   position: relative;
-  z-index: 1; /* garante que o texto fique acima do vídeo */
+  z-index: 1; /* garante que o texto fique acima da imagem */
   font-family: 'IntroCondBlackFree', sans-serif;
   letter-spacing: 1px;
   font-size: 3rem;
@@ -229,7 +222,8 @@
   color: #fff;
 }
 
-    @media (max-width: 768px) {
+/* MOBILE */
+@media (max-width: 768px) {
   .hero {
     padding: 0 1.5rem;   /* menos espaço lateral */
     align-items: center; /* centraliza no mobile */
@@ -240,12 +234,10 @@
     font-size: 1.8rem;   /* reduz tamanho da fonte */
     width: 100%;         /* ocupa toda a largura */
     max-width: 90%;      /* mas limita para não encostar nas bordas */
-    padding-right: 0;    /* remove espaçamento lateral */
+    padding-right: 0;
     margin-bottom: 1rem;
   }
 }
-    
-
       /* Indicadores (bolinhas) - por padrão escondemos no desktop */
   .carousel-indicators, .portfolio-indicators, .carousel-dots { display: none; }
 
@@ -571,16 +563,12 @@
   </nav>
 
   <!-- HERO SECTION -->
-  <section class="hero">
-    <video class="hero-video" autoplay muted loop>
-      <source src="imagem/fundo_impressao.png" type="impressão">
-      Seu navegador não suporta vídeos em HTML5.
-    </video>
-    <div class="hero-text">
-      <h1>Impressão</h1>
-      <p>Materiais gráficos de qualidade para dar vida às suas ideias.</p>
-    </div>
-  </section>
+<section class="hero">
+  <div class="hero-text">
+    <h1>Impressão</h1>
+    <p>Materiais gráficos de qualidade para dar vida às suas ideias.</p>
+  </div>
+</section>
 
   <!-- PROJECTS / PORTFOLIO -->
   <section id="portfolio" class="projects-section fade-in">
