@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressão</title>
+
+    <!-- marca que indica que JS está disponível (usada pelo CSS para não esconder elementos se o JS não rodar) -->
+  <script>document.documentElement.classList.add('js');</script>
+  
+  <style>
+ 
+  /* ==========================================
+     FONTS / RESET / VARIÁVEIS
+     ========================================== */
+  @font-face {
+    font-family: 'IntroCondBlackFree';
+    src: url('IntroCondBlackFree.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'IntroRegularAlt';
+    src: url('IntroRegularAlt.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  :root{
+    --brand: #1F4381;
+    --brand-dark: #16315f;
+    --bg: #f2f2f2;
+    --text: #333;
+  }
+
+  /* Evita a página mexer lateralmente */
+  html, body { overflow-x: hidden; }
+
+  /* RESET */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+  a { text-decoration: none; }
+
+  /* FADE-IN: só aplica a ocultação se o JS está presente (classe .js é adicionada via script) */
+  .js .fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .js .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ==========================================
+     NAVBAR
+     ========================================== */
+  nav {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 1rem 2rem; 
+    background: var(--brand);
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    transition: top 0.3s ease;
+  }
+    
+  .logo img { 
+    height: 50px; 
+  }
+  .nav-links { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem; 
+    position: relative; 
+  }
+  .nav-links a { 
+    color: #fff; 
+    font-family: 'IntroCondBlackFree', sans-serif; 
+    font-weight: 500; 
+  }
+  .dropdown { 
+    position: relative; 
+  }
+  .dropdown-content { 
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    background-color: var(--brand); 
+    min-width: 200px; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+  }
+  .dropdown-content a { 
+    display: block; 
+    padding: 0.75rem 1rem; 
+    color: #fff; 
+  }
+  .dropdown:hover .dropdown-content { 
+    display: block; 
+  }
+  .social-icons { 
+    display: flex; 
+    gap: 0.5rem; 
+  }
+  .social-icons a { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 40px; 
+    height: 40px; 
+    background-color: var(--brand); 
+    border-radius: 50%; 
+  }
+  .social-icons img {
+    width: 40px; 
+    height: 40px; 
+    filter: invert(1); 
+  }
+  .menu-toggle { 
+    display: none; 
+    font-size: 2rem; 
+    background: none; 
+    border: none; 
+    color: #fff; 
+    cursor: pointer; 
+    z-index: 1001; 
+  }
+
+  /* NAV - MOBILE */
+  @media (max-width: 768px) {
+    .menu-toggle { 
+      display: block; 
+    }
+    .nav-links { 
+      display: none; 
+      flex-direction: column; 
+      background: var(--brand); 
+      position: absolute; 
+      top: 70px; 
+      right: 20px; 
+      padding: 1rem; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+      z-index: 999; 
+    }
+    .nav-links a { 
+      color: #fff; 
+    }
+    .nav-links.active { 
+      display: flex; 
+    }
+    .dropdown-content { 
+      position: static; 
+      box-shadow: none; 
+      margin-top: 0.5rem;
+    }
+  }
+
+  /* ==========================================
+     WHATSAPP FLOAT
+     ========================================== */
+  .whatsapp-float { 
+    position: fixed; 
+    width: 60px; 
+    height: 60px; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+    background-color: #25d366; 
+    border-radius: 50%; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: transform 0.3s; 
+  }
+  .whatsapp-float:hover { 
+    transform: scale(1.1); 
+  }
+  .whatsapp-float img { 
+    width: 60px; 
+    height: 60px; 
+  }
+
+    
+    /* HERO SECTION */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  margin-top: 3rem;   /* descola da navbar */
+  padding: 0 6rem;    /* afasta o conteúdo das laterais */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+  text-align: left;
+  overflow: hidden;
+
+  background: url("imagem/fundo_impressao.png") no-repeat center center;
+  background-size: cover; /* cobre todo o espaço */
+}
+
+.hero-text {
+  position: relative;
+  z-index: 1; /* garante que o texto fique acima da imagem */
+  font-family: 'IntroCondBlackFree', sans-serif;
+  letter-spacing: 1px;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  padding-right: 2rem;
+  width: 50%;
+  color: #fff;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero {
+    padding: 0 1.5rem;   /* menos espaço lateral */
+    align-items: center; /* centraliza no mobile */
+    text-align: center;  /* texto centralizado */
+  }
+
+  .hero-text {
+    font-size: 1.8rem;   /* reduz tamanho da fonte */
+    width: 100%;         /* ocupa toda a largura */
+    max-width: 90%;      /* mas limita para não encostar nas bordas */
+    padding-right: 0;
+    margin-bottom: 1rem;
+  }
+}
+      /* Indicadores (bolinhas) - por padrão escondemos no desktop */
+  .carousel-indicators, .portfolio-indicators, .carousel-dots { display: none; }
+
+  /* estilos das bolinhas (usados tanto para feature quanto portfolio) */
+  .carousel-indicators span, .portfolio-indicators span, .carousel-dots span { 
+    display: block; 
+    width: 10px; 
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    transition: background .3s, transform .2s; 
+  }
+  .carousel-indicators span.active, .portfolio-indicators span.active, .carousel-dots span.active {
+    background: var(--brand); transform: scale(1.1); 
+  }
+
+      /* ==========================================
+     PORTFOLIO / PROJECTS
+     ========================================== */
+
+  .portfolio-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 2rem 4rem 2rem 4rem;
+  }
+    
+  .section-title { 
+    font-size: 2rem;
+    text-align: left;
+    color: var(--brand);
+    font-family: 'IntroCondBlackFree', sans-serif;
+    margin-bottom: 0.5rem
+    flex-shrink: 0;
+  }
+    
+  .section-description {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.4rem;
+    max-width: 600px;   
+    display: flex;
+    align-items: center;        /* centraliza verticalmente com o título */
+    font-family: 'IntroRegularAlt', sans-serif;
+  }
+    
+  .projects-section { 
+    min-height: 80vh; 
+    padding: 0; 
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+    justify-content: center; 
+    margin-bottom: 2rem;
+  }
+  .projects-carousel { 
+    position: relative; 
+    width: 100%; 
+    overflow: hidden; 
+  }
+  .projects-grid { 
+    display: flex; 
+    transition: transform 0.5s ease-in-out;
+    width: 100%; gap: 1rem; 
+  }
+  .project-item { 
+    flex: 0 0 33.333%; 
+    max-width: 33.333%; 
+    position: relative; 
+    overflow: hidden; 
+    aspect-ratio: 4/4;
+  }
+  .project-item img { 
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: filter .18s ease, transform .18s ease;
+  }
+  .overlay {
+    position: absolute; 
+    inset: 0; 
+    background-color: rgba(0,0,0,0.45); 
+    opacity: 0; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    gap: 0.7rem; 
+    transition: opacity .2s ease;
+    padding: 1rem; 
+    text-align: center;
+    color: #fff; 
+    font-family: 'IntroCondBlackFree', sans-serif;
+  }
+  .overlay p { 
+    font-family: 'IntroRegularAlt', sans-serif;
+    margin: 0; font-size: 1rem; 
+  }
+  .overlay .tag { 
+    background: var(--brand); 
+    color: #fff; 
+    padding: 6px 10px;
+    border-radius: 8px; 
+    font-size: 0.85rem; 
+    font-family: 'IntroRegularAlt', sans-serif;
+  }
+  .project-item:hover img {
+    transform: scale(1.02);
+    filter: brightness(0.6); 
+  }
+  .project-item:hover .overlay { opacity: 1; }
+
+  .portfolio-arrows { 
+    display: flex; 
+    gap: 1rem;
+    margin-top: 1rem;
+    align-self: center;
+  }
+  .portfolio-arrows .prev, .portfolio-arrows .next { 
+    background-color: var(--brand); 
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer; 
+    font-size: 1rem;
+    transition: background-color 0.3s ease, opacity 0.2s ease;
+  }
+  .portfolio-arrows .prev:hover, .portfolio-arrows .next:hover { background-color: var(--brand-dark); }
+  .portfolio-arrows .prev:disabled, .portfolio-arrows .next:disabled { opacity: 0.4; cursor: default; }
+
+  /* RESPONSIVO - tablet & mobile */
+  @media (max-width: 992px) {
+    .projects-grid { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      transition: none; 
+    }
+    .project-item {
+      flex: unset; 
+      max-width: unset; 
+    }
+    .portfolio-arrows { 
+      display: none;
+    }
+  }
+  @media (max-width: 768px) {
+    .projects-section { 
+      min-height: 60vh; 
+      margin-top: 0rem; 
+      padding-bottom: 2rem;
+    }
+    .section-title { 
+      margin-bottom: 1rem; 
+      font-size: 2rem; 
+      align-items: flex-start;
+    }
+
+    .portfolio-header {
+      flex-direction: column;
+      align-items: flex-start;
+       margin: 0 2rem 1.5rem 2rem;
+    }
+
+    .section-description {
+      max-height: none;   /* libera altura no mobile */
+      line-height: 1.4rem;
+    }
+    
+    .projects-grid { 
+      margin-top: 0rem; 
+      margin-bottom: 0.5rem;
+    }
+    .portfolio-indicators { 
+      margin-top: 0.5rem; 
+      margin-bottom: 0.5rem;
+    }
+    .projects-grid { 
+      display: flex; 
+      overflow-x: auto; 
+      scroll-snap-type: x mandatory; 
+      -webkit-overflow-scrolling: touch; 
+      gap: 1rem; 
+      transition: none; 
+    }
+    .project-item { 
+      flex: 0 0 100%; 
+      max-width: 100%; 
+      scroll-snap-align: start;
+      aspect-ratio: 4/4; 
+    }
+    .portfolio-arrows { 
+      display: none;
+    }
+    .portfolio-indicators {
+      display: flex; 
+      justify-content: center; 
+      gap: 0.5rem; 
+      margin-top: 1rem;
+      align-self: center;
+    }
+    .portfolio-indicators span { 
+      width: 10px; 
+      height: 10px;
+      background: #ccc; 
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .portfolio-indicators span.active { 
+      background: #1F4381;
+    }
+  }
+
+ /* ==========================================
+     CTA / CLIENTES / FOOTER
+     ========================================== */
+ 
+  footer { 
+    background-color: var(--brand);
+    color: white; 
+    padding: 2rem; 
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .footer-address { 
+    width: 30%; 
+    font-size: 0.9rem;
+    font-family: 'IntroRegularAlt', sans-serif; 
+  }
+  .footer-links { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.5rem; width: 30%;
+  }
+  .footer-links a {
+    font-family: 'IntroRegularAlt', sans-serif; 
+    color: white; 
+    font-weight: 500; 
+  }
+    
+/* Ícones */
+.social-icons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center; /* garante centralização */
+  padding-right: 6rem;
+}
+
+.social-icons img {
+  width: 56px;
+  height: 56px;
+  transition: opacity 0.3s ease;
+}
+
+.social-icons img:hover {
+  opacity: 0.8;
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .cta-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cta-text,
+  .cta-button {
+    width: 100%;
+    padding: 1rem 0;
+  }
+
+  /* Esconde endereço e links */
+  .footer-address,
+  .footer-links {
+    display: none;
+  }
+
+  /* Centraliza ícones no mobile */
+  .social-icons {
+    justify-content: center;  /* centraliza no rodapé */
+    margin-left: 7rem;         /* remove espaçamento lateral */
+    margin-top: 1rem;
+    gap: 1rem;                /* distância entre ícones */
+  }
+
+  .social-icons img {
+    width: 50px;   /* tamanho dos ícones no mobile */
+    height: 50px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">
+      <a href="index.html"><img src="Logo_png.png" alt="Logo da empresa"></a>
+    </div>
+    <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="orcamento.html">Orçamento</a>
+      <div class="dropdown">
+        <a href="#">Produtos</a>
+        <div class="dropdown-content">
+          <a href="impressao.html">Impressão</a>
+          <a href="criacao.html">Criação</a>
+          <a href="digital.html">Digital</a>
+          <a href="redes-sociais.html">Redes Sociais</a>
+        </div>
+      </div>
+      <a href="contato.html">Contato</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Impressão</h1>
+    <p>Materiais gráficos de qualidade para dar vida às suas ideias.</p>
+  </div>
+</section>
+
+  <!-- PROJECTS / PORTFOLIO -->
+  <section id="portfolio" class="projects-section fade-in">
+    <div class="portfolio-header">
+      <h2 class="section-title">Portfólio<br>criativo</h2>
+      <p class="section-description">
+        Impressões de alta qualidade que dão vida ao seu projeto. Trabalhamos com papéis especiais,
+        acabamentos premium e cores vibrantes para que cada detalhe transmita profissionalismo e impacto visual.
+      </p>
+    </div>
+
+    <div class="projects-carousel">
+      <div class="projects-grid">
+        <div class="project-item"><img src="imagem/renderjpg.jpg" alt="Recírculo 1"><div class="overlay"><h3>Recírculo</h3><span class="tag">Criação/Digital</span></div></div>
+        <div class="project-item"><img src="imagem/mock_2.png" alt="Programação"><div class="overlay"><h3>Celtoon App</h3><span class="tag">Digital</span></div></div>
+        <div class="project-item"><img src="imagem/cabine.png" alt="Cabine"><div class="overlay"><h3>Cabine Fotográfica</h3><span class="tag">Criação</span></div></div>
+        <div class="project-item"><img src="imagem/nort.jpg" alt="Nortinho"><div class="overlay"><h3>Nortinho</h3><span class="tag">Digital</span></div></div>
+        <div class="project-item"><img src="imagem/Domo.jpg" alt="Domo"><div class="overlay"><h3>Domo UFES</h3><span class="tag">Criação</span></div></div>
+        <div class="project-item"><img src="imagem/lavi.jpg" alt="Lavinho"><div class="overlay"><h3>Lavinho</h3><span class="tag">Digital</span></div></div>
+        <div class="project-item"><img src="imagem/mock.jpg" alt="Livro"><div class="overlay"><h3>Capa de livro</h3><span class="tag">Criação/Impressão</span></div></div>
+        <div class="project-item"><img src="imagem/magazine_boneco.jpg" alt="Magazine Móveis"><div class="overlay"><h3>Magazine Móveis</h3><span class="tag">Criação/Impressão</span></div></div>
+        <div class="project-item"><img src="imagem/recirculo.jpg" alt="Recírculo 2"><div class="overlay"><h3>Recírculo</h3><span class="tag">Criação/Digital</span></div></div>
+        <div class="project-item"><img src="imagem/ceopaginho.jpg" alt="Ceopag"><div class="overlay"><h3>Ceopaguinho</h3><span class="tag">Criação/Impressão</span></div></div>
+      </div>
+    </div>
+
+    <div class="portfolio-arrows">
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+
+    <!-- bolinhas do mobile -->
+    <div class="portfolio-indicators" aria-hidden="true">
+      <span class="active"></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-address">Rua Criatividade, 123<br>Bairro Inspiração<br>Cidade das Ideias – BR</div>
+    <div class="footer-links"><a href="index.html">Home</a><a href="orcamento.html">Orçamento</a><a href="#produtos">Produtos</a><a href="contato.html">Contato</a></div>
+    <div class="social-icons"><a href="https://www.instagram.com/celtoon.agencia/" target="_blank"><img src="instagram.png" alt="Instagram"></a><a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank"><img src="linkedin.png" alt="LinkedIn"></a></div>
+  </footer>
+
+  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
+    <img src="whats2.png" alt="WhatsApp" />
+  </a>
+
+  <!-- SCRIPTS -->
+  <script>
+  (function(){
+    'use strict';
+
+    const $ = sel => document.querySelector(sel);
+
+    // NAVBAR hide on scroll
+    (function navbarScroll(){
+      const navbar = $('nav');
+      if(!navbar) return;
+      let lastScrollTop = 0;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) navbar.style.top = `-${navbar.offsetHeight}px`;
+        else navbar.style.top = '0';
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      }, { passive: true });
+    })();
+
+    // MENU TOGGLE
+    (function menuToggle(){
+      const toggleBtn = $('.menu-toggle');
+      const navLinks = $('.nav-links');
+      if(!toggleBtn || !navLinks) return;
+      toggleBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+    })();
+
+    // PROJECTS DESKTOP arrows
+    (function initProjectsDesktop(){
+      const grid = document.querySelector('.projects-grid');
+      const items = grid ? Array.from(grid.querySelectorAll('.project-item')) : [];
+      const prevBtn = document.querySelector('.portfolio-arrows .prev');
+      const nextBtn = document.querySelector('.portfolio-arrows .next');
+      const mqDesktop = window.matchMedia('(min-width: 993px)');
+      const itemsPerPage = 3; let currentPage = 0;
+      if(!grid || !prevBtn || !nextBtn) return;
+
+      function totalPages(){ return Math.max(1, Math.ceil(items.length / itemsPerPage)); }
+      function applyTransform(){ if(mqDesktop.matches) grid.style.transform = `translateX(-${currentPage * 100}%)`; else grid.style.transform = ''; }
+      function updateButtons(){ const pages = totalPages(); prevBtn.disabled = currentPage === 0; nextBtn.disabled = currentPage >= pages - 1; }
+      function goTo(page){ const pages = totalPages(); currentPage = Math.min(Math.max(0, page), pages - 1); applyTransform(); updateButtons(); }
+      function init(){ if(mqDesktop.matches){ grid.style.willChange = 'transform'; goTo(0); } else { grid.style.willChange = ''; grid.style.transform = ''; } }
+
+      prevBtn.addEventListener('click', () => goTo(currentPage - 1));
+      nextBtn.addEventListener('click', () => goTo(currentPage + 1));
+      mqDesktop.addEventListener('change', init);
+      window.addEventListener('resize', applyTransform);
+      init();
+    })();
+
+    // PROJECTS MOBILE dots
+    (function initProjectsDots(){
+      const scroller = document.querySelector('.projects-grid');
+      const dots = document.querySelectorAll('.portfolio-indicators span');
+      if(!scroller || !dots.length) return;
+
+      function stepSize(){
+        const card = scroller.querySelector('.project-item');
+        if(!card) return scroller.clientWidth;
+        const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+        return card.offsetWidth + gap;
+      }
+      function updateDots(){
+        const step = stepSize(); if(!step) return;
+        const idx = Math.round(scroller.scrollLeft / step);
+        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+      }
+      dots.forEach((d,i) => d.addEventListener('click', () => { scroller.scrollTo({ left: i * stepSize(), behavior: 'smooth' }); }));
+      scroller.addEventListener('scroll', updateDots, { passive: true });
+      window.addEventListener('resize', updateDots);
+      setTimeout(updateDots, 250);
+    })();
+
+    // FADE-IN
+    (function initFadeIn(){
+      const targets = document.querySelectorAll('.fade-in');
+      if(!targets.length) return;
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(t => t.classList.add('visible'));
+        return;
+      }
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      targets.forEach(el => io.observe(el));
+    })();
+  })();
+    
+  </script>
+
+</body>
+</html>
