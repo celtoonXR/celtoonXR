@@ -7,183 +7,185 @@
   <title>Contato</title>
   <style>
  
-    @font-face {
+      /* ==========================================
+     FONTS / RESET / VARIÁVEIS
+     ========================================== */
+  @font-face {
     font-family: 'IntroCondBlackFree';
     src: url('IntroCondBlackFree.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
-
-       @font-face {
+  @font-face {
     font-family: 'IntroRegularAlt';
     src: url('IntroRegularAlt.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
 
+  :root{
+    --brand: #1F4381;
+    --brand-dark: #16315f;
+    --bg: #f2f2f2;
+    --text: #333;
+  }
+
+  /* Evita a página mexer lateralmente */
+  html, body { overflow-x: hidden; }
+
+  /* RESET */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+  a { text-decoration: none; }
+
+  /* FADE-IN: só aplica a ocultação se o JS está presente (classe .js é adicionada via script) */
+  .js .fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .js .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
     
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #f2f2f2;
-      color: #333;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    /* NAVBAR */
-   nav { 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #1F4381;
-  color: #1F4381;
-  position: fixed; /* antes era sticky */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: top 0.3s ease; /* suaviza o movimento */
-}
-    .logo img {
-      height: 50px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      position: relative;
-    }
-
-    .nav-links a {
-      color: #fff;
-      font-family: 'IntroCondBlackFree', sans-serif;
-      font-weight: 500;
-      position: relative;
-    }
-
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #1F4381;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 1;
-      min-width: 200px;
-      border-radius: 4px;
-    }
-
-    .dropdown-content a {
-      display: block;
-      padding: 0.75rem 1rem;
-      color: #fff;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-      .social-icons {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .social-icons a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-      background-color: #1F4381;
-      border-radius: 50%;
-    }
-
-    .social-icons img {
-      width: 40px;
-      height: 40px;
-      filter: invert(1);
-    }
-
-    .menu-toggle {
-  display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: #1F4381;
-  cursor: pointer;
-}
-
-/* Mobile: mostrar botão, esconder links */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
+  /* ==========================================
+     NAVBAR
+     ========================================== */
+  nav {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 1rem 2rem; 
+    background: var(--brand);
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    transition: top 0.3s ease;
+  }
+    
+  .logo img { 
+    height: 50px; 
+  }
+  .nav-links { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem; 
+    position: relative; 
+  }
+  .nav-links a { 
+    color: #fff; 
+    font-family: 'IntroCondBlackFree', sans-serif; 
+    font-weight: 500; 
+  }
+  .dropdown { 
+    position: relative; 
+  }
+  .dropdown-content { 
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    background-color: var(--brand); 
+    min-width: 200px; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+  }
+  .dropdown-content a { 
+    display: block; 
+    padding: 0.75rem 1rem; 
+    color: #fff; 
+  }
+  .dropdown:hover .dropdown-content { 
+    display: block; 
+  }
+  .social-icons { 
+    display: flex; 
+    gap: 0.5rem; 
+  }
+  .social-icons a { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 40px; 
+    height: 40px; 
+    background-color: var(--brand); 
+    border-radius: 50%; 
+  }
+  .social-icons img {
+    width: 40px; 
+    height: 40px; 
+    filter: invert(1); 
+  }
+  .menu-toggle { 
+    display: none; 
+    font-size: 2rem; 
+    background: none; 
+    border: none; 
+    color: #fff; 
+    cursor: pointer; 
+    z-index: 1001; 
   }
 
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: #fff;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    padding: 1rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    z-index: 999;
+  /* NAV - MOBILE */
+  @media (max-width: 768px) {
+    .menu-toggle { 
+      display: block; 
+    }
+    .nav-links { 
+      display: none; 
+      flex-direction: column; 
+      background: var(--brand); 
+      position: absolute; 
+      top: 70px; 
+      right: 20px; 
+      padding: 1rem; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+      z-index: 999; 
+    }
+    .nav-links a { 
+      color: #fff; 
+    }
+    .nav-links.active { 
+      display: flex; 
+    }
+    .dropdown-content { 
+      position: static; 
+      box-shadow: none; 
+      margin-top: 0.5rem;
+    }
   }
 
-  .nav-links.active {
-    display: flex;
+  /* ==========================================
+     WHATSAPP FLOAT
+     ========================================== */
+  .whatsapp-float { 
+    position: fixed; 
+    width: 60px; 
+    height: 60px; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+    background-color: #25d366; 
+    border-radius: 50%; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: transform 0.3s; 
+  }
+  .whatsapp-float:hover { 
+    transform: scale(1.1); 
+  }
+  .whatsapp-float img { 
+    width: 60px; 
+    height: 60px; 
   }
 
-  .dropdown-content {
-    position: static;
-    box-shadow: none;
-    margin-top: 0.5rem;
-  }
-}
-
-    /* WHATSAPP BOTÃO*/
-
-  .whatsapp-float {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  background-color: #25d366;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s;
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.1);
-}
-
-.whatsapp-float img {
-  width: 60px;
-  height: 60px;
-}
     
 /* === SEÇÃO CONTATO === */
 /* Container principal contato */
@@ -299,58 +301,164 @@
 
 
     
-    /* FOOTER */
-    footer {
-      background-color: #1F4381;
-      color: white;
-      padding: 2rem;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
+     /* ==========================================
+     CTA / CLIENTES / FOOTER
+     ========================================== */
+  .cta-section { 
+    min-height: 100vh; 
+    background-image: url('Fundo1.png'); 
+    background-size: cover; 
+    background-position: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 8rem 4rem; 
+    color: #fff;
+    margin-top: 2rem; 
+  }
+  .cta-text { 
+    font-family: 'IntroCondBlackFree', sans-serif;
+    letter-spacing: 1px; 
+    width: 50%;
+    font-size: 2rem; 
+    padding-right: 2rem; 
+  }
+  .cta-button { 
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .cta-button a { 
+    padding: 1rem 2rem; 
+    background-color: #fff; 
+    border-radius: 8px; 
+    color: var(--brand); 
+    font-family: 'IntroRegularAlt', sans-serif; 
+    text-decoration: none; 
+    transition: background 0.3s ease; 
+  }
+  .cta-button a:hover {
+    background-color: #e0e0e0;
+  }
 
-    .footer-address {
-      width: 30%;
-      font-size: 0.9rem;
-      font-family: 'IntroRegularAlt', sans-serif;
-    }
+  /* clientes - agora sem regra .visible separada (usamos .fade-in) */
+  .clientes-section { 
+    min-height: 60vh; 
+    background-color: #fff; 
+    padding: 2rem; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+  }
+  .clientes-section h2 {
+    font-family: 'IntroCondBlackFree', sans-serif;
+    font-size: 2rem; 
+    color: var(--brand);
+    margin-bottom: 2rem; 
+    text-align: center;
+  }
+  .clientes-grid { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 3rem; 
+    max-width: 960px; 
+    margin: 0 auto;
+  }
+  .clientes-grid img { 
+    flex: 0 1 calc(25% - 3rem);
+    max-width: 120px; 
+    height: 60px;
+    object-fit: contain; 
+    transition: transform 0.3s ease;
+  }
+  .clientes-grid img:hover { 
+    transform: scale(1.1);
+  }
 
-   .footer-links {
+  footer { 
+    background-color: var(--brand);
+    color: white; 
+    padding: 2rem; 
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .footer-address { 
+    width: 30%; 
+    font-size: 0.9rem;
+    font-family: 'IntroRegularAlt', sans-serif; 
+  }
+  .footer-links { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.5rem; width: 30%;
+  }
+  .footer-links a {
+    font-family: 'IntroRegularAlt', sans-serif; 
+    color: white; 
+    font-weight: 500; 
+  }
+    
+/* Ícones */
+.social-icons {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 30%;
-    }
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center; /* garante centralização */
+  padding-right: 4rem;
+}
 
-    .footer-links a {
-      font-family: 'IntroRegularAlt', sans-serif;
-      color: white;
-      font-weight: 500;
-    }
+.social-icons img {
+  width: 56px;
+  height: 56px;
+  transition: opacity 0.3s ease;
+}
 
-    @media (max-width: 768px) {
-      .cta-section {
-        flex-direction: column;
-        text-align: center;
-      }
+.social-icons img:hover {
+  opacity: 0.8;
+}
 
-      .cta-text,
-      .cta-button {
-        width: 100%;
-        padding: 1rem 0;
-      }
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .cta-section {
+    flex-direction: column;
+    text-align: center;
+  }
 
-      .footer-address,
-      .footer-links {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 1rem;
-      }
+  .cta-text,
+  .cta-button {
+    width: 100%;
+    padding: 1rem 0;
+  }
 
-      .nav-links {
-        flex-direction: column;
-      }
-    }
+  /* Esconde endereço e links */
+  .footer-address,
+  .footer-links {
+    display: none;
+  }
+
+  /* Centraliza ícones no mobile */
+  .social-icons {
+    justify-content: center;
+    padding-right: 0;
+    margin-top: 1rem;
+    margin-left: 7rem;     
+    gap: 1rem;
+  }
+
+  .social-icons img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+  }
+}
+    
   </style>
 </head>
 <body>
@@ -358,19 +466,15 @@
 
   <!-- NAVBAR -->
   <nav>
-    <div class="logo">
-      <a href="index.html"><img src="Logo_png.png" alt="Logo da empresa"></a>
-    </div>
-    
+    <div class="logo"><img src="Logo_png.png" alt="Logo da empresa"></div>
     <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
-    
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="orcamento.html">Orçamento</a>
       <div class="dropdown">
-        <a href="#">Produtos</a>
+        <a href="#produtos">Produtos</a>
         <div class="dropdown-content">
-          <a href="impressao.html">Impressão</a>
+          <a href="impressão.html">Impressão</a>
           <a href="criacao.html">Criação</a>
           <a href="digital.html">Digital</a>
           <a href="redes-sociais.html">Redes Sociais</a>
@@ -415,148 +519,49 @@
 
   </div>
 </section>
-
-
-
   <!-- FOOTER -->
   <footer>
-    <div class="footer-address">
-      Rua Criatividade, 123<br>
-      Bairro Inspiração<br>
-      Cidade das Ideias – BR
-    </div>
-     <div class="footer-links">
-    <a href="#home">Home</a>
-    <a href="#orcamento">Orçamento</a>
-    <a href="#produtos">Produtos</a>
-    <a href="#contato">Contato</a>
-  </div>
-
-  <div class="social-icons">
-    <a href="https://www.instagram.com/celtoon.agencia/" target="_blank">
-      <img src="instagram.png" alt="Instagram">
-    </a>
-    <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank">
-      <img src="linkedin.png" alt="LinkedIn">
-    </a>
-    <a href="https://wa.me/seunumerodetelefone" target="_blank">
-      <img src="whats.png" alt="Whatsapp">
-    </a>
-  </div>
+    <div class="footer-address">Rua Criatividade, 123<br>Bairro Inspiração<br>Cidade das Ideias – BR</div>
+    <div class="footer-links"><a href="index.html">Home</a><a href="orcamento.html">Orçamento</a><a href="#produtos">Produtos</a><a href="contato.html">Contato</a></div>
+    <div class="social-icons"><a href="https://www.instagram.com/celtoon.agencia/" target="_blank"><img src="instagram.png" alt="Instagram"></a><a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank"><img src="linkedin.png" alt="LinkedIn"></a></div>
   </footer>
 
-  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
-  <img src="whats2.png" alt="WhatsApp" />
-  </a>
+  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp" /></a>
+
 
 
     <script>
-    
-//Esconde a barra de comandos 
-let lastScrollTop = 0;
-const navbar = document.querySelector('nav');
 
-window.addEventListener('scroll', function() {
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  (function(){
+    'use strict';
 
-  if (scrollTop > lastScrollTop) {
-    // Rolando para baixo → esconder
-    navbar.style.top = "-80px"; // ajuste a altura da navbar
-  } else {
-    // Rolando para cima → mostrar
-    navbar.style.top = "0";
-  }
+    const $ = sel => document.querySelector(sel);
 
-  lastScrollTop = scrollTop;
-});
+    // NAVBAR hide on scroll
+    (function navbarScroll(){
+      const navbar = $('nav');
+      if(!navbar) return;
+      let lastScrollTop = 0;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) navbar.style.top = `-${navbar.offsetHeight}px`;
+        else navbar.style.top = '0';
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      }, { passive: true });
+    })();
+
+    // MENU TOGGLE
+    (function menuToggle(){
+      const toggleBtn = $('.menu-toggle');
+      const navLinks = $('.nav-links');
+      if(!toggleBtn || !navLinks) return;
+      toggleBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+    })();
 
 
-    // Animações existentes
-    window.addEventListener('load', () => {
-      const heroImage = document.getElementById('heroImage');
-      if (heroImage) {
-        heroImage.classList.add('visible');
-      }
+    })();
 
-       // Animação da seção de clientes
-  const clientesSection = document.querySelector('.clientes-section');
 
-  const clientesObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  if (clientesSection) {
-    clientesObserver.observe(clientesSection);
-  }
-
-    });
-
-    const boxes = document.querySelectorAll('.feature-box');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    boxes.forEach(box => observer.observe(box));
-
-    // animação texto topo 
-    const phrases = [
-    "Criamos design que resolve.",
-    "Ideias ousadas. Resultados reais.",
-    "Visual forte, marca memorável.",
-    "Seu negócio, nossa arte.",
-    "Do rascunho ao extraordinário.",
-    "Design que move, conecta e vende.",
-    "Criatividade é nossa matéria prima.",
-    "Projetamos impacto.",
-    "Menos do mesmo. Mais do que esperam.",
-    
-  ];
-
-  const typewriter = document.getElementById('typewriter');
-  const cursor = document.querySelector('.cursor');
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-
-  function type() {
-    const currentPhrase = phrases[phraseIndex];
-    if (isDeleting) {
-      typewriter.textContent = currentPhrase.substring(0, charIndex--);
-    } else {
-      typewriter.textContent = currentPhrase.substring(0, charIndex++);
-    }
-
-    if (!isDeleting && charIndex === currentPhrase.length) {
-      setTimeout(() => isDeleting = true, 2000);
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-    }
-
-    const speed = isDeleting ? 50 : 100;
-    setTimeout(type, speed);
-  }
-
-  document.addEventListener('DOMContentLoaded', type);
-
-    /*Menu Toogle*/
-    const toggleBtn = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-
-    
   </script>
 
 </body>
