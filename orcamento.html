@@ -7,39 +7,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orçamento</title>
   <style>
- 
-    @font-face {
+
+      /* ==========================================
+     FONTS / RESET / VARIÁVEIS
+     ========================================== */
+  @font-face {
     font-family: 'IntroCondBlackFree';
     src: url('IntroCondBlackFree.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
-
-       @font-face {
+  @font-face {
     font-family: 'IntroRegularAlt';
     src: url('IntroRegularAlt.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
 
+  :root{
+    --brand: #1F4381;
+    --brand-dark: #16315f;
+    --bg: #f2f2f2;
+    --text: #333;
+  }
+
+  /* Evita a página mexer lateralmente */
+  html, body { overflow-x: hidden; }
+
+  /* RESET */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+  a { text-decoration: none; }
+
+  /* FADE-IN: só aplica a ocultação se o JS está presente (classe .js é adicionada via script) */
+  .js .fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .js .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
     
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #f2f2f2;
-      color: #333;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
   /* ==========================================
      NAVBAR
      ========================================== */
