@@ -40,152 +40,141 @@
       text-decoration: none;
     }
 
-    /* NAVBAR */
-   nav { 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #1F4381;
-  color: #1F4381;
-  position: fixed; /* antes era sticky */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: top 0.3s ease; /* suaviza o movimento */
-}
-    .logo img {
-      height: 50px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      position: relative;
-    }
-
-    .nav-links a {
-      color: #fff;
-      font-family: 'IntroCondBlackFree', sans-serif;
-      font-weight: 500;
-      position: relative;
-    }
-
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #1F4381;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 1;
-      min-width: 200px;
-      border-radius: 4px;
-    }
-
-    .dropdown-content a {
-      display: block;
-      padding: 0.75rem 1rem;
-      color: #fff;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-      .social-icons {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .social-icons a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-      background-color: #1F4381;
-      border-radius: 50%;
-    }
-
-    .social-icons img {
-      width: 40px;
-      height: 40px;
-      filter: invert(1);
-    }
-
-    .menu-toggle {
-  display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: #1F4381;
-  cursor: pointer;
-}
-
-/* Mobile: mostrar botão, esconder links */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
+  /* ==========================================
+     NAVBAR
+     ========================================== */
+  nav {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 1rem 2rem; 
+    background: var(--brand);
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    transition: top 0.3s ease;
   }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: #fff;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    padding: 1rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    z-index: 999;
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-  .dropdown-content {
-    position: static;
-    box-shadow: none;
-    margin-top: 0.5rem;
-  }
-}
-
-    /* WHATSAPP BOTÃO*/
-
-  .whatsapp-float {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  background-color: #25d366;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s;
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.1);
-}
-
-.whatsapp-float img {
-  width: 60px;
-  height: 60px;
-}
     
+  .logo img { 
+    height: 50px; 
+  }
+  .nav-links { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem; 
+    position: relative; 
+  }
+  .nav-links a { 
+    color: #fff; 
+    font-family: 'IntroCondBlackFree', sans-serif; 
+    font-weight: 500; 
+  }
+  .dropdown { 
+    position: relative; 
+  }
+  .dropdown-content { 
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    background-color: var(--brand); 
+    min-width: 200px; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+  }
+  .dropdown-content a { 
+    display: block; 
+    padding: 0.75rem 1rem; 
+    color: #fff; 
+  }
+  .dropdown:hover .dropdown-content { 
+    display: block; 
+  }
+  .social-icons { 
+    display: flex; 
+    gap: 0.5rem; 
+  }
+  .social-icons a { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 40px; 
+    height: 40px; 
+    background-color: var(--brand); 
+    border-radius: 50%; 
+  }
+  .social-icons img {
+    width: 40px; 
+    height: 40px; 
+    filter: invert(1); 
+  }
+  .menu-toggle { 
+    display: none; 
+    font-size: 2rem; 
+    background: none; 
+    border: none; 
+    color: #fff; 
+    cursor: pointer; 
+    z-index: 1001; 
+  }
+
+  /* NAV - MOBILE */
+  @media (max-width: 768px) {
+    .menu-toggle { 
+      display: block; 
+    }
+    .nav-links { 
+      display: none; 
+      flex-direction: column; 
+      background: var(--brand); 
+      position: absolute; 
+      top: 70px; 
+      right: 20px; 
+      padding: 1rem; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+      z-index: 999; 
+    }
+    .nav-links a { 
+      color: #fff; 
+    }
+    .nav-links.active { 
+      display: flex; 
+    }
+    .dropdown-content { 
+      position: static; 
+      box-shadow: none; 
+      margin-top: 0.5rem;
+    }
+  }
+
+  /* ==========================================
+     WHATSAPP FLOAT
+     ========================================== */
+  .whatsapp-float { 
+    position: fixed; 
+    width: 60px; 
+    height: 60px; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+    background-color: #25d366; 
+    border-radius: 50%; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: transform 0.3s; 
+  }
+  .whatsapp-float:hover { 
+    transform: scale(1.1); 
+  }
+  .whatsapp-float img { 
+    width: 60px; 
+    height: 60px; 
+  }
 
 /* === ORÇAMENTO === */
 .orcamento {
@@ -268,59 +257,164 @@
   }
 }
 
+      /* ==========================================
+     CTA / CLIENTES / FOOTER
+     ========================================== */
+  .cta-section { 
+    min-height: 100vh; 
+    background-image: url('Fundo1.png'); 
+    background-size: cover; 
+    background-position: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 8rem 4rem; 
+    color: #fff;
+    margin-top: 2rem; 
+  }
+  .cta-text { 
+    font-family: 'IntroCondBlackFree', sans-serif;
+    letter-spacing: 1px; 
+    width: 50%;
+    font-size: 2rem; 
+    padding-right: 2rem; 
+  }
+  .cta-button { 
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .cta-button a { 
+    padding: 1rem 2rem; 
+    background-color: #fff; 
+    border-radius: 8px; 
+    color: var(--brand); 
+    font-family: 'IntroRegularAlt', sans-serif; 
+    text-decoration: none; 
+    transition: background 0.3s ease; 
+  }
+  .cta-button a:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* clientes - agora sem regra .visible separada (usamos .fade-in) */
+  .clientes-section { 
+    min-height: 60vh; 
+    background-color: #fff; 
+    padding: 2rem; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+  }
+  .clientes-section h2 {
+    font-family: 'IntroCondBlackFree', sans-serif;
+    font-size: 2rem; 
+    color: var(--brand);
+    margin-bottom: 2rem; 
+    text-align: center;
+  }
+  .clientes-grid { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 3rem; 
+    max-width: 960px; 
+    margin: 0 auto;
+  }
+  .clientes-grid img { 
+    flex: 0 1 calc(25% - 3rem);
+    max-width: 120px; 
+    height: 60px;
+    object-fit: contain; 
+    transition: transform 0.3s ease;
+  }
+  .clientes-grid img:hover { 
+    transform: scale(1.1);
+  }
+
+  footer { 
+    background-color: var(--brand);
+    color: white; 
+    padding: 2rem; 
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .footer-address { 
+    width: 30%; 
+    font-size: 0.9rem;
+    font-family: 'IntroRegularAlt', sans-serif; 
+  }
+  .footer-links { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.5rem; width: 30%;
+  }
+  .footer-links a {
+    font-family: 'IntroRegularAlt', sans-serif; 
+    color: white; 
+    font-weight: 500; 
+  }
     
-    /* FOOTER */
-    footer {
-      background-color: #1F4381;
-      color: white;
-      padding: 2rem;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .footer-address {
-      width: 30%;
-      font-size: 0.9rem;
-      font-family: 'IntroRegularAlt', sans-serif;
-    }
-
-   .footer-links {
+/* Ícones */
+.social-icons {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 30%;
-    }
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center; /* garante centralização */
+  padding-right: 4rem;
+}
 
-    .footer-links a {
-      font-family: 'IntroRegularAlt', sans-serif;
-      color: white;
-      font-weight: 500;
-    }
+.social-icons img {
+  width: 56px;
+  height: 56px;
+  transition: opacity 0.3s ease;
+}
 
-    @media (max-width: 768px) {
-      .cta-section {
-        flex-direction: column;
-        text-align: center;
-      }
+.social-icons img:hover {
+  opacity: 0.8;
+}
 
-      .cta-text,
-      .cta-button {
-        width: 100%;
-        padding: 1rem 0;
-      }
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .cta-section {
+    flex-direction: column;
+    text-align: center;
+  }
 
-      .footer-address,
-      .footer-links {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 1rem;
-      }
+  .cta-text,
+  .cta-button {
+    width: 100%;
+    padding: 1rem 0;
+  }
 
-      .nav-links {
-        flex-direction: column;
-      }
-    }
+  /* Esconde endereço e links */
+  .footer-address,
+  .footer-links {
+    display: none;
+  }
+
+  /* Centraliza ícones no mobile */
+  .social-icons {
+    justify-content: center;
+    padding-right: 0;
+    margin-top: 1rem;
+    margin-left: 7rem;     
+    gap: 1rem;
+  }
+
+  .social-icons img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+  }
+}
+    
   </style>
 </head>
 <body>
