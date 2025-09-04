@@ -459,21 +459,22 @@
     }
 
     .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 2rem 2rem 1.5rem 2rem;
+    flex-direction: column;       /* empilha título e descrição */
+    align-items: flex-start;      /* alinha à esquerda */
+    justify-content: flex-start;  /* evita o espaço entre */
+    margin: 0 2rem 1.5rem 2rem;   /* igual ao portfolio-header */
+    gap: 1rem;                    /* espaço entre título e parágrafo */
       
     }
 
      .feature-section h1 {
-    margin-bottom: 1rem; 
-    font-size: 2rem; 
-    align-items: flex-start;
+    margin-left: 0;               /* remove deslocamento lateral */
+    text-align: left;             /* garante alinhamento à esquerda */
   }
 
     .feature-description {
-     max-height: none;   /* libera altura no mobile */
-     line-height: 1.4rem;
+     text-align: left;             /* descrição alinhada à esquerda */
+    max-width: 90%;               /* não encosta na borda */
     }
     
     .feature-box { 
