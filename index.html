@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -878,8 +880,7 @@
     flex-direction: column;
   }
 }
-
-/* ===== CLIENTES - MARQUEE (mobile only) ===== */
+    /* ===== CLIENTES - MARQUEE (mobile only) ===== */
 @media (max-width: 768px) {
   /* wrapper que oculta overflow e contém a trilha */
   .clientes-marquee {
@@ -917,6 +918,7 @@
     100% { transform: translateX(-50%); }
   }
 }
+
   </style>
 </head>
 <body>
@@ -948,7 +950,7 @@
       Seu navegador não suporta vídeo.
     </video>
     <div class="hero-text">
-      <span id="typewriter">Criatividade que transforma marcas.</span><span class="cursor">|</span>
+      <span id="typewriter"></span><span class="cursor">|</span>
     </div>
     <a href="orcamento.html" class="orcamento-button">Vamos conversar?</a>
   </section>
@@ -973,7 +975,7 @@
     <div class="section-header">
       <h1>O que<br>fazemos</h1>
       <p class="feature-description">
-        Oferecemos serviços de pré-impressão, criação, digital e redes sociais para dar visibilidade ao seu negócio.
+        Oferecemos serviços de pré-impressão, criação, digital e redes sociais para dar visibilidade ao seu négocio.
       </p>
     </div>
     <div class="feature-carousel">
@@ -1035,27 +1037,51 @@
         </div>
         <div class="project-item">
           <img src="imagem/nort.jpg" alt="Nortinho">
-          <div class="overlay"><h3>Nortinho</h3><span class="tag">Criação</span></div>
+          <div class="overlay"><h3>Nortinho</h3><span class="tag">Digital</span></div>
+        </div>
+        <div class="project-item">
+          <img src="imagem/Domo.jpg" alt="Domo">
+          <div class="overlay"><h3>Domo UFES</h3><span class="tag">Criação</span></div>
+        </div>
+        <div class="project-item">
+          <img src="imagem/lavi.jpg" alt="Lavinho">
+          <div class="overlay"><h3>Lavinho</h3><span class="tag">Digital</span></div>
+        </div>
+        <div class="project-item">
+          <img src="imagem/mock.jpg" alt="Livro">
+          <div class="overlay"><h3>Capa de livro</h3><span class="tag">Criação/Impressão</span></div>
+        </div>
+        <div class="project-item">
+          <img src="imagem/magazine_boneco.jpg" alt="Magazine Móveis">
+          <div class="overlay"><h3>Magazine Móveis</h3><span class="tag">Criação/Impressão</span></div>
+        </div>
+        <div class="project-item">
+          <img src="imagem/recirculo.jpg" alt="Recírculo 2">
+          <div class="overlay"><h3>Recírculo</h3><span class="tag">Criação/Digital</span></div>
+        </div>
+        <div class="project-item">
+          <img src="imagem/ceopaginho.jpg" alt="Ceopag">
+          <div class="overlay"><h3>Ceopaguinho</h3><span class="tag">Criação/Impressão</span></div>
         </div>
       </div>
     </div>
 
+    <div class="portfolio-arrows">
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+
+    <!-- bolinhas do mobile (portfolio) -->
     <div class="portfolio-indicators" aria-hidden="true">
-      <span class="active"></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span class="active"></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta-section fade-in">
-    <div class="cta-text">
-      Pronto para transformar sua comunicação visual?
-    </div>
-    <div class="cta-button">
-      <a href="orcamento.html">Peça um orçamento</a>
-    </div>
+  <section id="cta" class="cta-section fade-in">
+    <div class="cta-text">Está pronto para transformar seu negócio com um design incrível?</div>
+    <div class="cta-button"><a href="orcamento.html">Solicitar Orçamento</a></div>
   </section>
 
   <!-- CLIENTES -->
@@ -1064,17 +1090,6 @@
 
     <!-- estrutura original visível no desktop; no mobile o JS converte em trilha infinita -->
     <div class="clientes-grid" aria-hidden="false">
-      <img src="cliente/Ansell.png" alt="Ansell">
-      <img src="cliente/Bike.png" alt="Bike Center Brasilia">
-      <img src="cliente/Ceopag.png" alt="Ceopag">
-      <img src="cliente/Magazine.png" alt="Magazine Móveis">
-      <img src="cliente/Recirculo.png" alt="Recirculo">
-      <img src="cliente/norte.png" alt="Norte Telecom">
-      <img src="cliente/powernet.png" alt="Power Net">
-      <img src="cliente/rohto.png" alt="Rohto">
-      <img src="cliente/Yogoberry.png" alt="Yogoberry">
-      <img src="cliente/HiperRoll.png" alt="Hiper Roll">
-      <img src="cliente/Guaçu.png" alt="Rádio Guaçu">
       <img src="cliente/Ansell.png" alt="Ansell">
       <img src="cliente/Bike.png" alt="Bike Center Brasilia">
       <img src="cliente/Ceopag.png" alt="Ceopag">
@@ -1100,24 +1115,160 @@
 
   <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp" /></a>
 
-  <!-- SCRIPTS -->
+  <!-- ==========================================
+       SCRIPTS (organizados & robustos)
+       ========================================== -->
   <script>
-    // Toggle menu mobile
-    (function(){
-      const btn = document.querySelector('.menu-toggle');
-      const nav = document.querySelector('.nav-links');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', () => {
-        nav.classList.toggle('active');
-      });
-      // fecha menu ao clicar em link (mobile)
-      nav.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') nav.classList.remove('active');
-      });
-    })();
-  </script>
+  (function(){
+    'use strict';
 
-  <!-- ===== SCRIPT: MARQUEE DE CLIENTES (aplica apenas em mobile) ===== -->
+    // ---------- helpers ----------
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+    // ---------- NAVBAR hide on scroll ----------
+    (function navbarScroll(){
+      const navbar = $('nav');
+      if(!navbar) return;
+      let lastScrollTop = 0;
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) navbar.style.top = `-${navbar.offsetHeight}px`; else navbar.style.top = '0';
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      }, { passive: true });
+    })();
+
+    // ---------- MENU TOGGLE ----------
+    (function menuToggle(){
+      const toggleBtn = $('.menu-toggle');
+      const navLinks = $('.nav-links');
+      if(!toggleBtn || !navLinks) return;
+      toggleBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+    })();
+
+    // ---------- TYPEWRITER ----------
+    (function typewriter(){
+      const phrases = [
+        "Criamos design que resolve.",
+        "Ideias ousadas. Resultados reais.",
+        "Visual forte, marca memorável.",
+        "Seu negócio, nossa arte.",
+        "Do rascunho ao extraordinário.",
+        "Design que move, conecta e vende.",
+        "Criatividade é nossa matéria prima.",
+        "Projetamos impacto.",
+        "Menos do mesmo. Mais do que esperam.",
+      ];
+      const el = $('#typewriter');
+      if(!el) return;
+      let phraseIndex = 0, charIndex = 0, isDeleting = false;
+      function tick(){
+        const p = phrases[phraseIndex];
+        if(isDeleting) { el.textContent = p.substring(0, charIndex--); }
+        else { el.textContent = p.substring(0, charIndex++); }
+        if(!isDeleting && charIndex === p.length) setTimeout(() => isDeleting = true, 2000);
+        else if(isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex+1) % phrases.length; }
+        const speed = isDeleting ? 50 : 100;
+        setTimeout(tick, speed);
+      }
+      tick();
+    })();
+
+    // ---------- FEATURE SCROLLER + INDICATORS (bolinhas) ----------
+    (function initFeatureScroller(){
+      const scroller = document.querySelector('.feature-boxes');
+      const dots = document.querySelectorAll('.carousel-indicators span');
+      if(!scroller || !dots.length) return;
+
+      function cardSize(){
+        const card = scroller.querySelector('.feature-box');
+        if(!card) return scroller.clientWidth;
+        const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+        return card.offsetWidth + gap;
+      }
+      function updateDots(){
+        const size = cardSize(); if(!size) return;
+        const idx = Math.round(scroller.scrollLeft / size);
+        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+      }
+      function scrollToIndex(i, behavior='smooth'){ scroller.scrollTo({ left: i * cardSize(), behavior }); }
+
+      dots.forEach((d,i) => d.addEventListener('click', () => scrollToIndex(i)));
+      scroller.addEventListener('scroll', updateDots, { passive: true });
+      window.addEventListener('resize', updateDots);
+      if (document.readyState === 'complete') requestAnimationFrame(updateDots);
+      else window.addEventListener('load', () => requestAnimationFrame(updateDots));
+    })();
+
+    // ---------- PROJECTS GRID (desktop arrows) ----------
+    (function initProjectsDesktop(){
+      const grid = document.querySelector('.projects-grid');
+      const items = grid ? Array.from(grid.querySelectorAll('.project-item')) : [];
+      const prevBtn = document.querySelector('.portfolio-arrows .prev');
+      const nextBtn = document.querySelector('.portfolio-arrows .next');
+      const mqDesktop = window.matchMedia('(min-width: 993px)');
+      const itemsPerPage = 3; let currentPage = 0;
+      if(!grid || !prevBtn || !nextBtn) return;
+
+      function totalPages(){ return Math.max(1, Math.ceil(items.length / itemsPerPage)); }
+      function applyTransform(){ if(mqDesktop.matches) grid.style.transform = `translateX(-${currentPage * 100}%)`; else grid.style.transform = ''; }
+      function updateButtons(){ const pages = totalPages(); prevBtn.disabled = currentPage === 0; nextBtn.disabled = currentPage >= pages - 1; }
+      function goTo(page){ const pages = totalPages(); currentPage = Math.min(Math.max(0, page), pages - 1); applyTransform(); updateButtons(); }
+      function init(){ if(mqDesktop.matches){ grid.style.willChange = 'transform'; goTo(0); } else { grid.style.willChange = ''; grid.style.transform = ''; } }
+
+      prevBtn.addEventListener('click', () => goTo(currentPage - 1));
+      nextBtn.addEventListener('click', () => goTo(currentPage + 1));
+      mqDesktop.addEventListener('change', init);
+      window.addEventListener('resize', applyTransform);
+      init();
+    })();
+
+    // ---------- PROJECTS MOBILE INDICATORS ----------
+    (function initProjectsDots(){
+      const scroller = document.querySelector('.projects-grid');
+      const dots = document.querySelectorAll('.portfolio-indicators span');
+      if(!scroller || !dots.length) return;
+
+      function stepSize(){
+        const card = scroller.querySelector('.project-item');
+        if(!card) return scroller.clientWidth;
+        const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
+        return card.offsetWidth + gap;
+      }
+      function updateDots(){
+        const step = stepSize(); if(!step) return;
+        const idx = Math.round(scroller.scrollLeft / step);
+        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+      }
+      dots.forEach((d,i) => d.addEventListener('click', () => { scroller.scrollTo({ left: i * stepSize(), behavior: 'smooth' }); }));
+      scroller.addEventListener('scroll', updateDots, { passive: true });
+      window.addEventListener('resize', updateDots);
+      setTimeout(updateDots, 250);
+    })();
+
+    // ---------- FADE-IN ----------
+    (function initFadeIn(){
+      const targets = document.querySelectorAll('.fade-in');
+      if(!targets.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(t => t.classList.add('visible'));
+        return;
+      }
+
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+      targets.forEach(el => io.observe(el));
+    })();
+
+      <!-- ===== SCRIPT: MARQUEE DE CLIENTES (aplica apenas em mobile) ===== -->
   <script>
   (function () {
     const MOBILE_MAX = 768;
@@ -1201,7 +1352,7 @@
         }
 
         // velocidade px/s — ajuste conforme necessidade (maior = mais rápido)
-        const speed = 80;
+        const speed = 100;
         const duration = Math.max(6, halfWidth / speed); // mínimo 6s
 
         // aplica duração da animação (keyframes deslocam -50%)
@@ -1220,15 +1371,8 @@
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(initClientesMarquee, 150);
     });
+
   })();
   </script>
-
-  <script>
-    // Faz aparecer elementos com .fade-in quando a página carrega (simples)
-    window.addEventListener('load', () => {
-      document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
-    });
-  </script>
-
 </body>
 </html>
