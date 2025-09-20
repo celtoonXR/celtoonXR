@@ -442,6 +442,14 @@
 
   /* MOBILE: transformamos em scroller horizontal */
   @media (max-width: 768px) {
+
+      /* Desativa o fade-in apenas no mobile */
+  .js .fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+    
     .feature-boxes { 
       display: flex; 
       flex-wrap: nowrap; 
@@ -904,7 +912,7 @@
     <div class="hero-text">
       <span id="typewriter"></span><span class="cursor">|</span>
     </div>
-    <a href="orcamento.html" class="orcamento-button">Solicitar orçamento</a>
+    <a href="orcamento.html" class="orcamento-button">Vamos conversar?</a>
   </section>
 
   <!-- HERO MOBILE -->
@@ -918,6 +926,7 @@
         <h1>Criatividade é nossa matéria prima.</h1>
         <p class="hero-mobile-desc">Do conceito ao resultado: design que conecta, emociona e vende.</p>
       </div>
+      <a href="orcamento.html" class="orcamento-button">Vamos conversar?</a>
     </div>
   </section>
 
