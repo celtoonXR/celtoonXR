@@ -320,7 +320,7 @@
     } 
     .orcamento-button { 
       position: absolute;
-      bottom: 6rem;
+      bottom: 12rem;
       left: 50%;
       transform: translateX(-50%);
       margin: 0;
@@ -843,6 +843,51 @@
 
 /* ========== MOBILE ========== */
 @media (max-width: 768px) {
+  .clientes-marquee {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .clientes-track {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    will-change: transform;
+    /* duration set dynamically by JS */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: ct-marquee;
+    animation-play-state: running;
+  }
+
+  /* make individual images behave consistently inside the track */
+  .clientes-track img {
+    flex: 0 0 auto;
+    max-width: 120px;
+    height: 60px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    display: block;
+  }
+
+  /* pause on hover (and when touching) */
+  .clientes-track:hover,
+  .clientes-track:active {
+    animation-play-state: paused;
+  }
+
+  @keyframes ct-marquee {
+    from { transform: translateX(0); }
+    /* to moves by 50% because JS duplicates content (two copies) */
+    to   { transform: translateX(-50%); }
+  }
+
+  /* small visual tweak so the original .clientes-grid (if present) doesn't interfere */
+  .clientes-section .clientes-grid {
+    display: none !important;
+  }
+
   .cta-section {
     flex-direction: column;
     text-align: center;
@@ -1213,6 +1258,84 @@
 
       targets.forEach(el => io.observe(el));
     })();
+
+
+  // Mobile-only infinite marquee for .clientes-section
+// - Moves existing children of .clientes-grid into a .clientes-track
+// - Duplicates the content to create a seamless loop
+// - Computes animation duration based on content width
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.innerWidth > 768) return; // mobile only
+
+  var original = document.querySelector('.clientes-grid');
+  if (!original) return;
+
+  // Collect children to move (NodeList -> array)
+  var nodes = Array.prototype.slice.call(original.children);
+  if (nodes.length === 0) return;
+
+  // Create wrapper and track
+  var marquee = document.createElement('div');
+  marquee.className = 'clientes-marquee';
+  var track = document.createElement('div');
+  track.className = 'clientes-track';
+
+  // Move nodes into track
+  nodes.forEach(function (n) { track.appendChild(n); });
+
+  // Duplicate track content to allow continuous scroll
+  track.innerHTML += track.innerHTML;
+
+  // Replace the original grid with the marquee wrapper
+  original.parentNode.replaceChild(marquee, original);
+  marquee.appendChild(track);
+
+  // Utility to set animation duration based on content width
+  function setAnimationDuration() {
+    // total width of single set (we duplicated so /2)
+    var singleWidth = track.scrollWidth / 2 || 0;
+    // base speed: pixels per second (adjustable)
+    var pxPerSecond = 80; // larger -> faster
+    var duration = Math.max(8, singleWidth / pxPerSecond); // seconds, minimum 8s
+    track.style.animationDuration = duration + 's';
+  }
+
+  // Ensure images are loaded before measuring
+  var imgs = track.querySelectorAll('img');
+  if (imgs.length === 0) {
+    setAnimationDuration();
+  } else {
+    var loaded = 0;
+    imgs.forEach(function (img) {
+      if (img.complete) {
+        loaded++;
+        if (loaded === imgs.length) setAnimationDuration();
+      } else {
+        img.addEventListener('load', function () {
+          loaded++;
+          if (loaded === imgs.length) setAnimationDuration();
+        });
+        img.addEventListener('error', function () {
+          loaded++;
+          if (loaded === imgs.length) setAnimationDuration();
+        });
+      }
+    });
+  }
+
+  // Recalculate on resize (debounced)
+  var rr;
+  window.addEventListener('resize', function () {
+    clearTimeout(rr);
+    rr = setTimeout(function () {
+      if (window.innerWidth > 768) {
+        // Stop and remove marquee if desktop — optional keep; here we do nothing
+        // You could implement a restore to original grid if desired.
+      } else {
+        setAnimationDuration();
+      }
+    }, 150);
+  });
 
   })();
   </script>
