@@ -893,24 +893,28 @@
     display: flex;
     gap: 3rem;
     align-items: center;
-    /* Animação controlada por variáveis definidas via JS */
+    flex-wrap: nowrap;         /* importante: manter em uma linha */
+    /* Animação: nome definido aqui, duração será ajustada via JS */
     animation-name: marquee;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     will-change: transform;
   }
 
+  .clientes-track > * {
+    flex: 0 0 auto;           /* garante que cada item mantenha sua largura */
+  }
+
   .clientes-track img {
-    flex: 0 0 auto;
     max-width: 120px;
     height: 60px;
     object-fit: contain;
   }
 
-  /* keyframes usam a variável --marquee-shift (definida por JS) */
+  /* keyframes agora deslocam 50% (um conjunto) — com duas cópias isso gera loop suave */
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(calc(-1 * var(--marquee-shift, 50%))); }
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 }
   </style>
@@ -1058,24 +1062,15 @@
   <section class="clientes-section fade-in" id="clientes" aria-label="Clientes">
     <h2>Nossos clientes</h2>
 
-    <!-- estrutura original visível no desktop -->
+    <!-- estrutura original visível no desktop; no mobile o JS converte em trilha infinita -->
     <div class="clientes-grid" aria-hidden="false">
-      <img src="cliente/Ansell.png" alt="Cliente 1">
-      <img src="cliente/Bike.png" alt="Cliente 2">
-      <img src="cliente/Ceopag.png" alt="Cliente 3">
-      <img src="cliente/Guaçu.png" alt="Cliente 4">
-      <img src="cliente/HiperRoll.png" alt="Cliente 5">
-      <img src="cliente/Lavateria.png" alt="Cliente 6">
-      <img src="cliente/Magazine.png" alt="Cliente 7">
-      <img src="cliente/Recirculo.png" alt="Cliente 8">
-      <img src="cliente/Yogoberry.png" alt="Cliente 9">
-      <img src="cliente/norte.png" alt="Cliente 10">
-      <img src="cliente/powernet.png" alt="Cliente 11">
-      <img src="cliente/rohto.png" alt="Cliente 12">
-      <!-- caso tenha mais, adicione aqui -->
+      <img src="clientes/cliente1.png" alt="Cliente 1">
+      <img src="clientes/cliente2.png" alt="Cliente 2">
+      <img src="clientes/cliente3.png" alt="Cliente 3">
+      <img src="clientes/cliente4.png" alt="Cliente 4">
+      <!-- adicione mais logos se quiser -->
     </div>
 
-    <!-- Observação: no mobile o JS converte .clientes-grid em trilha animada dentro de .clientes-marquee -->
   </section>
 
   <!-- FOOTER -->
@@ -1122,7 +1117,6 @@
   <!-- ===== SCRIPT: MARQUEE DE CLIENTES (aplica apenas em mobile) ===== -->
   <script>
   (function () {
-    // Largura máxima que consideramos "mobile"
     const MOBILE_MAX = 768;
 
     function initClientesMarquee() {
@@ -1130,26 +1124,24 @@
       const grid = document.querySelector('.clientes-grid');
       if (!grid) return;
 
-      // Se não for mobile, desfaz modificações e garante visual desktop
+      // Se não for mobile, restaura o HTML original (se salvamos antes)
       if (!isMobile) {
-        grid.style.animation = '';
-        grid.style.setProperty('--marquee-shift', '');
         if (grid.dataset.originalHtml) {
           grid.innerHTML = grid.dataset.originalHtml;
           delete grid.dataset.originalHtml;
           delete grid.dataset.cloned;
         }
         grid.classList.remove('clientes-track');
-        // Se estiver dentro de .clientes-marquee, mantemos a estrutura mas sem animação
+        // se estiver envolvido por .clientes-marquee, não removemos wrapper para simplicidade
         return;
       }
 
-      // Salva o HTML original (uma vez) para possível restauração
+      // salva o HTML original só uma vez
       if (!grid.dataset.originalHtml) {
         grid.dataset.originalHtml = grid.innerHTML;
       }
 
-      // Garante wrapper .clientes-marquee
+      // garante wrapper .clientes-marquee
       let wrapper = grid.closest('.clientes-marquee');
       if (!wrapper) {
         wrapper = document.createElement('div');
@@ -1161,7 +1153,7 @@
       const track = grid;
       track.classList.add('clientes-track');
 
-      // Clona os itens uma vez para possibilitar loop contínuo
+      // clona os itens uma vez para fazer a trilha dupla
       if (!track.dataset.cloned) {
         const children = Array.from(track.children);
         children.forEach(node => {
@@ -1171,7 +1163,7 @@
         track.dataset.cloned = 'true';
       }
 
-      // Espera imagens carregarem para medir corretamente
+      // espera imagens carregarem antes de medir
       const imgs = Array.from(track.querySelectorAll('img'));
       const promises = imgs.map(img => {
         if (img.complete) return Promise.resolve();
@@ -1179,33 +1171,46 @@
       });
 
       Promise.all(promises).then(() => {
+        // Calcula largura do conjunto original (metade da trilha)
         const children = Array.from(track.children);
-        const halfCount = children.length / 2;
+        const halfCount = Math.floor(children.length / 2);
         let halfWidth = 0;
+
+        // tenta obter gap em px via getComputedStyle; fallback 0
         const style = getComputedStyle(track);
-        const gap = parseFloat(style.gap || 0);
+        let gap = 0;
+        if (style && style.gap) {
+          gap = parseFloat(style.gap) || 0;
+        }
 
         for (let i = 0; i < halfCount; i++) {
           const el = children[i];
-          halfWidth += el.offsetWidth + gap;
+          // inclui margin-right se existir inline (não necessário se gap for usado)
+          const elWidth = el.getBoundingClientRect().width;
+          halfWidth += elWidth;
+          // acrescenta gap entre itens exceto após o último
+          if (i < halfCount - 1) halfWidth += gap;
         }
 
-        // fallback caso a medição falhe
         if (!halfWidth) {
+          // fallback para metade do scrollWidth
           halfWidth = track.scrollWidth / 2;
         }
 
-        // velocidade em px/s — altere para ajustar rapidez
+        // velocidade px/s — ajuste conforme necessidade (maior = mais rápido)
         const speed = 80;
-        const duration = Math.max(8, halfWidth / speed); // 8s mínimo
+        const duration = Math.max(6, halfWidth / speed); // mínimo 6s
 
-        // Define variável usada pelo CSS e duração da animação
-        track.style.setProperty('--marquee-shift', `${halfWidth}px`);
-        track.style.animationDuration = `${duration}s`;
+        // aplica duração da animação (keyframes deslocam -50%)
+        track.style.animationDuration = duration + 's';
+        track.style.animationTimingFunction = 'linear';
+        track.style.animationIterationCount = 'infinite';
+        track.style.animationPlayState = 'running';
+        // garante que a trilha não quebre linha
+        track.style.whiteSpace = 'nowrap';
       });
     }
 
-    // Inicializa e re-inicializa com debounce em resize
     let resizeTimer;
     window.addEventListener('load', initClientesMarquee);
     window.addEventListener('resize', () => {
