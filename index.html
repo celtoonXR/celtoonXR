@@ -345,13 +345,14 @@
   .section-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
-    gap: 0.1rem;
-    margin-bottom: 1rem;
+    gap: 1.5rem;
+    margin: 0 0 2rem 0;            /* Remove margens laterais */
   }
   .feature-description {
     font-family: 'IntroRegularAlt', sans-serif;
+    text-align: left;
     font-size: 1rem;
     max-width: 400px;
     color: var(--text);
@@ -477,13 +478,15 @@
     }
 
      .feature-section h1 {
-    margin-left: 0;               /* remove deslocamento lateral */
-    text-align: left;             /* garante alinhamento à esquerda */
+    margin-left: 0;                /* Remove deslocamento lateral */
+    margin-bottom: 0;              /* Remove espaçamento inferior extra */
+    text-align: left;
+    min-width: max-content;        /* Garante largura mínima para o título */
   }
 
     .feature-description {
      text-align: left;             /* descrição alinhada à esquerda */
-    max-width: 90%;               /* não encosta na borda */
+     max-width: 90%;               /* não encosta na borda */
     }
     
     .feature-box { 
@@ -537,12 +540,10 @@
   .portfolio-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.1rem;
-    margin-top: 2rem;
-    margin-right: 4rem;
-    margin-bottom: 2rem;
-    margin-left: 4rem;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    margin: 0 0 2rem 0;            /* Remove margens laterais */
+
   }
   .portfolio-description {
     font-family: 'IntroRegularAlt', sans-serif;
@@ -551,6 +552,8 @@
     color: var(--text);
     max-height: 4rem;
     overflow: hidden;
+    margin-left: 0;
+    text-align: left;
   }
     
   .projects-section { 
