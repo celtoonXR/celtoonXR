@@ -761,36 +761,54 @@
   z-index: 2;
 }
     
-.cta-text { 
+.cta-text {
   font-family: 'IntroCondBlackFree', sans-serif;
-  letter-spacing: 1px; 
-  width: 50%;
-  font-size: 2rem; 
-  padding-right: 2rem; 
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.2;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
-
-.cta-button { 
-  width: 50%;
+    
+.cta-button {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.cta-button a { 
-  padding: 1rem 2rem; 
-  background-color: #fff; 
-  border-radius: 8px; 
-  color: var(--brand); 
-  font-family: 'IntroRegularAlt', sans-serif; 
-  text-decoration: none; 
-  transition: background 0.3s ease; 
+.cta-button a {
+  padding: 1.1rem 2.5rem;
+  background: #ffffff;
+  border-radius: 999px;
+  color: var(--brand);
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 
 .cta-button a:hover {
-  background-color: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
 }
 
 
+    @media (max-width: 768px) {
+  .cta-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .cta-button {
+    justify-content: center;
+  }
+
+  .cta-text {
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+  }
+}
+
+
+    
   /* clientes - agora sem regra .visible separada (usamos .fade-in) */
   .clientes-section { 
     min-height: 60vh; 
