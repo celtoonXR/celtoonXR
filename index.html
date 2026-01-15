@@ -733,17 +733,28 @@
      CTA / CLIENTES / FOOTER
      ========================================== */
 
-    .cta-section {
+.cta-section {
   position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 8rem 4rem;
   color: #fff;
-  margin-top: 2rem;
   overflow: hidden;
 }
+
+    .cta-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
 
     .cta-video {
   position: absolute;
@@ -775,12 +786,14 @@
 }
 
 .cta-button a {
-  padding: 1.1rem 2.5rem;
+  width: 100%;
+  max-width: 320px;
+  padding: 1.2rem 0;
   background: #ffffff;
   border-radius: 999px;
   color: var(--brand);
   font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 1rem;
+  text-align: center;
   text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
@@ -1122,15 +1135,18 @@
     Seu navegador não suporta vídeo HTML5.
   </video>
 
-  <div class="cta-text">
-    Está pronto para transformar seu negócio com um design incrível?
-  </div>
+  <div class="cta-content">
+    <div class="cta-text">
+      Está pronto para transformar seu negócio com um design incrível?
+    </div>
 
-  <div class="cta-button">
-    <a href="orcamento.html">Solicitar Orçamento</a>
+    <div class="cta-button">
+      <a href="orcamento.html">Solicitar Orçamento</a>
+    </div>
   </div>
 
 </section>
+
 
   <!-- CLIENTES -->
   <section id="clientes" class="clientes-section fade-in">
