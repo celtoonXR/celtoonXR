@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Indica onde o mapa do site está localizado
-Sitemap: https://celtoon.com.br/sitemap.xml
