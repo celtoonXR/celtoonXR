@@ -805,18 +805,15 @@
 }
 
 
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
   .cta-content {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 2.5rem;
   }
 
-  .cta-button {
-    justify-content: center;
-  }
-
-  .cta-text {
-    font-size: clamp(1.8rem, 6vw, 2.4rem);
+  .cta-button a {
+    max-width: 100%;
   }
 }
 
