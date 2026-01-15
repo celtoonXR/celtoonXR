@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://celtoon.com.br/index.html</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://celtoon.com.br/orcamento.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celtoon.com.br/impressao.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://celtoon.com.br/criacao.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://celtoon.com.br/digital.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://celtoon.com.br/redes-sociais.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://celtoon.com.br/contato.html</loc>
+    <priority>0.5</priority>
+  </url>
+</urlset>
