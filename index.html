@@ -732,43 +732,96 @@
   /* ==========================================
      CTA / CLIENTES / FOOTER
      ========================================== */
-  .cta-section { 
-    min-height: 100vh; 
-    background-image: url('Fundo1.png'); 
-    background-size: cover; 
-    background-position: center;
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    padding: 8rem 4rem; 
-    color: #fff;
-    margin-top: 2rem; 
+ .cta-section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(4rem, 8vw, 8rem) clamp(2rem, 6vw, 4rem);
+  color: #fff;
+}
+
+    .cta-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  filter: saturate(1.1) contrast(1.05);
+}
+
+    .cta-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.4),
+      rgba(0,0,0,0.75)
+    );
+  z-index: 1;
+}
+
+    .cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+    .cta-text {
+  font-family: 'IntroCondBlackFree', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.2;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+    .cta-button {
+  display: flex;
+  justify-content: center;
+}
+
+.cta-button a {
+  padding: 1.1rem 2.5rem;
+  background: #ffffff;
+  border-radius: 999px;
+  color: var(--brand);
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.cta-button a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+}
+
+    @media (max-width: 768px) {
+  .cta-content {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
-  .cta-text { 
-    font-family: 'IntroCondBlackFree', sans-serif;
-    letter-spacing: 1px; 
-    width: 50%;
-    font-size: 2rem; 
-    padding-right: 2rem; 
-  }
-  .cta-button { 
-    width: 50%;
-    display: flex;
+
+  .cta-button {
     justify-content: center;
-    align-items: center;
   }
-  .cta-button a { 
-    padding: 1rem 2rem; 
-    background-color: #fff; 
-    border-radius: 8px; 
-    color: var(--brand); 
-    font-family: 'IntroRegularAlt', sans-serif; 
-    text-decoration: none; 
-    transition: background 0.3s ease; 
+
+  .cta-text {
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
   }
-  .cta-button a:hover {
-    background-color: #e0e0e0;
-  }
+}
 
   /* clientes - agora sem regra .visible separada (usamos .fade-in) */
   .clientes-section { 
@@ -1076,10 +1129,68 @@
   </section>
 
   <!-- CTA -->
-  <section id="cta" class="cta-section fade-in">
-    <div class="cta-text">Está pronto para transformar seu negócio com um design incrível?</div>
-    <div class="cta-button"><a href="orcamento.html">Solicitar Orçamento</a></div>
-  </section>
+<!-- CTA -->
+<section id="cta" class="cta-section fade-in">
+
+  <!-- Vídeo de fundo -->
+  <video
+    class="cta-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="fallback.jpg"
+  >
+    <source src="celtoon-reel-sn2.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo HTML5.
+  </video>
+
+  <!-- Overlay cinematográfico -->
+  <div class="cta-overlay"></div>
+
+  <!-- Conteúdo -->
+  <div class="cta-content">
+    <h2 class="cta-text">
+      Está pronto para transformar seu negócio com um design incrível?
+    </h2>
+
+    <div class="cta-button">
+      <a href="orcamento.html">Solicitar Orçamento</a>
+    </div>
+  </div>
+
+</section>
+
+  <!-- Vídeo de fundo -->
+  <video
+    class="cta-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="fallback.jpg"
+  >
+    <source src="video.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo HTML5.
+  </video>
+
+  <!-- Overlay cinematográfico -->
+  <div class="cta-overlay"></div>
+
+  <!-- Conteúdo -->
+  <div class="cta-content">
+    <h2 class="cta-text">
+      Está pronto para transformar seu negócio com um design incrível?
+    </h2>
+
+    <div class="cta-button">
+      <a href="orcamento.html">Solicitar Orçamento</a>
+    </div>
+  </div>
+
+</section>
 
   <!-- CLIENTES -->
   <section id="clientes" class="clientes-section fade-in">
