@@ -806,18 +806,32 @@
 
 
 @media (max-width: 768px) {
+  .cta-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .cta-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-content: center;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .cta-text {
+    max-width: 28ch;
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+  }
+
   .cta-button {
     width: 100%;
-    display: flex;
-    justify-content: center;
   }
 
   .cta-button a {
-    width: 100%;
     max-width: 320px;
+    width: 100%;
   }
 }
-
     
   /* clientes - agora sem regra .visible separada (usamos .fade-in) */
   .clientes-section { 
