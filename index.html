@@ -350,202 +350,210 @@
     }
   }
 
-  /* ==========================================
-     FEATURE (Boxes / Carousel) 
-     ========================================== */
-  .feature-section { 
-    min-height: 90vh; 
-    padding: 2rem; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center;
-    align-items: flex-start;
-    position: relative;
+/* =========================
+   FEATURE SECTION
+========================= */
+
+.feature-section { 
+  min-height: 90vh; 
+  padding: 2rem; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1.5rem;
+  margin: 0 0 2rem 0;
+}
+
+.feature-description {
+  font-family: 'IntroRegularAlt', sans-serif;
+  text-align: left;
+  font-size: 1rem;
+  max-width: 400px;
+  color: var(--text);
+  max-height: 4rem;
+  overflow: hidden;
+}
+
+.feature-section h1 { 
+  text-align: left;
+  margin-left: 2rem;
+  font-family: 'IntroCondBlackFree', sans-serif;
+  color: var(--brand); 
+  letter-spacing: 1px; 
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.feature-boxes { 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 1.8rem; 
+  margin-top: 2rem; 
+}
+
+/* =========================
+   FEATURE BOX (BASE)
+========================= */
+
+.feature-box { 
+  width: 300px; 
+  height: 350px; 
+  text-align: center;
+}
+
+/* =========================
+   FLIP CARD – DESKTOP ONLY
+========================= */
+
+@media (min-width: 769px) {
+
+  .feature-box.flip {
+    perspective: 1200px;
   }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  .feature-box-inner {
+    position: relative;
     width: 100%;
-    gap: 1.5rem;
-    margin: 0 0 2rem 0;            /* Remove margens laterais */
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
   }
-  .feature-description {
-    font-family: 'IntroRegularAlt', sans-serif;
-    text-align: left;
-    font-size: 1rem;
-    max-width: 400px;
-    color: var(--text);
-    max-height: 4rem; /* mesma altura do título */
-    overflow: hidden;
+
+  .feature-box.flip:hover .feature-box-inner {
+    transform: rotateY(180deg);
   }
-    
-  .feature-section h1 { 
-    text-align: left;
-    margin-left: 2rem;
-    font-family: 'IntroCondBlackFree', sans-serif;
-    color: var(--brand); 
-    letter-spacing: 1px; 
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-  }
-  .feature-boxes { 
+
+  .feature-box-front,
+  .feature-box-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: var(--brand);
+    box-shadow: 0 8px 24px rgba(30, 67, 129, 0.13),
+                0 1.5px 8px rgba(30, 67, 129, 0.11);
+    color: #fff;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center; 
-    gap: 1.8rem; 
-    margin-top: 2rem; 
+    flex-direction: column;
+    justify-content: space-between;
   }
-  .feature-box { 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between; 
-    background-color: var(--brand); 
-    border-radius: 8px; 
-    padding: 1.5rem; 
-    width: 300px; 
-    height: 350px; 
-    box-shadow: 0 8px 24px rgba(30, 67, 129, 0.13), 0 1.5px 8px rgba(30, 67, 129, 0.11);
-    text-align: center; 
-    color: #fff; 
-  }
-  .feature-box p { 
-    font-family: 'IntroRegularAlt', sans-serif;
-  }
-  .feature-box img { 
-    width: auto; 
-    max-width: 100%; 
-    height: 50%; 
-    border-radius: 8px; 
-    margin-top: 1rem; 
-    margin-bottom: 10px; 
-    align-self: center;
-  }
-  .feature-box h3 { 
-    font-family: 'IntroCondBlackFree', sans-serif; 
-    letter-spacing: 2px; 
-    margin-bottom: 0.5rem; 
+
+  .feature-box-front h3 {
+    font-family: 'IntroCondBlackFree', sans-serif;
+    letter-spacing: 2px;
     font-size: 1.2rem;
   }
-  .more-button { 
-    margin-top: 2rem; 
-    padding: 0.75rem 1.5rem; 
-    background-color: var(--brand); 
-    color: #fff; 
-    border-radius: 8px; 
+
+  .feature-box-front img {
+    height: 50%;
+    object-fit: contain;
+    margin-top: 1rem;
+  }
+
+  .feature-box-back {
+    transform: rotateY(180deg);
     font-family: 'IntroRegularAlt', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    display: inline-block; 
-    text-align: center; 
-    text-decoration: none; 
-    margin-bottom: 2rem;
-    align-self: center;
+    font-size: 0.95rem;
+    line-height: 1.4rem;
+    justify-content: center;
+    text-align: center;
   }
-  .more-button:hover { 
-    background-color: var(--brand-dark); 
-  }
+}
 
-  /* Indicadores (bolinhas) - por padrão escondemos no desktop */
-  .carousel-indicators, .portfolio-indicators, .carousel-dots { display: none; }
+/* =========================
+   BOTÃO MAIS
+========================= */
 
-  /* estilos das bolinhas (usados tanto para feature quanto portfolio) */
-  .carousel-indicators span, .portfolio-indicators span, .carousel-dots span { 
-    display: block; 
-    width: 10px; 
-    height: 10px;
-    border-radius: 50%;
-    background: #ccc;
-    transition: background .3s, transform .2s; 
-  }
-  .carousel-indicators span.active, .portfolio-indicators span.active, .carousel-dots span.active {
-    background: var(--brand); transform: scale(1.1); 
-  }
+.more-button { 
+  margin-top: 2rem; 
+  padding: 0.75rem 1.5rem; 
+  background-color: var(--brand); 
+  color: #fff; 
+  border-radius: 8px; 
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none; 
+  align-self: center;
+}
 
-  /* MOBILE: transformamos em scroller horizontal */
-  @media (max-width: 768px) {
+.more-button:hover { 
+  background-color: var(--brand-dark); 
+}
 
-      /* Desativa o fade-in apenas no mobile */
+/* =========================
+   INDICADORES (DESKTOP ESCONDIDO)
+========================= */
+
+.carousel-indicators,
+.portfolio-indicators,
+.carousel-dots {
+  display: none;
+}
+
+/* =========================
+   MOBILE – MANTIDO ORIGINAL
+========================= */
+
+@media (max-width: 768px) {
+
   .js .fade-in {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
-    
-    .feature-boxes { 
-      display: flex; 
-      flex-wrap: nowrap; 
-      overflow-x: auto; 
-      overflow-y: hidden; 
-      gap: 1rem; 
-      padding: 1 1rem; 
-      max-width: 100vw; 
-      scroll-snap-type: x mandatory; 
-      -webkit-overflow-scrolling: touch; 
-      touch-action: pan-x;
-      overscroll-behavior-x: contain;
-      justify-content: flex-start; 
-      scroll-padding-left: 1rem;
-    }
 
-    .section-header {
-    flex-direction: column;       /* empilha título e descrição */
-    align-items: flex-start;      /* alinha à esquerda */
-    justify-content: flex-start;  /* evita o espaço entre */
-    margin: 0 2rem 1.5rem 0rem;   /* igual ao portfolio-header */
-    gap: 1rem;                    /* espaço entre título e parágrafo */
-      
-    }
-
-     .feature-section h1 {
-    margin-left: 0;                /* Remove deslocamento lateral */
-    margin-bottom: 0;              /* Remove espaçamento inferior extra */
-    text-align: left;
-    min-width: max-content;        /* Garante largura mínima para o título */
+  .feature-boxes { 
+    display: flex; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    gap: 1rem; 
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
   }
 
-    .feature-description {
-     text-align: left;             /* descrição alinhada à esquerda */
-     max-width: 90%;               /* não encosta na borda */
-     line-height: 1.4rem;
-    }
-    
-    .feature-box { 
-      flex: 0 0 auto; 
-      width: 300px;
-      height: 350px; 
-      scroll-snap-align: start; 
-    }
-
-    /* Indicadores do feature (aparecem no mobile) */
-    .carousel-indicators { 
-      display: flex; 
-      justify-content: center; 
-      align-self: center;
-      gap: 0.5rem; 
-      margin: 1rem 4rem 0.75rem 0rem; 
-      position: relative; 
-      z-index: 2; 
-      align-self: center;
-    }
-
-    /* Exibir indicadores do portfolio também em mobile/tablet */
-    .portfolio-indicators { 
-      display: flex; 
-      justify-content: center;
-      align-self: center;
-      gap: 0.5rem; 
-      position: relative; 
-      z-index: 2; 
-      margin: 1rem 0 0.75rem; 
-    }
-
-    /* pequenas melhorias visuais */
-    .feature-section { 
-      padding-bottom: 2rem;
-    }
+  .feature-box {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
   }
+
+  /* desativa flip no mobile */
+  .feature-box-inner,
+  .feature-box-front,
+  .feature-box-back {
+    position: static;
+    transform: none !important;
+    backface-visibility: visible;
+  }
+
+  .feature-box-front,
+  .feature-box-back {
+    background-color: var(--brand);
+    padding: 1.5rem;
+  }
+
+  .feature-box-back {
+    display: none;
+  }
+
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+}
 
   /* ==========================================
      PORTFOLIO / PROJECTS
@@ -1127,48 +1135,108 @@
     </div>
   </section>
 
-  <!-- FEATURE BOXES -->
-  <section id="features" class="feature-section fade-in">
-    <div class="section-header">
-      <h1>O que<br>fazemos</h1>
-      <p class="feature-description">
-        Oferecemos serviços de pré-impressão, criação, digital e redes sociais para dar visibilidade ao seu négocio.
-      </p>
-    </div>
-    <div class="feature-carousel">
-      <div class="feature-boxes">
-        <div class="feature-box fade-in">
-          <h3>Impressão</h3>
-          <p>Flyer, cordão para crachá, credencial, totem, caderno, camiseta, ecobag, adesivo, cartão de visitas, cartaz, convite, envelope, banner, arte finalização.</p>
-          <img src="personagem/impressão.png" alt="Serviços de Impressão" />
-        </div>
-        <div class="feature-box fade-in">
-          <h3>Criação</h3>
-          <p>Naming, slogan, style guide, criação de logo, mascote, mockup digital, layout, embalagem, vetorização, ilustração, key visual, edição, conceito visual.</p>
-          <img src="personagem/criacao.png" alt="Serviços de Criação" />
-        </div>
-        <div class="feature-box fade-in">
-          <h3>Digital</h3>
-          <p>Modelagem 3D, UI &amp; UX, Banner para site, infográfico, apresentação de slide, catálogo, landing page.</p>
-          <img src="personagem/digital.png" alt="Serviços Digitais" />
-        </div>
-        <div class="feature-box fade-in">
-          <h3>Redes Sociais</h3>
-          <p>Estático, reels, animado, carrossel</p>
-          <img src="personagem/redes.png" alt="Serviços para Redes sociais" />
+ <section id="features" class="feature-section fade-in">
+
+  <div class="section-header">
+    <h1>O que<br>fazemos</h1>
+    <p class="feature-description">
+      Oferecemos serviços de pré-impressão, criação, digital e redes sociais para dar visibilidade ao seu negócio.
+    </p>
+  </div>
+
+  <div class="feature-carousel">
+    <div class="feature-boxes">
+
+      <!-- IMPRESSÃO -->
+      <div class="feature-box flip fade-in">
+        <div class="feature-box-inner">
+
+          <div class="feature-box-front">
+            <h3>Impressão</h3>
+            <img src="personagem/impressão.png" alt="Serviços de Impressão">
+          </div>
+
+          <div class="feature-box-back">
+            <p>
+              Flyer, cordão para crachá, credencial, totem, caderno, camiseta,
+              ecobag, adesivo, cartão de visitas, cartaz, convite, envelope,
+              banner, arte finalização.
+            </p>
+          </div>
+
         </div>
       </div>
 
-      <!-- Indicadores (bolinhas do carrossel de features) -->
-      <div class="carousel-indicators" aria-hidden="true">
-        <span class="active"></span>
-        <span></span>
-        <span></span>
-        <span></span>
+      <!-- CRIAÇÃO -->
+      <div class="feature-box flip fade-in">
+        <div class="feature-box-inner">
+
+          <div class="feature-box-front">
+            <h3>Criação</h3>
+            <img src="personagem/criacao.png" alt="Serviços de Criação">
+          </div>
+
+          <div class="feature-box-back">
+            <p>
+              Naming, slogan, style guide, criação de logo, mascote, mockup
+              digital, layout, embalagem, vetorização, ilustração, key visual,
+              edição, conceito visual.
+            </p>
+          </div>
+
+        </div>
       </div>
+
+      <!-- DIGITAL -->
+      <div class="feature-box flip fade-in">
+        <div class="feature-box-inner">
+
+          <div class="feature-box-front">
+            <h3>Digital</h3>
+            <img src="personagem/digital.png" alt="Serviços Digitais">
+          </div>
+
+          <div class="feature-box-back">
+            <p>
+              Modelagem 3D, UI & UX, banner para site, infográfico,
+              apresentação de slide, catálogo, landing page.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- REDES -->
+      <div class="feature-box flip fade-in">
+        <div class="feature-box-inner">
+
+          <div class="feature-box-front">
+            <h3>Redes Sociais</h3>
+            <img src="personagem/redes.png" alt="Serviços para Redes Sociais">
+          </div>
+
+          <div class="feature-box-back">
+            <p>
+              Conteúdo estático, reels, animado e carrossel.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
     </div>
-    <a href="#produtos" class="more-button">Mais</a>
-  </section>
+
+    <div class="carousel-indicators">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <a href="#produtos" class="more-button">Mais</a>
+
+</section>
 
   <!-- PORTFOLIO -->
   <div class="portfolio-header">
