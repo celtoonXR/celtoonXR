@@ -619,7 +619,74 @@
   .carousel-indicators span.active {
     background: var(--brand);
   }
+
+
+/* =========================
+   PATCH FINAL – MOBILE
+   (imagem, texto e bolinhas)
+========================= */
+@media (max-width: 768px) {
+
+  /* 1) garante que o card não deixe nada "vazar" */
+  .feature-box {
+    overflow: hidden;
+  }
+
+  /* 2) limita a imagem dentro da box (sem estourar) */
+  .feature-box-front img {
+    height: auto;         /* remove a lógica do "50%" aqui */
+    max-height: 160px;    /* ajuste fino: 140–180 costuma ficar ótimo */
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0.75rem auto 0;
+  }
+
+  /* 3) No mobile, o verso vira texto normal (igual ao original) */
+  .feature-box-inner {
+    position: static;     /* tira qualquer “efeito colateral” do desktop */
+    height: auto;
+    transform: none !important;
+  }
+
+  .feature-box-front,
+  .feature-box-back {
+    position: static;     /* desfaz o absolute do desktop */
+    inset: auto;
+    backface-visibility: visible;
+    transform: none !important;
+    box-shadow: none;     /* quem dá sombra é a feature-box (original) */
+    background: transparent;
+    padding: 0;
+  }
+
+  /* Frente: só título + imagem (bem como antes) */
+  .feature-box-front {
+    display: block;
+  }
+
+  /* Verso: aparece como o parágrafo original */
+  .feature-box-back {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .feature-box-back p {
+    display: block;
+    margin: 0;
+    font-family: 'IntroRegularAlt', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.3rem;
+  }
+
+  /* 4) Centraliza as bolinhas de verdade */
+  .carousel-indicators {
+    width: 100%;
+    justify-content: center;
+    margin: 1rem auto 0.75rem;
+  }
 }
+
 
 
   /* ==========================================
