@@ -558,6 +558,12 @@
     transition: none !important;
   }
 
+  .feature-section {
+    padding-left: 0;
+    padding-right: 0;
+    align-items: center; /* Centraliza os filhos por padrão */
+  }
+
   .feature-boxes { 
     margin-top: 0.75rem;
     display: flex; 
@@ -615,11 +621,13 @@
   }
 
   .carousel-indicators span {
-    width: 8px;
-    height: 8px;
+    flex: 0 0 auto;          /* Impede que as bolinhas estiquem ou encolham */
+    width: 10px;             /* Aumentei um pouco para facilitar o toque */
+    height: 10px;
     background: rgba(31, 67, 129, 0.3);
     border-radius: 50%;
-    display: block;
+    margin: 0 5px;           /* Espaçamento individual entre as bolinhas */
+    
   }
 
   .carousel-indicators span.active {
