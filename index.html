@@ -394,7 +394,7 @@
 }
 
 /* =========================
-   FEATURE BOXES
+   FEATURE BOXES – BASE (MOBILE FIRST)
 ========================= */
 
 .feature-boxes { 
@@ -406,20 +406,53 @@
 }
 
 .feature-box { 
-  width: 300px; 
-  height: 350px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--brand);
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 300px;
+  height: 350px;
+  box-shadow: 0 8px 24px rgba(30, 67, 129, 0.13),
+              0 1.5px 8px rgba(30, 67, 129, 0.11);
   text-align: center;
+  color: #fff;
+}
+
+.feature-box h3 {
+  font-family: 'IntroCondBlackFree', sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature-box img {
+  width: auto;
+  max-width: 100%;
+  height: 50%;
+  border-radius: 8px;
+  margin-top: 1rem;
+  align-self: center;
+}
+
+.feature-box p {
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.3rem;
 }
 
 /* =========================
-   FLIP CARD – DESKTOP
-========================= */
-
-/* =========================
-   FLIP CARD – DESKTOP ONLY
+   FLIP – DESKTOP ONLY
 ========================= */
 
 @media (min-width: 769px) {
+
+  .feature-box {
+    background: none;
+    padding: 0;
+    box-shadow: none;
+  }
 
   .feature-box.flip {
     perspective: 1200px;
@@ -459,10 +492,8 @@
   }
 
   .feature-box-front h3 {
-    font-family: 'IntroCondBlackFree', sans-serif;
     font-size: 1.6rem;
     letter-spacing: 3px;
-    text-align: center;
   }
 
   .feature-box-front img {
@@ -474,10 +505,12 @@
   .feature-box-back {
     transform: rotateY(180deg);
     justify-content: center;
-    font-family: 'IntroRegularAlt', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.4rem;
     text-align: center;
+  }
+
+  /* texto só no verso no desktop */
+  .feature-box-front p {
+    display: none;
   }
 }
 
@@ -486,7 +519,7 @@
 ========================= */
 
 .more-button { 
-  margin-top: 2rem; 
+  remember: 2rem; 
   padding: 0.75rem 1.5rem; 
   background-color: var(--brand); 
   color: #fff; 
@@ -503,7 +536,7 @@
 }
 
 /* =========================
-   INDICADORES (DESKTOP)
+   INDICADORES – DESKTOP
 ========================= */
 
 .carousel-indicators,
@@ -513,8 +546,9 @@
 }
 
 /* =========================
-   MOBILE – MANTIDO ORIGINAL
+   MOBILE – ORIGINAL (INALTERADO)
 ========================= */
+
 @media (max-width: 768px) {
 
   .js .fade-in {
@@ -522,14 +556,14 @@
     transform: none !important;
     transition: none !important;
   }
-    
+
   .feature-boxes { 
     display: flex; 
     flex-wrap: nowrap; 
     overflow-x: auto; 
     overflow-y: hidden; 
     gap: 1rem; 
-    padding: 1 1rem; 
+    padding: 1rem; 
     max-width: 100vw; 
     scroll-snap-type: x mandatory; 
     -webkit-overflow-scrolling: touch; 
@@ -559,7 +593,7 @@
     max-width: 90%;
     line-height: 1.4rem;
   }
-    
+
   .feature-box { 
     flex: 0 0 auto; 
     width: 300px;
@@ -570,11 +604,8 @@
   .carousel-indicators { 
     display: flex; 
     justify-content: center; 
-    align-self: center;
     gap: 0.5rem; 
-    margin: 1rem 4rem 0.75rem 0rem; 
-    position: relative; 
-    z-index: 2; 
+    margin: 1rem auto 0.75rem; 
   }
 
   .carousel-indicators span {
@@ -588,7 +619,6 @@
   .carousel-indicators span.active {
     background: var(--brand);
   }
-
 }
 
 
