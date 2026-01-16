@@ -393,6 +393,10 @@
   font-size: 2rem;
 }
 
+/* =========================
+   FEATURE BOXES
+========================= */
+
 .feature-boxes { 
   display: flex;
   flex-wrap: wrap;
@@ -401,10 +405,6 @@
   margin-top: 2rem; 
 }
 
-/* =========================
-   FEATURE BOX (BASE)
-========================= */
-
 .feature-box { 
   width: 300px; 
   height: 350px; 
@@ -412,7 +412,7 @@
 }
 
 /* =========================
-   FLIP CARD – DESKTOP ONLY
+   FLIP CARD – DESKTOP
 ========================= */
 
 @media (min-width: 769px) {
@@ -446,20 +446,31 @@
     color: #fff;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+  }
+
+  /* ===== FRENTE ===== */
+
+  .feature-box-front {
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
   }
 
   .feature-box-front h3 {
     font-family: 'IntroCondBlackFree', sans-serif;
-    letter-spacing: 2px;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    text-align: center;
+    margin: 0;
   }
 
   .feature-box-front img {
-    height: 50%;
+    height: 65%;
+    max-width: 90%;
     object-fit: contain;
-    margin-top: 1rem;
   }
+
+  /* ===== VERSO ===== */
 
   .feature-box-back {
     transform: rotateY(180deg);
@@ -493,7 +504,7 @@
 }
 
 /* =========================
-   INDICADORES (DESKTOP ESCONDIDO)
+   INDICADORES (DESKTOP)
 ========================= */
 
 .carousel-indicators,
@@ -519,12 +530,19 @@
     flex-wrap: nowrap; 
     overflow-x: auto; 
     gap: 1rem; 
+    padding: 1rem;
+    max-width: 100vw;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    justify-content: flex-start;
   }
 
   .feature-box {
     flex: 0 0 auto;
+    width: 300px;
+    height: 350px;
     scroll-snap-align: start;
   }
 
@@ -547,11 +565,14 @@
     display: none;
   }
 
-  .carousel-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
+  /* indicadores visíveis no mobile */
+  .carousel-indicators { 
+    display: flex; 
+    justify-content: center; 
+    gap: 0.5rem; 
+    margin: 1rem auto 0.75rem;
+    position: relative;
+    z-index: 2;
   }
 }
 
