@@ -351,184 +351,139 @@
   }
 
 /* =========================
-   FEATURE SECTION
+   VARIÁVEIS E BASE
 ========================= */
+:root {
+  --brand: #1e4381;
+  --brand-dark: #153260;
+  --text: #333;
+}
 
 .feature-section { 
   min-height: 90vh; 
-  padding: 2rem; 
+  padding: 4rem 0; /* Padding vertical apenas */
   display: flex; 
   flex-direction: column; 
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center; /* Centraliza os filhos horizontalmente */
   position: relative;
+  overflow-x: hidden;
 }
 
+/* =========================
+   HEADER DA SEÇÃO
+========================= */
 .section-header {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  max-width: 1200px;
   gap: 1.5rem;
-  margin: 0 0 2rem 0;
+  margin: 0 0 3rem 0;
+  padding: 0 2rem; /* Padding lateral aqui para alinhar com o conteúdo */
+  box-sizing: border-box;
+}
+
+.feature-section h1 { 
+  font-family: 'IntroCondBlackFree', sans-serif;
+  color: var(--brand); 
+  letter-spacing: 1px; 
+  font-size: 2.5rem;
+  margin: 0;
 }
 
 .feature-description {
   font-family: 'IntroRegularAlt', sans-serif;
-  text-align: left;
   font-size: 1rem;
-  max-width: 400px;
+  max-width: 450px;
   color: var(--text);
-  max-height: 4rem;
-  overflow: hidden;
-}
-
-.feature-section h1 { 
-  text-align: left;
-  margin-left: 2rem;
-  font-family: 'IntroCondBlackFree', sans-serif;
-  color: var(--brand); 
-  letter-spacing: 1px; 
-  margin-bottom: 0.5rem;
-  font-size: 2rem;
+  line-height: 1.4;
 }
 
 /* =========================
-   FEATURE BOXES – BASE (MOBILE FIRST)
+   CARDS CONTAINER (DESKTOP)
 ========================= */
-
 .feature-boxes { 
   display: flex;
   flex-wrap: wrap;
   justify-content: center; 
-  gap: 1.8rem; 
-  margin-top: 2rem; 
+  gap: 2rem; 
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 1rem;
 }
 
 .feature-box { 
+  width: 300px;
+  height: 380px;
+  perspective: 1200px; /* Necessário para o efeito flip */
+}
+
+.feature-box-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Hover do Flip (Apenas Desktop) */
+@media (min-width: 769px) {
+  .feature-box:hover .feature-box-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.feature-box-front,
+.feature-box-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  padding: 2rem;
+  background-color: var(--brand);
+  color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: var(--brand);
-  border-radius: 8px;
-  padding: 1.5rem;
-  width: 300px;
-  height: 350px;
-  box-shadow: 0 8px 24px rgba(30, 67, 129, 0.13),
-              0 1.5px 8px rgba(30, 67, 129, 0.11);
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  color: #fff;
+  box-shadow: 0 10px 30px rgba(30, 67, 129, 0.15);
+}
+
+.feature-box-back {
+  transform: rotateY(180deg);
 }
 
 .feature-box h3 {
   font-family: 'IntroCondBlackFree', sans-serif;
-  letter-spacing: 2px;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
 }
 
 .feature-box img {
-  width: auto;
-  max-width: 100%;
-  height: 50%;
-  border-radius: 8px;
-  margin-top: 1rem;
-  align-self: center;
-}
-
-.feature-box p {
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.3rem;
+  max-width: 80%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 1rem;
 }
 
 /* =========================
-   FLIP – DESKTOP ONLY
+   INDICADORES E BOTÃO
 ========================= */
-
-@media (min-width: 769px) {
-
-  .feature-box {
-    background: none;
-    padding: 0;
-    box-shadow: none;
-  }
-
-  .feature-box.flip {
-    perspective: 1200px;
-  }
-
-  .feature-box-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
-  }
-
-  .feature-box.flip:hover .feature-box-inner {
-    transform: rotateY(180deg);
-  }
-
-  .feature-box-front,
-  .feature-box-back {
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    border-radius: 8px;
-    padding: 1.5rem;
-    background-color: var(--brand);
-    box-shadow: 0 8px 24px rgba(30, 67, 129, 0.13),
-                0 1.5px 8px rgba(30, 67, 129, 0.11);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .feature-box-front {
-    justify-content: center;
-    align-items: center;
-    gap: 1.2rem;
-  }
-
-  .feature-box-front h3 {
-    font-size: 1.6rem;
-    letter-spacing: 3px;
-  }
-
-  .feature-box-front img {
-    height: 65%;
-    max-width: 90%;
-    object-fit: contain;
-  }
-
-  .feature-box-back {
-    transform: rotateY(180deg);
-    justify-content: center;
-    text-align: center;
-  }
-
-  /* texto só no verso no desktop */
-  .feature-box-front p {
-    display: none;
-  }
+.carousel-indicators {
+  display: none; /* Escondido no desktop */
 }
-
-/* =========================
-   BOTÃO MAIS
-========================= */
 
 .more-button { 
-  margin-top: 2rem; 
-  padding: 0.75rem 1.5rem; 
+  margin-top: 3rem; 
+  padding: 0.8rem 2rem; 
   background-color: var(--brand); 
   color: #fff; 
   border-radius: 8px; 
   font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 1rem;
-  cursor: pointer;
   text-decoration: none; 
-  align-self: center;
+  transition: background 0.3s;
 }
 
 .more-button:hover { 
@@ -536,156 +491,103 @@
 }
 
 /* =========================
-   INDICADORES – DESKTOP
+   VERSÃO MOBILE (REVISADA)
 ========================= */
-
-.carousel-indicators,
-.portfolio-indicators,
-.carousel-dots {
-  display: none;
-}
-
-/* =========================
-   MOBILE – ORIGINAL (INALTERADO)
-========================= */
-
 @media (max-width: 768px) {
-
-  .js .fade-in {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  .feature-boxes { 
-    margin-top: 0.75rem;
-    display: flex; 
-    flex-wrap: nowrap; 
-    overflow-x: auto; 
-    overflow-y: hidden; 
-    gap: 1rem; 
-    padding: 1rem; 
-    max-width: 100vw; 
-    scroll-snap-type: x mandatory; 
-    -webkit-overflow-scrolling: touch; 
-    touch-action: pan-x;
-    overscroll-behavior-x: contain;
-    justify-content: flex-start; 
-    scroll-padding-left: 1rem;
+  
+  .feature-section {
+    padding: 2rem 0;
   }
 
   .section-header {
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
-    margin: 0 2rem 1.5rem 0rem;
-    gap: 1rem;
+    padding: 0 1.5rem;
+    gap: 0.5rem;
   }
 
   .feature-section h1 {
-    margin-left: 0;
-    margin-bottom: 0;
-    text-align: left;
-    min-width: max-content;
+    font-size: 2rem;
   }
 
-  .feature-description {
-    text-align: left;
-    max-width: 90%;
-    line-height: 1.4rem;
+  /* Revisão de Overflow e Scroll */
+  .feature-boxes { 
+    display: flex; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    -webkit-overflow-scrolling: touch;
+    padding: 1rem 1.5rem 2rem; /* Padding lateral para o primeiro card não colar na borda */
+    gap: 1.2rem;
+    justify-content: flex-start;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .feature-boxes::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
   }
 
   .feature-box { 
-    flex: 0 0 auto; 
-    width: 300px;
-    height: 350px; 
-    scroll-snap-align: start; 
+    flex: 0 0 280px; /* Largura fixa do card no mobile */
+    scroll-snap-align: center; /* Card para no centro ao scrollar */
+    height: 400px;
   }
 
-  .carousel-indicators { 
-    width: 100%;
-    display: flex; 
-    justify-content: center; 
-    gap: 0.5rem; 
-    margin: 1rem auto 0.75rem; 
-    position: relative; 
-    z-index: 2; 
-  }
-
-  .carousel-indicators span {
-    width: 8px;
-    height: 8px;
-    background: rgba(31, 67, 129, 0.3);
-    border-radius: 50%;
-    display: block;
-  }
-
-  .carousel-indicators span.active {
-    background: var(--brand);
-  }
-} 
-
-/* =========================
-   PATCH FINAL – MOBILE
-   (imagem, texto e bolinhas)
-========================= */
-@media (max-width: 768px) {
-
-  /* 1) garante que o card não deixe nada "vazar" */
-  .feature-box {
-    overflow: hidden;
-  }
-
-  /* 2) limita a imagem dentro da box (sem estourar) */
-  .feature-box-front img {
-    height: auto;         /* remove a lógica do "50%" aqui */
-    max-height: 160px;    /* ajuste fino: 140–180 costuma ficar ótimo */
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    margin: 0.75rem auto 0;
-  }
-
-  /* 3) No mobile, o verso vira texto normal (igual ao original) */
+  /* Desativar Flip no Mobile e empilhar conteúdo */
   .feature-box-inner {
-    position: static;     /* tira qualquer “efeito colateral” do desktop */
-    height: auto;
     transform: none !important;
+    perspective: none;
   }
 
   .feature-box-front,
   .feature-box-back {
-    position: static;     /* desfaz o absolute do desktop */
+    position: relative;
     inset: auto;
     backface-visibility: visible;
     transform: none !important;
-    box-shadow: none;     /* quem dá sombra é a feature-box (original) */
-    background: transparent;
-    padding: 0;
+    height: auto;
+    width: 100%;
+    padding: 1rem;
+    box-shadow: none;
   }
 
-  /* Frente: só título + imagem (bem como antes) */
   .feature-box-front {
-    display: block;
+    height: 60%;
   }
-
-  /* Verso: aparece como o parágrafo original */
+  
   .feature-box-back {
-    display: block;
-    margin-top: 0.5rem;
+    height: 40%;
+    padding-top: 0;
   }
 
-  .feature-box-back p {
-    display: block;
-    margin: 0;
-    font-family: 'IntroRegularAlt', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.3rem;
+  .feature-box-front img {
+    height: 120px;
   }
 
-} 
+  /* Indicadores Centralizados */
+  .carousel-indicators { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    gap: 0.8rem; 
+    width: 100%; /* Agora ocupa a tela toda */
+    margin: 0 auto;
+    padding: 1rem 0;
+  }
 
+  .carousel-indicators span {
+    width: 10px;
+    height: 10px;
+    background: rgba(31, 67, 129, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
 
+  .carousel-indicators span.active {
+    background: var(--brand);
+    transform: scale(1.2);
+  }
+}
   /* ==========================================
      PORTFOLIO / PROJECTS
      ========================================== */
