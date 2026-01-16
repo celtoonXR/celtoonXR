@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -351,171 +352,341 @@
   }
 
 /* =========================
-   FEATURE SECTION (PAI)
+   FEATURE SECTION
 ========================= */
+
 .feature-section { 
   min-height: 90vh; 
-  padding: 4rem 0;
+  padding: 2rem; 
   display: flex; 
   flex-direction: column; 
-  align-items: center; 
+  justify-content: center;
+  align-items: flex-start;
   position: relative;
-  width: 100%;
-  overflow-x: hidden; /* Evita scroll horizontal na página toda */
 }
 
-/* =========================
-   HEADER
-========================= */
 .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
-  max-width: 1280px; /* Aumentado para comportar as 4 boxes */
-  padding: 0 2rem;
-  margin-bottom: 3rem;
-  box-sizing: border-box;
+  gap: 1.5rem;
+  margin: 0 0 2rem 0;
+}
+
+.feature-description {
+  font-family: 'IntroRegularAlt', sans-serif;
+  text-align: left;
+  font-size: 1rem;
+  max-width: 400px;
+  color: var(--text);
+  max-height: 4rem;
+  overflow: hidden;
+}
+
+.feature-section h1 { 
+  text-align: left;
+  margin-left: 2rem;
+  font-family: 'IntroCondBlackFree', sans-serif;
+  color: var(--brand); 
+  letter-spacing: 1px; 
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
 }
 
 /* =========================
-   FEATURE BOXES – DESKTOP (GRID 4 COLUNAS)
+   FEATURE BOXES – BASE (MOBILE FIRST)
 ========================= */
+
 .feature-boxes { 
-  display: grid;
-  /* Garante 4 colunas iguais sem quebrar */
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 1.5rem; 
-  width: 100%;
-  max-width: 1280px;
-  padding: 0 2rem;
-  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 1.8rem; 
+  margin-top: 2rem; 
 }
 
 .feature-box { 
-  width: 100%; /* Ocupa o espaço da coluna do grid */
-  height: 380px;
-  perspective: 1200px;
-}
-
-.feature-box-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-
-.feature-box:hover .feature-box-inner {
-  transform: rotateY(180deg);
-}
-
-.feature-box-front,
-.feature-box-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  border-radius: 12px;
-  padding: 1.5rem;
-  background-color: var(--brand);
-  color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  background-color: var(--brand);
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 300px;
+  height: 350px;
+  box-shadow: 0 8px 24px rgba(30, 67, 129, 0.13),
+              0 1.5px 8px rgba(30, 67, 129, 0.11);
   text-align: center;
+  color: #fff;
 }
 
-.feature-box-back {
-  transform: rotateY(180deg);
+.feature-box h3 {
+  font-family: 'IntroCondBlackFree', sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .feature-box img {
-  max-width: 90%;
-  height: 140px;
-  object-fit: contain;
-  margin-bottom: 1rem;
+  width: auto;
+  max-width: 100%;
+  height: 50%;
+  border-radius: 8px;
+  margin-top: 1rem;
+  align-self: center;
+}
+
+.feature-box p {
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.3rem;
 }
 
 /* =========================
-   MOBILE – REVISÃO TOTAL
+   FLIP – DESKTOP ONLY
 ========================= */
-@media (max-width: 1024px) {
-  /* No tablet, já começa a permitir scroll ou vira 2x2 */
-  .feature-boxes {
-    grid-template-columns: repeat(2, 1fr);
+
+@media (min-width: 769px) {
+
+  .feature-box {
+    background: none;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .feature-box.flip {
+    perspective: 1200px;
+  }
+
+  .feature-box-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+  }
+
+  .feature-box.flip:hover .feature-box-inner {
+    transform: rotateY(180deg);
+  }
+
+  .feature-box-front,
+  .feature-box-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: var(--brand);
+    box-shadow: 0 8px 24px rgba(30, 67, 129, 0.13),
+                0 1.5px 8px rgba(30, 67, 129, 0.11);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-box-front {
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .feature-box-front h3 {
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+  }
+
+  .feature-box-front img {
+    height: 65%;
+    max-width: 90%;
+    object-fit: contain;
+  }
+
+  .feature-box-back {
+    transform: rotateY(180deg);
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* texto só no verso no desktop */
+  .feature-box-front p {
+    display: none;
   }
 }
 
+/* =========================
+   BOTÃO MAIS
+========================= */
+
+.more-button { 
+  margin-top: 2rem; 
+  padding: 0.75rem 1.5rem; 
+  background-color: var(--brand); 
+  color: #fff; 
+  border-radius: 8px; 
+  font-family: 'IntroRegularAlt', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none; 
+  align-self: center;
+}
+
+.more-button:hover { 
+  background-color: var(--brand-dark); 
+}
+
+/* =========================
+   INDICADORES – DESKTOP
+========================= */
+
+.carousel-indicators,
+.portfolio-indicators,
+.carousel-dots {
+  display: none;
+}
+
+/* =========================
+   MOBILE – ORIGINAL (INALTERADO)
+========================= */
+
 @media (max-width: 768px) {
-  .feature-section {
-    padding: 2rem 0;
+
+  .js .fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .feature-boxes { 
+    margin-top: 0.75rem;
+    display: flex; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    overflow-y: hidden; 
+    gap: 1rem; 
+    padding: 1rem; 
+    max-width: 100vw; 
+    scroll-snap-type: x mandatory; 
+    -webkit-overflow-scrolling: touch; 
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    justify-content: flex-start; 
+    scroll-padding-left: 1rem;
   }
 
   .section-header {
-    padding: 0 1.5rem;
-  }
-
-  /* Transformando Grid em Flex Carrossel */
-  .feature-boxes { 
-    display: flex; 
-    grid-template-columns: none; /* Desativa o grid */
-    flex-wrap: nowrap; 
-    overflow-x: auto; 
-    scroll-snap-type: x mandatory; 
-    -webkit-overflow-scrolling: touch;
-    padding: 1rem 1.5rem 3rem; /* Espaço para as bolinhas abaixo */
-    gap: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: flex-start;
-    scrollbar-width: none;
+    margin: 0 2rem 1.5rem 0rem;
+    gap: 1rem;
   }
 
-  .feature-boxes::-webkit-scrollbar {
-    display: none;
+  .feature-section h1 {
+    margin-left: 0;
+    margin-bottom: 0;
+    text-align: left;
+    min-width: max-content;
+  }
+
+  .feature-description {
+    text-align: left;
+    max-width: 90%;
+    line-height: 1.4rem;
   }
 
   .feature-box { 
-    flex: 0 0 85%; /* Card ocupa 85% da tela para mostrar o próximo */
-    scroll-snap-align: center; /* Centraliza o card ao soltar o dedo */
-    height: 420px;
+    flex: 0 0 auto; 
+    width: 300px;
+    height: 350px; 
+    scroll-snap-align: start; 
   }
 
-  /* Desativa o Flip no Mobile para o conteúdo ficar visível */
-  .feature-box-inner { transform: none !important; }
-  .feature-box-front, .feature-box-back {
-    position: relative;
-    inset: auto;
-    backface-visibility: visible;
-    height: auto;
-    background: transparent;
-    padding: 0;
-  }
-  
-  .feature-box {
-    background-color: var(--brand);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  /* Indicadores Centralizados */
   .carousel-indicators { 
+    width: 100%;
     display: flex; 
     justify-content: center; 
-    width: 100%;
-    gap: 0.8rem;
-    margin-top: -1rem; /* Aproxima dos cards */
+    gap: 0.5rem; 
+    margin: 1rem auto 0.75rem; 
+    position: relative; 
+    z-index: 2; 
   }
 
   .carousel-indicators span {
-    width: 10px;
-    height: 10px;
-    background: rgba(31, 67, 129, 0.2);
+    width: 8px;
+    height: 8px;
+    background: rgba(31, 67, 129, 0.3);
     border-radius: 50%;
+    display: block;
   }
 
   .carousel-indicators span.active {
     background: var(--brand);
   }
-}
+} 
+
+/* =========================
+   PATCH FINAL – MOBILE
+   (imagem, texto e bolinhas)
+========================= */
+@media (max-width: 768px) {
+
+  /* 1) garante que o card não deixe nada "vazar" */
+  .feature-box {
+    overflow: hidden;
+  }
+
+  /* 2) limita a imagem dentro da box (sem estourar) */
+  .feature-box-front img {
+    height: auto;         /* remove a lógica do "50%" aqui */
+    max-height: 160px;    /* ajuste fino: 140–180 costuma ficar ótimo */
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0.75rem auto 0;
+  }
+
+  /* 3) No mobile, o verso vira texto normal (igual ao original) */
+  .feature-box-inner {
+    position: static;     /* tira qualquer “efeito colateral” do desktop */
+    height: auto;
+    transform: none !important;
+  }
+
+  .feature-box-front,
+  .feature-box-back {
+    position: static;     /* desfaz o absolute do desktop */
+    inset: auto;
+    backface-visibility: visible;
+    transform: none !important;
+    box-shadow: none;     /* quem dá sombra é a feature-box (original) */
+    background: transparent;
+    padding: 0;
+  }
+
+  /* Frente: só título + imagem (bem como antes) */
+  .feature-box-front {
+    display: block;
+  }
+
+  /* Verso: aparece como o parágrafo original */
+  .feature-box-back {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .feature-box-back p {
+    display: block;
+    margin: 0;
+    font-family: 'IntroRegularAlt', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.3rem;
+  }
+
+} 
+
+
   /* ==========================================
      PORTFOLIO / PROJECTS
      ========================================== */
