@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Planta Baixa LiDAR GLB | Celtoon</title>
+  <meta name="description" content="Ferramenta web para transformar modelos GLB de escaneamento LiDAR em plantas baixas 2D com corte horizontal, limpeza de nuvem de pontos, medidas e exportação SVG, PNG e DXF.">
+  <meta name="keywords" content="planta baixa lidar, glb para planta baixa, floor plan ai, matterport, iguide, escaneamento 3d, nuvem de pontos">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gerador de Planta Baixa LiDAR GLB | Celtoon">
+  <meta property="og:description" content="Suba um GLB escaneado por LiDAR e gere uma planta baixa profissional com paredes limpas, ambientes, medidas e arquivos exportáveis.">
+  <meta property="og:url" content="https://celtoon.com.br/floorplan.html">
+  <link rel="canonical" href="https://celtoon.com.br/floorplan.html">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    @font-face {
+      font-family: 'IntroCondBlackFree';
+      src: url('IntroCondBlackFree.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'IntroRegularAlt';
+      src: url('IntroRegularAlt.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --brand: #1F4381;
+      --brand-dark: #16315f;
+      --ink: #172033;
+      --muted: #61708a;
+      --paper: #ffffff;
+      --panel: #f4f7fb;
+      --line: #d9e1ee;
+      --accent: #ffb000;
+      --ok: #22a06b;
+      --danger: #d64545;
+      --wall: #161b24;
+      --glass: rgba(255, 255, 255, 0.86);
+      --shadow: 0 24px 60px rgba(18, 38, 73, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; overflow-x: hidden; }
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(31, 67, 129, 0.18), transparent 34rem),
+        linear-gradient(135deg, #eef3fb 0%, #f8fafc 45%, #e9eef6 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--brand);
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.14);
+    }
+    .logo img { height: 40px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; position: relative; }
+    .nav-links a { color: #fff; font-family: 'IntroCondBlackFree', sans-serif; letter-spacing: 0.03em; }
+    .dropdown { position: relative; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--brand);
+      min-width: 210px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+    }
+    .dropdown-content a { display: block; padding: 0.85rem 1rem; }
+    .dropdown-content a:hover { background: var(--brand-dark); }
+    .dropdown:hover .dropdown-content { display: block; }
+    .menu-toggle { display: none; font-size: 2rem; background: none; border: 0; color: #fff; cursor: pointer; }
+
+    .hero {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+      gap: 2rem;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid rgba(31,67,129,0.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.68);
+      color: var(--brand);
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 1.1rem;
+    }
+    h1 {
+      font-family: 'IntroCondBlackFree', Impact, sans-serif;
+      font-size: clamp(2.6rem, 7vw, 5.8rem);
+      line-height: 0.9;
+      color: var(--brand-dark);
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+    }
+    .hero p { color: var(--muted); font-size: 1.1rem; line-height: 1.65; max-width: 680px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.6rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border: 0;
+      border-radius: 14px;
+      padding: 0.9rem 1.15rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary { background: var(--brand); color: #fff; box-shadow: 0 14px 28px rgba(31,67,129,0.26); }
+    .btn.secondary { background: #fff; color: var(--brand); border: 1px solid var(--line); }
+    .btn.ghost { background: transparent; color: var(--brand); border: 1px solid rgba(31,67,129,0.26); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+    .research-card {
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.78);
+      border-radius: 28px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .research-card h2 { font-family: 'IntroRegularAlt', Arial, sans-serif; color: var(--brand-dark); margin-bottom: 0.8rem; }
+    .research-list { display: grid; gap: 0.75rem; list-style: none; }
+    .research-list li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      padding: 0.78rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid rgba(31,67,129,0.08);
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .research-list strong { color: var(--ink); }
+    .badge-icon {
+      width: 34px;
+      height: 34px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(31,67,129,0.1);
+      color: var(--brand);
+      font-weight: 900;
+    }
+
+    .app-shell {
+      max-width: 1440px;
+      margin: 0 auto 4rem;
+      padding: 1rem 1.5rem 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+      gap: 1.25rem;
+    }
+    .panel, .stage {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(217,225,238,0.9);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+    .panel { padding: 1.2rem; align-self: start; position: sticky; top: 88px; }
+    .panel h2, .stage h2 { font-family: 'IntroRegularAlt', Arial, sans-serif; color: var(--brand-dark); }
+    .dropzone {
+      margin: 1rem 0;
+      border: 2px dashed rgba(31,67,129,0.36);
+      border-radius: 22px;
+      padding: 1.2rem;
+      text-align: center;
+      background: linear-gradient(160deg, rgba(31,67,129,0.08), rgba(255,176,0,0.08));
+      cursor: pointer;
+      transition: border 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    }
+    .dropzone.dragover { border-color: var(--accent); transform: scale(1.01); background: rgba(255,176,0,0.12); }
+    .dropzone input { display: none; }
+    .dropzone strong { display: block; margin-bottom: 0.35rem; color: var(--brand-dark); }
+    .dropzone span { color: var(--muted); font-size: 0.92rem; }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 42px;
+      padding: 0.75rem;
+      border-radius: 14px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1rem;
+    }
+    .status.ok { color: #0f6b47; background: rgba(34,160,107,0.1); }
+    .status.error { color: var(--danger); background: rgba(214,69,69,0.1); }
+    .loader {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(31,67,129,0.16);
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      display: none;
+    }
+    .status.loading .loader { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .control-group { border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 1rem; }
+    .control-group:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+    .control-group h3 { font-size: 0.92rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.85rem; }
+    .field { display: grid; gap: 0.45rem; margin-bottom: 0.9rem; }
+    .field label { display: flex; justify-content: space-between; gap: 1rem; font-weight: 700; color: var(--ink); }
+    .field label span { color: var(--brand); font-weight: 800; }
+    .field input[type="range"] { width: 100%; accent-color: var(--brand); }
+    .field select, .field input[type="number"] {
+      width: 100%;
+      padding: 0.74rem 0.8rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+    }
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 0.7rem 0; color: var(--muted); }
+    .toggle-row input { width: 18px; height: 18px; accent-color: var(--brand); }
+    .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 1rem; }
+    .button-grid .btn { padding: 0.78rem 0.7rem; font-size: 0.9rem; }
+
+    .stage { overflow: hidden; min-height: 720px; display: grid; grid-template-rows: auto auto minmax(480px, 1fr); }
+    .stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.15rem 1.25rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .stage-header p { color: var(--muted); margin-top: 0.25rem; line-height: 1.45; }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--line);
+      background: #f8fafd;
+    }
+    .metric {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 0.8rem;
+    }
+    .metric small { display: block; color: var(--muted); margin-bottom: 0.3rem; }
+    .metric strong { color: var(--brand-dark); font-size: 1.15rem; }
+    .canvas-wrap {
+      position: relative;
+      min-height: 560px;
+      background:
+        linear-gradient(rgba(31,67,129,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31,67,129,0.045) 1px, transparent 1px),
+        #fff;
+      background-size: 24px 24px;
+      overflow: auto;
+    }
+    #floorSvg { display: block; width: 100%; height: 100%; min-height: 560px; }
+    .empty-state {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      pointer-events: none;
+    }
+    .empty-card {
+      max-width: 560px;
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 20px 50px rgba(18,38,73,0.1);
+    }
+    .empty-card h3 { font-family: 'IntroRegularAlt', Arial, sans-serif; color: var(--brand-dark); margin-bottom: 0.6rem; }
+    .empty-card p { color: var(--muted); line-height: 1.6; }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      position: absolute;
+      left: 1rem;
+      bottom: 1rem;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.7rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .swatch { width: 12px; height: 12px; border-radius: 3px; background: var(--wall); display: inline-block; }
+    .swatch.room { background: #e9f1ff; border: 1px solid #b9cff2; }
+    .swatch.opening { background: var(--accent); }
+
+    .toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      max-width: 360px;
+      z-index: 2000;
+      padding: 0.95rem 1rem;
+      border-radius: 16px;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 18px 35px rgba(0,0,0,0.22);
+      opacity: 0;
+      transform: translateY(18px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1040px) {
+      .hero, .app-shell { grid-template-columns: 1fr; }
+      .panel { position: static; }
+      .metric-grid { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 1rem; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 72px;
+        right: 1rem;
+        width: min(280px, calc(100vw - 2rem));
+        padding: 1rem;
+        border-radius: 18px;
+        background: var(--brand);
+        box-shadow: 0 18px 30px rgba(0,0,0,0.2);
+      }
+      .nav-links.active { display: flex; }
+      .dropdown-content { position: static; margin-top: 0.5rem; box-shadow: none; }
+      .hero { padding-top: 3rem; }
+      .stage-header { flex-direction: column; }
+      .button-grid { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo"><a href="index.html"><img src="Logo_png.png" alt="Logo Celtoon"></a></div>
+    <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="orcamento.html">Orçamento</a>
+      <div class="dropdown">
+        <a href="#">Produtos</a>
+        <div class="dropdown-content">
+          <a href="impressão.html">Impressão</a>
+          <a href="criacao.html">Criação</a>
+          <a href="digital.html">Digital</a>
+          <a href="floorplan.html">Planta LiDAR</a>
+          <a href="redes-sociais.html">Redes Sociais</a>
+        </div>
+      </div>
+      <a href="contato.html">Contato</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">LiDAR GLB → planta baixa comercial</span>
+        <h1>Plantas baixas a partir de escaneamento 3D.</h1>
+        <p>
+          Protótipo de produto inspirado no padrão de entrega de iGUIDE e Matterport: upload do modelo GLB,
+          corte regulável da nuvem de pontos, reconstrução 2D, limpeza morfológica, medição em escala e exportação
+          para apresentação ou fluxo CAD.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#app">Começar análise</a>
+          <a class="btn secondary" href="https://goiguide.com/iguide/floor-plans" target="_blank" rel="noopener">Referência iGUIDE</a>
+          <a class="btn secondary" href="https://matterport.com/schematic-floor-plans" target="_blank" rel="noopener">Referência Matterport</a>
+        </div>
+      </div>
+      <aside class="research-card" aria-label="Resumo da investigação de produto">
+        <h2>O que o produto precisa entregar</h2>
+        <ul class="research-list">
+          <li><span class="badge-icon">1</span><span><strong>Precisão e confiança:</strong> escala explícita, área calculada e indicadores de qualidade para reduzir retrabalho.</span></li>
+          <li><span class="badge-icon">2</span><span><strong>Turnaround rápido:</strong> fluxo todo no navegador para gerar uma prévia em minutos, antes de um refinamento humano ou CAD.</span></li>
+          <li><span class="badge-icon">3</span><span><strong>Entrega profissional:</strong> paredes vetoriais, ambientes coloridos, cotas, norte, escala e downloads em SVG, PNG e DXF.</span></li>
+          <li><span class="badge-icon">4</span><span><strong>Controle técnico:</strong> ajuste de altura do corte, espessura, resolução, limpeza e fechamento de lacunas para lidar com scans incompletos.</span></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="app-shell" id="app">
+      <aside class="panel">
+        <h2>Pipeline LiDAR</h2>
+        <label class="dropzone" id="dropzone">
+          <input id="fileInput" type="file" accept=".glb,model/gltf-binary">
+          <strong>Suba seu GLB</strong>
+          <span>Arraste o arquivo aqui ou clique para selecionar.</span>
+        </label>
+        <div class="status" id="status"><span class="loader"></span><span id="statusText">Aguardando modelo 3D.</span></div>
+
+        <div class="control-group">
+          <h3>Corte e escala</h3>
+          <div class="field">
+            <label for="sliceHeight">Altura do corte <span id="sliceHeightValue">42%</span></label>
+            <input id="sliceHeight" type="range" min="5" max="90" value="42">
+          </div>
+          <div class="field">
+            <label for="sliceThickness">Espessura <span id="sliceThicknessValue">0.35 m</span></label>
+            <input id="sliceThickness" type="range" min="10" max="120" value="35">
+          </div>
+          <div class="field">
+            <label for="scaleFactor">Escala do modelo</label>
+            <input id="scaleFactor" type="number" min="0.01" step="0.01" value="1">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <h3>Reconstrução</h3>
+          <div class="field">
+            <label for="gridResolution">Resolução <span id="gridResolutionValue">0.08 m</span></label>
+            <input id="gridResolution" type="range" min="4" max="22" value="8">
+          </div>
+          <div class="field">
+            <label for="densityThreshold">Densidade mínima <span id="densityThresholdValue">2 pts</span></label>
+            <input id="densityThreshold" type="range" min="1" max="12" value="2">
+          </div>
+          <div class="field">
+            <label for="cleanupPasses">Limpeza/fechamento <span id="cleanupPassesValue">2x</span></label>
+            <input id="cleanupPasses" type="range" min="0" max="5" value="2">
+          </div>
+          <label class="toggle-row"><span>Detectar ambientes e áreas</span><input id="showRooms" type="checkbox" checked></label>
+          <label class="toggle-row"><span>Mostrar cotas externas</span><input id="showDimensions" type="checkbox" checked></label>
+          <label class="toggle-row"><span>Destacar possíveis aberturas</span><input id="showOpenings" type="checkbox" checked></label>
+        </div>
+
+        <button class="btn primary" id="generateBtn" type="button" disabled>Gerar planta baixa</button>
+        <div class="button-grid">
+          <button class="btn secondary" id="exportSvgBtn" type="button" disabled>SVG</button>
+          <button class="btn secondary" id="exportPngBtn" type="button" disabled>PNG</button>
+          <button class="btn secondary" id="exportDxfBtn" type="button" disabled>DXF</button>
+          <button class="btn ghost" id="resetBtn" type="button">Limpar</button>
+        </div>
+      </aside>
+
+      <section class="stage">
+        <div class="stage-header">
+          <div>
+            <h2>Resultado vetorial</h2>
+            <p>Visualização com paredes consolidadas, ambientes preenchidos e elementos de apresentação comercial.</p>
+          </div>
+          <button class="btn secondary" id="demoBtn" type="button">Usar demo sintética</button>
+        </div>
+        <div class="metric-grid">
+          <div class="metric"><small>Pontos processados</small><strong id="metricPoints">0</strong></div>
+          <div class="metric"><small>Área estimada</small><strong id="metricArea">0 m²</strong></div>
+          <div class="metric"><small>Dimensão geral</small><strong id="metricSize">—</strong></div>
+          <div class="metric"><small>Confiança</small><strong id="metricConfidence">—</strong></div>
+        </div>
+        <div class="canvas-wrap">
+          <svg id="floorSvg" role="img" aria-label="Planta baixa gerada"></svg>
+          <div class="empty-state" id="emptyState">
+            <div class="empty-card">
+              <h3>Nenhum GLB carregado ainda</h3>
+              <p>Suba um scan LiDAR ou clique em “Usar demo sintética” para ver o pipeline de corte, fechamento e exportação funcionando.</p>
+            </div>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span><i class="swatch"></i>Paredes</span>
+            <span><i class="swatch room"></i>Ambientes</span>
+            <span><i class="swatch opening"></i>Aberturas prováveis</span>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script type="module">
+    const GLB_JSON_CHUNK = 0x4E4F534A;
+    const GLB_BIN_CHUNK = 0x004E4942;
+    const IDENTITY_MATRIX = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1];
+
+    const state = {
+      points: [],
+      bounds: null,
+      fileName: '',
+      plan: null,
+      walls: [],
+      rooms: [],
+      openings: [],
+      scale: 1
+    };
+
+    const els = {
+      fileInput: document.querySelector('#fileInput'),
+      dropzone: document.querySelector('#dropzone'),
+      status: document.querySelector('#status'),
+      statusText: document.querySelector('#statusText'),
+      generateBtn: document.querySelector('#generateBtn'),
+      demoBtn: document.querySelector('#demoBtn'),
+      resetBtn: document.querySelector('#resetBtn'),
+      exportSvgBtn: document.querySelector('#exportSvgBtn'),
+      exportPngBtn: document.querySelector('#exportPngBtn'),
+      exportDxfBtn: document.querySelector('#exportDxfBtn'),
+      floorSvg: document.querySelector('#floorSvg'),
+      emptyState: document.querySelector('#emptyState'),
+      toast: document.querySelector('#toast'),
+      metricPoints: document.querySelector('#metricPoints'),
+      metricArea: document.querySelector('#metricArea'),
+      metricSize: document.querySelector('#metricSize'),
+      metricConfidence: document.querySelector('#metricConfidence'),
+      sliceHeight: document.querySelector('#sliceHeight'),
+      sliceHeightValue: document.querySelector('#sliceHeightValue'),
+      sliceThickness: document.querySelector('#sliceThickness'),
+      sliceThicknessValue: document.querySelector('#sliceThicknessValue'),
+      scaleFactor: document.querySelector('#scaleFactor'),
+      gridResolution: document.querySelector('#gridResolution'),
+      gridResolutionValue: document.querySelector('#gridResolutionValue'),
+      densityThreshold: document.querySelector('#densityThreshold'),
+      densityThresholdValue: document.querySelector('#densityThresholdValue'),
+      cleanupPasses: document.querySelector('#cleanupPasses'),
+      cleanupPassesValue: document.querySelector('#cleanupPassesValue'),
+      showRooms: document.querySelector('#showRooms'),
+      showDimensions: document.querySelector('#showDimensions'),
+      showOpenings: document.querySelector('#showOpenings')
+    };
+
+    const formatNumber = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
+    const formatInt = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+
+    function setStatus(message, type = '') {
+      els.status.className = `status ${type}`.trim();
+      els.statusText.textContent = message;
+    }
+
+    function showToast(message) {
+      els.toast.textContent = message;
+      els.toast.classList.add('show');
+      window.setTimeout(() => els.toast.classList.remove('show'), 3600);
+    }
+
+    function updateLabels() {
+      els.sliceHeightValue.textContent = `${els.sliceHeight.value}%`;
+      els.sliceThicknessValue.textContent = `${(Number(els.sliceThickness.value) / 100).toFixed(2)} m`;
+      els.gridResolutionValue.textContent = `${(Number(els.gridResolution.value) / 100).toFixed(2)} m`;
+      els.densityThresholdValue.textContent = `${els.densityThreshold.value} pts`;
+      els.cleanupPassesValue.textContent = `${els.cleanupPasses.value}x`;
+    }
+
+    function pointKey(x, y) { return `${x},${y}`; }
+    function clamp(value, min, max) { return Math.min(max, Math.max(min, value)); }
+
+    function computeBounds(points) {
+      const bounds = {
+        minX: Infinity, maxX: -Infinity,
+        minY: Infinity, maxY: -Infinity,
+        minZ: Infinity, maxZ: -Infinity
+      };
+      points.forEach((p) => {
+        bounds.minX = Math.min(bounds.minX, p.x);
+        bounds.maxX = Math.max(bounds.maxX, p.x);
+        bounds.minY = Math.min(bounds.minY, p.y);
+        bounds.maxY = Math.max(bounds.maxY, p.y);
+        bounds.minZ = Math.min(bounds.minZ, p.z);
+        bounds.maxZ = Math.max(bounds.maxZ, p.z);
+      });
+      bounds.width = bounds.maxX - bounds.minX;
+      bounds.depth = bounds.maxZ - bounds.minZ;
+      bounds.height = bounds.maxY - bounds.minY;
+      return bounds;
+    }
+
+    function distance3(a, b) {
+      return Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+    }
+
+    function addSampledTrianglePoints(target, a, b, c, step) {
+      const ab = distance3(a, b);
+      const bc = distance3(b, c);
+      const ca = distance3(c, a);
+      const samples = clamp(Math.ceil(Math.max(ab, bc, ca) / step), 1, 10);
+      for (let i = 0; i <= samples; i += 1) {
+        for (let j = 0; j <= samples - i; j += 1) {
+          const u = i / samples;
+          const v = j / samples;
+          const w = 1 - u - v;
+          target.push({
+            x: a.x * u + b.x * v + c.x * w,
+            y: a.y * u + b.y * v + c.y * w,
+            z: a.z * u + b.z * v + c.z * w
+          });
+        }
+      }
+    }
+
+    function componentReader(view, componentType) {
+      const readers = {
+        5120: (offset) => view.getInt8(offset),
+        5121: (offset) => view.getUint8(offset),
+        5122: (offset) => view.getInt16(offset, true),
+        5123: (offset) => view.getUint16(offset, true),
+        5125: (offset) => view.getUint32(offset, true),
+        5126: (offset) => view.getFloat32(offset, true)
+      };
+      return readers[componentType];
+    }
+
+    function componentSize(componentType) {
+      return { 5120: 1, 5121: 1, 5122: 2, 5123: 2, 5125: 4, 5126: 4 }[componentType];
+    }
+
+    function typeSize(type) {
+      return { SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4, MAT4: 16 }[type];
+    }
+
+    function readAccessor(gltf, bin, accessorIndex) {
+      const accessor = gltf.accessors[accessorIndex];
+      const bufferView = gltf.bufferViews[accessor.bufferView];
+      const view = new DataView(bin.buffer, bin.byteOffset, bin.byteLength);
+      const read = componentReader(view, accessor.componentType);
+      const itemSize = typeSize(accessor.type);
+      const bytes = componentSize(accessor.componentType);
+      const stride = bufferView.byteStride || itemSize * bytes;
+      const baseOffset = (bufferView.byteOffset || 0) + (accessor.byteOffset || 0);
+      const values = new Array(accessor.count);
+
+      for (let i = 0; i < accessor.count; i += 1) {
+        const item = new Array(itemSize);
+        for (let j = 0; j < itemSize; j += 1) {
+          item[j] = read(baseOffset + i * stride + j * bytes);
+        }
+        values[i] = itemSize === 1 ? item[0] : item;
+      }
+      return values;
+    }
+
+    function multiplyMatrix(a, b) {
+      const out = new Array(16).fill(0);
+      for (let col = 0; col < 4; col += 1) {
+        for (let row = 0; row < 4; row += 1) {
+          for (let k = 0; k < 4; k += 1) {
+            out[col * 4 + row] += a[k * 4 + row] * b[col * 4 + k];
+          }
+        }
+      }
+      return out;
+    }
+
+    function composeMatrix(node) {
+      if (node.matrix) return node.matrix.slice();
+      const t = node.translation || [0, 0, 0];
+      const r = node.rotation || [0, 0, 0, 1];
+      const s = node.scale || [1, 1, 1];
+      const [x, y, z, w] = r;
+      const x2 = x + x;
+      const y2 = y + y;
+      const z2 = z + z;
+      const xx = x * x2;
+      const xy = x * y2;
+      const xz = x * z2;
+      const yy = y * y2;
+      const yz = y * z2;
+      const zz = z * z2;
+      const wx = w * x2;
+      const wy = w * y2;
+      const wz = w * z2;
+      return [
+        (1 - (yy + zz)) * s[0], (xy + wz) * s[0], (xz - wy) * s[0], 0,
+        (xy - wz) * s[1], (1 - (xx + zz)) * s[1], (yz + wx) * s[1], 0,
+        (xz + wy) * s[2], (yz - wx) * s[2], (1 - (xx + yy)) * s[2], 0,
+        t[0], t[1], t[2], 1
+      ];
+    }
+
+    function transformPoint(p, matrix) {
+      return {
+        x: matrix[0] * p[0] + matrix[4] * p[1] + matrix[8] * p[2] + matrix[12],
+        y: matrix[1] * p[0] + matrix[5] * p[1] + matrix[9] * p[2] + matrix[13],
+        z: matrix[2] * p[0] + matrix[6] * p[1] + matrix[10] * p[2] + matrix[14]
+      };
+    }
+
+    function parseGlb(arrayBuffer) {
+      const view = new DataView(arrayBuffer);
+      const magic = view.getUint32(0, true);
+      if (magic !== 0x46546C67) throw new Error('Arquivo não é um GLB válido.');
+      let offset = 12;
+      let gltf = null;
+      let bin = null;
+      while (offset < arrayBuffer.byteLength) {
+        const chunkLength = view.getUint32(offset, true);
+        const chunkType = view.getUint32(offset + 4, true);
+        const chunkStart = offset + 8;
+        if (chunkType === GLB_JSON_CHUNK) {
+          const jsonText = new TextDecoder().decode(new Uint8Array(arrayBuffer, chunkStart, chunkLength));
+          gltf = JSON.parse(jsonText);
+        }
+        if (chunkType === GLB_BIN_CHUNK) {
+          bin = new Uint8Array(arrayBuffer, chunkStart, chunkLength);
+        }
+        offset = chunkStart + chunkLength;
+      }
+      if (!gltf || !bin) throw new Error('GLB sem chunks JSON/BIN esperados.');
+      return { gltf, bin };
+    }
+
+    function extractPointsFromGlb(arrayBuffer) {
+      const { gltf, bin } = parseGlb(arrayBuffer);
+      const points = [];
+      const sceneIndex = gltf.scene || 0;
+      const scene = gltf.scenes[sceneIndex];
+
+      function visitNode(nodeIndex, parentMatrix) {
+        const node = gltf.nodes[nodeIndex];
+        const worldMatrix = multiplyMatrix(parentMatrix, composeMatrix(node));
+        if (typeof node.mesh === 'number') {
+          const mesh = gltf.meshes[node.mesh];
+          mesh.primitives.forEach((primitive) => {
+            const positionAccessor = primitive.attributes && primitive.attributes.POSITION;
+            if (typeof positionAccessor !== 'number') return;
+            const positions = readAccessor(gltf, bin, positionAccessor);
+            const maxVertices = Math.min(positions.length, 260000);
+            const transformed = new Array(maxVertices);
+            for (let i = 0; i < maxVertices; i += 1) {
+              transformed[i] = transformPoint(positions[i], worldMatrix);
+              points.push(transformed[i]);
+            }
+            if (typeof primitive.indices === 'number' && positions.length < 90000) {
+              const indices = readAccessor(gltf, bin, primitive.indices);
+              const triangleLimit = Math.min(Math.floor(indices.length / 3), 30000);
+              for (let i = 0; i < triangleLimit; i += 1) {
+                const a = transformed[indices[i * 3]] || transformPoint(positions[indices[i * 3]], worldMatrix);
+                const b = transformed[indices[i * 3 + 1]] || transformPoint(positions[indices[i * 3 + 1]], worldMatrix);
+                const c = transformed[indices[i * 3 + 2]] || transformPoint(positions[indices[i * 3 + 2]], worldMatrix);
+                addSampledTrianglePoints(points, a, b, c, 0.22);
+              }
+            }
+          });
+        }
+        (node.children || []).forEach((childIndex) => visitNode(childIndex, worldMatrix));
+      }
+
+      (scene.nodes || []).forEach((nodeIndex) => visitNode(nodeIndex, IDENTITY_MATRIX));
+      return points;
+    }
+
+    function loadModel(file) {
+      const reader = new FileReader();
+      state.fileName = file.name.replace(/\.(glb|gltf)$/i, '');
+      setStatus(`Carregando ${file.name}...`, 'loading');
+      reader.onload = () => {
+        window.setTimeout(() => {
+          try {
+            const rawPoints = extractPointsFromGlb(reader.result);
+            const scale = Number(els.scaleFactor.value) || 1;
+            state.scale = scale;
+            state.points = rawPoints.map((p) => ({ x: p.x * scale, y: p.y * scale, z: p.z * scale }));
+            state.bounds = computeBounds(state.points);
+            if (state.points.length < 100) {
+              setStatus('O arquivo foi lido, mas não há pontos suficientes para reconstruir uma planta.', 'error');
+              return;
+            }
+            els.generateBtn.disabled = false;
+            setStatus(`${formatInt.format(state.points.length)} pontos extraídos. Ajuste o corte e gere a planta.`, 'ok');
+            updateMetrics({ points: state.points.length });
+            generatePlan();
+          } catch (error) {
+            setStatus(`Não foi possível ler o GLB: ${error.message}`, 'error');
+          }
+        }, 20);
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function createDemoModel() {
+      const points = [];
+      const rooms = [
+        { x: 0, z: 0, w: 4.2, d: 3.4 },
+        { x: 4.2, z: 0, w: 3.2, d: 3.4 },
+        { x: 0, z: 3.4, w: 3.1, d: 3.0 },
+        { x: 3.1, z: 3.4, w: 4.3, d: 3.0 }
+      ];
+      const walls = new Set();
+      rooms.forEach((room) => {
+        for (let i = 0; i <= room.w * 24; i += 1) {
+          walls.add(`${(room.x + i / 24).toFixed(2)},${room.z.toFixed(2)}`);
+          walls.add(`${(room.x + i / 24).toFixed(2)},${(room.z + room.d).toFixed(2)}`);
+        }
+        for (let i = 0; i <= room.d * 24; i += 1) {
+          walls.add(`${room.x.toFixed(2)},${(room.z + i / 24).toFixed(2)}`);
+          walls.add(`${(room.x + room.w).toFixed(2)},${(room.z + i / 24).toFixed(2)}`);
+        }
+      });
+      [...walls].forEach((key) => {
+        const [x, z] = key.split(',').map(Number);
+        const isDoor = (Math.abs(x - 3.1) < 0.08 && z > 4.2 && z < 5.3) ||
+          (Math.abs(z - 3.4) < 0.08 && x > 1.1 && x < 2.0) ||
+          (Math.abs(z - 3.4) < 0.08 && x > 5.1 && x < 6.1);
+        if (isDoor) return;
+        for (let h = 0; h < 8; h += 1) {
+          points.push({
+            x: x + (Math.random() - 0.5) * 0.035,
+            y: 0.9 + h * 0.18 + (Math.random() - 0.5) * 0.03,
+            z: z + (Math.random() - 0.5) * 0.035
+          });
+        }
+      });
+      for (let i = 0; i < 2200; i += 1) {
+        points.push({ x: Math.random() * 7.4, y: Math.random() * 0.08, z: Math.random() * 6.4 });
+      }
+      state.fileName = 'demo-planta-lidar';
+      state.points = points;
+      state.bounds = computeBounds(points);
+      els.generateBtn.disabled = false;
+      setStatus('Demo sintética carregada com paredes, aberturas e piso ruidoso.', 'ok');
+      generatePlan();
+    }
+
+    function buildGrid(points, bounds, options) {
+      const margin = options.resolution * 4;
+      const width = Math.ceil((bounds.width + margin * 2) / options.resolution);
+      const height = Math.ceil((bounds.depth + margin * 2) / options.resolution);
+      const originX = bounds.minX - margin;
+      const originZ = bounds.minZ - margin;
+      const counts = new Uint16Array(width * height);
+      const sliceY = bounds.minY + bounds.height * (options.sliceHeight / 100);
+      const halfThickness = options.sliceThickness / 2;
+      const slicePoints = [];
+
+      points.forEach((p) => {
+        if (Math.abs(p.y - sliceY) > halfThickness) return;
+        const gx = Math.floor((p.x - originX) / options.resolution);
+        const gy = Math.floor((p.z - originZ) / options.resolution);
+        if (gx < 0 || gy < 0 || gx >= width || gy >= height) return;
+        counts[gy * width + gx] += 1;
+        slicePoints.push(p);
+      });
+
+      const cells = new Uint8Array(width * height);
+      for (let i = 0; i < counts.length; i += 1) {
+        if (counts[i] >= options.threshold) cells[i] = 1;
+      }
+      return { width, height, originX, originZ, counts, cells, slicePoints, sliceY };
+    }
+
+    function dilate(cells, width, height) {
+      const out = new Uint8Array(cells);
+      for (let y = 1; y < height - 1; y += 1) {
+        for (let x = 1; x < width - 1; x += 1) {
+          const idx = y * width + x;
+          if (cells[idx]) continue;
+          let neighbors = 0;
+          for (let dy = -1; dy <= 1; dy += 1) {
+            for (let dx = -1; dx <= 1; dx += 1) {
+              if (cells[(y + dy) * width + x + dx]) neighbors += 1;
+            }
+          }
+          if (neighbors >= 3) out[idx] = 1;
+        }
+      }
+      return out;
+    }
+
+    function erode(cells, width, height) {
+      const out = new Uint8Array(cells);
+      for (let y = 1; y < height - 1; y += 1) {
+        for (let x = 1; x < width - 1; x += 1) {
+          const idx = y * width + x;
+          if (!cells[idx]) continue;
+          let neighbors = 0;
+          for (let dy = -1; dy <= 1; dy += 1) {
+            for (let dx = -1; dx <= 1; dx += 1) {
+              if (cells[(y + dy) * width + x + dx]) neighbors += 1;
+            }
+          }
+          if (neighbors <= 3) out[idx] = 0;
+        }
+      }
+      return out;
+    }
+
+    function closeGrid(cells, width, height, passes) {
+      let current = cells;
+      for (let i = 0; i < passes; i += 1) current = dilate(current, width, height);
+      for (let i = 0; i < Math.max(1, passes - 1); i += 1) current = erode(current, width, height);
+      return current;
+    }
+
+    function removeSmallComponents(cells, width, height, minCells) {
+      const visited = new Uint8Array(width * height);
+      const out = new Uint8Array(cells);
+      const queue = [];
+      for (let y = 0; y < height; y += 1) {
+        for (let x = 0; x < width; x += 1) {
+          const start = y * width + x;
+          if (!cells[start] || visited[start]) continue;
+          queue.length = 0;
+          const component = [];
+          queue.push([x, y]);
+          visited[start] = 1;
+          while (queue.length) {
+            const [cx, cy] = queue.pop();
+            component.push([cx, cy]);
+            [[1,0],[-1,0],[0,1],[0,-1]].forEach(([dx, dy]) => {
+              const nx = cx + dx;
+              const ny = cy + dy;
+              if (nx < 0 || ny < 0 || nx >= width || ny >= height) return;
+              const ni = ny * width + nx;
+              if (!cells[ni] || visited[ni]) return;
+              visited[ni] = 1;
+              queue.push([nx, ny]);
+            });
+          }
+          if (component.length < minCells) {
+            component.forEach(([cx, cy]) => { out[cy * width + cx] = 0; });
+          }
+        }
+      }
+      return out;
+    }
+
+    function detectRooms(cells, grid, minAreaCells) {
+      const { width, height } = grid;
+      const visited = new Uint8Array(width * height);
+      const rooms = [];
+      const queue = [];
+      for (let y = 1; y < height - 1; y += 1) {
+        for (let x = 1; x < width - 1; x += 1) {
+          const start = y * width + x;
+          if (cells[start] || visited[start]) continue;
+          queue.length = 0;
+          const component = [];
+          let touchesBorder = false;
+          let minX = x; let maxX = x; let minY = y; let maxY = y;
+          queue.push([x, y]);
+          visited[start] = 1;
+          while (queue.length) {
+            const [cx, cy] = queue.pop();
+            component.push([cx, cy]);
+            minX = Math.min(minX, cx); maxX = Math.max(maxX, cx);
+            minY = Math.min(minY, cy); maxY = Math.max(maxY, cy);
+            if (cx <= 1 || cy <= 1 || cx >= width - 2 || cy >= height - 2) touchesBorder = true;
+            [[1,0],[-1,0],[0,1],[0,-1]].forEach(([dx, dy]) => {
+              const nx = cx + dx;
+              const ny = cy + dy;
+              if (nx < 0 || ny < 0 || nx >= width || ny >= height) return;
+              const ni = ny * width + nx;
+              if (cells[ni] || visited[ni]) return;
+              visited[ni] = 1;
+              queue.push([nx, ny]);
+            });
+          }
+          if (!touchesBorder && component.length >= minAreaCells) {
+            rooms.push({
+              cells: component,
+              minX, maxX, minY, maxY,
+              area: component.length * grid.resolution * grid.resolution,
+              cx: (minX + maxX + 1) / 2,
+              cy: (minY + maxY + 1) / 2
+            });
+          }
+        }
+      }
+      return rooms.sort((a, b) => b.area - a.area).slice(0, 24);
+    }
+
+    function extractWalls(cells, grid) {
+      const { width, height, resolution } = grid;
+      const hSegments = [];
+      const vSegments = [];
+
+      for (let y = 0; y < height; y += 1) {
+        let start = null;
+        for (let x = 0; x <= width; x += 1) {
+          const top = y > 0 && x < width ? cells[(y - 1) * width + x] : 0;
+          const bottom = y < height && x < width ? cells[y * width + x] : 0;
+          const boundary = top !== bottom && (top || bottom);
+          if (boundary && start === null) start = x;
+          if ((!boundary || x === width) && start !== null) {
+            if (x - start >= 2) hSegments.push({ x1: start, y1: y, x2: x, y2: y, length: (x - start) * resolution });
+            start = null;
+          }
+        }
+      }
+
+      for (let x = 0; x < width; x += 1) {
+        let start = null;
+        for (let y = 0; y <= height; y += 1) {
+          const left = x > 0 && y < height ? cells[y * width + x - 1] : 0;
+          const right = x < width && y < height ? cells[y * width + x] : 0;
+          const boundary = left !== right && (left || right);
+          if (boundary && start === null) start = y;
+          if ((!boundary || y === height) && start !== null) {
+            if (y - start >= 2) vSegments.push({ x1: x, y1: start, x2: x, y2: y, length: (y - start) * resolution });
+            start = null;
+          }
+        }
+      }
+      return [...hSegments, ...vSegments];
+    }
+
+    function detectOpenings(walls, grid) {
+      const openings = [];
+      const grouped = new Map();
+      walls.forEach((wall) => {
+        const horizontal = wall.y1 === wall.y2;
+        const key = horizontal ? `h-${wall.y1}` : `v-${wall.x1}`;
+        if (!grouped.has(key)) grouped.set(key, []);
+        grouped.get(key).push(wall);
+      });
+      grouped.forEach((segments) => {
+        const horizontal = segments[0].y1 === segments[0].y2;
+        segments.sort((a, b) => horizontal ? a.x1 - b.x1 : a.y1 - b.y1);
+        for (let i = 0; i < segments.length - 1; i += 1) {
+          const a = segments[i];
+          const b = segments[i + 1];
+          const gapCells = horizontal ? b.x1 - a.x2 : b.y1 - a.y2;
+          const gap = gapCells * grid.resolution;
+          if (gap >= 0.65 && gap <= 1.45) {
+            openings.push(horizontal
+              ? { x1: a.x2, y1: a.y1, x2: b.x1, y2: b.y1, type: 'porta' }
+              : { x1: a.x1, y1: a.y2, x2: b.x1, y2: b.y1, type: 'porta' });
+          }
+        }
+      });
+      return openings.slice(0, 32);
+    }
+
+    function generatePlan() {
+      if (!state.points.length || !state.bounds) return;
+      updateLabels();
+      setStatus('Gerando corte, limpeza e vetorização...', 'loading');
+      window.requestAnimationFrame(() => {
+        const options = {
+          sliceHeight: Number(els.sliceHeight.value),
+          sliceThickness: Number(els.sliceThickness.value) / 100,
+          resolution: Number(els.gridResolution.value) / 100,
+          threshold: Number(els.densityThreshold.value),
+          cleanupPasses: Number(els.cleanupPasses.value)
+        };
+        const grid = buildGrid(state.points, state.bounds, options);
+        grid.resolution = options.resolution;
+        grid.cells = closeGrid(grid.cells, grid.width, grid.height, options.cleanupPasses);
+        grid.cells = removeSmallComponents(grid.cells, grid.width, grid.height, Math.max(5, Math.round(0.12 / (options.resolution * options.resolution))));
+
+        const occupied = grid.cells.reduce((sum, value) => sum + value, 0);
+        const rooms = detectRooms(grid.cells, grid, Math.max(30, Math.round(1.2 / (options.resolution * options.resolution))));
+        const walls = extractWalls(grid.cells, grid).filter((wall) => wall.length >= options.resolution * 2.5);
+        const openings = detectOpenings(walls, grid);
+        const filledArea = rooms.reduce((sum, room) => sum + room.area, 0) || occupied * options.resolution * options.resolution;
+        const confidence = calculateConfidence(grid.slicePoints.length, occupied, walls.length, rooms.length);
+
+        state.plan = { grid, options, filledArea, confidence };
+        state.rooms = rooms;
+        state.walls = walls;
+        state.openings = openings;
+        renderPlan();
+        updateMetrics({
+          points: grid.slicePoints.length,
+          area: filledArea,
+          size: `${formatNumber.format(state.bounds.width)} × ${formatNumber.format(state.bounds.depth)} m`,
+          confidence
+        });
+        setStatus(`Planta gerada com ${walls.length} segmentos e ${rooms.length} ambientes prováveis.`, 'ok');
+        enableExports(true);
+      });
+    }
+
+    function calculateConfidence(slicePoints, occupied, walls, rooms) {
+      const pointScore = clamp(slicePoints / 9000, 0, 1) * 38;
+      const wallScore = clamp(walls / 80, 0, 1) * 30;
+      const fillScore = clamp(occupied / 600, 0, 1) * 18;
+      const roomScore = clamp(rooms / 4, 0, 1) * 14;
+      return Math.round(pointScore + wallScore + fillScore + roomScore);
+    }
+
+    function svgCoord(x, y, grid, scale, padding) {
+      return {
+        x: padding + x * grid.resolution * scale,
+        y: padding + y * grid.resolution * scale
+      };
+    }
+
+    function renderPlan() {
+      const { grid } = state.plan;
+      const padding = 70;
+      const meterScale = clamp(760 / Math.max(grid.width * grid.resolution, grid.height * grid.resolution), 34, 92);
+      const width = grid.width * grid.resolution * meterScale + padding * 2;
+      const height = grid.height * grid.resolution * meterScale + padding * 2;
+      const svg = els.floorSvg;
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      svg.innerHTML = '';
+
+      const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      defs.innerHTML = `
+        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#172033" flood-opacity="0.12"/></filter>
+        <pattern id="paperGrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#dce5f2" stroke-width="0.7" opacity="0.7"/></pattern>
+      `;
+      svg.appendChild(defs);
+
+      const bg = createSvg('rect', { x: 0, y: 0, width, height, fill: 'url(#paperGrid)' });
+      svg.appendChild(bg);
+
+      if (els.showRooms.checked) renderRooms(svg, grid, meterScale, padding);
+      renderWalls(svg, grid, meterScale, padding);
+      if (els.showOpenings.checked) renderOpenings(svg, grid, meterScale, padding);
+      if (els.showDimensions.checked) renderDimensions(svg, grid, meterScale, padding, width, height);
+      renderTitleBlock(svg, width, height, meterScale);
+      els.emptyState.style.display = 'none';
+    }
+
+    function createSvg(tag, attrs) {
+      const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
+      return node;
+    }
+
+    function renderRooms(svg, grid, meterScale, padding) {
+      const palette = ['#e9f1ff', '#fff0cf', '#eaf8ef', '#f6eefe', '#e9fbfb', '#ffeceb'];
+      state.rooms.forEach((room, index) => {
+        const x = padding + room.minX * grid.resolution * meterScale;
+        const y = padding + room.minY * grid.resolution * meterScale;
+        const w = (room.maxX - room.minX + 1) * grid.resolution * meterScale;
+        const h = (room.maxY - room.minY + 1) * grid.resolution * meterScale;
+        svg.appendChild(createSvg('rect', {
+          x, y, width: w, height: h,
+          fill: palette[index % palette.length],
+          stroke: '#b8c8df',
+          'stroke-width': 1.2,
+          rx: 8,
+          opacity: 0.78
+        }));
+        const label = createSvg('text', {
+          x: x + w / 2,
+          y: y + h / 2 - 4,
+          'text-anchor': 'middle',
+          'font-size': clamp(Math.min(w, h) / 8, 10, 20),
+          'font-weight': 800,
+          fill: '#244061'
+        });
+        label.textContent = `Ambiente ${index + 1}`;
+        svg.appendChild(label);
+        const area = createSvg('text', {
+          x: x + w / 2,
+          y: y + h / 2 + 15,
+          'text-anchor': 'middle',
+          'font-size': clamp(Math.min(w, h) / 10, 9, 16),
+          fill: '#61708a'
+        });
+        area.textContent = `${formatNumber.format(room.area)} m²`;
+        svg.appendChild(area);
+      });
+    }
+
+    function renderWalls(svg, grid, meterScale, padding) {
+      const group = createSvg('g', { filter: 'url(#softShadow)' });
+      state.walls.forEach((wall) => {
+        const a = svgCoord(wall.x1, wall.y1, grid, meterScale, padding);
+        const b = svgCoord(wall.x2, wall.y2, grid, meterScale, padding);
+        group.appendChild(createSvg('line', {
+          x1: a.x, y1: a.y, x2: b.x, y2: b.y,
+          stroke: '#161b24',
+          'stroke-width': clamp(meterScale * 0.13, 5, 12),
+          'stroke-linecap': 'square',
+          'stroke-linejoin': 'round'
+        }));
+        group.appendChild(createSvg('line', {
+          x1: a.x, y1: a.y, x2: b.x, y2: b.y,
+          stroke: '#ffffff',
+          'stroke-width': 1.2,
+          opacity: 0.24
+        }));
+      });
+      svg.appendChild(group);
+    }
+
+    function renderOpenings(svg, grid, meterScale, padding) {
+      state.openings.forEach((opening) => {
+        const a = svgCoord(opening.x1, opening.y1, grid, meterScale, padding);
+        const b = svgCoord(opening.x2, opening.y2, grid, meterScale, padding);
+        svg.appendChild(createSvg('line', {
+          x1: a.x, y1: a.y, x2: b.x, y2: b.y,
+          stroke: '#ffb000',
+          'stroke-width': clamp(meterScale * 0.16, 7, 14),
+          'stroke-linecap': 'round'
+        }));
+      });
+    }
+
+    function renderDimensions(svg, grid, meterScale, padding, width, height) {
+      const planW = grid.width * grid.resolution * meterScale;
+      const planH = grid.height * grid.resolution * meterScale;
+      const dimY = padding + planH + 34;
+      const dimX = padding + planW + 34;
+      svg.appendChild(createSvg('line', { x1: padding, y1: dimY, x2: padding + planW, y2: dimY, stroke: '#1F4381', 'stroke-width': 2 }));
+      svg.appendChild(createSvg('line', { x1: dimX, y1: padding, x2: dimX, y2: padding + planH, stroke: '#1F4381', 'stroke-width': 2 }));
+      svg.appendChild(createSvg('line', { x1: padding, y1: dimY - 7, x2: padding, y2: dimY + 7, stroke: '#1F4381', 'stroke-width': 2 }));
+      svg.appendChild(createSvg('line', { x1: padding + planW, y1: dimY - 7, x2: padding + planW, y2: dimY + 7, stroke: '#1F4381', 'stroke-width': 2 }));
+      svg.appendChild(createSvg('line', { x1: dimX - 7, y1: padding, x2: dimX + 7, y2: padding, stroke: '#1F4381', 'stroke-width': 2 }));
+      svg.appendChild(createSvg('line', { x1: dimX - 7, y1: padding + planH, x2: dimX + 7, y2: padding + planH, stroke: '#1F4381', 'stroke-width': 2 }));
+      const widthLabel = createSvg('text', { x: padding + planW / 2, y: dimY + 24, 'text-anchor': 'middle', fill: '#1F4381', 'font-weight': 800, 'font-size': 14 });
+      widthLabel.textContent = `${formatNumber.format(grid.width * grid.resolution)} m`;
+      svg.appendChild(widthLabel);
+      const heightLabel = createSvg('text', { x: dimX + 24, y: padding + planH / 2, transform: `rotate(90 ${dimX + 24} ${padding + planH / 2})`, 'text-anchor': 'middle', fill: '#1F4381', 'font-weight': 800, 'font-size': 14 });
+      heightLabel.textContent = `${formatNumber.format(grid.height * grid.resolution)} m`;
+      svg.appendChild(heightLabel);
+
+      const north = createSvg('g', { transform: `translate(${width - 82} 42)` });
+      north.appendChild(createSvg('path', { d: 'M22 0 L38 46 L22 36 L6 46 Z', fill: '#1F4381' }));
+      const n = createSvg('text', { x: 22, y: 66, 'text-anchor': 'middle', fill: '#1F4381', 'font-weight': 900, 'font-size': 18 });
+      n.textContent = 'N';
+      north.appendChild(n);
+      svg.appendChild(north);
+
+      const bar = createSvg('g', { transform: `translate(36 ${height - 42})` });
+      bar.appendChild(createSvg('rect', { x: 0, y: 0, width: meterScale, height: 8, fill: '#161b24' }));
+      bar.appendChild(createSvg('rect', { x: meterScale, y: 0, width: meterScale, height: 8, fill: '#fff', stroke: '#161b24' }));
+      const scaleText = createSvg('text', { x: meterScale, y: 25, 'text-anchor': 'middle', fill: '#172033', 'font-weight': 700, 'font-size': 12 });
+      scaleText.textContent = '2 m';
+      bar.appendChild(scaleText);
+      svg.appendChild(bar);
+    }
+
+    function renderTitleBlock(svg, width, height) {
+      const group = createSvg('g', { transform: `translate(${width - 285} ${height - 96})` });
+      group.appendChild(createSvg('rect', { x: 0, y: 0, width: 250, height: 64, rx: 12, fill: '#ffffff', stroke: '#d9e1ee' }));
+      const title = createSvg('text', { x: 14, y: 24, fill: '#16315f', 'font-weight': 900, 'font-size': 14 });
+      title.textContent = state.fileName || 'planta-lidar';
+      group.appendChild(title);
+      const subtitle = createSvg('text', { x: 14, y: 45, fill: '#61708a', 'font-size': 12 });
+      subtitle.textContent = `Celtoon LiDAR • confiança ${state.plan.confidence}%`;
+      group.appendChild(subtitle);
+      svg.appendChild(group);
+    }
+
+    function updateMetrics({ points, area, size, confidence }) {
+      if (typeof points === 'number') els.metricPoints.textContent = formatInt.format(points);
+      if (typeof area === 'number') els.metricArea.textContent = `${formatNumber.format(area)} m²`;
+      if (size) els.metricSize.textContent = size;
+      if (typeof confidence === 'number') els.metricConfidence.textContent = `${confidence}%`;
+    }
+
+    function enableExports(enabled) {
+      els.exportSvgBtn.disabled = !enabled;
+      els.exportPngBtn.disabled = !enabled;
+      els.exportDxfBtn.disabled = !enabled;
+    }
+
+    function serializeSvg() {
+      const clone = els.floorSvg.cloneNode(true);
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      return new XMLSerializer().serializeToString(clone);
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportSvg() {
+      downloadBlob(new Blob([serializeSvg()], { type: 'image/svg+xml' }), `${state.fileName || 'planta-lidar'}.svg`);
+      showToast('SVG vetorial exportado.');
+    }
+
+    function exportPng() {
+      const svgText = serializeSvg();
+      const img = new Image();
+      const url = URL.createObjectURL(new Blob([svgText], { type: 'image/svg+xml' }));
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const viewBox = els.floorSvg.viewBox.baseVal;
+        canvas.width = Math.round(viewBox.width * 2);
+        canvas.height = Math.round(viewBox.height * 2);
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((blob) => downloadBlob(blob, `${state.fileName || 'planta-lidar'}.png`), 'image/png');
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+      showToast('PNG em alta resolução exportado.');
+    }
+
+    function exportDxf() {
+      if (!state.plan) return;
+      const { grid } = state.plan;
+      const lines = ['0', 'SECTION', '2', 'ENTITIES'];
+      state.walls.forEach((wall) => {
+        lines.push('0', 'LINE', '8', 'WALLS', '10', String(wall.x1 * grid.resolution), '20', String(-wall.y1 * grid.resolution), '30', '0', '11', String(wall.x2 * grid.resolution), '21', String(-wall.y2 * grid.resolution), '31', '0');
+      });
+      state.openings.forEach((opening) => {
+        lines.push('0', 'LINE', '8', 'OPENINGS', '10', String(opening.x1 * grid.resolution), '20', String(-opening.y1 * grid.resolution), '30', '0', '11', String(opening.x2 * grid.resolution), '21', String(-opening.y2 * grid.resolution), '31', '0');
+      });
+      lines.push('0', 'ENDSEC', '0', 'EOF');
+      downloadBlob(new Blob([lines.join('\n')], { type: 'application/dxf' }), `${state.fileName || 'planta-lidar'}.dxf`);
+      showToast('DXF simplificado exportado para CAD.');
+    }
+
+    function resetApp() {
+      state.points = [];
+      state.bounds = null;
+      state.plan = null;
+      state.walls = [];
+      state.rooms = [];
+      state.openings = [];
+      state.fileName = '';
+      els.fileInput.value = '';
+      els.floorSvg.innerHTML = '';
+      els.emptyState.style.display = 'grid';
+      els.generateBtn.disabled = true;
+      enableExports(false);
+      els.metricPoints.textContent = '0';
+      els.metricArea.textContent = '0 m²';
+      els.metricSize.textContent = '—';
+      els.metricConfidence.textContent = '—';
+      setStatus('Aguardando modelo 3D.');
+    }
+
+    ['sliceHeight', 'sliceThickness', 'gridResolution', 'densityThreshold', 'cleanupPasses'].forEach((id) => {
+      els[id].addEventListener('input', () => {
+        updateLabels();
+        if (state.points.length) generatePlan();
+      });
+    });
+    ['showRooms', 'showDimensions', 'showOpenings'].forEach((id) => {
+      els[id].addEventListener('change', () => { if (state.plan) renderPlan(); });
+    });
+    els.scaleFactor.addEventListener('change', () => showToast('Recarregue o GLB para aplicar a nova escala ao modelo.'));
+    els.generateBtn.addEventListener('click', generatePlan);
+    els.demoBtn.addEventListener('click', createDemoModel);
+    els.resetBtn.addEventListener('click', resetApp);
+    els.exportSvgBtn.addEventListener('click', exportSvg);
+    els.exportPngBtn.addEventListener('click', exportPng);
+    els.exportDxfBtn.addEventListener('click', exportDxf);
+    els.fileInput.addEventListener('change', (event) => {
+      const [file] = event.target.files;
+      if (file) loadModel(file);
+    });
+
+    ['dragenter', 'dragover'].forEach((eventName) => {
+      els.dropzone.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        els.dropzone.classList.add('dragover');
+      });
+    });
+    ['dragleave', 'drop'].forEach((eventName) => {
+      els.dropzone.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        els.dropzone.classList.remove('dragover');
+      });
+    });
+    els.dropzone.addEventListener('drop', (event) => {
+      const [file] = event.dataTransfer.files;
+      if (file) loadModel(file);
+    });
+
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    updateLabels();
+  </script>
+</body>
+</html>
