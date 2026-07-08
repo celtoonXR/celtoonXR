@@ -109,8 +109,13 @@
     var io = new IntersectionObserver(function(entries, obs){
       entries.forEach(function(entry){
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          obs.unobserve(entry.target);
+          var el = entry.target;
+          el.classList.add('visible');
+          obs.unobserve(el);
+          // Após a entrada, remove .fade-in para que o transform fixado
+          // por .js .fade-in.visible não bloqueie efeitos de hover
+          // (ex.: .service-card:hover { translateY(-8px) }).
+          setTimeout(function(){ el.classList.remove('fade-in'); }, 900);
         }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
