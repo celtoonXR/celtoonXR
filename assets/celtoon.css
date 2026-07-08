@@ -171,10 +171,8 @@ button{ font-family:inherit; cursor:pointer; }
   gap:24px;
 }
 .navbar .logo img{
-  height:40px;
+  height:26px;
   width:auto;
-  /* logo original é branco — escurece para o navbar claro */
-  filter: brightness(0.15);
 }
 .nav-links{
   display:flex;
@@ -222,9 +220,11 @@ button{ font-family:inherit; cursor:pointer; }
   gap:32px;
 }
 .footer .footer-brand img{
-  height:48px;
+  height:28px;
   width:auto;
   margin-bottom:24px;
+  /* logo é navy — converte para branco no rodapé escuro */
+  filter: brightness(0) invert(1);
 }
 .footer-brand p{
   max-width:320px;
