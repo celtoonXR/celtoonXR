@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfólio | Celtoon Agência Criativa — Projetos de Design, 3D e Branding</title>
+  <meta name="description" content="Conheça o portfólio da Celtoon: modelagem 3D, mascotes, aplicativos, realidade aumentada, embalagens e identidade visual. Casos de sucesso que unem design e tecnologia.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Portfólio | Celtoon Agência Criativa">
+  <meta property="og:description" content="Casos de sucesso que unem design estratégico e execução técnica impecável.">
+  <meta property="og:url" content="https://celtoon.com.br/portfolio.html">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="canonical" href="https://celtoon.com.br/portfolio.html">
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/celtoon.css">
+
+  <style>
+  /* Filtros */
+  .filter-bar{
+    max-width: var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x) 48px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .filter-btn{
+    font-family: var(--font-mono);
+    font-weight:700;
+    font-size:12px;
+    line-height:16px;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    padding:12px 24px;
+    border-radius:9999px;
+    border:1px solid var(--gray-400);
+    background:transparent;
+    color: var(--gray-700);
+    transition: all .25s ease;
+  }
+  .filter-btn:hover{
+    border-color: var(--navy-800);
+    color: var(--navy-800);
+  }
+  .filter-btn.active{
+    background: var(--grad);
+    border-color:transparent;
+    color:#fff;
+  }
+
+  /* Grid */
+  .portfolio-page{
+    padding-bottom:96px;
+  }
+  .portfolio-grid{
+    max-width: var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x);
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:24px;
+  }
+  .project-card.hidden{ display:none; }
+
+  @media (max-width: 992px){
+    .portfolio-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px){
+    .portfolio-grid{ grid-template-columns: 1fr; }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo"><img src="Logo_png.png" alt="Celtoon Agência Criativa"></a>
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="produto.html">Produto</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <a href="orcamento.html" class="btn btn-pill-grad nav-cta">Solicitar Orçamento</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="badge mono-label">Nossos Projetos</span>
+      <h1>Portfólio<br>Criativo</h1>
+      <p>Casos de sucesso que unem design estratégico e execução técnica impecável. Explore por categoria ou navegue por tudo.</p>
+    </div>
+  </header>
+
+  <!-- FILTROS -->
+  <div class="filter-bar fade-in">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="3d">Modelagem 3D</button>
+    <button class="filter-btn" data-filter="mascote">Mascotes</button>
+    <button class="filter-btn" data-filter="digital">Digital &amp; AR</button>
+    <button class="filter-btn" data-filter="impressao">Impressão</button>
+  </div>
+
+  <!-- GRID -->
+  <section class="portfolio-page">
+    <div class="portfolio-grid">
+      <div class="project-card fade-in" data-category="3d">
+        <img src="imagem/pizza.png" alt="Renderização de modelagem 3D profissional de pizza para publicidade alimentícia" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Modelagem 3D</span><h3>Pizza 3D Realista</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="digital">
+        <img src="imagem/mock_2.png" alt="Programação de aplicativo interativo e realidade aumentada" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Mobile App</span><h3>Celtoon Experience App</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="mascote">
+        <img src="imagem/nort.jpg" alt="Design de mascote para empresa de telecomunicações" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Character Design</span><h3>Mascote Nortinho</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/cabine.png" alt="Design de cabine fotográfica inflável" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Arquitetura Inflável</span><h3>Cabine Fotográfica</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/Domo.jpg" alt="Design de domo inflável para fins educacionais" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Design de Impressão</span><h3>Domo UFES</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="digital">
+        <img src="imagem/app1.png" alt="UX e UI de aplicativo delivery e rede social" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">UX &amp; UI Design</span><h3>Aplicativo</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="digital">
+        <img src="imagem/app2.png" alt="Design de interface de aplicativo móvel - Projeto UX e UI Celtoon" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">UX &amp; UI Design</span><h3>Aplicativo</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="digital">
+        <img src="imagem/curar5.png" alt="Projeto CurAR - Experiência imersiva em Realidade Aumentada" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Realidade Aumentada</span><h3>CurAR</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="digital">
+        <img src="imagem/exp.jpg" alt="Desenvolvimento de filtro e experiência em Realidade Aumentada para arquitetura" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Realidade Aumentada</span><h3>Experiência AR</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/mock.jpg" alt="Ilustração e diagramação para capa de livro" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Design de Capa</span><h3>Capa de Livro</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="3d">
+        <img src="imagem/Poty.jpg" alt="Modelagem 3D profissional para publicidade alimentícia" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Modelagem 3D</span><h3>Layout Poty</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/folder.png" alt="Folder educativo para empresas" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Design de Impressão</span><h3>Folder Recírculo</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="mascote">
+        <img src="imagem/ceopaginho.jpg" alt="Design de mascote para empresa de máquinas de pagamento" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Character Design</span><h3>Ceopaguinho</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="mascote">
+        <img src="imagem/renderjpg.jpg" alt="Design de mascote para empresa de gestão de resíduos" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Character Design</span><h3>Recírculo</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="3d">
+        <img src="imagem/fries.jpg" alt="Modelagem 3D profissional para propaganda alimentícia" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Modelagem 3D</span><h3>Batata Frita</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="mascote">
+        <img src="imagem/guacu.png" alt="Criação de mascote personalizado para Rádio Guaçu" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Character Design</span><h3>Mascote Guaçu</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="mascote">
+        <img src="imagem/lavi.jpg" alt="Mascote Lavinho" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Character Design</span><h3>Lavinho</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/Tshirt.png" alt="Design de estampa para camisetas personalizadas" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Camiseta</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/Bolsa_Salvador.png" alt="Design de estampa para Eco Bag e brindes sustentáveis" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Eco Bag</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/cafe.png" alt="Design de embalagem para o setor alimentício" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Embalagem</span><h3>3 Corações</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/salinas.png" alt="Design de embalagem e pré-impressão técnica" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Embalagem</span><h3>Salinas</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/Clareador.png" alt="Criação de layout para embalagem de produto clareador" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Embalagem</span><h3>Clareador</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="impressao">
+        <img src="imagem/magazine_boneco.jpg" alt="Material promocional e arte final para Magazine Móveis" loading="lazy">
+        <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Magazine Móveis</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section fade-in">
+    <div class="cta-inner">
+      <h2>Gostou do que viu? O próximo case de sucesso pode ser o seu.</h2>
+      <a href="orcamento.html" class="btn-white btn">Solicitar Orçamento</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="Logo_png.png" alt="Celtoon">
+        <p>Rua Criatividade, 123<br>Bairro Inspiração<br>Cidade das Ideias – BR</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <a href="index.html">Home</a>
+        <a href="orcamento.html">Orçamento</a>
+        <a href="produto.html">Produto</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <a href="https://www.instagram.com/celtoon.agencia/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-col">
+        <h4>Siga a Celtoon</h4>
+        <div class="footer-social-circles">
+          <a href="https://www.instagram.com/celtoon.agencia/" target="_blank" rel="noopener" aria-label="Instagram"><img src="instagram.png" alt="Instagram"></a>
+          <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Celtoon Agência Criativa | Design Gráfico, 3D e Inovação Visual em São Paulo</p>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp"></a>
+
+  <script src="assets/celtoon.js"></script>
+  <script>
+  // Filtro de categorias
+  (function(){
+    'use strict';
+    var buttons = document.querySelectorAll('.filter-btn');
+    var cards = document.querySelectorAll('.project-card[data-category]');
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        buttons.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var filter = btn.getAttribute('data-filter');
+        cards.forEach(function(card){
+          var match = filter === 'all' || card.getAttribute('data-category') === filter;
+          card.classList.toggle('hidden', !match);
+        });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

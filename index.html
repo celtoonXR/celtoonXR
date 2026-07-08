@@ -1,1953 +1,505 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Celtoon Agência Criativa | Design, Modelagem 3D e Identidade Visual em SP</title>
-<meta name="description" content="Transforme sua marca com a Celtoon. Especialistas em modelagem 3D, criação de mascotes, design de embalagens e estratégia digital para destacar seu negócio.">
-<meta name="keywords" content="Modelagem 3D profissional, criação de personagens cartoon 3D, personagens low-poly para videogames, desenvolvimento de texturas 2D seamless, 
-  renderização de produtos 3D, realidade aumentada para empresas (AR), filtros interativos para marcas, arquitetura inflável e design de domos, 
-  visualização arquitetônica e renderização de fachadas, afrofuturismo design visual e estético, criação de logotipos minimalistas, identidade visual para confeitarias e docerias, 
-  design de mascotes empresariais, naming e criação de slogans, style guide e manual de marca, redesign de marca e modernização visual, vetorização de logotipos e ilustrações, ilustração digital personalizada, 
-  design de embalagens e dielines (facas de corte), embalagens personalizadas para doces e alimentos, pré-impressão e fechamento de arquivos, arte finalização para gráficas, diagramação de catálogos e revistas, 
-  design de materiais promocionais, folders, flyers, banners, design de estampas para camisetas e ecobags, criação de layouts para totens e eventos, design de interfaces UX/UI, criação de landing pages de alta conversão, artes para redes sociais, Instagram, LinkedIn, TikTok, 
-  design de reels animados e carrosséis, apresentações corporativas de alto impacto, banners digitais para sites e e-commerce, agência criativa em São Paulo, estúdio de design 3D em SP, designer gráfico em São Paulo, criação de marcas SP, serviços de 3D e animação em São Paulo.">
+  <meta name="description" content="Transforme sua marca com a Celtoon. Especialistas em modelagem 3D, criação de mascotes, design de embalagens e estratégia digital para destacar seu negócio.">
+  <meta name="keywords" content="Modelagem 3D profissional, criação de personagens cartoon 3D, personagens low-poly para videogames, desenvolvimento de texturas 2D seamless,
+    renderização de produtos 3D, realidade aumentada para empresas (AR), filtros interativos para marcas, arquitetura inflável e design de domos,
+    visualização arquitetônica e renderização de fachadas, afrofuturismo design visual e estético, criação de logotipos minimalistas, identidade visual para confeitarias e docerias,
+    design de mascotes empresariais, naming e criação de slogans, style guide e manual de marca, redesign de marca e modernização visual, vetorização de logotipos e ilustrações, ilustração digital personalizada,
+    design de embalagens e dielines (facas de corte), embalagens personalizadas para doces e alimentos, pré-impressão e fechamento de arquivos, arte finalização para gráficas, diagramação de catálogos e revistas,
+    design de materiais promocionais, folders, flyers, banners, design de estampas para camisetas e ecobags, criação de layouts para totens e eventos, design de interfaces UX/UI, criação de landing pages de alta conversão, artes para redes sociais, Instagram, LinkedIn, TikTok,
+    design de reels animados e carrosséis, apresentações corporativas de alto impacto, banners digitais para sites e e-commerce, agência criativa em São Paulo, estúdio de design 3D em SP, designer gráfico em São Paulo, criação de marcas SP, serviços de 3D e animação em São Paulo.">
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Celtoon Agência Criativa | Criatividade que gera resultados">
-<meta property="og:description" content="Do conceito ao 3D: Design que conecta e vende. Conheça nosso portfólio.">
-<meta property="og:image" content="https://celtoon.com.br">
-<meta property="og:url" content="https://celtoon.com.br">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Celtoon Agência Criativa | Criatividade que gera resultados">
+  <meta property="og:description" content="Do conceito ao 3D: Design que conecta e vende. Conheça nosso portfólio.">
+  <meta property="og:image" content="https://celtoon.com.br">
+  <meta property="og:url" content="https://celtoon.com.br">
 
-<link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="canonical" href="https://celtoon.com.br">
 
-<link rel="canonical" href="https://celtoon.com.br">
-
-
-  <title>Celtoon Agência Criativa</title>
-
-  <!-- marca que indica que JS está disponível (usada pelo CSS para não esconder elementos se o JS não rodar) -->
   <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/celtoon.css">
 
   <style>
   /* ==========================================
-     FONTS / RESET / VARIÁVEIS
+     HERO
      ========================================== */
-  @font-face {
-    font-family: 'IntroCondBlackFree';
-    src: url('IntroCondBlackFree.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:176px 0 96px;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
   }
-  @font-face {
-    font-family: 'IntroRegularAlt';
-    src: url('IntroRegularAlt.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  .hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: radial-gradient(circle at 50% 50%, rgba(0,40,85,0.12) 0%, transparent 65%);
+    opacity:.6;
+    pointer-events:none;
   }
-
-  :root{
-    --brand: #1F4381;
-    --brand-dark: #16315f;
-    --brand-light: #2d5ba3;
-    --accent: #FF6835;
-    --accent-dark: #e05025;
-    --bg: #f4f6f9;
-    --text: #2a2a3a;
+  .hero::after{
+    content:'';
+    position:absolute;
+    right:-80px;
+    top:calc(50% + 100px);
+    width:384px;
+    height:384px;
+    border-radius:9999px;
+    background: var(--grad);
+    filter: blur(60px);
+    opacity:.1;
+    pointer-events:none;
   }
-
-  /* Evita a página mexer lateralmente */
-  html, body { overflow-x: hidden; }
-
-  /* RESET */
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
-  a { text-decoration: none; }
-
-  /* FADE-IN: só aplica a ocultação se o JS está presente (classe .js é adicionada via script) */
-  .js .fade-in {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+  .hero-inner{
+    position:relative;
+    max-width: var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x);
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:64px;
+    align-items:center;
+    width:100%;
   }
-  .js .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+  .hero-copy{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:28px;
+  }
+  .hero-badge{
+    background: rgba(214,227,255,0.3);
+    border:1px solid rgba(0,86,179,0.12);
+    padding:8px 16px;
+    border-radius:9999px;
+    color: var(--blue);
+  }
+  .hero-copy h1{
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 100;
+    font-size: clamp(52px, 6.2vw, 80px);
+    line-height:1.12;
+    letter-spacing:-1.6px;
+    color: var(--navy-950);
+    font-weight:800;
+    text-transform:uppercase;
+  }
+  .hero-copy h1 .thin{
+    font-weight:400;
+    color: var(--navy-800);
+  }
+  .hero-copy p{
+    font-size:18px;
+    line-height:28px;
+    max-width:576px;
+  }
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    padding-top:4px;
+  }
+  .hero-media{
+    position:relative;
+    border-radius: var(--radius-card);
+    overflow:hidden;
+    box-shadow: var(--shadow-card);
+    aspect-ratio: 1 / 1;
+    background: var(--navy-950);
+  }
+  .hero-media video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .hero-media::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: linear-gradient(to top, rgba(0,26,56,0.4) 0%, rgba(0,26,56,0) 60%);
+    opacity:0;
+    transition: opacity .3s ease;
+    pointer-events:none;
+  }
+  .hero-media:hover::after{ opacity:1; }
+
+  /* ==========================================
+     SERVICES — O QUE FAZEMOS
+     ========================================== */
+  .services{
+    padding:128px 0;
+  }
+  .services-header{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    margin-bottom:64px;
+  }
+  .services-grid{
+    max-width: var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x);
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:24px;
+  }
+  .service-card{
+    border-radius: var(--radius-card);
+    padding:32px 32px 48px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .service-card:hover{ transform: translateY(-8px); }
+  .service-card.dark{
+    background: var(--navy-950);
+    color:#fff;
+  }
+  .service-card.light{
+    background:#fff;
+    border:1px solid #eee;
+    filter: drop-shadow(var(--shadow-drop));
+    color: var(--gray-700);
+  }
+  .service-card img{
+    width:192px;
+    height:192px;
+    object-fit:contain;
+    margin-bottom:24px;
+  }
+  .service-card h3{
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 100;
+    font-weight:600;
+    font-size:32px;
+    line-height:40px;
+    margin-bottom:8px;
+  }
+  .service-card.dark h3{ color:#fff; }
+  .service-card.light h3{ color: var(--navy-950); }
+  .service-card p{
+    font-size:16px;
+    line-height:24px;
+  }
+  .service-card.dark p{ color: rgba(255,255,255,0.8); }
+  .services-footer{
+    display:flex;
+    justify-content:center;
+    margin-top:64px;
   }
 
   /* ==========================================
-     NAVBAR
+     PORTFOLIO PREVIEW
      ========================================== */
-  nav {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    padding: 1rem 2rem; 
-    background: var(--brand);
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-    transition: top 0.3s ease;
+  .portfolio-preview{
+    background: var(--bg-alt);
+    padding:128px 0;
   }
-    
-  .logo img { 
-    height: 40px; 
+  .portfolio-inner{
+    max-width: var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x);
+    display:flex;
+    flex-direction:column;
+    gap:64px;
   }
-  .nav-links { 
-    display: flex; 
-    align-items: center; 
-    gap: 1.5rem; 
-    position: relative; 
+  .portfolio-header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:32px;
   }
-  .nav-links a { 
-    color: #fff; 
-    font-family: 'IntroCondBlackFree', sans-serif; 
-    font-weight: 500; 
+  .portfolio-header .intro{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
   }
-  .dropdown { 
-    position: relative; 
+  .portfolio-header .intro p{
+    font-size:18px;
+    line-height:28px;
+    max-width:448px;
   }
-  .dropdown-content { 
-    display: none; 
-    position: absolute; 
-    top: 100%; 
-    left: 0; 
-    background-color: var(--brand); 
-    min-width: 200px; 
-    border-radius: 4px; 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+  .portfolio-nav{
+    display:flex;
+    gap:16px;
+    flex-shrink:0;
   }
-  .dropdown-content a { 
-    display: block; 
-    padding: 0.75rem 1rem; 
-    color: #fff; 
+  .portfolio-nav a{
+    width:56px;
+    height:56px;
+    border-radius:9999px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.1rem;
+    transition: transform .2s ease, background .2s ease, color .2s ease;
   }
-  .dropdown:hover .dropdown-content { 
-    display: block; 
+  .portfolio-nav a:hover{ transform: translateY(-2px); }
+  .portfolio-nav .arrow-ghost{
+    border:1px solid var(--gray-400);
+    color: var(--gray-700);
+    background:transparent;
   }
-  .social-icons { 
-    display: flex; 
-    gap: 0.5rem; 
+  .portfolio-nav .arrow-solid{
+    background: var(--navy-950);
+    color:#fff;
   }
-  .social-icons a { 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    width: 40px; 
-    height: 40px; 
-    background-color: var(--brand); 
-    border-radius: 50%; 
-  }
-  .social-icons img {
-    width: 40px; 
-    height: 40px; 
-    filter: invert(1); 
-  }
-  .menu-toggle { 
-    display: none; 
-    font-size: 2rem; 
-    background: none; 
-    border: none; 
-    color: #fff; 
-    cursor: pointer; 
-    z-index: 1001; 
-  }
-
-  /* NAV - MOBILE */
-  @media (max-width: 768px) {
-    .menu-toggle { 
-      display: block; 
-    }
-    .nav-links { 
-      display: none; 
-      flex-direction: column; 
-      background: var(--brand); 
-      position: absolute; 
-      top: 70px; 
-      right: 20px; 
-      padding: 1rem; 
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-      z-index: 999; 
-    }
-    .nav-links a { 
-      color: #fff; 
-    }
-    .nav-links.active { 
-      display: flex; 
-    }
-    .dropdown-content { 
-      position: static; 
-      box-shadow: none; 
-      margin-top: 0.5rem;
-    }
+  .portfolio-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:24px;
   }
 
   /* ==========================================
-     WHATSAPP FLOAT
+     CLIENTES
      ========================================== */
-  .whatsapp-float { 
-    position: fixed; 
-    width: 60px; 
-    height: 60px; 
-    bottom: 20px; 
-    right: 20px; 
-    z-index: 1000; 
-    background-color: #25d366; 
-    border-radius: 50%; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    transition: transform 0.3s; 
-  }
-  .whatsapp-float:hover { 
-    transform: scale(1.1); 
-  }
-  .whatsapp-float img { 
-    width: 60px; 
-    height: 60px; 
-  }
-
-  /* ==========================================
-     HERO (Desktop & Mobile)
-     ========================================== */
-  .hero { 
-    position: relative; 
-    min-height: 100vh; 
-    margin-top: 3rem; 
-    padding: 0 6rem; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: flex-start; 
-    color: #fff; 
-    text-align: left; 
-    overflow: hidden; 
-  }
-
-  .orcamento-button { 
-    position: relative;
-    z-index: 2;
-    margin-top: 10rem; 
-    padding: 0.75rem 1.5rem; 
-    background-color: var(--brand); 
-    color: #fff; 
-    border-radius: 8px; 
-    font-family: 'IntroRegularAlt', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    display: inline-block; 
-    text-align: center; 
-    text-decoration: none; 
-    margin-bottom: 2rem;
-    margin-left: 0rem;
-  }
-
-  .orcamento-button:hover { 
-    background-color: var(--brand-dark); 
-  }
-  .hero-video { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    z-index: 0;
-  }
-  .hero-text { 
-    position: relative; 
-    z-index: 1; 
-    font-family: 'IntroCondBlackFree', sans-serif; 
-    letter-spacing: 1px; 
-    font-size: 3rem; 
-    margin-bottom: 0.75rem; 
-    max-width: 600px; 
-    width: 50%; 
-    color: #fff; 
-    padding-right: 2rem; 
-      /* altura fixa — ajuste para caber o número de linhas que seu typewriter mostra */
-    height: 6rem;
-  /* garante que o texto que aparece não aumente o bloco */
-    overflow: hidden;
-  /* mantém o layout atual (block para controle de altura) */
-    display: block;
-  /* impede quebra de linha excessiva; use 'normal' se quiser permitir várias linhas */
-    white-space: normal;
-    line-height: 1.05;
-  }
-
-  .cursor { 
-    display: inline-block; 
-    color: #fff; 
-    font-weight: bold; 
-    font-family: 'IntroRegularAlt', sans-serif; 
-    animation: blink 0.7s infinite; 
-    vertical-align: bottom;
-  }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-  .hero-mobile { 
-    display: none; 
-    position: relative; 
-    min-height: 100vh; 
-    color: #fff; 
-    text-align: center; 
-    overflow: hidden; 
-  }
-  .hero-mobile .hero-video { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%;
-    height: 100%; 
-    object-fit: cover; 
-    z-index: 0;
-  }
-  .hero-mobile-bg { 
-    position: relative; 
-    z-index: 1;
-    background: rgba(0,0,0,0.5); 
-    width: 100%; 
-    height: 100vh; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-  }
-  .hero-mobile-text h1 { 
-    font-size: 2rem;
-    padding: 0 1rem;
-    font-family: 'IntroCondBlackFree', sans-serif;
-    align-items: center; 
-    justify-content: center; 
-    margin-left: 1rem;
-  }
-  .hero-mobile-desc{
-    font-family: 'IntroRegularAlt', sans-serif;
-    font-size: 1rem;
-    margin-top: .5rem;
-    padding: 0 1rem;
-  }
-
-  @media (max-width: 768px) { 
-    .hero { 
-      display: none !important; 
-    } 
-    .hero-mobile { 
-      display: flex !important; 
-      margin-top: 4.5rem; 
-      position: relative;
-    } 
-    .orcamento-button { 
-      position: absolute;
-      bottom: 16rem;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0;
-      z-index: 2;
-    }
-  }
-
-/* =========================
-   FEATURE SECTION
-========================= */
-
-.feature-section { 
-  min-height: 90vh; 
-  padding: 2rem; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  gap: 1.5rem;
-  margin: 0 0 2rem 0;
-}
-
-.feature-description {
-  font-family: 'IntroRegularAlt', sans-serif;
-  text-align: left;
-  font-size: 1rem;
-  max-width: 400px;
-  color: var(--text);
-  max-height: 4rem;
-  overflow: hidden;
-}
-
-.feature-section h1 { 
-  text-align: left;
-  margin-left: 2rem;
-  font-family: 'IntroCondBlackFree', sans-serif;
-  color: var(--brand); 
-  letter-spacing: 1px; 
-  margin-bottom: 0rem;
-  font-size: 3rem;
-}
-
-/* =========================
-   FEATURE BOXES – BASE (MOBILE FIRST)
-========================= */
-
-.feature-boxes { 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; 
-  gap: 1.8rem; 
-  margin-top: 0rem; 
-}
-
-.feature-box { 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: var(--brand);
-  border-radius: 8px;
-  padding: 1.5rem;
-  width: 300px;
-  height: 350px;
-  box-shadow: 0 8px 24px rgba(30, 67, 129, 0.13),
-              0 1.5px 8px rgba(30, 67, 129, 0.11);
-  text-align: center;
-  color: #fff;
-}
-
-.feature-box h3 {
-  font-family: 'IntroCondBlackFree', sans-serif;
-  letter-spacing: 2px;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.feature-box img {
-  width: auto;
-  max-width: 100%;
-  height: 50%;
-  border-radius: 8px;
-  margin-top: 1rem;
-  align-self: center;
-}
-
-.feature-box p {
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.3rem;
-}
-
-/* =========================
-   FLIP – DESKTOP ONLY
-========================= */
-
-@media (min-width: 769px) {
-
-  .feature-box {
-    background: none;
-    padding: 0;
-    box-shadow: none;
-  }
-
-  .feature-box.flip {
-    perspective: 1200px;
-  }
-
-  .feature-box-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
-  }
-
-  .feature-box.flip:hover .feature-box-inner {
-    transform: rotateY(180deg);
-  }
-
-  .feature-box-front,
-  .feature-box-back {
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    border-radius: 8px;
-    padding: 1.5rem;
-    background-color: var(--brand);
-    box-shadow: 0 8px 24px rgba(30, 67, 129, 0.13),
-                0 1.5px 8px rgba(30, 67, 129, 0.11);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .feature-box-front {
-    justify-content: center;
-    align-items: center;
-    gap: 1.2rem;
-  }
-
-  .feature-box-front h3 {
-    font-size: 1.6rem;
-    letter-spacing: 3px;
-  }
-
-  .feature-box-front img {
-    height: 65%;
-    max-width: 90%;
-    object-fit: contain;
-  }
-
-  .feature-box-back {
-    transform: rotateY(180deg);
-    justify-content: center;
-    text-align: center;
-  }
-
-  /* texto só no verso no desktop */
-  .feature-box-front p {
-    display: none;
-  }
-}
-
-/* =========================
-   BOTÃO MAIS
-========================= */
-
-.more-button { 
-  margin-top: 2rem; 
-  padding: 0.75rem 1.5rem; 
-  background-color: var(--brand); 
-  color: #fff; 
-  border-radius: 8px; 
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 1rem;
-  cursor: pointer;
-  text-decoration: none; 
-  align-self: center;
-}
-
-.more-button:hover { 
-  background-color: var(--brand-dark); 
-}
-
-/* =========================
-   INDICADORES – DESKTOP
-========================= */
-
-.carousel-indicators,
-.portfolio-indicators,
-.carousel-dots {
-  display: none;
-}
-
-/* =========================
-   MOBILE – ORIGINAL (INALTERADO)
-========================= */
-
-@media (max-width: 768px) {
-
-  .js .fade-in {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  .feature-section {
-    padding-left: 1;
-    padding-right: 0;
-    align-items: center; /* Centraliza os filhos por padrão */
-  }
-
-  .feature-boxes { 
-    margin-top: 0.75rem;
-    display: flex; 
-    flex-wrap: nowrap; 
-    overflow-x: auto; 
-    overflow-y: hidden; 
-    gap: 1rem; 
-    padding-left: 0.25rem; 
-    padding-right: 1rem; 
-    max-width: 100vw; 
-    scroll-snap-type: x mandatory; 
-    -webkit-overflow-scrolling: touch; 
-    touch-action: pan-x;
-    overscroll-behavior-x: contain;
-    justify-content: flex-start; 
-    scroll-padding-left: 0.25rem;
-  }
-
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin: 0 2rem 1.5rem 0rem;
-    gap: 1rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .feature-section h1 {
-    margin-left: 0;
-    margin-bottom: 0;
-    text-align: left;
-    min-width: max-content;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .feature-description {
-    text-align: left;
-    max-width: 90%;
-    line-height: 1.4rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .feature-box { 
-    flex: 0 0 auto; 
-    width: 300px;
-    height: 350px; 
-    scroll-snap-align: start; 
-  }
-
-  .carousel-indicators { 
-    display: flex;
-    justify-content: center; /* Centraliza as bolinhas horizontalmente */
-    align-items: center;
-    width: 100%;             /* Garante que ocupa a largura toda da tela */
-    margin: 1.5rem 0;        /* Remove o 'auto' lateral e foca no vertical */
-    padding: 0;              /* Remove paddings residuais */
-    left: 0;                 /* Garante posicionamento inicial */
-  }
-
-  .carousel-indicators span {
-    flex: 0 0 auto;          /* Impede que as bolinhas estiquem ou encolham */
-    width: 10px;             /* Aumentei um pouco para facilitar o toque */
-    height: 10px;
-    background: rgba(31, 67, 129, 0.3);
-    border-radius: 50%;
-    margin: 0 5px;           /* Espaçamento individual entre as bolinhas */
-    
-  }
-
-  .carousel-indicators span.active {
-    background: var(--brand);
-  }
-} 
-
-/* =========================
-   PATCH FINAL – MOBILE
-   (imagem, texto e bolinhas)
-========================= */
-@media (max-width: 768px) {
-
-  /* 1) garante que o card não deixe nada "vazar" */
-  .feature-box {
-    overflow: hidden;
-  }
-
-  /* 2) limita a imagem dentro da box (sem estourar) */
-  .feature-box-front img {
-    height: auto;         /* remove a lógica do "50%" aqui */
-    max-height: 160px;    /* ajuste fino: 140–180 costuma ficar ótimo */
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    margin: 0.75rem auto 0;
-  }
-
-  /* 3) No mobile, o verso vira texto normal (igual ao original) */
-  .feature-box-inner {
-    position: static;     /* tira qualquer “efeito colateral” do desktop */
-    height: auto;
-    transform: none !important;
-  }
-
-  .feature-box-front,
-  .feature-box-back {
-    position: static;     /* desfaz o absolute do desktop */
-    inset: auto;
-    backface-visibility: visible;
-    transform: none !important;
-    box-shadow: none;     /* quem dá sombra é a feature-box (original) */
-    background: transparent;
-    padding: 0;
-  }
-
-  /* Frente: só título + imagem (bem como antes) */
-  .feature-box-front {
-    display: block;
-  }
-
-  /* Verso: aparece como o parágrafo original */
-  .feature-box-back {
-    display: block;
-    margin-top: 0.5rem;
-  }
-
-  .feature-box-back p {
-    display: block;
-    margin: 0;
-    font-family: 'IntroRegularAlt', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.3rem;
-  }
-
-} 
-
-
-  /* ==========================================
-     PORTFOLIO / PROJECTS
-     ========================================== */
-  .section-title { 
-    font-size: 3rem;
-    text-align: left;
-    color: var(--brand);
-    font-family: 'IntroCondBlackFree', sans-serif;
-    margin-bottom: 0rem;
-    margin-left: 4rem;
-  }
-
-  .portfolio-header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1.5rem;
-    margin: 0 0 0rem 0;            /* Remove margens laterais */
-
-  }
-  .portfolio-description {
-    font-family: 'IntroRegularAlt', sans-serif;
-    font-size: 1rem;
-    max-width: 400px;
-    color: var(--text);
-    max-height: 4rem;
-    overflow: hidden;
-    margin-left: 0;
-    text-align: left;
-  }
-    
-  .projects-section { 
-    min-height: 80vh; 
-    padding: 0; 
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
-    justify-content: center; 
-  }
-  .projects-carousel { 
-    position: relative; 
-    width: 100%; 
-    overflow: hidden; 
-  }
-  .projects-grid { 
-    display: flex; 
-    transition: transform 0.5s ease-in-out;
-    width: 90%; 
-    gap: 1rem; 
-    margin-left: 1rem;
-  }
-  .project-item { 
-    border-radius: 8px;
-    flex: 0 0 33.333%; 
-    max-width: 33.333%; 
-    position: relative; 
-    overflow: hidden; 
-    aspect-ratio: 4/4;
-  }
-  .project-item img { 
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    transition: filter .18s ease, transform .18s ease;
-  }
-  .overlay {
-    position: absolute; 
-    inset: 0; 
-    background-color: rgba(0,0,0,0.45); 
-    opacity: 0; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center; 
-    gap: 0.7rem; 
-    transition: opacity .2s ease;
-    padding: 1rem; 
-    text-align: center;
-    color: #fff; 
-    font-family: 'IntroCondBlackFree', sans-serif;
-  }
-  .overlay p { 
-    font-family: 'IntroRegularAlt', sans-serif;
-    margin: 0; 
-    font-size: 1rem; 
-  }
-  .overlay .tag { 
-    background: var(--brand); 
-    color: #fff; 
-    padding: 6px 10px;
-    border-radius: 8px; 
-    font-size: 0.85rem; 
-    font-family: 'IntroRegularAlt', sans-serif;
-  }
-  .project-item:hover img {
-    transform: scale(1.02);
-    filter: brightness(0.6); 
-  }
-  .project-item:hover .overlay { opacity: 1; }
-
-  .portfolio-arrows { 
-    display: flex; 
-    gap: 1rem;
-    margin-top: 1rem;
-    margin-top: 2rem;
-    align-self: center;
-  }
-  .portfolio-arrows .prev, .portfolio-arrows .next { 
-    background-color: var(--brand); 
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 50px;
-    cursor: pointer; 
-    font-size: 1rem;
-    transition: background-color 0.3s ease, opacity 0.2s ease;
-  }
-  .portfolio-arrows .prev:hover, .portfolio-arrows .next:hover { background-color: var(--brand-dark); }
-  .portfolio-arrows .prev:disabled, .portfolio-arrows .next:disabled { opacity: 0.4; cursor: default; }
-
-  /* RESPONSIVO - tablet & mobile */
-  @media (max-width: 992px) {
-    .projects-grid { 
-      display: grid; 
-      grid-template-columns: repeat(2, 1fr); 
-      transition: none; 
-    }
-
-    .project-item {
-      flex: unset; 
-      max-width: unset; 
-    }
-    .portfolio-arrows { 
-      display: none;
-    }
-  }
-  @media (max-width: 768px) {
-    .projects-section { 
-      min-height: 60vh; 
-      margin-top: 0rem; 
-      padding-bottom: 2rem;
-    }
-
-    .portfolio-description {
-      max-height: none;   /* libera altura no mobile */
-      line-height: 1.4rem;
-      margin-top: 0;
-    }
-
-    .portfolio-header {
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 2rem 2rem 1.5rem 2rem;
-    }
-    
-    .section-title { 
-      margin-bottom: 0; 
-      font-size: 3rem; 
-      align-items: flex-start;
-      margin-left: 0;
-    }
-    .projects-grid { 
-      margin-top: 1rem; 
-      margin-bottom: 0.5rem;
-      width: 100%;
-    }
-    .portfolio-indicators { 
-      margin-top: 0.5rem; 
-      margin-bottom: 0.5rem;
-    }
-    .projects-grid { 
-      display: flex; 
-      overflow-x: auto; 
-      scroll-snap-type: x mandatory; 
-      -webkit-overflow-scrolling: touch; 
-      gap: 1rem; 
-      transition: none; 
-    }
-    .project-item { 
-      flex: 0 0 90%; 
-      max-width: 100%; 
-      scroll-snap-align: start;
-      aspect-ratio: 4/4; 
-    }
-    .portfolio-arrows { 
-      display: none;
-    }
-    .portfolio-indicators {
-      display: flex; 
-      justify-content: center; 
-      gap: 0.5rem; 
-      margin-top: 1rem;
-      align-self: center;
-    }
-    .portfolio-indicators span { 
-      width: 10px; 
-      height: 10px;
-      background: #ccc; 
-      border-radius: 50%;
-      cursor: pointer;
-    }
-    .portfolio-indicators span.active { 
-      background: #1F4381;
-    }
-  }
-
-  /* ==========================================
-     CTA / CLIENTES / FOOTER
-     ========================================== */
-
-.cta-section {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8rem 4rem;
-  color: #fff;
-  overflow: hidden;
-}
-
-    
-    .cta-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
-}
-
-
-    .cta-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1200px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  align-items: center;
-  gap: 4rem;
-}
-
-
-    .cta-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.cta-text,
-.cta-button {
-  position: relative;
-  z-index: 2;
-}
-    
-.cta-text {
-  font-family: 'IntroCondBlackFree', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  line-height: 1.2;
-  letter-spacing: 1px;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
-}
-    
-.cta-button {
-  display: flex;
-  justify-content: center;
-}
-
-.cta-button a {
-  width: 100%;
-  max-width: 320px;
-  padding: 1.2rem 0;
-  background: #ffffff;
-  border-radius: 999px;
-  color: var(--brand);
-  font-family: 'IntroRegularAlt', sans-serif;
-  text-align: center;
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-}
-
-.cta-button a:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
-}
-
-
-@media (max-width: 768px) {
-  .cta-section {
-    padding: 4rem 1.5rem;
-  }
-
-  .cta-content {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    align-content: center;
-    text-align: center;
-    gap: 2.5rem;
-  }
-
-  .cta-text {
-    max-width: 28ch;
-    font-size: clamp(1.8rem, 6vw, 2.4rem);
-  }
-
-  .cta-button {
-    width: 100%;
-  }
-
-  .cta-button a {
-    max-width: 320px;
-    width: 100%;
-  }
-}
-
-    
-.clientes-section { 
-  width: 100vw;
-  min-height: auto;
-  background-color: #fff; 
-  padding: 3rem 0;
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center;
-  overflow: hidden;
-}
-
-.clientes-section h2 {
-  font-family: 'IntroCondBlackFree', sans-serif;
-  font-size: 3rem; 
-  color: var(--brand);
-  margin-bottom: 2rem; 
-  text-align: center;
-}
-
-/* DESKTOP GRID */
-.clientes-grid { 
-  display: flex; 
-  flex-wrap: wrap; 
-  justify-content: center;
-  gap: 3rem; 
-  max-width: 960px; 
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.clientes-grid img { 
-  flex: 0 1 calc(25% - 3rem);
-  max-width: 120px; 
-  height: 60px;
-  object-fit: contain; 
-  transition: transform 0.3s ease;
-}
-
-.clientes-grid img:hover { 
-  transform: scale(1.1);
-}
-
-/* MOBILE MARQUEE */
-.clientes-marquee {
-  display: none;
-  width: 100vw;
-  overflow: hidden;
-  position: relative;
-}
-
-.clientes-track {
-  display: flex;
-  gap: 3rem;
-  width: max-content;
-  animation: clientes-marquee 20s linear infinite;
-}
-
-.clientes-track img {
-  width: 120px;
-  height: 60px;
-  object-fit: contain;
-  flex-shrink: 0;
-  opacity: 0.85;
-}
-
-/* animação */
-@keyframes clientes-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/* MOBILE BREAKPOINT */
-@media (max-width: 768px) {
-  .clientes-grid {
-    display: none;
-  }
-
-  .clientes-marquee {
-    display: block;
-  }
-
-  .clientes-section {
-    padding: 2rem 0;
-  }
-}
-
-
-  footer { 
-    background-color: var(--brand);
-    color: white; 
-    padding: 2rem; 
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  .footer-address { 
-    width: 30%; 
-    font-size: 0.9rem;
-    font-family: 'IntroRegularAlt', sans-serif; 
-  }
-  .footer-links { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 0.5rem; width: 30%;
-  }
-  .footer-links a {
-    font-family: 'IntroRegularAlt', sans-serif; 
-    color: white; 
-    font-weight: 500; 
-  }
-
-    /* Estilo para a frase de SEO no rodapé */
-.footer-seo {
-  width: 100%;
-  text-align: center;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Linha divisória sutil */
-}
-
-.footer-seo p {
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7); /* Texto levemente transparente para ser discreto */
-  letter-spacing: 0.5px;
-}
-    
-/* Ícones */
-.social-icons {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  justify-content: center; /* garante centralização */
-  padding-right: 4rem;
-}
-
-.social-icons img {
-  width: 56px;
-  height: 56px;
-  transition: opacity 0.3s ease;
-}
-
-.social-icons img:hover {
-  opacity: 0.8;
-}
-
-/* ========== MOBILE ========== */
-@media (max-width: 768px) {
-  .cta-section {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .cta-text {
-  width: 100%;
-  display: flex !important;
-  margin: 3rem 0 1.5rem;   /* menor margem superior e margem inferior consistente */
-  justify-content: center; /* centraliza horizontalmente o conteúdo */
-  align-items: center;     /* centraliza verticalmente, caso a altura aumente */
-  text-align: center;      /* garante que o texto fique centrado */
-  padding: 0 1rem;         /* evita que o texto encoste nas bordas do viewport */
-  font-size: 2.5rem;       /* ajuste de tamanho mais apropriado para mobile; altere se desejar */
-  line-height: 1.1;
-  }
-
-  .cta-button {
-    width: 100%;
-    margin-bottom: 5rem;
-  }
-
-  /* Esconde endereço e links */
-  .footer-address,
-  .footer-links {
-    display: none;
-  }
-
-  /* Ajuste para mobile */
-@media (max-width: 768px) {
-  .footer-seo {
-    margin-top: 1.5rem;
-    padding: 1rem;
-  }
-  .footer-seo p {
-    font-size: 0.75rem;
-    line-height: 1.4;
-  }
-}
-
-  /* Centraliza ícones no mobile */
-  .social-icons {
-    justify-content: center;
-    padding-right: 0;
-    margin-top: 1rem;
-    margin-left: 7rem;     
-    gap: 1rem;
-  }
-
-  .social-icons img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-  }
-}
-
-
-  /* ==========================================
-     MODERNIZAÇÃO — MELHORIAS VISUAIS
-     ========================================== */
-
-  /* Navbar — efeito glass ao rolar */
-  nav {
-    transition: top 0.3s ease, background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
-  }
-  nav.scrolled {
-    background: rgba(31, 67, 129, 0.88);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
-  }
-
-  /* Hover animado nos links do menu */
-  .nav-links > a,
-  .nav-links .dropdown > a {
-    position: relative;
-    padding-bottom: 3px;
-    transition: opacity 0.2s ease;
-  }
-  .nav-links > a::after,
-  .nav-links .dropdown > a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 2px;
-    transition: width 0.3s ease;
-  }
-  .nav-links > a:hover::after,
-  .nav-links .dropdown > a:hover::after {
-    width: 100%;
-  }
-
-  /* Hero — overlay gradiente lateral */
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.12) 55%,
-      transparent 100%
-    );
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  /* Botão orçamento — destaque com accent */
-  .orcamento-button {
-    background: linear-gradient(135deg, var(--accent) 0%, #ff8c5a 100%);
-    border-radius: 50px;
-    padding: 0.9rem 2.2rem;
-    letter-spacing: 0.5px;
-    box-shadow: 0 6px 24px rgba(255, 104, 53, 0.42);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .orcamento-button:hover {
-    background: linear-gradient(135deg, #ff7a47 0%, var(--accent) 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 36px rgba(255, 104, 53, 0.55);
-  }
-
-  /* WhatsApp — anel pulsante */
-  .whatsapp-float {
-    overflow: visible;
-  }
-  .whatsapp-float::before {
-    content: '';
-    position: absolute;
-    inset: -7px;
-    border-radius: 50%;
-    background: rgba(37, 211, 102, 0.35);
-    animation: wpp-pulse 2.4s ease-out infinite;
-    pointer-events: none;
-  }
-  @keyframes wpp-pulse {
-    0%   { transform: scale(1);   opacity: 0.85; }
-    100% { transform: scale(1.6); opacity: 0; }
-  }
-
-  /* Feature section — fundo gradiente suave */
-  .feature-section {
-    background: linear-gradient(180deg, var(--bg) 0%, #e8eef8 100%);
-  }
-
-  /* Barra decorativa accent nos títulos */
-  .feature-section h1::before {
-    content: '';
-    display: block;
-    width: 42px;
-    height: 4px;
-    background: var(--accent);
-    border-radius: 2px;
-    margin-bottom: 0.65rem;
-  }
-  .section-title::before {
-    content: '';
-    display: block;
-    width: 42px;
-    height: 4px;
-    background: var(--accent);
-    border-radius: 2px;
-    margin-bottom: 0.65rem;
-  }
-
-  @media (max-width: 768px) {
-    .section-title::before {
-      margin-left: 0;
-    }
-  }
-
-  /* Feature cards — gradiente e borda-raio maior */
-  .feature-box-front,
-  .feature-box-back {
-    border-radius: 16px !important;
-    box-shadow: 0 12px 40px rgba(31, 67, 129, 0.22) !important;
-  }
-  .feature-box-front {
-    background: linear-gradient(145deg, var(--brand-light) 0%, var(--brand) 100%) !important;
-  }
-  .feature-box-back {
-    background: linear-gradient(145deg, var(--brand) 0%, var(--brand-dark) 100%) !important;
-  }
-
-  @media (max-width: 768px) {
-    .feature-box {
-      border-radius: 16px !important;
-      background: linear-gradient(145deg, var(--brand-light) 0%, var(--brand) 100%) !important;
-    }
-  }
-
-  /* Botão "Mais" — estilo outline moderno */
-  .more-button {
-    background: transparent;
-    border: 2px solid var(--brand);
-    color: var(--brand);
-    border-radius: 50px;
-    letter-spacing: 0.5px;
-    padding: 0.75rem 2.2rem;
-    transition: all 0.3s ease;
-  }
-  .more-button:hover {
-    background: var(--brand);
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(31, 67, 129, 0.28);
-  }
-
-  /* Portfolio overlay — gradiente com brand */
-  .overlay {
-    background: linear-gradient(
-      160deg,
-      rgba(31, 67, 129, 0.88) 0%,
-      rgba(14, 28, 62, 0.96) 100%
-    ) !important;
-  }
-  .project-item {
-    border-radius: 14px;
-  }
-
-  /* CTA button — gradiente accent */
-  .cta-button a {
-    background: linear-gradient(135deg, var(--accent) 0%, #ff8c5a 100%) !important;
-    color: #fff !important;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    box-shadow: 0 10px 40px rgba(255, 104, 53, 0.45) !important;
-  }
-  .cta-button a:hover {
-    box-shadow: 0 16px 50px rgba(255, 104, 53, 0.58) !important;
-    transform: translateY(-3px) !important;
-  }
-
-  /* Clientes — grayscale + cor no hover */
-  .clientes-grid img {
-    filter: grayscale(65%);
-    opacity: 0.75;
-    transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
-  }
-  .clientes-grid img:hover {
+  .clients{
+    padding:64px 0 96px;
+  }
+  .clients h3{
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 100;
+    font-weight:600;
+    font-size:32px;
+    line-height:40px;
+    color: var(--navy-950);
+    text-align:center;
+    text-transform:uppercase;
+    margin-bottom:48px;
+  }
+  .clients-grid{
+    max-width: var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x);
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:48px;
+  }
+  .clients-grid img{
+    max-width:120px;
+    height:56px;
+    object-fit:contain;
+    filter: grayscale(100%);
+    opacity:.5;
+    transition: filter .35s ease, opacity .35s ease, transform .35s ease;
+  }
+  .clients-grid img:hover{
     filter: grayscale(0%);
-    opacity: 1;
-    transform: scale(1.12);
-  }
-
-  /* Footer — borda topo gradiente */
-  footer {
-    position: relative;
-  }
-  footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(
-      to right,
-      var(--accent),
-      var(--brand-light),
-      var(--accent)
-    );
+    opacity:1;
+    transform: scale(1.1);
   }
 
   /* ==========================================
-     FIM MODERNIZAÇÃO
+     RESPONSIVO
      ========================================== */
-
+  @media (max-width: 992px){
+    .hero-inner{ grid-template-columns:1fr; gap:48px; }
+    .hero{ padding:150px 0 64px; min-height:auto; }
+    .services-grid{ grid-template-columns: repeat(2, 1fr); }
+    .portfolio-grid{ grid-template-columns: repeat(2, 1fr); }
+    .portfolio-header{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (max-width: 768px){
+    .services{ padding:80px 0; }
+    .portfolio-preview{ padding:80px 0; }
+    .services-grid{ grid-template-columns: 1fr; }
+    .portfolio-grid{ grid-template-columns: 1fr; }
+    .hero-actions .btn{ width:100%; }
+  }
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <nav>
-    <div class="logo"><img src="Logo_png.png" alt="Logo da empresa"></div>
-    <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="orcamento.html">Orçamento</a>
-      <div class="dropdown">
-        <a href="#produtos">Produtos</a>
-        <div class="dropdown-content">
-          <a href="impressão.html">Impressão</a>
-          <a href="criacao.html">Criação</a>
-          <a href="digital.html">Digital</a>
-          <a href="redes-sociais.html">Redes Sociais</a>
-        </div>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo"><img src="Logo_png.png" alt="Celtoon Agência Criativa"></a>
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="produto.html">Produto</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contato.html">Contato</a>
       </div>
-      <a href="contato.html">Contato</a>
+      <a href="orcamento.html" class="btn btn-pill-grad nav-cta">Solicitar Orçamento</a>
     </div>
   </nav>
 
-  <!-- HERO DESKTOP -->
-  <section class="hero" id="home">
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="imagem/fundo.webm" type="video/webm">
-      Seu navegador não suporta vídeo.
-    </video>
-    <div class="hero-text">
-      <span id="typewriter"></span><span class="cursor">|</span>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="hero-badge mono-label">Creative Agency</span>
+        <h1>Ideias<br>Ousadas.<br><span class="thin">Resultados<br>Reais.</span></h1>
+        <p>Do conceito ao resultado: design que conecta, emociona e vende. Transformamos marcas através de tecnologia e arte.</p>
+        <div class="hero-actions">
+          <a href="orcamento.html" class="btn btn-grad">Vamos conversar?</a>
+          <a href="portfolio.html" class="btn btn-outline">Ver Portfólio</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <video autoplay muted loop playsinline>
+          <source src="celtoon-reel-sn2.webm" type="video/webm">
+          <source src="celtoon-reel-sn.mp4" type="video/mp4">
+          Seu navegador não suporta vídeo.
+        </video>
+      </div>
     </div>
-    <a href="orcamento.html" class="orcamento-button">Vamos conversar?</a>
-  </section>
+  </header>
 
-  <!-- HERO MOBILE -->
-  <section class="hero-mobile">
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="celtoon-reel-sn.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo.
-    </video>
-    <div class="hero-mobile-bg">
-      <div class="hero-mobile-text">
-        <h1>Criatividade é nossa matéria prima.</h1>
-        <p class="hero-mobile-desc">Do conceito ao resultado: design que conecta, emociona e vende.</p>
-      </div>
-      <a href="orcamento.html" class="orcamento-button">Vamos conversar?</a>
-    </div>
-  </section>
-
- <section id="features" class="feature-section fade-in">
-
-  <div class="section-header">
-    <h1>O que<br>fazemos</h1>
-    
-  </div>
-
-  <div class="feature-carousel">
-    <div class="feature-boxes">
-
-      <!-- IMPRESSÃO -->
-      <div class="feature-box flip fade-in">
-        <div class="feature-box-inner">
-
-          <div class="feature-box-front">
-            <h3>Impressão</h3>
-            <img src="personagem/boneco_papel.png" alt="Serviços de Impressão">
-          </div>
-
-          <div class="feature-box-back">
-            <p>
-              Flyer, cordão para crachá, credencial, totem, caderno, camiseta,
-              ecobag, adesivo, cartão de visitas, cartaz, convite, envelope,
-              banner, arte finalização.
-            </p>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- CRIAÇÃO -->
-      <div class="feature-box flip fade-in">
-        <div class="feature-box-inner">
-
-          <div class="feature-box-front">
-            <h3>Criação</h3>
-            <img src="personagem/boneco_plano.png" alt="Serviços de Criação">
-          </div>
-
-          <div class="feature-box-back">
-            <p>
-              Naming, slogan, style guide, criação de logo, mascote, mockup
-              digital, layout, embalagem, vetorização, ilustração, key visual,
-              edição, conceito visual.
-            </p>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- DIGITAL -->
-      <div class="feature-box flip fade-in">
-        <div class="feature-box-inner">
-
-          <div class="feature-box-front">
-            <h3>Digital</h3>
-            <img src="personagem/boneco_banco.png" alt="Serviços Digitais">
-          </div>
-
-          <div class="feature-box-back">
-            <p>
-              Modelagem 3D, UI & UX, banner para site, infográfico,
-              apresentação de slide, catálogo, landing page.
-            </p>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- REDES -->
-      <div class="feature-box flip fade-in">
-        <div class="feature-box-inner">
-
-          <div class="feature-box-front">
-            <h3>Redes Sociais</h3>
-            <img src="personagem/boneco_cel.png" alt="Serviços para Redes Sociais">
-          </div>
-
-          <div class="feature-box-back">
-            <p>
-              Conteúdo estático, reels, animado e carrossel.
-            </p>
-          </div>
-
-        </div>
-      </div>
-
+  <!-- SERVICES -->
+  <section id="servicos" class="services fade-in">
+    <div class="services-header">
+      <h2 class="section-title">O que fazemos</h2>
+      <div class="grad-divider"></div>
     </div>
 
-    <div class="carousel-indicators">
-      <span class="active"></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-
-  <a href="orcamento.html"  class="more-button">Mais</a>
-
-</section>
-
-  <!-- PORTFOLIO -->
-  <div class="portfolio-header">
-    <h2 class="section-title">Portfólio<br>criativo</h2>
-    
-  </div>
-  <section id="portfolio" class="projects-section fade-in">
-    <div class="projects-carousel">
-      <div class="projects-grid">
-        <div class="project-item">
-          <img src="imagem/pizza.png" alt="Renderização de modelagem 3D profissional de pizza para publicidade alimentícia">
-          <div class="overlay"><h3>Pizza</h3><span class="tag">Modelagem 3D</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/mock_2.png" alt="Programação de aplicativo interativo e realidade aumentada">
-          <div class="overlay"><h3>Celtoon App</h3><span class="tag">Programação</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/cabine.png" alt="Design de cabine fotográfica inflável">
-          <div class="overlay"><h3>Cabine Fotográfica</h3><span class="tag">Arquitetura Inflável</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/nort.jpg" alt="Design de mascote para empresa de telecomunicações">
-          <div class="overlay"><h3>Nortinho</h3><span class="tag">Mascote</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/Domo.jpg" alt="Design de domu inflável para fins educacionais">
-          <div class="overlay"><h3>Domo UFES</h3><span class="tag">Design de impressão</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/app1.png" alt="UX & UI de aplicativo delivery e rede social">
-          <div class="overlay"><h3>UX & UI</h3><span class="tag">Design e Programação</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/mock.jpg" alt="Ilustração para capa de livro">
-          <div class="overlay"><h3>Capa de livro</h3><span class="tag">Design de capa</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/Poty.jpg" alt="Modelagem 3D profissional para publicidade alimentícia">
-          <div class="overlay"><h3>Layout</h3><span class="tag">Modelagem 3D</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/folder.png" alt="Folder educativo para empresas">
-          <div class="overlay"><h3>Folder</h3><span class="tag">Design de impressão</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/ceopaginho.jpg" alt="Design de mascote para empresa de máquinas de pagamento">
-          <div class="overlay"><h3>Ceopaguinho</h3><span class="tag">Mascote</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/renderjpg.jpg" alt="Design de mascote para empresa de gestão de resíduos">
-          <div class="overlay"><h3>Recírculo</h3><span class="tag">Mascote</span></div>
-        </div>
-        <div class="project-item">
-          <img src="imagem/fries.jpg" alt="Modelagem 3D profissional para propaganda alimentícia">
-          <div class="overlay"><h3>Batata Frita</h3><span class="tag">Modelagem 3D</span></div>
-        </div>
+    <div class="services-grid">
+      <div class="service-card dark fade-in">
+        <img src="personagem/boneco_papel.png" alt="Serviços de Impressão" loading="lazy">
+        <h3>Impressão</h3>
+        <p>Qualidade tátil que dá vida às suas ideias no mundo físico.</p>
+      </div>
+      <div class="service-card light fade-in">
+        <img src="personagem/boneco_plano.png" alt="Serviços de Criação" loading="lazy">
+        <h3>Criação</h3>
+        <p>Identidade visual e branding que contam a sua história única.</p>
+      </div>
+      <div class="service-card dark fade-in">
+        <img src="personagem/boneco_banco.png" alt="Serviços Digitais" loading="lazy">
+        <h3>Digital</h3>
+        <p>Interfaces intuitivas e experiências web de alta performance.</p>
+      </div>
+      <div class="service-card light fade-in">
+        <img src="personagem/boneco_cel.png" alt="Serviços para Redes Sociais" loading="lazy">
+        <h3>Redes Sociais</h3>
+        <p>Estratégia e conteúdo que geram engajamento real.</p>
       </div>
     </div>
 
-    <div class="portfolio-arrows">
-      <button class="prev">&#10094;</button>
-      <button class="next">&#10095;</button>
-    </div>
-
-    <!-- bolinhas do mobile (portfolio) -->
-    <div class="portfolio-indicators" aria-hidden="true">
-      <span class="active"></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="services-footer">
+      <a href="produto.html" class="btn btn-pill">Mais Serviços</a>
     </div>
   </section>
 
-<!-- CTA -->
-<section id="cta" class="cta-section fade-in">
-  
-  <video class="cta-video" autoplay muted loop playsinline>
-    <source src="celtoon-reel-sn2.webm" type="video/webm">
-    Seu navegador não suporta vídeo HTML5.
-  </video>
+  <!-- PORTFOLIO PREVIEW -->
+  <section id="portfolio" class="portfolio-preview fade-in">
+    <div class="portfolio-inner">
+      <div class="portfolio-header">
+        <div class="intro">
+          <h2 class="section-title">Portfólio<br>Criativo</h2>
+          <p>Casos de sucesso que unem design estratégico e execução técnica impecável.</p>
+        </div>
+        <div class="portfolio-nav">
+          <a href="portfolio.html" class="arrow-ghost" aria-label="Ver portfólio completo">&#10094;</a>
+          <a href="portfolio.html" class="arrow-solid" aria-label="Ver portfólio completo">&#10095;</a>
+        </div>
+      </div>
 
-  <div class="cta-content">
-    <div class="cta-text">
-      Está pronto para transformar seu negócio com um design incrível?
+      <div class="portfolio-grid">
+        <a href="portfolio.html" class="project-card">
+          <img src="imagem/pizza.png" alt="Renderização de modelagem 3D profissional de pizza para publicidade alimentícia" loading="lazy">
+          <div class="overlay">
+            <span class="tag mono-label">Modelagem 3D</span>
+            <h3>Pizza 3D Realista</h3>
+          </div>
+        </a>
+        <a href="portfolio.html" class="project-card">
+          <img src="imagem/mock_2.png" alt="Programação de aplicativo interativo e realidade aumentada" loading="lazy">
+          <div class="overlay">
+            <span class="tag mono-label">Mobile App</span>
+            <h3>Celtoon Experience App</h3>
+          </div>
+        </a>
+        <a href="portfolio.html" class="project-card">
+          <img src="imagem/nort.jpg" alt="Design de mascote para empresa de telecomunicações" loading="lazy">
+          <div class="overlay">
+            <span class="tag mono-label">Character Design</span>
+            <h3>Mascote Nortinho</h3>
+          </div>
+        </a>
+      </div>
     </div>
+  </section>
 
-    <div class="cta-button">
-      <a href="orcamento.html">Solicitar Orçamento</a>
+  <!-- CTA -->
+  <section class="cta-section fade-in">
+    <div class="cta-inner">
+      <h2>Está pronto para transformar seu negócio com um design incrível?</h2>
+      <a href="orcamento.html" class="btn-white btn">Solicitar Orçamento</a>
     </div>
-  </div>
+  </section>
 
-</section>
-
-
-
-<!-- CLIENTES -->
-<section id="clientes" class="clientes-section fade-in">
-  <h2>Nossos clientes</h2>
-
-  <!-- Desktop -->
-  <div class="clientes-grid">
-    <img src="cliente/Ansell.png" alt="Ansell">
-    <img src="cliente/Bike.png" alt="Bike Center Brasilia">
-    <img src="cliente/Ceopag.png" alt="Ceopag">
-    <img src="cliente/Magazine.png" alt="Magazine Móveis">
-    <img src="cliente/Recirculo.png" alt="Recirculo">
-    <img src="cliente/norte.png" alt="Norte Telecom">
-    <img src="cliente/powernet.png" alt="Power Net">
-    <img src="cliente/rohto.png" alt="Rohto">
-    <img src="cliente/Yogoberry.png" alt="Yogoberry">
-    <img src="cliente/HiperRoll.png" alt="Hiper Roll">
-    <img src="cliente/Guaçu.png" alt="Rádio Guaçu">
-  </div>
-
-  <!-- Mobile (marquee infinito) -->
-  <div class="clientes-marquee">
-    <div class="clientes-track">
-      <!-- sequência 1 -->
-      <img src="cliente/Ansell.png">
-      <img src="cliente/Bike.png">
-      <img src="cliente/Ceopag.png">
-      <img src="cliente/Magazine.png">
-      <img src="cliente/Recirculo.png">
-      <img src="cliente/norte.png">
-      <img src="cliente/powernet.png">
-      <img src="cliente/rohto.png">
-      <img src="cliente/Yogoberry.png">
-      <img src="cliente/HiperRoll.png">
-      <img src="cliente/Guaçu.png">
-
-      <!-- sequência 2 (duplicada para loop infinito) -->
-      <img src="cliente/Ansell.png">
-      <img src="cliente/Bike.png">
-      <img src="cliente/Ceopag.png">
-      <img src="cliente/Magazine.png">
-      <img src="cliente/Recirculo.png">
-      <img src="cliente/norte.png">
-      <img src="cliente/powernet.png">
-      <img src="cliente/rohto.png">
-      <img src="cliente/Yogoberry.png">
-      <img src="cliente/HiperRoll.png">
-      <img src="cliente/Guaçu.png">
+  <!-- CLIENTES -->
+  <section id="clientes" class="clients fade-in">
+    <h3>Nossos Clientes</h3>
+    <div class="clients-grid">
+      <img src="cliente/Ansell.png" alt="Ansell" loading="lazy">
+      <img src="cliente/Bike.png" alt="Bike Center Brasilia" loading="lazy">
+      <img src="cliente/Ceopag.png" alt="Ceopag" loading="lazy">
+      <img src="cliente/Magazine.png" alt="Magazine Móveis" loading="lazy">
+      <img src="cliente/Recirculo.png" alt="Recirculo" loading="lazy">
+      <img src="cliente/norte.png" alt="Norte Telecom" loading="lazy">
+      <img src="cliente/powernet.png" alt="Power Net" loading="lazy">
+      <img src="cliente/rohto.png" alt="Rohto" loading="lazy">
+      <img src="cliente/Yogoberry.png" alt="Yogoberry" loading="lazy">
+      <img src="cliente/HiperRoll.png" alt="Hiper Roll" loading="lazy">
+      <img src="cliente/Guaçu.png" alt="Rádio Guaçu" loading="lazy">
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- FOOTER -->
- <footer>
-  <div class="footer-address">
-    Rua Criatividade, 123<br>
-    Bairro Inspiração<br>
-    Cidade das Ideias – BR
-  </div>
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="Logo_png.png" alt="Celtoon">
+        <p>Rua Criatividade, 123<br>Bairro Inspiração<br>Cidade das Ideias – BR</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <a href="index.html">Home</a>
+        <a href="orcamento.html">Orçamento</a>
+        <a href="produto.html">Produto</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <a href="https://www.instagram.com/celtoon.agencia/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-col">
+        <h4>Siga a Celtoon</h4>
+        <div class="footer-social-circles">
+          <a href="https://www.instagram.com/celtoon.agencia/" target="_blank" rel="noopener" aria-label="Instagram"><img src="instagram.png" alt="Instagram"></a>
+          <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Celtoon Agência Criativa | Design Gráfico, 3D e Inovação Visual em São Paulo</p>
+    </div>
+  </footer>
 
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="orcamento.html">Orçamento</a>
-    <a href="#produtos">Produtos</a>
-    <a href="contato.html">Contato</a>
-  </div>
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp"></a>
 
-  <div class="social-icons">
-    <a href="https://www.instagram.com/celtoon.agencia/" target="_blank"><img src="instagram.png" alt="Instagram"></a>
-    <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank"><img src="linkedin.png" alt="LinkedIn"></a>
-  </div>
-
-  <div class="footer-seo">
-    <p>Celtoon Agência Criativa | Especialista em Design Gráfico, 3D e Inovação Visual em São Paulo.</p>
-  </div>
-</footer>
-
-  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp" /></a>
-
-  <!-- ==========================================
-       SCRIPTS (organizados & robustos)
-       ========================================== -->
-  <script>
-  (function(){
-    'use strict';
-
-    // ---------- helpers ----------
-    const $ = sel => document.querySelector(sel);
-    const $$ = sel => Array.from(document.querySelectorAll(sel));
-
-    // ---------- NAVBAR hide on scroll ----------
-    (function navbarScroll(){
-      const navbar = $('nav');
-      if(!navbar) return;
-      let lastScrollTop = 0;
-      window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) navbar.style.top = `-${navbar.offsetHeight}px`; else navbar.style.top = '0';
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        if (scrollTop > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
-      }, { passive: true });
-    })();
-
-    // ---------- MENU TOGGLE ----------
-    (function menuToggle(){
-      const toggleBtn = $('.menu-toggle');
-      const navLinks = $('.nav-links');
-      if(!toggleBtn || !navLinks) return;
-      toggleBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-    })();
-
-    // ---------- TYPEWRITER ----------
-    (function typewriter(){
-      const phrases = [
-        "Criamos design que resolve.",
-        "Ideias ousadas. Resultados reais.",
-        "Visual forte, marca memorável.",
-        "Seu negócio, nossa arte.",
-        "Do rascunho ao extraordinário.",
-        "Design que move, conecta e vende.",
-        "Criatividade é nossa matéria prima.",
-        "Projetamos impacto.",
-        "Menos do mesmo. Mais do que esperam.",
-      ];
-      const el = $('#typewriter');
-      if(!el) return;
-      let phraseIndex = 0, charIndex = 0, isDeleting = false;
-      function tick(){
-        const p = phrases[phraseIndex];
-        if(isDeleting) { el.textContent = p.substring(0, charIndex--); }
-        else { el.textContent = p.substring(0, charIndex++); }
-        if(!isDeleting && charIndex === p.length) setTimeout(() => isDeleting = true, 2000);
-        else if(isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex+1) % phrases.length; }
-        const speed = isDeleting ? 50 : 100;
-        setTimeout(tick, speed);
-      }
-      tick();
-    })();
-
-    // ---------- FEATURE SCROLLER + INDICATORS (bolinhas) ----------
-    (function initFeatureScroller(){
-      const scroller = document.querySelector('.feature-boxes');
-      const dots = document.querySelectorAll('.carousel-indicators span');
-      if(!scroller || !dots.length) return;
-
-      function cardSize(){
-        const card = scroller.querySelector('.feature-box');
-        if(!card) return scroller.clientWidth;
-        const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
-        return card.offsetWidth + gap;
-      }
-      function updateDots(){
-        const size = cardSize(); if(!size) return;
-        const idx = Math.round(scroller.scrollLeft / size);
-        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
-      }
-      function scrollToIndex(i, behavior='smooth'){ scroller.scrollTo({ left: i * cardSize(), behavior }); }
-
-      dots.forEach((d,i) => d.addEventListener('click', () => scrollToIndex(i)));
-      scroller.addEventListener('scroll', updateDots, { passive: true });
-      window.addEventListener('resize', updateDots);
-      if (document.readyState === 'complete') requestAnimationFrame(updateDots);
-      else window.addEventListener('load', () => requestAnimationFrame(updateDots));
-    })();
-
-    // ---------- PROJECTS GRID (desktop arrows) ----------
-    (function initProjectsDesktop(){
-      const grid = document.querySelector('.projects-grid');
-      const items = grid ? Array.from(grid.querySelectorAll('.project-item')) : [];
-      const prevBtn = document.querySelector('.portfolio-arrows .prev');
-      const nextBtn = document.querySelector('.portfolio-arrows .next');
-      const mqDesktop = window.matchMedia('(min-width: 993px)');
-      const itemsPerPage = 3; let currentPage = 0;
-      if(!grid || !prevBtn || !nextBtn) return;
-
-      function totalPages(){ return Math.max(1, Math.ceil(items.length / itemsPerPage)); }
-      function applyTransform(){ if(mqDesktop.matches) grid.style.transform = `translateX(-${currentPage * 100}%)`; else grid.style.transform = ''; }
-      function updateButtons(){ const pages = totalPages(); prevBtn.disabled = currentPage === 0; nextBtn.disabled = currentPage >= pages - 1; }
-      function goTo(page){ const pages = totalPages(); currentPage = Math.min(Math.max(0, page), pages - 1); applyTransform(); updateButtons(); }
-      function init(){ if(mqDesktop.matches){ grid.style.willChange = 'transform'; goTo(0); } else { grid.style.willChange = ''; grid.style.transform = ''; } }
-
-      prevBtn.addEventListener('click', () => goTo(currentPage - 1));
-      nextBtn.addEventListener('click', () => goTo(currentPage + 1));
-      mqDesktop.addEventListener('change', init);
-      window.addEventListener('resize', applyTransform);
-      init();
-    })();
-
-    // ---------- PROJECTS MOBILE INDICATORS ----------
-    (function initProjectsDots(){
-      const scroller = document.querySelector('.projects-grid');
-      const dots = document.querySelectorAll('.portfolio-indicators span');
-      if(!scroller || !dots.length) return;
-
-      function stepSize(){
-        const card = scroller.querySelector('.project-item');
-        if(!card) return scroller.clientWidth;
-        const gap = parseFloat(getComputedStyle(scroller).gap) || 0;
-        return card.offsetWidth + gap;
-      }
-      function updateDots(){
-        const step = stepSize(); if(!step) return;
-        const idx = Math.round(scroller.scrollLeft / step);
-        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
-      }
-      dots.forEach((d,i) => d.addEventListener('click', () => { scroller.scrollTo({ left: i * stepSize(), behavior: 'smooth' }); }));
-      scroller.addEventListener('scroll', updateDots, { passive: true });
-      window.addEventListener('resize', updateDots);
-      setTimeout(updateDots, 250);
-    })();
-
-    // ---------- FADE-IN ----------
-    (function initFadeIn(){
-      const targets = document.querySelectorAll('.fade-in');
-      if(!targets.length) return;
-
-      if (!('IntersectionObserver' in window)) {
-        targets.forEach(t => t.classList.add('visible'));
-        return;
-      }
-
-      const io = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
-
-      targets.forEach(el => io.observe(el));
-    })();
-
-  })();
-  </script>
+  <script src="assets/celtoon.js"></script>
 </body>
 </html>

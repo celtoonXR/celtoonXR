@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Produto | Celtoon Agência Criativa — Impressão, Criação, Digital e Redes Sociais</title>
+  <meta name="description" content="Conheça os serviços da Celtoon: impressão e arte finalização, criação de marcas e mascotes, modelagem 3D e experiências digitais, e conteúdo para redes sociais.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Produto | Celtoon Agência Criativa">
+  <meta property="og:description" content="Impressão, Criação, Digital e Redes Sociais — tudo o que fazemos em um só lugar.">
+  <meta property="og:url" content="https://celtoon.com.br/produto.html">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="canonical" href="https://celtoon.com.br/produto.html">
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/celtoon.css">
+
+  <style>
+  /* Seções de categoria */
+  .category-section{
+    padding:96px 0;
+  }
+  .category-section:nth-of-type(even){
+    background: var(--bg-alt);
+  }
+  .category-inner{
+    max-width: var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x);
+    display:flex;
+    flex-direction:column;
+    gap:48px;
+  }
+  .category-header{
+    display:grid;
+    grid-template-columns: auto 1fr;
+    align-items:center;
+    gap:48px;
+  }
+  .category-header .mascot{
+    width:180px;
+    height:180px;
+    object-fit:contain;
+  }
+  .category-header .titles{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    align-items:flex-start;
+  }
+  .category-header .tagline{
+    color: var(--blue);
+    text-transform:uppercase;
+  }
+  .category-header p.desc{
+    font-size:18px;
+    line-height:28px;
+    max-width:640px;
+  }
+  .category-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:24px;
+  }
+
+  @media (max-width: 992px){
+    .category-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px){
+    .category-section{ padding:64px 0; }
+    .category-header{
+      grid-template-columns: 1fr;
+      text-align:left;
+      gap:24px;
+    }
+    .category-header .mascot{ width:140px; height:140px; }
+    .category-grid{ grid-template-columns: 1fr; }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo"><img src="Logo_png.png" alt="Celtoon Agência Criativa"></a>
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="produto.html" class="active">Produto</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <a href="orcamento.html" class="btn btn-pill-grad nav-cta">Solicitar Orçamento</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="badge mono-label">Nossos Serviços</span>
+      <h1>Produto</h1>
+      <p>Impressão, Criação, Digital e Redes Sociais: tudo o que a Celtoon faz para transformar a sua marca, reunido em um só lugar.</p>
+    </div>
+  </header>
+
+  <!-- IMPRESSÃO -->
+  <section id="impressao" class="category-section fade-in">
+    <div class="category-inner">
+      <div class="category-header">
+        <img class="mascot" src="personagem/boneco_papel.png" alt="Mascote Celtoon — Impressão">
+        <div class="titles">
+          <span class="tagline mono-label">Materiais gráficos prontos para impressão e corte</span>
+          <h2 class="section-title">Impressão</h2>
+          <div class="grad-divider"></div>
+          <p class="desc">Uma boa impressão depende de um bom ante-projeto. Trabalhamos com vetorização, diagramação e arte finalização para que cada detalhe transmita profissionalismo e impacto visual. Flyer, cordão para crachá, credencial, totem, caderno, camiseta, ecobag, adesivo, cartão de visitas, cartaz, convite, envelope, banner e arte finalização.</p>
+        </div>
+      </div>
+      <div class="category-grid">
+        <div class="project-card">
+          <img src="imagem/folder.png" alt="Design de folder institucional e diagramação - Projeto Recírculo" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Recírculo</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/Tshirt.png" alt="Design de estampa para camisetas interativas e personalizadas" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Camiseta</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/mock.jpg" alt="Diagramação e design de capa de livro profissional" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Capa de livro</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/magazine_boneco.jpg" alt="Criação de material promocional e arte final para Magazine Móveis" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Magazine Móveis</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/Bolsa_Salvador.png" alt="Design de estampa para Eco Bag e brindes sustentáveis" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Eco Bag</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/ceopaginho.jpg" alt="Design de Mascote para empresa de máquinas de pagamento" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Ceopaguinho</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/cafe.png" alt="Design de embalagem e pré-impressão técnica para o setor alimentício" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>3 Corações</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/salinas.png" alt="Design de embalagem e pré-impressão técnica para o setor alimentício" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Salinas</h3></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRIAÇÃO -->
+  <section id="criacao" class="category-section fade-in">
+    <div class="category-inner">
+      <div class="category-header">
+        <img class="mascot" src="personagem/boneco_plano.png" alt="Mascote Celtoon — Criação">
+        <div class="titles">
+          <span class="tagline mono-label">Uma nova cara e identidade para sua marca</span>
+          <h2 class="section-title">Criação</h2>
+          <div class="grad-divider"></div>
+          <p class="desc">Toda grande ideia começa no papel. Cuidamos da identidade visual, ilustração e design conceitual para transformar ideias em projetos únicos, com criatividade e personalidade. Naming, slogan, style guide, criação de logo, mascote, mockup digital, layout, embalagem, vetorização, ilustração, key visual e conceito visual.</p>
+        </div>
+      </div>
+      <div class="category-grid">
+        <div class="project-card">
+          <img src="imagem/guacu.png" alt="Criação de mascote personalizado para Rádio Guaçu - Ilustração Celtoon" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Mascote</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/Poty.jpg" alt="Design de layout e mockup para embalagens" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Layout</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/Clareador.png" alt="Criação de layout para embalagem de produto clareador" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Layout</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/ceopaginho.jpg" alt="Design de personagem mascote Ceopaguinho para branding empresarial" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Mascote</h3></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIGITAL -->
+  <section id="digital" class="category-section fade-in">
+    <div class="category-inner">
+      <div class="category-header">
+        <img class="mascot" src="personagem/boneco_banco.png" alt="Mascote Celtoon — Digital">
+        <div class="titles">
+          <span class="tagline mono-label">Tecnologia e inovação para dar vida à sua imaginação</span>
+          <h2 class="section-title">Digital</h2>
+          <div class="grad-divider"></div>
+          <p class="desc">A presença digital exige mais do que estar online, exige impacto. Desenvolvemos modelos 3D, apresentações e materiais digitais que unem design e funcionalidade para destacar sua marca em qualquer plataforma. Modelagem 3D, UI &amp; UX, banner para site, infográfico, apresentação de slide, catálogo e landing page.</p>
+        </div>
+      </div>
+      <div class="category-grid">
+        <div class="project-card">
+          <img src="imagem/app1.png" alt="Design de interface de aplicativo móvel - Projeto UX e UI Celtoon" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">UX &amp; UI Design</span><h3>Aplicativo</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/mock_2.png" alt="Interface do aplicativo Celtoon - Design e Programação Digital e Realidade Aumentada" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Design / Programação</span><h3>Celtoon App</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/app2.png" alt="Design de interface de aplicativo móvel - Projeto UX e UI Celtoon" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">UX &amp; UI Design</span><h3>Aplicativo</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/curar5.png" alt="Projeto CurAR - Experiência imersiva em Realidade Aumentada (AR)" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Realidade Aumentada</span><h3>CurAR</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/exp.jpg" alt="Desenvolvimento de filtro e experiência em Realidade Aumentada para arquitetura" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Realidade Aumentada</span><h3>Experiência AR</h3></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REDES SOCIAIS -->
+  <section id="redes-sociais" class="category-section fade-in">
+    <div class="category-inner">
+      <div class="category-header">
+        <img class="mascot" src="personagem/boneco_cel.png" alt="Mascote Celtoon — Redes Sociais">
+        <div class="titles">
+          <span class="tagline mono-label">Criações incríveis para atrair e surpreender o seu público</span>
+          <h2 class="section-title">Redes Sociais</h2>
+          <div class="grad-divider"></div>
+          <p class="desc">Nas redes sociais, cada post é uma oportunidade de conexão. Criamos conteúdos estratégicos e visuais envolventes que fortalecem sua marca e aumentam o engajamento do público. Conteúdo estático, reels, animado e carrossel.</p>
+        </div>
+      </div>
+      <div class="category-grid">
+        <div class="project-card">
+          <img src="imagem/renderjpg.jpg" alt="Conteúdo para redes sociais - Recírculo" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Criação / Digital</span><h3>Recírculo</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/cabine.png" alt="Design de cabine fotográfica inflável" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Cabine Fotográfica</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/lavi.jpg" alt="Mascote Lavinho para redes sociais" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Digital</span><h3>Lavinho</h3></div>
+        </div>
+        <div class="project-card">
+          <img src="imagem/Domo.jpg" alt="Design de domo inflável para fins educacionais" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Domo UFES</h3></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section fade-in">
+    <div class="cta-inner">
+      <h2>Encontrou o que seu projeto precisa? Vamos conversar!</h2>
+      <a href="orcamento.html" class="btn-white btn">Solicitar Orçamento</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="Logo_png.png" alt="Celtoon">
+        <p>Rua Criatividade, 123<br>Bairro Inspiração<br>Cidade das Ideias – BR</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <a href="index.html">Home</a>
+        <a href="orcamento.html">Orçamento</a>
+        <a href="produto.html">Produto</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <a href="https://www.instagram.com/celtoon.agencia/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-col">
+        <h4>Siga a Celtoon</h4>
+        <div class="footer-social-circles">
+          <a href="https://www.instagram.com/celtoon.agencia/" target="_blank" rel="noopener" aria-label="Instagram"><img src="instagram.png" alt="Instagram"></a>
+          <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Celtoon Agência Criativa | Design Gráfico, 3D e Inovação Visual em São Paulo</p>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp"></a>
+
+  <script src="assets/celtoon.js"></script>
+</body>
+</html>

@@ -1,557 +1,221 @@
-
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Solicitar Orçamento de Design, 3D e Identidade Visual | Celtoon</title>
-  <meta name="description" content="Peça seu orçamento personalizado para projetos de design de marca, modelagem 3D, criação de mascotes e artes para redes sociais. Atendimento rápido e focado em resultados para o seu negócio.">
-  <meta name="keywords" content="orçamento design gráfico, preço modelagem 3d, contratar criação de mascotes, orçamento identidade visual sp, projeto de branding preço, celtoon agência">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orçamento | Celtoon Agência Criativa — Solicite sua Proposta</title>
+  <meta name="description" content="Pronto para transformar sua ideia em realidade? Preencha nosso formulário e receba uma proposta personalizada para o seu projeto.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Solicite seu Orçamento na Celtoon Agência Criativa">
+  <meta property="og:title" content="Orçamento | Celtoon Agência Criativa">
   <meta property="og:description" content="Pronto para transformar sua ideia em realidade? Preencha nosso formulário e receba uma proposta personalizada para o seu projeto.">
-  <meta property="og:image" content="https://celtoon.com.br/Logo_png.png"> 
   <meta property="og:url" content="https://celtoon.com.br/orcamento.html">
 
-  <link rel="canonical" href="https://celtoon.com.br/orcamento.html">
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="canonical" href="https://celtoon.com.br/orcamento.html">
 
   <script>document.documentElement.classList.add('js');</script>
-  
- 
-  <title>Orçamento</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/celtoon.css">
+
   <style>
-
-      /* ==========================================
-     FONTS / RESET / VARIÁVEIS
-     ========================================== */
-  @font-face {
-    font-family: 'IntroCondBlackFree';
-    src: url('IntroCondBlackFree.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  .orcamento-section{
+    padding-bottom:128px;
   }
-  @font-face {
-    font-family: 'IntroRegularAlt';
-    src: url('IntroRegularAlt.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  .orcamento-wrap{
+    max-width:840px;
+    margin:0 auto;
+    padding:0 var(--pad-x);
   }
-
-  :root{
-    --brand: #1F4381;
-    --brand-dark: #16315f;
-    --bg: #f2f2f2;
-    --text: #333;
+  .form-orcamento{
+    background:#fff;
+    border:1px solid #eee;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding:48px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
   }
-
-  /* Evita a página mexer lateralmente */
-  html, body { overflow-x: hidden; }
-
-  /* RESET */
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
-  a { text-decoration: none; }
-
-  /* FADE-IN: só aplica a ocultação se o JS está presente (classe .js é adicionada via script) */
-  .js .fade-in {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+  .form-orcamento label{
+    font-family: var(--font-mono);
+    font-weight:700;
+    font-size:12px;
+    line-height:16px;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color: var(--navy-800);
+    margin-top:20px;
+    margin-bottom:8px;
+    display:block;
   }
-  .js .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+  .form-orcamento input[type="text"],
+  .form-orcamento input[type="email"]{
+    width:100%;
+    padding:14px 16px;
+    font-family: var(--font-body);
+    font-size:16px;
+    color: var(--gray-700);
+    background: var(--bg);
+    border:1px solid #e3e5ea;
+    border-radius:12px;
+    outline:none;
+    transition: border-color .2s ease, box-shadow .2s ease;
   }
-    
-  /* ==========================================
-     NAVBAR
-     ========================================== */
-  nav {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    padding: 1rem 2rem; 
-    background: var(--brand);
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-    transition: top 0.3s ease;
+  .form-orcamento input[type="text"]:focus,
+  .form-orcamento input[type="email"]:focus{
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(0,86,179,0.12);
   }
-    
-  .logo img { 
-    height: 40px; 
+  .form-orcamento fieldset{
+    border:1px solid #e3e5ea;
+    border-radius:16px;
+    padding:24px;
+    margin-top:28px;
   }
-  .nav-links { 
-    display: flex; 
-    align-items: center; 
-    gap: 1.5rem; 
-    position: relative; 
+  .form-orcamento legend{
+    font-family: var(--font-mono);
+    font-weight:700;
+    font-size:12px;
+    line-height:16px;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color: var(--navy-800);
+    padding:0 8px;
   }
-  .nav-links a { 
-    color: #fff; 
-    font-family: 'IntroCondBlackFree', sans-serif; 
-    font-weight: 500; 
+  .form-orcamento fieldset label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family: var(--font-body);
+    font-weight:400;
+    font-size:16px;
+    line-height:24px;
+    letter-spacing:0;
+    text-transform:none;
+    color: var(--gray-700);
+    margin:0 0 14px 0;
+    cursor:pointer;
   }
-  .dropdown { 
-    position: relative; 
+  .form-orcamento fieldset label:last-child{ margin-bottom:0; }
+  .form-orcamento input[type="checkbox"]{
+    width:18px;
+    height:18px;
+    accent-color: var(--blue);
+    flex-shrink:0;
+    cursor:pointer;
   }
-  .dropdown-content { 
-    display: none; 
-    position: absolute; 
-    top: 100%; 
-    left: 0; 
-    background-color: var(--brand); 
-    min-width: 200px; 
-    border-radius: 4px; 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
-  }
-  .dropdown-content a { 
-    display: block; 
-    padding: 0.75rem 1rem; 
-    color: #fff; 
-  }
-  .dropdown:hover .dropdown-content { 
-    display: block; 
-  }
-  .social-icons { 
-    display: flex; 
-    gap: 0.5rem; 
-  }
-  .social-icons a { 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    width: 40px; 
-    height: 40px; 
-    background-color: var(--brand); 
-    border-radius: 50%; 
-  }
-  .social-icons img {
-    width: 40px; 
-    height: 40px; 
-    filter: invert(1); 
-  }
-  .menu-toggle { 
-    display: none; 
-    font-size: 2rem; 
-    background: none; 
-    border: none; 
-    color: #fff; 
-    cursor: pointer; 
-    z-index: 1001; 
+  .form-orcamento button[type="submit"]{
+    margin-top:36px;
+    align-self:flex-start;
+    border:none;
   }
 
-  /* NAV - MOBILE */
-  @media (max-width: 768px) {
-    .menu-toggle { 
-      display: block; 
-    }
-    .nav-links { 
-      display: none; 
-      flex-direction: column; 
-      background: var(--brand); 
-      position: absolute; 
-      top: 70px; 
-      right: 20px; 
-      padding: 1rem; 
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-      z-index: 999; 
-    }
-    .nav-links a { 
-      color: #fff; 
-    }
-    .nav-links.active { 
-      display: flex; 
-    }
-    .dropdown-content { 
-      position: static; 
-      box-shadow: none; 
-      margin-top: 0.5rem;
-    }
+  @media (max-width: 768px){
+    .form-orcamento{ padding:28px 20px; }
+    .form-orcamento button[type="submit"]{ width:100%; }
   }
-
-  /* ==========================================
-     WHATSAPP FLOAT
-     ========================================== */
-  .whatsapp-float { 
-    position: fixed; 
-    width: 60px; 
-    height: 60px; 
-    bottom: 20px; 
-    right: 20px; 
-    z-index: 1000; 
-    background-color: #25d366; 
-    border-radius: 50%; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    transition: transform 0.3s; 
-  }
-  .whatsapp-float:hover { 
-    transform: scale(1.1); 
-  }
-  .whatsapp-float img { 
-    width: 60px; 
-    height: 60px; 
-  }
-
-/* === ORÇAMENTO === */
-.orcamento {
-  max-width: 800px;
-  margin: 6rem auto 4rem auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.orcamento h1 {
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.form-orcamento {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  text-align: left;
-}
-
-.form-orcamento label {
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-size: 1rem;
-}
-
-.form-orcamento input[type="text"] {
-  padding: .8rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-}
-
-.form-orcamento fieldset {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-}
-
-.form-orcamento fieldset label {
-  font-family: 'IntroRegularAlt', sans-serif;
-  display: block;   /* Faz cada item ocupar 100% da linha */
-  margin: 0.4rem 0;
-}
-
-.form-orcamento legend {
-  font-family: 'IntroRegularAlt', sans-serif;
-  font-weight: bold;
-}
-
-.form-orcamento input[type="checkbox"] {
-  margin-right: .5rem;
-}
-
-.form-orcamento button {
-  margin-top: 1rem;
-  background-color: #1F4381;
-  color: #fff;
-  border: none;
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-family: 'IntroRegularAlt', sans-serif;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background .3s ease;
-}
-
-.form-orcamento button:hover {
-  background-color: #16315b;
-}
-
-@media (max-width: 600px) {
-  .orcamento {
-    padding: 1rem;
-  }
-  .orcamento h1 {
-    font-size: 2rem;
-  }
-}
-
-      /* ==========================================
-     CTA / CLIENTES / FOOTER
-     ========================================== */
-  .cta-section { 
-    min-height: 100vh; 
-    background-image: url('Fundo1.png'); 
-    background-size: cover; 
-    background-position: center;
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    padding: 8rem 4rem; 
-    color: #fff;
-    margin-top: 2rem; 
-  }
-  .cta-text { 
-    font-family: 'IntroCondBlackFree', sans-serif;
-    letter-spacing: 1px; 
-    width: 50%;
-    font-size: 2rem; 
-    padding-right: 2rem; 
-  }
-  .cta-button { 
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .cta-button a { 
-    padding: 1rem 2rem; 
-    background-color: #fff; 
-    border-radius: 8px; 
-    color: var(--brand); 
-    font-family: 'IntroRegularAlt', sans-serif; 
-    text-decoration: none; 
-    transition: background 0.3s ease; 
-  }
-  .cta-button a:hover {
-    background-color: #e0e0e0;
-  }
-
-  /* clientes - agora sem regra .visible separada (usamos .fade-in) */
-  .clientes-section { 
-    min-height: 60vh; 
-    background-color: #fff; 
-    padding: 2rem; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center;
-  }
-  .clientes-section h2 {
-    font-family: 'IntroCondBlackFree', sans-serif;
-    font-size: 2rem; 
-    color: var(--brand);
-    margin-bottom: 2rem; 
-    text-align: center;
-  }
-  .clientes-grid { 
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: center;
-    gap: 3rem; 
-    max-width: 960px; 
-    margin: 0 auto;
-  }
-  .clientes-grid img { 
-    flex: 0 1 calc(25% - 3rem);
-    max-width: 120px; 
-    height: 60px;
-    object-fit: contain; 
-    transition: transform 0.3s ease;
-  }
-  .clientes-grid img:hover { 
-    transform: scale(1.1);
-  }
-
-  footer { 
-    background-color: var(--brand);
-    color: white; 
-    padding: 2rem; 
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  .footer-address { 
-    width: 30%; 
-    font-size: 0.9rem;
-    font-family: 'IntroRegularAlt', sans-serif; 
-  }
-  .footer-links { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 0.5rem; width: 30%;
-  }
-  .footer-links a {
-    font-family: 'IntroRegularAlt', sans-serif; 
-    color: white; 
-    font-weight: 500; 
-  }
-    
-/* Ícones */
-.social-icons {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  justify-content: center; /* garante centralização */
-  padding-right: 4rem;
-}
-
-.social-icons img {
-  width: 56px;
-  height: 56px;
-  transition: opacity 0.3s ease;
-}
-
-.social-icons img:hover {
-  opacity: 0.8;
-}
-
-/* ========== MOBILE ========== */
-@media (max-width: 768px) {
-  .cta-section {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .cta-text,
-  .cta-button {
-    width: 100%;
-    padding: 1rem 0;
-  }
-
-  /* Esconde endereço e links */
-  .footer-address,
-  .footer-links {
-    display: none;
-  }
-
-  /* Centraliza ícones no mobile */
-  .social-icons {
-    justify-content: center;
-    padding-right: 0;
-    margin-top: 1rem;
-    margin-left: 7rem;     
-    gap: 1rem;
-  }
-
-  .social-icons img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-  }
-}
-    
   </style>
 </head>
 <body>
 
-
-
   <!-- NAVBAR -->
-  <nav>
-    <div class="logo"><img src="Logo_png.png" alt="Logo da empresa"></div>
-    <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="orcamento.html">Orçamento</a>
-      <div class="dropdown">
-        <a href="#produtos">Produtos</a>
-        <div class="dropdown-content">
-          <a href="impressão.html">Impressão</a>
-          <a href="criacao.html">Criação</a>
-          <a href="digital.html">Digital</a>
-          <a href="redes-sociais.html">Redes Sociais</a>
-        </div>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo"><img src="Logo_png.png" alt="Celtoon Agência Criativa"></a>
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="produto.html">Produto</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contato.html">Contato</a>
       </div>
-      <a href="contato.html">Contato</a>
+      <a href="orcamento.html" class="btn btn-pill-grad nav-cta">Solicitar Orçamento</a>
     </div>
   </nav>
 
-  <!-- Seção Orçamento -->
-  <section class="orcamento">
-    <h1>Solicite um orçamento</h1>
-    <form action="https://formspree.io/f/xblarrql" method="POST" class="form-orcamento">
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required>
+  <!-- HERO -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="badge mono-label">Vamos Conversar?</span>
+      <h1>Solicite um<br>Orçamento</h1>
+      <p>Pronto para transformar sua ideia em realidade? Preencha o formulário abaixo e receba uma proposta personalizada para o seu projeto.</p>
+    </div>
+  </header>
 
-      <label for="contato">E-mail para contato:</label>
-      <input type="text" id="contato" name="contato" required>
+  <!-- FORMULÁRIO -->
+  <section class="orcamento-section fade-in">
+    <div class="orcamento-wrap">
+      <form action="https://formspree.io/f/xblarrql" method="POST" class="form-orcamento">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-      <label for="empresa">Nome da empresa/ segmento de atuação/ número de funcionários:</label>
-      <input type="text" id="empresa" name="empresa_info">
+        <label for="contato">E-mail para contato:</label>
+        <input type="text" id="contato" name="contato" required>
 
-      <label for="investimento">Até quanto pretende investir nesse projeto?</label>
-      <input type="text" id="investimento" name="investimento">
+        <label for="empresa">Nome da empresa/ segmento de atuação/ número de funcionários:</label>
+        <input type="text" id="empresa" name="empresa_info">
 
-      <fieldset>
-        <legend>Em quais categorias abaixo o seu projeto se encaixa?</legend>
-        <label><input type="checkbox" name="categoria" value="Design ou Redesign de marca"> Design ou Redesign de marca</label>
-        <label><input type="checkbox" name="categoria" value="Modelagem 3D"> Modelagem 3D</label>
-        <label><input type="checkbox" name="categoria" value="Vetorização"> Vetorização</label>
-        <label><input type="checkbox" name="categoria" value="Identidade Visual"> Identidade Visual</label>
-        <label><input type="checkbox" name="categoria" value="Padrão de Comunicação"> Padrão de Comunicação</label>
-        <label><input type="checkbox" name="categoria" value="Ilustração Manual e Digital"> Ilustração Manual e Digital</label>
-        <label><input type="checkbox" name="categoria" value="Design de Personagens ou Mascotes"> Design de Personagens ou Mascotes</label>
-        <label><input type="checkbox" name="categoria" value="Materiais Impressos: cartaz, panfleto, folder etc..."> Materiais Impressos</label>
-        <label><input type="checkbox" name="categoria" value="Diagramação de Livros e Revistas"> Diagramação de Livros e Revistas</label>
-        <label><input type="checkbox" name="categoria" value="Anúncio"> Anúncio</label>
-        <label><input type="checkbox" name="categoria" value="Arte para Redes Sociais"> Arte para Redes Sociais</label>
-      </fieldset>
+        <label for="investimento">Até quanto pretende investir nesse projeto?</label>
+        <input type="text" id="investimento" name="investimento">
 
-      <button type="submit">Enviar pedido</button>
-    </form>
+        <fieldset>
+          <legend>Em quais categorias abaixo o seu projeto se encaixa?</legend>
+          <label><input type="checkbox" name="categoria" value="Design ou Redesign de marca"> Design ou Redesign de marca</label>
+          <label><input type="checkbox" name="categoria" value="Modelagem 3D"> Modelagem 3D</label>
+          <label><input type="checkbox" name="categoria" value="Vetorização"> Vetorização</label>
+          <label><input type="checkbox" name="categoria" value="Identidade Visual"> Identidade Visual</label>
+          <label><input type="checkbox" name="categoria" value="Padrão de Comunicação"> Padrão de Comunicação</label>
+          <label><input type="checkbox" name="categoria" value="Ilustração Manual e Digital"> Ilustração Manual e Digital</label>
+          <label><input type="checkbox" name="categoria" value="Design de Personagens ou Mascotes"> Design de Personagens ou Mascotes</label>
+          <label><input type="checkbox" name="categoria" value="Materiais Impressos: cartaz, panfleto, folder etc..."> Materiais Impressos</label>
+          <label><input type="checkbox" name="categoria" value="Diagramação de Livros e Revistas"> Diagramação de Livros e Revistas</label>
+          <label><input type="checkbox" name="categoria" value="Anúncio"> Anúncio</label>
+          <label><input type="checkbox" name="categoria" value="Arte para Redes Sociais"> Arte para Redes Sociais</label>
+        </fieldset>
+
+        <button type="submit" class="btn btn-grad">Enviar pedido</button>
+      </form>
+    </div>
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="footer-address">Rua Criatividade, 123<br>Bairro Inspiração<br>Cidade das Ideias – BR</div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="orcamento.html">Orçamento</a><a href="#produtos">Produtos</a><a href="contato.html">Contato</a></div>
-    <div class="social-icons"><a href="https://www.instagram.com/celtoon.agencia/" target="_blank"><img src="instagram.png" alt="Instagram"></a><a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank"><img src="linkedin.png" alt="LinkedIn"></a></div>
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="Logo_png.png" alt="Celtoon">
+        <p>Rua Criatividade, 123<br>Bairro Inspiração<br>Cidade das Ideias – BR</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <a href="index.html">Home</a>
+        <a href="orcamento.html">Orçamento</a>
+        <a href="produto.html">Produto</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <a href="https://www.instagram.com/celtoon.agencia/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-col">
+        <h4>Siga a Celtoon</h4>
+        <div class="footer-social-circles">
+          <a href="https://www.instagram.com/celtoon.agencia/" target="_blank" rel="noopener" aria-label="Instagram"><img src="instagram.png" alt="Instagram"></a>
+          <a href="https://www.linkedin.com/in/danilo-celso-da-silva-256686204/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Celtoon Agência Criativa | Design Gráfico, 3D e Inovação Visual em São Paulo</p>
+    </div>
   </footer>
 
-  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp" /></a>
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp"></a>
 
-
-
-    <script>
-
-  (function(){
-    'use strict';
-
-    const $ = sel => document.querySelector(sel);
-
-    // NAVBAR hide on scroll
-    (function navbarScroll(){
-      const navbar = $('nav');
-      if(!navbar) return;
-      let lastScrollTop = 0;
-      window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) navbar.style.top = `-${navbar.offsetHeight}px`;
-        else navbar.style.top = '0';
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-      }, { passive: true });
-    })();
-
-    // MENU TOGGLE
-    (function menuToggle(){
-      const toggleBtn = $('.menu-toggle');
-      const navLinks = $('.nav-links');
-      if(!toggleBtn || !navLinks) return;
-      toggleBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-    })();
-
-
-    })();
-
-
-    
-  </script>
-
+  <script src="assets/celtoon.js"></script>
 </body>
 </html>
