@@ -27,6 +27,46 @@
     });
   })();
 
+  // Lightbox: toque/clique em cards de imagem abre a imagem inteira
+  // (object-fit: contain) sobre um fundo escuro. Apenas cards que não
+  // são links — âncoras continuam navegando normalmente.
+  (function initLightbox(){
+    var cards = document.querySelectorAll('div.project-card, div.social-card');
+    if(!cards.length) return;
+
+    var overlay = document.createElement('div');
+    overlay.className = 'lightbox';
+    overlay.innerHTML = '<button class="lightbox-close" aria-label="Fechar imagem">&times;</button><img alt="">';
+    document.body.appendChild(overlay);
+    var full = overlay.querySelector('img');
+
+    function open(src, alt){
+      full.src = src;
+      full.alt = alt || '';
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close(){
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    overlay.addEventListener('click', function(e){
+      if(e.target !== full) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') close();
+    });
+
+    cards.forEach(function(card){
+      var img = card.querySelector('img');
+      if(!img) return;
+      card.style.cursor = 'zoom-in';
+      card.addEventListener('click', function(){
+        open(img.currentSrc || img.src, img.alt);
+      });
+    });
+  })();
+
   // Carrossel genérico ([data-carousel]):
   // - .carousel-track rola com scroll-snap
   // - [data-carousel-prev]/[data-carousel-next] avançam por página
