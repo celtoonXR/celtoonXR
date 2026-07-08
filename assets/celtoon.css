@@ -406,56 +406,95 @@ button{ font-family:inherit; cursor:pointer; }
   color:#fff;
 }
 
-/* ---------- CTA SECTION (compartilhada) ---------- */
+/* ---------- CTA BOX (compartilhada) ---------- */
 .cta-section{
+  padding:32px var(--pad-x) 128px;
+}
+.cta-box{
   position:relative;
   overflow:hidden;
-  background: var(--grad);
+  max-width: calc(var(--container) - (2 * var(--pad-x)));
+  margin:0 auto;
+  border-radius:48px;
+  background: linear-gradient(135deg, #001a38 0%, #0056b3 100%);
+  padding:96px 48px;
+  text-align:center;
+  color:#fff;
+  box-shadow: var(--shadow-card);
 }
-.cta-section::before{
+.cta-box::before{
   content:'';
   position:absolute;
   inset:0;
-  background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.18) 0%, transparent 60%);
+  background: radial-gradient(circle at 75% 20%, rgba(255,255,255,0.14) 0%, transparent 55%);
   pointer-events:none;
 }
-.cta-inner{
+.cta-box h2{
   position:relative;
-  max-width: var(--container);
-  margin:0 auto;
-  padding:96px var(--pad-x);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:48px;
-}
-.cta-inner h2{
   font-family: var(--font-display);
   font-variation-settings: "wdth" 100;
   font-weight:700;
-  font-size:48px;
-  line-height:56px;
-  color:#fff;
-  max-width:672px;
-  text-transform:uppercase;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height:1.2;
+  margin-bottom:20px;
 }
-.cta-inner .btn-white{
-  flex-shrink:0;
+.cta-box p{
+  position:relative;
+  font-size:16px;
+  line-height:26px;
+  color: rgba(255,255,255,0.75);
+  max-width:520px;
+  margin:0 auto 40px;
+}
+.cta-actions{
+  position:relative;
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.cta-btn-primary,
+.cta-btn-wpp{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 28px;
+  border-radius:10px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.cta-btn-primary{
   background:#fff;
   color: var(--navy-950);
-  font-family: var(--font-display);
-  font-variation-settings: "wdth" 100;
-  font-weight:400;
-  font-size:18px;
-  line-height:28px;
-  padding:20px 48px;
-  border-radius:9999px;
-  filter: drop-shadow(var(--shadow-drop));
-  transition: transform .3s ease;
-  text-transform:none;
-  letter-spacing:0;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
 }
-.cta-inner .btn-white:hover{ transform: translateY(-3px); }
+.cta-btn-wpp{
+  background: rgba(255,255,255,0.96);
+  color: var(--navy-950);
+  border:1px solid rgba(255,255,255,0.5);
+}
+.cta-btn-primary:hover,
+.cta-btn-wpp:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.3);
+}
+.cta-btn-wpp svg{
+  width:16px;
+  height:16px;
+  fill:#25d366;
+  flex-shrink:0;
+}
+
+/* ---------- GRID DE PONTINHOS (hero) ---------- */
+.hero-dots{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+.page-hero .container{
+  position:relative;
+  z-index:1;
+}
 
 /* ==========================================================
    RESPONSIVO
@@ -463,8 +502,7 @@ button{ font-family:inherit; cursor:pointer; }
 @media (max-width: 992px){
   :root{ --pad-x: 32px; }
   .section-title{ font-size:38px; line-height:46px; }
-  .cta-inner{ flex-direction:column; text-align:center; }
-  .cta-inner h2{ font-size:36px; line-height:44px; }
+  .cta-box{ padding:64px 32px; border-radius:36px; }
   .footer-top{ grid-template-columns: repeat(2, 1fr); padding-top:64px; padding-bottom:48px; }
 }
 
@@ -495,6 +533,10 @@ button{ font-family:inherit; cursor:pointer; }
   .nav-cta{ display:none; }
 
   .page-hero{ padding:140px 0 48px; }
+
+  .cta-section{ padding-bottom:80px; }
+  .cta-box{ padding:56px 24px; border-radius:28px; }
+  .cta-actions a{ width:100%; justify-content:center; }
 
   .footer-top{ grid-template-columns: 1fr; gap:40px; }
 

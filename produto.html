@@ -21,65 +21,194 @@
   <link rel="stylesheet" href="assets/celtoon.css">
 
   <style>
-  /* Seções de categoria */
-  .category-section{
+  /* ===== Seções por pilar ===== */
+  .pillar-section{
     padding:96px 0;
   }
-  .category-section:nth-of-type(even){
-    background: var(--bg-alt);
-  }
-  .category-inner{
+  .pillar-inner{
     max-width: var(--container);
     margin:0 auto;
     padding:0 var(--pad-x);
-    display:flex;
-    flex-direction:column;
-    gap:48px;
   }
-  .category-header{
+  .pillar-header{
     display:grid;
-    grid-template-columns: auto 1fr;
-    align-items:center;
+    grid-template-columns: 1fr auto;
+    align-items:end;
     gap:48px;
+    margin-bottom:40px;
   }
-  .category-header .mascot{
-    width:180px;
-    height:180px;
-    object-fit:contain;
-  }
-  .category-header .titles{
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-    align-items:flex-start;
-  }
-  .category-header .tagline{
+  .pillar-eyebrow{
+    display:block;
     color: var(--blue);
     text-transform:uppercase;
+    margin-bottom:10px;
   }
-  .category-header p.desc{
-    font-size:18px;
-    line-height:28px;
-    max-width:640px;
+  .pillar-header h2{
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 100;
+    font-weight:700;
+    font-size: clamp(30px, 3.6vw, 44px);
+    line-height:1.15;
+    color: var(--navy-950);
   }
-  .category-grid{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap:24px;
+  .pillar-header .desc{
+    max-width:360px;
+    font-size:15px;
+    line-height:24px;
+    color: var(--gray-700);
+    padding-bottom:6px;
   }
 
+  /* ===== Mosaico (bento) ===== */
+  .bento{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 205px;
+    grid-auto-flow: dense;
+    gap:20px;
+  }
+  .bento .project-card{
+    aspect-ratio:auto;
+    height:100%;
+  }
+  .b-lg{ grid-column: span 2; grid-row: span 2; }
+  .b-wide{ grid-column: span 2; }
+  .b-tall{ grid-row: span 2; }
+
+  .bento .text-card{
+    border-radius: var(--radius-card);
+    background: linear-gradient(150deg, var(--navy-800) 0%, var(--navy-950) 100%);
+    color:#fff;
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    position:relative;
+    overflow:hidden;
+  }
+  .bento .text-card svg{
+    position:absolute;
+    top:24px;
+    right:24px;
+    width:26px;
+    height:26px;
+    fill:none;
+    stroke: var(--cyan);
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    opacity:.9;
+  }
+  .bento .text-card h3{
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 100;
+    font-weight:600;
+    font-size:26px;
+    line-height:32px;
+    margin-bottom:8px;
+  }
+  .bento .text-card p{
+    font-size:14px;
+    line-height:22px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ===== Redes Sociais (seção escura) ===== */
+  .social-section{
+    background: var(--navy-950);
+    padding:112px 0;
+    color:#fff;
+  }
+  .social-inner{
+    max-width: var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x);
+  }
+  .social-header{
+    text-align:center;
+    max-width:620px;
+    margin:0 auto 64px;
+  }
+  .social-header .pillar-eyebrow{
+    color: var(--cyan);
+  }
+  .social-header h2{
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 100;
+    font-weight:700;
+    font-size: clamp(30px, 3.6vw, 44px);
+    line-height:1.15;
+    color:#fff;
+    margin-bottom:16px;
+  }
+  .social-header p{
+    font-size:16px;
+    line-height:26px;
+    color: rgba(196,198,208,0.85);
+  }
+  .social-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:20px;
+  }
+  .social-card{
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    aspect-ratio: 3 / 4;
+    background: var(--navy-800);
+  }
+  .social-card:nth-child(even){ margin-top:36px; }
+  .social-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition: transform .5s ease;
+  }
+  .social-card:hover img{ transform: scale(1.06); }
+  .social-card::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: linear-gradient(to top, rgba(0,26,56,0.92) 0%, rgba(0,26,56,0.25) 45%, rgba(0,26,56,0) 70%);
+    pointer-events:none;
+  }
+  .social-card .info{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:22px;
+    z-index:1;
+  }
+  .social-card .info h3{
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 100;
+    font-weight:600;
+    font-size:22px;
+    line-height:28px;
+    margin-bottom:6px;
+  }
+  .social-card .info p{
+    font-size:13px;
+    line-height:20px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ===== Responsivo ===== */
   @media (max-width: 992px){
-    .category-grid{ grid-template-columns: repeat(2, 1fr); }
+    .bento{ grid-template-columns: repeat(2, 1fr); grid-auto-rows: 190px; }
+    .social-grid{ grid-template-columns: repeat(2, 1fr); }
+    .pillar-header{ grid-template-columns: 1fr; align-items:start; gap:16px; }
+    .pillar-header .desc{ max-width:560px; }
   }
   @media (max-width: 768px){
-    .category-section{ padding:64px 0; }
-    .category-header{
-      grid-template-columns: 1fr;
-      text-align:left;
-      gap:24px;
-    }
-    .category-header .mascot{ width:140px; height:140px; }
-    .category-grid{ grid-template-columns: 1fr; }
+    .pillar-section{ padding:64px 0; }
+    .social-section{ padding:72px 0; }
+    .bento{ grid-template-columns: 1fr; grid-auto-rows: 240px; }
+    .b-lg, .b-wide{ grid-column: auto; }
+    .b-lg, .b-tall{ grid-row: span 2; }
+    .social-grid{ grid-template-columns: 1fr; }
+    .social-card{ aspect-ratio: 4 / 3; }
+    .social-card:nth-child(even){ margin-top:0; }
   }
   </style>
 </head>
@@ -101,7 +230,7 @@
   </nav>
 
   <!-- HERO -->
-  <header class="page-hero">
+  <header class="page-hero" data-dots>
     <div class="container">
       <span class="badge mono-label">Nossos Serviços</span>
       <h1>Produto</h1>
@@ -109,163 +238,183 @@
     </div>
   </header>
 
-  <!-- IMPRESSÃO -->
-  <section id="impressao" class="category-section fade-in">
-    <div class="category-inner">
-      <div class="category-header">
-        <img class="mascot" src="personagem/boneco_papel.png" alt="Mascote Celtoon — Impressão">
-        <div class="titles">
-          <span class="tagline mono-label">Materiais gráficos prontos para impressão e corte</span>
-          <h2 class="section-title">Impressão</h2>
-          <div class="grad-divider"></div>
-          <p class="desc">Uma boa impressão depende de um bom ante-projeto. Trabalhamos com vetorização, diagramação e arte finalização para que cada detalhe transmita profissionalismo e impacto visual. Flyer, cordão para crachá, credencial, totem, caderno, camiseta, ecobag, adesivo, cartão de visitas, cartaz, convite, envelope, banner e arte finalização.</p>
+  <!-- PILLAR 01 — IMPRESSÃO -->
+  <section id="impressao" class="pillar-section fade-in">
+    <div class="pillar-inner">
+      <div class="pillar-header">
+        <div>
+          <span class="pillar-eyebrow mono-label">Pillar 01</span>
+          <h2>Impressão &amp; Acabamento</h2>
         </div>
+        <p class="desc">Qualidade tátil que dá vida às suas ideias. Vetorização, diagramação e arte finalização para materiais impecáveis na gráfica.</p>
       </div>
-      <div class="category-grid">
-        <div class="project-card">
+      <div class="bento">
+        <div class="project-card b-lg">
           <img src="imagem/folder.png" alt="Design de folder institucional e diagramação - Projeto Recírculo" loading="lazy">
           <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Recírculo</h3></div>
         </div>
         <div class="project-card">
           <img src="imagem/Tshirt.png" alt="Design de estampa para camisetas interativas e personalizadas" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Camiseta</h3></div>
+          <div class="overlay"><span class="tag mono-label">Estampa</span><h3>Camiseta</h3></div>
+        </div>
+        <div class="text-card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          <h3>Arte-finalização</h3>
+          <p>Fechamento de arquivo impecável, pronto para impressão e corte.</p>
         </div>
         <div class="project-card">
           <img src="imagem/mock.jpg" alt="Diagramação e design de capa de livro profissional" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Capa de livro</h3></div>
+          <div class="overlay"><span class="tag mono-label">Editorial</span><h3>Capa de livro</h3></div>
         </div>
         <div class="project-card">
           <img src="imagem/magazine_boneco.jpg" alt="Criação de material promocional e arte final para Magazine Móveis" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Magazine Móveis</h3></div>
+          <div class="overlay"><span class="tag mono-label">Promocional</span><h3>Magazine Móveis</h3></div>
+        </div>
+        <div class="project-card b-wide">
+          <img src="imagem/cafe.png" alt="Design de embalagem e pré-impressão técnica para o setor alimentício" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Embalagem</span><h3>3 Corações</h3></div>
         </div>
         <div class="project-card">
           <img src="imagem/Bolsa_Salvador.png" alt="Design de estampa para Eco Bag e brindes sustentáveis" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Eco Bag</h3></div>
-        </div>
-        <div class="project-card">
-          <img src="imagem/ceopaginho.jpg" alt="Design de Mascote para empresa de máquinas de pagamento" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Ceopaguinho</h3></div>
-        </div>
-        <div class="project-card">
-          <img src="imagem/cafe.png" alt="Design de embalagem e pré-impressão técnica para o setor alimentício" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>3 Corações</h3></div>
+          <div class="overlay"><span class="tag mono-label">Brinde</span><h3>Eco Bag</h3></div>
         </div>
         <div class="project-card">
           <img src="imagem/salinas.png" alt="Design de embalagem e pré-impressão técnica para o setor alimentício" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Pré-impressão</span><h3>Salinas</h3></div>
+          <div class="overlay"><span class="tag mono-label">Embalagem</span><h3>Salinas</h3></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CRIAÇÃO -->
-  <section id="criacao" class="category-section fade-in">
-    <div class="category-inner">
-      <div class="category-header">
-        <img class="mascot" src="personagem/boneco_plano.png" alt="Mascote Celtoon — Criação">
-        <div class="titles">
-          <span class="tagline mono-label">Uma nova cara e identidade para sua marca</span>
-          <h2 class="section-title">Criação</h2>
-          <div class="grad-divider"></div>
-          <p class="desc">Toda grande ideia começa no papel. Cuidamos da identidade visual, ilustração e design conceitual para transformar ideias em projetos únicos, com criatividade e personalidade. Naming, slogan, style guide, criação de logo, mascote, mockup digital, layout, embalagem, vetorização, ilustração, key visual e conceito visual.</p>
+  <!-- PILLAR 02 — CRIAÇÃO -->
+  <section id="criacao" class="pillar-section fade-in">
+    <div class="pillar-inner">
+      <div class="pillar-header">
+        <div>
+          <span class="pillar-eyebrow mono-label">Pillar 02</span>
+          <h2>Criação &amp; Identidade</h2>
         </div>
+        <p class="desc">Do conceito ao guia de estilo. Construímos as fundações visuais que tornam marcas inesquecíveis.</p>
       </div>
-      <div class="category-grid">
+      <div class="bento">
+        <div class="project-card b-lg">
+          <img src="imagem/mock_2.png" alt="Interface do aplicativo Celtoon - identidade e key visual" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Key Visual</span><h3>Celtoon App</h3></div>
+        </div>
+        <div class="text-card b-wide">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+          <h3>Naming</h3>
+          <p>Palavras que ecoam o propósito da sua empresa.</p>
+        </div>
+        <div class="project-card b-wide">
+          <img src="imagem/Poty.jpg" alt="Design de layout e mockup para embalagens" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Layout Poty</h3></div>
+        </div>
         <div class="project-card">
           <img src="imagem/guacu.png" alt="Criação de mascote personalizado para Rádio Guaçu - Ilustração Celtoon" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Mascote</h3></div>
-        </div>
-        <div class="project-card">
-          <img src="imagem/Poty.jpg" alt="Design de layout e mockup para embalagens" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Layout</h3></div>
+          <div class="overlay"><span class="tag mono-label">Mascote</span><h3>Guaçu</h3></div>
         </div>
         <div class="project-card">
           <img src="imagem/Clareador.png" alt="Criação de layout para embalagem de produto clareador" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Layout</h3></div>
+          <div class="overlay"><span class="tag mono-label">Embalagem</span><h3>Clareador</h3></div>
         </div>
-        <div class="project-card">
+        <div class="project-card b-wide">
           <img src="imagem/ceopaginho.jpg" alt="Design de personagem mascote Ceopaguinho para branding empresarial" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Mascote</h3></div>
+          <div class="overlay"><span class="tag mono-label">Mascote</span><h3>Ceopaguinho</h3></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- DIGITAL -->
-  <section id="digital" class="category-section fade-in">
-    <div class="category-inner">
-      <div class="category-header">
-        <img class="mascot" src="personagem/boneco_banco.png" alt="Mascote Celtoon — Digital">
-        <div class="titles">
-          <span class="tagline mono-label">Tecnologia e inovação para dar vida à sua imaginação</span>
-          <h2 class="section-title">Digital</h2>
-          <div class="grad-divider"></div>
-          <p class="desc">A presença digital exige mais do que estar online, exige impacto. Desenvolvemos modelos 3D, apresentações e materiais digitais que unem design e funcionalidade para destacar sua marca em qualquer plataforma. Modelagem 3D, UI &amp; UX, banner para site, infográfico, apresentação de slide, catálogo e landing page.</p>
+  <!-- PILLAR 03 — DIGITAL -->
+  <section id="digital" class="pillar-section fade-in">
+    <div class="pillar-inner">
+      <div class="pillar-header">
+        <div>
+          <span class="pillar-eyebrow mono-label">Pillar 03</span>
+          <h2>Digital &amp; Experiências</h2>
         </div>
+        <p class="desc">Tecnologia e inovação para dar vida à sua imaginação: modelagem 3D, UI &amp; UX e realidade aumentada.</p>
       </div>
-      <div class="category-grid">
-        <div class="project-card">
+      <div class="bento">
+        <div class="project-card b-lg">
           <img src="imagem/app1.png" alt="Design de interface de aplicativo móvel - Projeto UX e UI Celtoon" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">UX &amp; UI Design</span><h3>Aplicativo</h3></div>
-        </div>
-        <div class="project-card">
-          <img src="imagem/mock_2.png" alt="Interface do aplicativo Celtoon - Design e Programação Digital e Realidade Aumentada" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Design / Programação</span><h3>Celtoon App</h3></div>
-        </div>
-        <div class="project-card">
-          <img src="imagem/app2.png" alt="Design de interface de aplicativo móvel - Projeto UX e UI Celtoon" loading="lazy">
           <div class="overlay"><span class="tag mono-label">UX &amp; UI Design</span><h3>Aplicativo</h3></div>
         </div>
         <div class="project-card">
           <img src="imagem/curar5.png" alt="Projeto CurAR - Experiência imersiva em Realidade Aumentada (AR)" loading="lazy">
           <div class="overlay"><span class="tag mono-label">Realidade Aumentada</span><h3>CurAR</h3></div>
         </div>
-        <div class="project-card">
+        <div class="text-card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></svg>
+          <h3>Modelagem 3D</h3>
+          <p>Produtos e personagens renderizados com realismo publicitário.</p>
+        </div>
+        <div class="project-card b-wide">
           <img src="imagem/exp.jpg" alt="Desenvolvimento de filtro e experiência em Realidade Aumentada para arquitetura" loading="lazy">
           <div class="overlay"><span class="tag mono-label">Realidade Aumentada</span><h3>Experiência AR</h3></div>
+        </div>
+        <div class="project-card b-wide">
+          <img src="imagem/app2.png" alt="Design de interface de aplicativo móvel - Projeto UX e UI Celtoon" loading="lazy">
+          <div class="overlay"><span class="tag mono-label">UX &amp; UI Design</span><h3>Aplicativo</h3></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- REDES SOCIAIS -->
-  <section id="redes-sociais" class="category-section fade-in">
-    <div class="category-inner">
-      <div class="category-header">
-        <img class="mascot" src="personagem/boneco_cel.png" alt="Mascote Celtoon — Redes Sociais">
-        <div class="titles">
-          <span class="tagline mono-label">Criações incríveis para atrair e surpreender o seu público</span>
-          <h2 class="section-title">Redes Sociais</h2>
-          <div class="grad-divider"></div>
-          <p class="desc">Nas redes sociais, cada post é uma oportunidade de conexão. Criamos conteúdos estratégicos e visuais envolventes que fortalecem sua marca e aumentam o engajamento do público. Conteúdo estático, reels, animado e carrossel.</p>
-        </div>
+  <!-- PILLAR 04 — REDES SOCIAIS (seção escura) -->
+  <section id="redes-sociais" class="social-section fade-in">
+    <div class="social-inner">
+      <div class="social-header">
+        <span class="pillar-eyebrow mono-label">Pillar 04</span>
+        <h2>Redes Sociais</h2>
+        <p>Conteúdo que interrompe o scroll. Transformamos a presença digital da sua marca com estética e estratégia.</p>
       </div>
-      <div class="category-grid">
-        <div class="project-card">
-          <img src="imagem/renderjpg.jpg" alt="Conteúdo para redes sociais - Recírculo" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Criação / Digital</span><h3>Recírculo</h3></div>
+      <div class="social-grid">
+        <div class="social-card">
+          <img src="imagem/lavi.jpg" alt="Motion design e reels para redes sociais - Lavinho" loading="lazy">
+          <div class="info">
+            <h3>Reels &amp; Video</h3>
+            <p>Motion design que prende a atenção.</p>
+          </div>
         </div>
-        <div class="project-card">
-          <img src="imagem/cabine.png" alt="Design de cabine fotográfica inflável" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Cabine Fotográfica</h3></div>
+        <div class="social-card">
+          <img src="imagem/renderjpg.jpg" alt="Conteúdo estático para feed - Recírculo" loading="lazy">
+          <div class="info">
+            <h3>Static Content</h3>
+            <p>Curadoria visual para o seu feed.</p>
+          </div>
         </div>
-        <div class="project-card">
-          <img src="imagem/lavi.jpg" alt="Mascote Lavinho para redes sociais" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Digital</span><h3>Lavinho</h3></div>
+        <div class="social-card">
+          <img src="imagem/cabine.png" alt="Animações e motion assets para marcas" loading="lazy">
+          <div class="info">
+            <h3>Animations</h3>
+            <p>Micro-interações e motion assets.</p>
+          </div>
         </div>
-        <div class="project-card">
-          <img src="imagem/Domo.jpg" alt="Design de domo inflável para fins educacionais" loading="lazy">
-          <div class="overlay"><span class="tag mono-label">Criação</span><h3>Domo UFES</h3></div>
+        <div class="social-card">
+          <img src="imagem/recirculo.jpg" alt="Gestão e estratégia de conteúdo para redes sociais" loading="lazy">
+          <div class="info">
+            <h3>Management</h3>
+            <p>Estratégia e performance de marca.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta-section fade-in">
-    <div class="cta-inner">
-      <h2>Encontrou o que seu projeto precisa? Vamos conversar!</h2>
-      <a href="orcamento.html" class="btn-white btn">Solicitar Orçamento</a>
+  <section class="cta-section fade-in" style="padding-top:96px;">
+    <div class="cta-box">
+      <h2>Pronto para elevar sua marca?</h2>
+      <p>Seja para um projeto específico ou uma parceria contínua, estamos prontos para transformar sua visão em realidade.</p>
+      <div class="cta-actions">
+        <a href="orcamento.html" class="cta-btn-primary mono-label">Começar Projeto</a>
+        <a href="https://wa.me/+5511994950389" target="_blank" rel="noopener" class="cta-btn-wpp mono-label">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
     </div>
   </section>
 
