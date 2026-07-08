@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/celtoon.css?v=2">
+  <link rel="stylesheet" href="assets/celtoon.css?v=3">
 
   <style>
   /* Filtros */
@@ -76,9 +76,9 @@
     max-width: var(--container);
     margin:0 auto;
     padding:0 var(--pad-x);
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:24px;
+  }
+  .featured-grid .carousel-track > .featured-card{
+    flex:0 0 calc((100% - 24px) / 2);
   }
   .featured-card{
     position:relative;
@@ -149,8 +149,12 @@
     .portfolio-grid{ grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 768px){
-    .portfolio-grid{ grid-template-columns: 1fr; }
-    .featured-grid{ grid-template-columns: 1fr; }
+    /* grid compacto em 2 colunas no mobile */
+    .portfolio-grid{ grid-template-columns: repeat(2, 1fr); gap:12px; }
+    .portfolio-grid .project-card .overlay{ padding:12px; }
+    .portfolio-grid .project-card .overlay h3{ font-size:15px; line-height:20px; }
+    .portfolio-grid .project-card .overlay .tag{ font-size:9px; letter-spacing:0.8px; }
+    .featured-grid .carousel-track > .featured-card{ flex-basis: 88%; }
     .featured-card{ aspect-ratio: 4 / 3; }
   }
   </style>
@@ -182,8 +186,9 @@
   </header>
 
   <!-- DESTAQUES -->
-  <section class="featured fade-in">
+  <section class="featured fade-in" data-carousel>
     <div class="featured-grid">
+      <div class="carousel-track">
       <a href="#todos" class="featured-card">
         <img src="imagem/mock_2.png" alt="Celtoon App - aplicativo interativo com realidade aumentada" loading="lazy">
         <span class="arrow" aria-hidden="true">&#10132;</span>
@@ -200,6 +205,12 @@
           <p>Identidade visual e documentação arquitetônica para um marco acadêmico.</p>
         </div>
       </a>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-arrow" data-carousel-prev aria-label="Anterior">&#10094;</button>
+        <div class="carousel-dots"></div>
+        <button class="carousel-arrow solid" data-carousel-next aria-label="Próximo">&#10095;</button>
+      </div>
     </div>
   </section>
 
@@ -361,7 +372,7 @@
   <!-- WHATSAPP -->
   <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp"></a>
 
-  <script src="assets/celtoon.js?v=2"></script>
+  <script src="assets/celtoon.js?v=3"></script>
   <script>
   // Filtro de categorias
   (function(){

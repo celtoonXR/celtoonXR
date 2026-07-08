@@ -406,6 +406,67 @@ button{ font-family:inherit; cursor:pointer; }
   color:#fff;
 }
 
+/* ---------- CARROSSEL (compartilhado) ---------- */
+.carousel-track{
+  display:flex;
+  gap:24px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+}
+.carousel-track::-webkit-scrollbar{ display:none; }
+.carousel-track > *{
+  flex:0 0 100%;
+  scroll-snap-align:start;
+}
+.carousel-controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+  margin-top:28px;
+}
+.carousel-arrow{
+  width:44px;
+  height:44px;
+  border-radius:9999px;
+  border:1px solid var(--gray-400);
+  background:transparent;
+  color: var(--gray-700);
+  font-size:1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform .2s ease, opacity .2s ease, background .2s ease, color .2s ease;
+}
+.carousel-arrow.solid{
+  background: var(--navy-950);
+  color:#fff;
+  border-color: var(--navy-950);
+}
+.carousel-arrow:hover:not(:disabled){ transform: translateY(-2px); }
+.carousel-arrow:disabled{ opacity:.35; cursor:default; }
+.carousel-dots{
+  display:flex;
+  gap:8px;
+}
+.carousel-dots button{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  border:none;
+  padding:0;
+  background: rgba(0,26,56,0.2);
+  cursor:pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.carousel-dots button.active{
+  background: var(--blue);
+  transform: scale(1.2);
+}
+
 /* ---------- CTA BOX (compartilhada) ---------- */
 .cta-section{
   padding:32px var(--pad-x) 128px;
@@ -545,4 +606,19 @@ button{ font-family:inherit; cursor:pointer; }
     width:56px; height:56px;
   }
   .whatsapp-float img{ width:32px; height:32px; }
+
+  /* Sem hover no touch: overlay dos cards sempre visível no mobile */
+  .project-card .overlay{
+    opacity:1;
+    padding:18px;
+    background: linear-gradient(to top, rgba(0,26,56,0.9) 0%, rgba(0,26,56,0.15) 55%, rgba(0,26,56,0) 75%);
+  }
+  .project-card .overlay h3{
+    font-size:20px;
+    line-height:26px;
+  }
+  .project-card .overlay .tag{
+    font-size:10px;
+    margin-bottom:4px;
+  }
 }

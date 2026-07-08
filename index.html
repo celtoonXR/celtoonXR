@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/celtoon.css?v=2">
+  <link rel="stylesheet" href="assets/celtoon.css?v=3">
 
   <style>
   /* ==========================================
@@ -152,9 +152,12 @@
     max-width: var(--container);
     margin:0 auto;
     padding:0 var(--pad-x);
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap:24px;
+  }
+  .services-grid .carousel-track{
+    padding:12px 4px 24px; /* respiro para a sombra do hover */
+  }
+  .services-grid .carousel-track > .service-card{
+    flex:0 0 calc((100% - 72px) / 4);
   }
   .service-card{
     border-radius: var(--radius-card);
@@ -242,30 +245,17 @@
     gap:16px;
     flex-shrink:0;
   }
-  .portfolio-nav a{
+  .portfolio-nav .carousel-arrow{
     width:56px;
     height:56px;
-    border-radius:9999px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     font-size:1.1rem;
-    transition: transform .2s ease, background .2s ease, color .2s ease;
   }
-  .portfolio-nav a:hover{ transform: translateY(-2px); }
-  .portfolio-nav .arrow-ghost{
-    border:1px solid var(--gray-400);
-    color: var(--gray-700);
-    background:transparent;
+  .portfolio-track > .project-card{
+    flex:0 0 calc((100% - 48px) / 3);
   }
-  .portfolio-nav .arrow-solid{
-    background: var(--navy-950);
-    color:#fff;
-  }
-  .portfolio-grid{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:24px;
+  .portfolio-preview .carousel-dots{
+    justify-content:center;
+    margin-top:8px;
   }
 
   /* ==========================================
@@ -315,15 +305,15 @@
   @media (max-width: 992px){
     .hero-inner{ grid-template-columns:1fr; gap:48px; }
     .hero{ padding:150px 0 64px; min-height:auto; }
-    .services-grid{ grid-template-columns: repeat(2, 1fr); }
-    .portfolio-grid{ grid-template-columns: repeat(2, 1fr); }
+    .services-grid .carousel-track > .service-card{ flex-basis: calc((100% - 24px) / 2); }
+    .portfolio-track > .project-card{ flex-basis: calc((100% - 24px) / 2); }
     .portfolio-header{ flex-direction:column; align-items:flex-start; }
   }
   @media (max-width: 768px){
     .services{ padding:80px 0; }
     .portfolio-preview{ padding:80px 0; }
-    .services-grid{ grid-template-columns: 1fr; }
-    .portfolio-grid{ grid-template-columns: 1fr; }
+    .services-grid .carousel-track > .service-card{ flex-basis: 82%; }
+    .portfolio-track > .project-card{ flex-basis: 86%; }
     .hero-actions .btn{ width:100%; }
   }
   </style>
@@ -374,26 +364,33 @@
       <div class="grad-divider"></div>
     </div>
 
-    <div class="services-grid">
-      <div class="service-card dark fade-in">
-        <img src="personagem/boneco_papel.png" alt="Serviços de Impressão" loading="lazy">
-        <h3>Impressão</h3>
-        <p>Qualidade tátil que dá vida às suas ideias no mundo físico.</p>
+    <div class="services-grid" data-carousel>
+      <div class="carousel-track">
+        <div class="service-card dark fade-in">
+          <img src="personagem/boneco_papel.png" alt="Serviços de Impressão" loading="lazy">
+          <h3>Impressão</h3>
+          <p>Qualidade tátil que dá vida às suas ideias no mundo físico.</p>
+        </div>
+        <div class="service-card light fade-in">
+          <img src="personagem/boneco_plano.png" alt="Serviços de Criação" loading="lazy">
+          <h3>Criação</h3>
+          <p>Identidade visual e branding que contam a sua história única.</p>
+        </div>
+        <div class="service-card dark fade-in">
+          <img src="personagem/boneco_banco.png" alt="Serviços Digitais" loading="lazy">
+          <h3>Digital</h3>
+          <p>Interfaces intuitivas e experiências web de alta performance.</p>
+        </div>
+        <div class="service-card light fade-in">
+          <img src="personagem/boneco_cel.png" alt="Serviços para Redes Sociais" loading="lazy">
+          <h3>Redes Sociais</h3>
+          <p>Estratégia e conteúdo que geram engajamento real.</p>
+        </div>
       </div>
-      <div class="service-card light fade-in">
-        <img src="personagem/boneco_plano.png" alt="Serviços de Criação" loading="lazy">
-        <h3>Criação</h3>
-        <p>Identidade visual e branding que contam a sua história única.</p>
-      </div>
-      <div class="service-card dark fade-in">
-        <img src="personagem/boneco_banco.png" alt="Serviços Digitais" loading="lazy">
-        <h3>Digital</h3>
-        <p>Interfaces intuitivas e experiências web de alta performance.</p>
-      </div>
-      <div class="service-card light fade-in">
-        <img src="personagem/boneco_cel.png" alt="Serviços para Redes Sociais" loading="lazy">
-        <h3>Redes Sociais</h3>
-        <p>Estratégia e conteúdo que geram engajamento real.</p>
+      <div class="carousel-controls">
+        <button class="carousel-arrow" data-carousel-prev aria-label="Anterior">&#10094;</button>
+        <div class="carousel-dots"></div>
+        <button class="carousel-arrow solid" data-carousel-next aria-label="Próximo">&#10095;</button>
       </div>
     </div>
 
@@ -403,7 +400,7 @@
   </section>
 
   <!-- PORTFOLIO PREVIEW -->
-  <section id="portfolio" class="portfolio-preview fade-in">
+  <section id="portfolio" class="portfolio-preview fade-in" data-carousel>
     <div class="portfolio-inner">
       <div class="portfolio-header">
         <div class="intro">
@@ -411,12 +408,12 @@
           <p>Casos de sucesso que unem design estratégico e execução técnica impecável.</p>
         </div>
         <div class="portfolio-nav">
-          <a href="portfolio.html" class="arrow-ghost" aria-label="Ver portfólio completo">&#10094;</a>
-          <a href="portfolio.html" class="arrow-solid" aria-label="Ver portfólio completo">&#10095;</a>
+          <button class="carousel-arrow" data-carousel-prev aria-label="Projetos anteriores">&#10094;</button>
+          <button class="carousel-arrow solid" data-carousel-next aria-label="Próximos projetos">&#10095;</button>
         </div>
       </div>
 
-      <div class="portfolio-grid">
+      <div class="carousel-track portfolio-track">
         <a href="portfolio.html" class="project-card">
           <img src="imagem/pizza.png" alt="Renderização de modelagem 3D profissional de pizza para publicidade alimentícia" loading="lazy">
           <div class="overlay">
@@ -438,7 +435,30 @@
             <h3>Mascote Nortinho</h3>
           </div>
         </a>
+        <a href="portfolio.html" class="project-card">
+          <img src="imagem/cabine.png" alt="Design de cabine fotográfica inflável" loading="lazy">
+          <div class="overlay">
+            <span class="tag mono-label">Arquitetura Inflável</span>
+            <h3>Cabine Fotográfica</h3>
+          </div>
+        </a>
+        <a href="portfolio.html" class="project-card">
+          <img src="imagem/Domo.jpg" alt="Design de domo inflável para fins educacionais" loading="lazy">
+          <div class="overlay">
+            <span class="tag mono-label">Design de Impressão</span>
+            <h3>Domo UFES</h3>
+          </div>
+        </a>
+        <a href="portfolio.html" class="project-card">
+          <img src="imagem/fries.jpg" alt="Modelagem 3D profissional para propaganda alimentícia" loading="lazy">
+          <div class="overlay">
+            <span class="tag mono-label">Modelagem 3D</span>
+            <h3>Batata Frita</h3>
+          </div>
+        </a>
       </div>
+
+      <div class="carousel-dots"></div>
     </div>
   </section>
 
@@ -510,6 +530,6 @@
   <!-- WHATSAPP -->
   <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp"></a>
 
-  <script src="assets/celtoon.js?v=2"></script>
+  <script src="assets/celtoon.js?v=3"></script>
 </body>
 </html>
