@@ -27,6 +27,69 @@
     });
   })();
 
+  // Carrossel genérico ([data-carousel]):
+  // - .carousel-track rola com scroll-snap
+  // - [data-carousel-prev]/[data-carousel-next] avançam por página
+  // - .carousel-dots recebe bolinhas geradas por página
+  // Controles somem quando todo o conteúdo cabe na tela.
+  (function initCarousels(){
+    var roots = document.querySelectorAll('[data-carousel]');
+    roots.forEach(function(root){
+      var track = root.querySelector('.carousel-track');
+      if(!track) return;
+      var prev = root.querySelector('[data-carousel-prev]');
+      var next = root.querySelector('[data-carousel-next]');
+      var dotsWrap = root.querySelector('.carousel-dots');
+
+      function pages(){
+        return Math.max(1, Math.round(track.scrollWidth / track.clientWidth));
+      }
+      function page(){
+        return Math.min(pages() - 1, Math.round(track.scrollLeft / track.clientWidth));
+      }
+      function goTo(p){
+        track.scrollTo({ left: p * track.clientWidth, behavior: 'smooth' });
+      }
+      function update(){
+        var n = pages(), p = page();
+        var overflow = track.scrollWidth > track.clientWidth + 4;
+        if(prev){ prev.disabled = p <= 0; prev.style.display = overflow ? '' : 'none'; }
+        if(next){ next.disabled = p >= n - 1; next.style.display = overflow ? '' : 'none'; }
+        if(dotsWrap){
+          Array.prototype.forEach.call(dotsWrap.children, function(d, i){
+            d.classList.toggle('active', i === p);
+          });
+        }
+      }
+      function buildDots(){
+        if(dotsWrap){
+          dotsWrap.innerHTML = '';
+          var n = pages();
+          // muitas páginas = bolinhas viram ruído; só as setas ficam
+          if(n > 1 && n <= 10){
+            for(var i = 0; i < n; i++){
+              (function(i){
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.setAttribute('aria-label', 'Ir para página ' + (i + 1));
+                b.addEventListener('click', function(){ goTo(i); });
+                dotsWrap.appendChild(b);
+              })(i);
+            }
+          }
+        }
+        update();
+      }
+
+      if(prev) prev.addEventListener('click', function(e){ e.preventDefault(); goTo(page() - 1); });
+      if(next) next.addEventListener('click', function(e){ e.preventDefault(); goTo(page() + 1); });
+      track.addEventListener('scroll', function(){ requestAnimationFrame(update); }, { passive: true });
+      window.addEventListener('resize', buildDots);
+      window.addEventListener('load', buildDots);
+      buildDots();
+    });
+  })();
+
   // Grid de pontinhos interativo nos heros ([data-dots])
   // Pontos apagam num degradê até a base da seção e acendem
   // (navy → roxo) conforme o mouse passa por cima.

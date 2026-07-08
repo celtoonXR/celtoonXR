@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/celtoon.css">
+  <link rel="stylesheet" href="assets/celtoon.css?v=3">
 
   <style>
   /* ===== Seções por pilar ===== */
@@ -203,12 +203,24 @@
   @media (max-width: 768px){
     .pillar-section{ padding:64px 0; }
     .social-section{ padding:72px 0; }
-    .bento{ grid-template-columns: 1fr; grid-auto-rows: 240px; }
-    .b-lg, .b-wide{ grid-column: auto; }
-    .b-lg, .b-tall{ grid-row: span 2; }
-    .social-grid{ grid-template-columns: 1fr; }
-    .social-card{ aspect-ratio: 4 / 3; }
-    .social-card:nth-child(even){ margin-top:0; }
+
+    /* Mosaico preservado no mobile: 2 colunas com células menores */
+    .bento{ grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; gap:12px; }
+    .bento .project-card{ border-radius:16px; }
+    .bento .project-card .overlay{ padding:14px; }
+    .bento .project-card .overlay h3{ font-size:16px; line-height:21px; }
+    .bento .project-card .overlay .tag{ font-size:9px; letter-spacing:0.8px; margin-bottom:3px; }
+    .bento .text-card{ padding:16px; border-radius:16px; }
+    .bento .text-card h3{ font-size:17px; line-height:22px; margin-bottom:5px; }
+    .bento .text-card p{ font-size:12px; line-height:17px; }
+    .bento .text-card svg{ top:12px; right:12px; width:18px; height:18px; }
+
+    .social-grid{ grid-template-columns: repeat(2, 1fr); gap:12px; }
+    .social-card{ border-radius:16px; }
+    .social-card:nth-child(even){ margin-top:20px; }
+    .social-card .info{ padding:14px; }
+    .social-card .info h3{ font-size:16px; line-height:21px; margin-bottom:4px; }
+    .social-card .info p{ font-size:11px; line-height:16px; }
   }
   </style>
 </head>
@@ -453,6 +465,6 @@
   <!-- WHATSAPP -->
   <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp"></a>
 
-  <script src="assets/celtoon.js"></script>
+  <script src="assets/celtoon.js?v=3"></script>
 </body>
 </html>
