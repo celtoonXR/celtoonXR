@@ -36,33 +36,57 @@
 
     var overlay = document.createElement('div');
     overlay.className = 'lightbox';
-    overlay.innerHTML = '<button class="lightbox-close" aria-label="Fechar imagem">&times;</button><img alt="">';
+    overlay.innerHTML = '<button class="lightbox-close" aria-label="Fechar">&times;</button>' +
+      '<img alt="" style="display:none">' +
+      '<video controls autoplay loop playsinline style="display:none"></video>';
     document.body.appendChild(overlay);
-    var full = overlay.querySelector('img');
+    var fullImg = overlay.querySelector('img');
+    var fullVideo = overlay.querySelector('video');
 
-    function open(src, alt){
-      full.src = src;
-      full.alt = alt || '';
+    function openImage(src, alt){
+      fullVideo.style.display = 'none';
+      fullVideo.pause();
+      fullVideo.removeAttribute('src');
+      fullImg.src = src;
+      fullImg.alt = alt || '';
+      fullImg.style.display = '';
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function openVideo(src){
+      fullImg.style.display = 'none';
+      fullImg.removeAttribute('src');
+      fullVideo.src = src;
+      fullVideo.style.display = '';
+      fullVideo.play();
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
     function close(){
       overlay.classList.remove('open');
       document.body.style.overflow = '';
+      fullVideo.pause();
+      fullVideo.removeAttribute('src');
     }
     overlay.addEventListener('click', function(e){
-      if(e.target !== full) close();
+      if(e.target !== fullImg && e.target !== fullVideo) close();
     });
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape') close();
     });
 
     cards.forEach(function(card){
-      var img = card.querySelector('img');
-      if(!img) return;
+      var media = card.querySelector('video, img');
+      if(!media) return;
       card.style.cursor = 'zoom-in';
       card.addEventListener('click', function(){
-        open(img.currentSrc || img.src, img.alt);
+        if(media.tagName === 'VIDEO'){
+          var source = media.querySelector('source');
+          var src = media.currentSrc || (source && source.src);
+          if(src) openVideo(src);
+        } else {
+          openImage(media.currentSrc || media.src, media.alt);
+        }
       });
     });
   })();
