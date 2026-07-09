@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/celtoon.css?v=4">
+  <link rel="stylesheet" href="assets/celtoon.css?v=5">
 
   <style>
   /* Filtros */
@@ -221,12 +221,31 @@
     <button class="filter-btn" data-filter="3d">Modelagem 3D</button>
     <button class="filter-btn" data-filter="mascote">Mascotes</button>
     <button class="filter-btn" data-filter="digital">Digital &amp; AR</button>
+    <button class="filter-btn" data-filter="reels">Reels</button>
     <button class="filter-btn" data-filter="impressao">Impressão</button>
   </div>
 
   <!-- GRID -->
   <section class="portfolio-page">
     <div class="portfolio-grid">
+      <div class="project-card fade-in" data-category="reels">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="imagem/reel-1.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"><span class="tag mono-label">Reels</span><h3>Reel 01</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="reels">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="imagem/reel-2.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"><span class="tag mono-label">Reels</span><h3>Reel 02</h3></div>
+      </div>
+      <div class="project-card fade-in" data-category="reels">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="imagem/reel-3.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"><span class="tag mono-label">Reels</span><h3>Reel 03</h3></div>
+      </div>
       <div class="project-card fade-in" data-category="3d">
         <img src="imagem/pizza.png" alt="Renderização de modelagem 3D profissional de pizza para publicidade alimentícia" loading="lazy">
         <div class="overlay"><span class="tag mono-label">Modelagem 3D</span><h3>Pizza 3D Realista</h3></div>
@@ -372,7 +391,7 @@
   <!-- WHATSAPP -->
   <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp"></a>
 
-  <script src="assets/celtoon.js?v=4"></script>
+  <script src="assets/celtoon.js?v=5"></script>
   <script>
   // Filtro de categorias
   (function(){

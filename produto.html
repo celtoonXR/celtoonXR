@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;600;700;800&family=JetBrains+Mono:wght@700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/celtoon.css?v=4">
+  <link rel="stylesheet" href="assets/celtoon.css?v=5">
 
   <style>
   /* ===== Seções por pilar ===== */
@@ -159,13 +159,15 @@
     background: var(--navy-800);
   }
   .social-card:nth-child(even){ margin-top:36px; }
-  .social-card img{
+  .social-card img,
+  .social-card video{
     width:100%;
     height:100%;
     object-fit:cover;
     transition: transform .5s ease;
   }
-  .social-card:hover img{ transform: scale(1.06); }
+  .social-card:hover img,
+  .social-card:hover video{ transform: scale(1.06); }
   .social-card::after{
     content:'';
     position:absolute;
@@ -384,7 +386,9 @@
       </div>
       <div class="social-grid">
         <div class="social-card">
-          <img src="imagem/lavi.jpg" alt="Motion design e reels para redes sociais - Lavinho" loading="lazy">
+          <video autoplay muted loop playsinline preload="metadata" poster="imagem/lavi.jpg" aria-label="Reel de motion design para redes sociais">
+            <source src="imagem/reel-1.mp4" type="video/mp4">
+          </video>
           <div class="info">
             <h3>Reels &amp; Video</h3>
             <p>Motion design que prende a atenção.</p>
@@ -465,6 +469,6 @@
   <!-- WHATSAPP -->
   <a href="https://wa.me/+5511994950389" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp"><img src="whats2.png" alt="WhatsApp"></a>
 
-  <script src="assets/celtoon.js?v=4"></script>
+  <script src="assets/celtoon.js?v=5"></script>
 </body>
 </html>
