@@ -233,20 +233,34 @@
       targets.forEach(function(t){ t.classList.add('visible'); });
       return;
     }
+    function reveal(el){
+      el.classList.add('visible');
+      // Após a entrada, remove .fade-in para que o transform fixado
+      // por .js .fade-in.visible não bloqueie efeitos de hover
+      // (ex.: .service-card:hover { translateY(-8px) }).
+      setTimeout(function(){ el.classList.remove('fade-in'); }, 900);
+    }
     var io = new IntersectionObserver(function(entries, obs){
       entries.forEach(function(entry){
         if (entry.isIntersecting) {
-          var el = entry.target;
-          el.classList.add('visible');
-          obs.unobserve(el);
-          // Após a entrada, remove .fade-in para que o transform fixado
-          // por .js .fade-in.visible não bloqueie efeitos de hover
-          // (ex.: .service-card:hover { translateY(-8px) }).
-          setTimeout(function(){ el.classList.remove('fade-in'); }, 900);
+          reveal(entry.target);
+          obs.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     targets.forEach(function(el){ io.observe(el); });
+
+    // Rede de segurança: se o observador não disparar para algum
+    // elemento (rolagem muito rápida, aba em segundo plano etc.),
+    // nada pode ficar invisível — após alguns segundos tudo é revelado.
+    setTimeout(function(){
+      targets.forEach(function(el){
+        if(!el.classList.contains('visible')){
+          io.unobserve(el);
+          reveal(el);
+        }
+      });
+    }, 4000);
   })();
 
 })();
