@@ -157,6 +157,191 @@
     .featured-grid .carousel-track > .featured-card{ flex-basis: 88%; }
     .featured-card{ aspect-ratio: 4 / 3; }
   }
+
+  /* ============================================================
+     GALLERY CARD — thumb com crossfade + lightbox em carrossel
+     Nome deliberadamente diferente de "carousel-*" para não
+     colidir com as classes já usadas pelo carrossel de destaques
+     (.carousel-track / .carousel-dots / [data-carousel-*]).
+     ============================================================ */
+  .project-card.gallery-card{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .gallery-card .gallery-thumb{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    background: var(--navy-950);
+  }
+  .gallery-card .gallery-thumb img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition: opacity 1.1s ease;
+  }
+  .gallery-card .gallery-thumb img.is-active{
+    opacity:1;
+  }
+  .gallery-card .gallery-thumb-dots{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    z-index:2;
+    display:flex;
+    gap:5px;
+  }
+  .gallery-card .gallery-thumb-dots span{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background: rgba(255,255,255,0.4);
+    transition: background .3s ease, transform .3s ease;
+  }
+  .gallery-card .gallery-thumb-dots span.is-active{
+    background:#fff;
+    transform: scale(1.35);
+  }
+
+  /* Lightbox / modal do carrossel */
+  .gallery-modal{
+    position:fixed;
+    inset:0;
+    z-index:999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    visibility:hidden;
+    transition: opacity .35s ease, visibility 0s linear .35s;
+  }
+  .gallery-modal.is-open{
+    opacity:1;
+    visibility:visible;
+    transition: opacity .35s ease, visibility 0s;
+  }
+  .gallery-modal-backdrop{
+    position:absolute;
+    inset:0;
+    background: rgba(0,10,26,0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .gallery-modal-content{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:1040px;
+    padding:0 72px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .gallery-modal-stage{
+    position:relative;
+    width:100%;
+    max-height:78vh;
+    border-radius: var(--radius-card);
+    overflow:hidden;
+    box-shadow: var(--shadow-card);
+    background: var(--navy-950);
+    transform: scale(.96);
+    transition: transform .35s ease;
+  }
+  .gallery-modal.is-open .gallery-modal-stage{ transform: scale(1); }
+  .gallery-modal-stage img{
+    display:block;
+    width:100%;
+    max-height:78vh;
+    object-fit:contain;
+    background: var(--navy-950);
+  }
+  .gallery-modal-caption{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:20px 28px;
+    background: linear-gradient(0deg, rgba(0,10,26,0.85) 0%, rgba(0,10,26,0) 100%);
+  }
+  .gallery-modal-caption h3{
+    font-family: var(--font-display);
+    font-weight:600;
+    font-size:20px;
+    color:#fff;
+    margin-top:4px;
+  }
+  .gallery-modal-close{
+    position:absolute;
+    top:-52px;
+    right:0;
+    width:40px;
+    height:40px;
+    border-radius:9999px;
+    border:1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    color:#fff;
+    font-size:22px;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: background .25s ease, transform .25s ease;
+  }
+  .gallery-modal-close:hover{ background: rgba(255,255,255,0.2); transform: rotate(90deg); }
+  .gallery-modal-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:48px;
+    height:48px;
+    border-radius:9999px;
+    border:none;
+    background: rgba(255,255,255,0.1);
+    color:#fff;
+    font-size:1.1rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: background .25s ease;
+    z-index:2;
+  }
+  .gallery-modal-nav:hover{ background: var(--grad); }
+  .gallery-modal-nav.prev{ left:8px; }
+  .gallery-modal-nav.next{ right:8px; }
+  .gallery-modal-dots{
+    display:flex;
+    gap:8px;
+    margin-top:20px;
+  }
+  .gallery-modal-dots span{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background: rgba(255,255,255,0.3);
+    cursor:pointer;
+    transition: background .25s ease, transform .25s ease;
+  }
+  .gallery-modal-dots span.is-active{
+    background:#fff;
+    transform: scale(1.35);
+  }
+  body.gallery-modal-open{ overflow:hidden; }
+
+  @media (max-width:768px){
+    .gallery-modal-content{ padding:0 20px; }
+    .gallery-modal-close{ top:-46px; right:0; width:36px; height:36px; font-size:19px; }
+    .gallery-modal-nav{ width:40px; height:40px; }
+    .gallery-modal-nav.prev{ left:-4px; }
+    .gallery-modal-nav.next{ right:-4px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .gallery-card .gallery-thumb img{ transition:none; }
+    .gallery-modal, .gallery-modal-stage{ transition:none; }
+  }
   </style>
 </head>
 <body>
@@ -228,6 +413,20 @@
   <!-- GRID -->
   <section class="portfolio-page">
     <div class="portfolio-grid">
+
+      <!-- ===== NOVO: Gallery Card (thumb crossfade + lightbox carrossel) =====
+           Para criar outro igual: duplique este bloco inteiro e troque
+           apenas data-category, data-gallery-title, data-gallery-images
+           e o conteúdo do .overlay (tag + h3). Nada mais precisa mudar. -->
+      <div class="project-card gallery-card"
+           data-category="digital"
+           data-gallery-title="Carrossel Projeto 01"
+           data-gallery-images="imagem/galeria-01-1.jpg,imagem/galeria-01-2.jpg,imagem/galeria-01-3.jpg">
+        <div class="gallery-thumb"></div>
+        <div class="gallery-thumb-dots"></div>
+        <div class="overlay"><span class="tag mono-label">Case Completo</span><h3>Carrossel Projeto 01</h3></div>
+      </div>
+
       <div class="project-card" data-category="reels">
         <video autoplay muted loop playsinline preload="metadata">
           <source src="imagem/reel-1.mp4" type="video/mp4">
@@ -427,6 +626,188 @@
         });
       });
     });
+  })();
+  </script>
+
+  <script>
+  // ============================================================
+  // Gallery Card: thumb com crossfade automático + lightbox carrossel
+  // Reutilizável: qualquer .gallery-card com data-gallery-images
+  // (lista separada por vírgula, 2+ imagens) ganha esse comportamento
+  // automaticamente, sem precisar tocar neste script de novo.
+  // ============================================================
+  (function(){
+    'use strict';
+
+    var CROSSFADE_INTERVAL = 3200; // ms que cada imagem fica visível na thumb
+
+    var cards = document.querySelectorAll('.gallery-card');
+    if(!cards.length) return;
+
+    function getImages(card){
+      return (card.getAttribute('data-gallery-images') || '')
+        .split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+    }
+    function getTitle(card){
+      var h3 = card.querySelector('.overlay h3');
+      return card.getAttribute('data-gallery-title') || (h3 ? h3.textContent : '');
+    }
+
+    /* ---- Monta o crossfade de cada thumb ---- */
+    cards.forEach(function(card){
+      var images = getImages(card);
+      var title = getTitle(card);
+      var thumb = card.querySelector('.gallery-thumb');
+      var dotsWrap = card.querySelector('.gallery-thumb-dots');
+      if(!thumb || !images.length) return;
+
+      images.forEach(function(src, i){
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = title + ' - imagem ' + (i + 1);
+        img.loading = 'lazy';
+        if(i === 0) img.classList.add('is-active');
+        thumb.appendChild(img);
+
+        if(dotsWrap){
+          var dot = document.createElement('span');
+          if(i === 0) dot.classList.add('is-active');
+          dotsWrap.appendChild(dot);
+        }
+      });
+
+      if(images.length < 2) return;
+
+      var current = 0;
+      var thumbImgs = thumb.querySelectorAll('img');
+      var thumbDots = dotsWrap ? dotsWrap.querySelectorAll('span') : [];
+      var timer = null;
+
+      function advance(){
+        thumbImgs[current].classList.remove('is-active');
+        if(thumbDots[current]) thumbDots[current].classList.remove('is-active');
+        current = (current + 1) % thumbImgs.length;
+        thumbImgs[current].classList.add('is-active');
+        if(thumbDots[current]) thumbDots[current].classList.add('is-active');
+      }
+      function start(){ if(!timer) timer = setInterval(advance, CROSSFADE_INTERVAL); }
+      function stop(){ clearInterval(timer); timer = null; }
+
+      if('IntersectionObserver' in window){
+        var observer = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){ entry.isIntersecting ? start() : stop(); });
+        }, { threshold: 0.2 });
+        observer.observe(card);
+      } else {
+        start();
+      }
+    });
+
+    /* ---- Lightbox / modal (uma única instância compartilhada) ---- */
+    var modal = document.createElement('div');
+    modal.className = 'gallery-modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML =
+      '<div class="gallery-modal-backdrop" data-gallery-close></div>' +
+      '<div class="gallery-modal-content">' +
+        '<button class="gallery-modal-close" data-gallery-close aria-label="Fechar">&times;</button>' +
+        '<button class="gallery-modal-nav prev" data-gallery-prev aria-label="Imagem anterior">&#10094;</button>' +
+        '<div class="gallery-modal-stage">' +
+          '<img id="galleryModalImage" src="" alt="">' +
+          '<div class="gallery-modal-caption">' +
+            '<span class="tag mono-label" id="galleryModalTag"></span>' +
+            '<h3 id="galleryModalTitle"></h3>' +
+          '</div>' +
+        '</div>' +
+        '<button class="gallery-modal-nav next" data-gallery-next aria-label="Próxima imagem">&#10095;</button>' +
+        '<div class="gallery-modal-dots" id="galleryModalDots"></div>' +
+      '</div>';
+    document.body.appendChild(modal);
+
+    var modalImg   = modal.querySelector('#galleryModalImage');
+    var modalTag   = modal.querySelector('#galleryModalTag');
+    var modalTitle = modal.querySelector('#galleryModalTitle');
+    var modalDots  = modal.querySelector('#galleryModalDots');
+
+    var activeImages = [];
+    var activeIndex = 0;
+
+    function renderModal(){
+      modalImg.src = activeImages[activeIndex];
+      modalImg.alt = modalTitle.textContent + ' - imagem ' + (activeIndex + 1);
+      modalDots.querySelectorAll('span').forEach(function(dot, i){
+        dot.classList.toggle('is-active', i === activeIndex);
+      });
+    }
+    function buildDots(){
+      modalDots.innerHTML = '';
+      activeImages.forEach(function(_, i){
+        var dot = document.createElement('span');
+        dot.addEventListener('click', function(){ activeIndex = i; renderModal(); });
+        modalDots.appendChild(dot);
+      });
+    }
+    function openModal(card){
+      var images = getImages(card);
+      if(!images.length) return;
+      activeImages = images;
+      activeIndex = 0;
+
+      var tag = card.querySelector('.overlay .tag');
+      modalTag.textContent = tag ? tag.textContent : '';
+      modalTitle.textContent = getTitle(card);
+
+      buildDots();
+      renderModal();
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('gallery-modal-open');
+    }
+    function closeModal(){
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('gallery-modal-open');
+    }
+    function next(){ activeIndex = (activeIndex + 1) % activeImages.length; renderModal(); }
+    function prev(){ activeIndex = (activeIndex - 1 + activeImages.length) % activeImages.length; renderModal(); }
+
+    cards.forEach(function(card){
+      // capture:true garante que este clique é tratado ANTES de qualquer
+      // listener de "ampliar imagem" que já exista em celtoon.js para
+      // .project-card, e stopPropagation() impede que ele também dispare.
+      card.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        openModal(card);
+      }, true);
+    });
+
+    modal.addEventListener('click', function(e){
+      if(e.target.closest('[data-gallery-close]')) closeModal();
+      if(e.target.closest('[data-gallery-next]')) next();
+      if(e.target.closest('[data-gallery-prev]')) prev();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(!modal.classList.contains('is-open')) return;
+      if(e.key === 'Escape') closeModal();
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+    });
+
+    /* swipe básico no mobile */
+    var touchStartX = null;
+    modal.addEventListener('touchstart', function(e){
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive:true });
+    modal.addEventListener('touchend', function(e){
+      if(touchStartX === null) return;
+      var delta = e.changedTouches[0].clientX - touchStartX;
+      if(Math.abs(delta) > 40){ delta < 0 ? next() : prev(); }
+      touchStartX = null;
+    }, { passive:true });
+
   })();
   </script>
 </body>
